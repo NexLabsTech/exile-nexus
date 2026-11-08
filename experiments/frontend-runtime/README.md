@@ -6,7 +6,7 @@ No game assets, APIs, authentication, third-party telemetry or real data.
 
 - `astro/`: Astro 7.4.7, @astrojs/react 7.1.4, React 19.3.1.
 - `vite/`: Vite 8.3.6, React 19.3.1.
-- Both use TypeScript 7.0.2 strict typechecking, Node 22 and `dist/`.
+- Astro uses TypeScript 6.0.2 (required by `@astrojs/check@0.9.12` peer range); Vite uses TypeScript 7.0.2. Both use strict typechecking, Node 22 and `dist/`.
 - Benchmark: `.github/workflows/runtime-adr-benchmark.yml` on PRs.
 - Direct package versions are exact. Transitive dependencies are resolved
   by a temporary npm lock per CI job. A production lockfile MUST be committed

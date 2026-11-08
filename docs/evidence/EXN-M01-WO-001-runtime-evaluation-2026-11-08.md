@@ -34,13 +34,13 @@ externos, monetização ou alterações em main.
 
 | Teste | Astro + React | Vite + React |
 | --- | --- | --- |
-| npm install + npm ci | NOT RUN | NOT RUN |
-| TypeScript / astro check | NOT RUN | NOT RUN |
-| npm run build | NOT RUN | NOT RUN |
-| dist/index.html | NOT RUN | NOT RUN |
-| Build ms (runner) | NOT MEASURED | NOT MEASURED |
-| Total dist bytes | NOT MEASURED | NOT MEASURED |
-| Generated files | NOT MEASURED | NOT MEASURED |
+| npm install + npm ci | FAIL (`ERESOLVE`, TS7 peer mismatch; correction in progress) | PASS (run #42519095743) |
+| TypeScript / astro check | NOT RUN (install failed) | PASS |
+| npm run build | NOT RUN (install failed) | PASS |
+| dist/index.html | NOT RUN (install failed) | PASS |
+| Build ms (runner) | NOT MEASURED | 343 ms (cold runner) |
+| Total dist bytes | NOT MEASURED | 220,692 bytes |
+| Generated files | NOT MEASURED | 2 |
 | Cloudflare Pages config | DOCUMENTED, not deployed | DOCUMENTED, not deployed |
 
 O ambiente local de auditoria não conseguiu resolver `registry.npmjs.org`
@@ -72,3 +72,18 @@ futura aplicação de produção.
   operacional, dado de jogo ou deploy nesta WO.
 - STATUS ATUAL: **IN REVIEW / BENCHMARK NOT RUN**. Nenhum APP/RELEASE DoD
   pode ser declarado entregue.
+
+## Correction Delta 01 — Astro TypeScript peer constraint
+
+- GitHub Actions run [#42519095743](https://github.com/NexLabsTech/exile-nexus/actions/runs/42519095743),
+  HEAD `70dee1c039a236a3e87ccdc6985cc320c0e95c68`: Vite job PASS;
+  Astro install FAIL at `npm install --package-lock-only`.
+- Exact error: `ERESOLVE` because `@astrojs/check@0.9.12` declares
+  peer `typescript: ^5.0.0 || ^6.0.0` and the probe used `7.0.2`.
+- Correction: fix **only Astro fixture's TypeScript** to `6.0.2`,
+  explicitly documenting version divergence. Do not set
+  `--force` / `--legacy-peer-deps` or disable checks. No app code changed.
+- Existing Vite outcome: Node 22.23.4, `tsc --noEmit` PASS,
+  `vite build` PASS, 343ms wall-clock, 220,692 bytes, 2 files.
+- All results on the new correction HEAD still require fresh CI evidence;
+  do not promote a benchmark recommendation prematurely.

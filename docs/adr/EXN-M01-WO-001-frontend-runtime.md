@@ -34,6 +34,13 @@ benchmark comparável e documentar decisão pelo owner.
 
 ## Prova mensurável e teste de compatibilidade
 
+**Constraint discovered:** The first GitHub Actions run exposed a concrete
+peer-version incompatibility: `@astrojs/check@0.9.12` currently accepts
+TypeScript `^5 || ^6`, not `7`. The Astro probe is therefore pinned to
+TypeScript 6.0.2 while Vite tests TypeScript 7.0.2. This is an honest
+toolchain-maintenance tradeoff, not permission to bypass npm peer resolution.
+
+
 A pasta [experiments/frontend-runtime](../../experiments/frontend-runtime/README.md)
 contém **duas fixtures sintéticas** com uma página original e um contador React
 hidratado, sem material ou API do jogo. A Action
