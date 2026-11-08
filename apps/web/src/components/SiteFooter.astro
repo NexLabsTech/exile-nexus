@@ -1,0 +1,17 @@
+---
+import { routes } from "../lib/navigation";
+---
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="ornament" aria-hidden="true">✦</span>
+      <span>EXILE NEXUS</span>
+      <p>Tools for a journey still being written.</p>
+    </div>
+    <nav aria-label="Footer navigation" class="footer-links">
+      <a href="/">Home</a>
+      {routes.slice(0, 4).map((route) => <a href={route.href}>{route.short}</a>)}
+    </nav>
+    <p class="disclaimer">Exile Nexus is an independent community tool, not affiliated with or endorsed by Grinding Gear Games. All demonstration content is fictional.</p>
+  </div>
+</footer>
