@@ -1,0 +1,68 @@
+name: EXN Quality Baseline
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: exn-quality-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  baseline:
+    name: Quality baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+    steps:
+      - name: Checkout source without persisted credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Python regressions and negative failure tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Compile Python source to detect syntax errors
+        run: python3 -m compileall -q scripts tests
+
+      - name: Validate workflow and production manifest policies
+        run: python3 scripts/quality_gate.py
+
+      - name: Set up Node.js when production packages are present
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '22'
+
+      - name: Execute production npm checks or report NOT_APPLICABLE
+        shell: bash
+        run: |
+          set -euo pipefail
+          apps="$(python3 scripts/quality_gate.py --list-apps)"
+          if [[ -z "$apps" ]]; then
+            echo 'NOT_APPLICABLE: no production app package.json outside experiments/'
+            echo 'Product lint, typecheck, test, build and audit NOT APPLICABLE' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          while IFS= read -r app_dir; do
+            echo "Checking production app: $app_dir"
+            (
+              cd "$app_dir"
+              npm ci --no-audit --no-fund
+              npm run lint
+              npm run typecheck
+              npm test
+              npm run build
+              npm audit --audit-level=high
+            )
+          done <<< "$apps"
+          echo 'All production npm quality checks passed' >> "$GITHUB_STEP_SUMMARY"
