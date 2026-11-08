@@ -99,7 +99,15 @@ not PASS for the future product.
 - PR #140 original HEAD `5a4ef68ff73cda7161063876de5e1cd9ea34d4ce`:
   [run #42511563927](https://github.com/NexLabsTech/exile-nexus/actions/runs/42511563927)
   `completed/success`, `Docs validation` passed with all job steps.
-  A new run on the amended HEAD remains required after this Correction Delta.
+- PR #140 corrected HEAD `32614b15858dae8bd0e8b93597b25a76d3163523`:
+  [run #42512434261](https://github.com/NexLabsTech/exile-nexus/actions/runs/42512434261)
+  `completed/success`; `Docs validation` succeeded including documentation
+  validator unit tests, Source Pack/links/secret-pattern validation, actionlint
+  and zizmor. The required check was green on this exact SHA.
+- This documentation-only correction produces another HEAD. Its final CI
+  execution must be verified from GitHub Actions and recorded in the PR
+  conversation with the actual SHA/run URL; a commit cannot contain evidence
+  of its own future CI run. Do not claim a future run already passed.
 - No new runtime tests in this Work Order: NOT APPLICABLE.
 - No source code, workflow implementation, settings, API, payments or deployment
   was changed by this proposed audit.
