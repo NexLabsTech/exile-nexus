@@ -1,15 +1,15 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · CI corrigido e validado; configuração administrativa BLOCKED
+- **Status:** PROPOSED · WO-008 em auditoria; WO-007 integrada e regras verificadas
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-007 · Issue #8
-- **Base SHA desta proposta:** `e8e900feeaadc98f45e47244ad7840d25e1cc871`
+- **Work Order:** EXN-M00-WO-008 · Issue #9
+- **Base SHA desta proposta:** `aaf24a660ff2ee2334d713685e2edee1f841eedc`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
-Este checkpoint reconcilia a WO-006 integrada e registra a proposta de Test
-Plan, CI documental e contribuição da WO-007. Continua PROPOSED até testes,
-auditoria técnica, aceite NexLabsTech e integração normal.
+Esta proposta de WO-008 reconcilia a WO-007, já integrada na main após aceite
+NexLabsTech, e inicia exclusivamente auditoria final do M00. O checkpoint
+permanece PROPOSED até auditoria objetiva, aceite e merge da presente WO.
 
 ## Histórico e aceite
 
@@ -38,17 +38,17 @@ auditoria técnica, aceite NexLabsTech e integração normal.
   `653b721a796cafa2d2bed500c2c720d3c4a079d7`. Aceite administrativo
   NexLabsTech #6721135679; Issue #7 concluída. Auditoria na mesma sessão do
   executor; não independente e sem GitHub Review formal `APPROVED`.
-- Aceite documental não libera direitos R01–R14, configuração da conta ou
-  deployment.
+- PR #139 integrou WO-007 em squash no commit
+  aaf24a660ff2ee2334d713685e2edee1f841eedc após autorização NexLabsTech;
+  Issue #8 foi encerrada, sem bypass de regras.
+- Aceite documental não libera direitos R01–R14, dados, cobrança ou deploy.
 
 ## Context Lock e fonte atual
 
-- Issue #8 está aberta e sua dependência EXN-M00-WO-006 foi concluída pela
-  PR #138.
-- `main` remota e checkout no início desta WO tinham o mesmo SHA
-  `e8e900feeaadc98f45e47244ad7840d25e1cc871`.
-- Não havia PR aberta, workflow de Actions ou manifesto/lockfile. O repo tem
-  documentação; ainda não há app, endpoint, banco ou deployment.
+- Issue #8 encerrada; EXN-M00-WO-008 (#9) é a única próxima WO NECESSARY.
+- main no início da auditoria: aaf24a660ff2ee2334d713685e2edee1f841eedc.
+- CI documental integrado em .github/workflows/docs-ci.yml, sem app, endpoint,
+  banco, manifesto de dependências de runtime ou deploy.
 - As atualizações anteriores deixam o threat model como referência de
   planejamento e documentam os settings que continuam NOT VERIFIED.
 - Nenhuma fonte de jogo, API econômica, árvore, scraping ou monetização foi
@@ -91,16 +91,15 @@ auditoria técnica, aceite NexLabsTech e integração normal.
   nenhuma conta/projeto/deploy provisionado.
 - WO-006 / Issue #7: Threat Model, privacidade e abuso integrados; controles
   sem read-back continuam NOT VERIFIED.
-- WO-007 / Issue #8: Test Plan, CI documental e contribuição nesta branch;
-  CI e read-back do ruleset verificados, pendente aceite administrativo da
-  entrega e integração por squash (não declarar concluída antecipadamente).
-- WO-008 / Issue #9: auditoria final e revisão do backlog, depende da conclusão
-  da WO-007.
+- WO-007 / Issue #8: Test Plan, CI e contribuição integrados na PR #139;
+  checks e regras verificados; issue concluída.
+- WO-008 / Issue #9: AUDITORIA EM ANDAMENTO; aceite e merge ainda pendentes.
 
 ## Estado de produto e custos
 
-- O repositório continua sem código de produto, dependências, workflow integrado
-  ou dados de usuários. Não iniciar implementação funcional ou deployment.
+- O repositório tem CI documental integrado, mas não possui aplicação,
+  dependências de runtime, dados pessoais, API ou deployment. Não desenvolver
+  funcionalidade enquanto WO-008 estiver pendente.
 - A arquitetura modular monolith, TypeScript strict e deny-by-default segue
   como restrição; serviços permanecem não selecionados.
 - O plano financeiro obrigatório é US$ 0. Runners GitHub-hosted padrão são
@@ -130,3 +129,21 @@ e aceite administrativo explícito de `NexLabsTech`, integrar WO-007 por
 squash, fechar issue #8, documentar CI efetivo e iniciar apenas WO-008.
 Até esse aceite não promover este documento como checkpoint canônico.
 Nenhuma aplicação ou deploy foi implementado nesta WO.
+
+## Auditoria WO-008 e Checkpoint Delta PROPOSTO
+
+- Evidence Bundle: [Foundation Audit](evidence/EXN-M00-WO-008-foundation-audit-2026-11-08.md).
+- M00: 7 Work Orders concluídas (#2–#8); a issue #9 segue OPEN.
+- GitHub Issues: 132 IDs únicos, sendo 13 épicos e 119 Work Orders;
+  sem ciclos, referências inexistentes ou dependências de issues fechadas
+  ainda abertas, conforme snapshot do relatório.
+- Ruleset #26806979 ACTIVE, main protegida, squash-only, 0 aprovações,
+  force-push/deleção bloqueados, sem bypass e Docs validation required.
+- CI main após merge: run #42510645690 completed/success.
+- Primeiro candidato pós-M00: M01-WO-001 (#11), ao lado de M02-WO-001 (#22)
+  e M12-WO-001 (#119); não iniciar nenhuma nesta WO.
+- Direitos de jogo, AdSense e fontes não autorizadas permanecem bloqueados;
+  billing, Code Security adicional e serviços existentes não totalmente
+  verificados, sem liberar gastos.
+- Não promover este Checkpoint Delta sem auditoria objetiva, aceite do owner
+  e squash merge da WO-008.

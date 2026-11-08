@@ -12,17 +12,19 @@ O backlog prevê experiências de consulta e ferramentas para jogadores, mas o
 produto, os requisitos funcionais e os dados permitidos ainda não foram
 aprovados.
 
-## Estado atual
+## Estado atual, verificado na proposta WO-008
 
-- Não há aplicação, API, banco de dados, workflow de CI ou implantação.
-- O baseline de main é 23ec93e0fb174fb84db38298ce890f693a62abf1, com o README
-  original.
-- Direitos, marcas, atribuição, APIs, fontes de dados e atualizações de jogo
-  aguardam verificação em EXN-M00-WO-003 (issue #4).
-- Escopo, requisitos e Definition of Done aguardam EXN-M00-WO-004 (issue #5).
-- O teto financeiro obrigatório é US$ 0. Elegibilidade, quotas e disponibilidade
-  de cada serviço precisam ser verificadas antes de adoção.
+- Source Pack, Threat Model, direitos, requisitos, arquitetura e plano de
+  testes já estão versionados. A PR #139 integrou CI documental por squash na
+  main no SHA aaf24a660ff2ee2334d713685e2edee1f841eedc.
+- Ruleset NexLabs Main Protection #26806979: ACTIVE, main protegida e
+  Docs validation obrigatório; run #42510645690 da main passou.
+- Issues #2–#8 concluídas; issue #9 é a auditoria final M00 e está aberta.
+- Não existem aplicação, API, banco de dados ou deployment operacionais.
+- A matriz R01–R14 não autoriza ingestão, redistribuição de assets, árvore
+  passiva ou anúncios AdSense.
+- Nenhum novo gasto foi autorizado nesta auditoria; custos totais e
+  elegibilidade de apps externos continuam NOT VERIFIED.
 
-Este documento registra contexto de planejamento. Não afirma que recursos,
-dados, direitos, serviços gratuitos ou implantação estejam disponíveis ou
-aprovados.
+Este documento permanece PROPOSED e não declara o produto pronto nem concede
+direitos de conteúdo ou autorização de produção.
