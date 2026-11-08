@@ -3,55 +3,90 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-002 · Issue #3
+- **Work Order:** EXN-M00-WO-004 · Issue #5
+- **Base SHA desta proposta:** `1e786ad840a12762e1f98424f927f48638f7a036`
+- **HEAD desta proposta:** consultar a PR da WO-004 após sua criação; não
+  autoinserir o SHA no próprio commit.
 
-Este checkpoint é uma proposta desta PR. Não altera unilateralmente um
-checkpoint aceito; não havia checkpoint no main do baseline.
+Este checkpoint atualiza o estado após a integração de WO-003. Continua sendo
+uma proposta até aceite e integração desta PR.
 
-## Base e auditoria
+## Histórico e aceite
 
-- main no início do WO-001: 23ec93e0fb174fb84db38298ce890f693a62abf1.
-- O veredito textual da auditoria registrada na PR #133 foi APPROVED apenas
-  para o conteúdo documental no HEAD
-  fda049e31f92fcb7b1294eb9bbe5daa26f30b291.
-- A review GitHub da PR #133 está COMMENTED e foi enviada pela conta
-  NexLabsTech; isso não é aprovação formal de outra conta nem aceite formal da
-  dependência para merge ou progressão.
-- PR #133 foi integrada à `main` por squash no commit
-  `b012731fd052e4c08aaa005b4e269b4d7e8ed7f4`, após auditoria técnica
-  favorável e instrução de continuação do proprietário. A review GitHub anterior
-  permaneceu COMMENTED, sem uma aprovação formal de outra conta. As settings
-  administrativas continuam NOT VERIFIED conforme o baseline histórico.
-- O proprietário solicitou continuar a sequência de fundação. A integração
-  de WO-001 concluiu a dependência de código de WO-002; isso não implica
-  aprovação de settings, nem dispensa revalidar e auditar a nova base da PR #134.
+- Baseline consultado da `main` no início da WO-001:
+  `23ec93e0fb174fb84db38298ce890f693a62abf1`.
+- PR #133 integrou a WO-001 por squash no commit
+  `b012731fd052e4c08aaa005b4e269b4d7e8ed7f4`. A review GitHub ficou
+  `COMMENTED` pela NexLabsTech; isso não foi uma aprovação formal.
+- PR #134 integrou a WO-002 por squash no commit
+  `5cf7ab69d8a2b80b245cd64966d9d40f13a8c8e1`. As reviews da NexLabsTech
+  ficaram `COMMENTED`; não houve GitHub Review `APPROVED` formal. Issue #3 foi
+  concluída.
+- PR #135 integrou a WO-003 por squash no commit
+  `1e786ad840a12762e1f98424f927f48638f7a036`, a partir do HEAD
+  `63ea494518296b0e85c40f979ba042a644489a4b`. O owner registrou aceite
+  administrativo no comentário
+  [#6720404361](https://github.com/NexLabsTech/exile-nexus/pull/135#issuecomment-6720404361).
+  Nenhuma GitHub Review `APPROVED` foi criada. Issue #4 foi concluída.
+- O aceite administrativo das entregas não muda a conclusão da matriz de
+  direitos: uso de conteúdo, dados, APIs e monetização continuam bloqueados
+  até evidência/permissão específica.
 
-## Estado de repositório observado
+## Estado do repositório e governança observada
 
-- main retornou protected: false; rulesets com pais retornaram lista vazia.
-- Squash, merge commit e rebase estavam permitidos. Não havia workflow de
-  GitHub Actions no baseline.
-- Dependabot Alerts foi reportado pela API como desativado. Outras settings de
-  segurança seguem não verificadas por limitações de acesso.
-- O repositório não contém aplicação ou deployment.
+Leitura realizada em 2026-11-08; nenhuma configuração foi alterada nesta WO.
+
+- Repositório público; default branch `main`. O objeto do repositório permite
+  squash, merge commit e rebase; a estratégia usada nas WOs integradas foi
+  squash.
+- A API de rulesets visíveis retornou lista vazia. A leitura da branch
+  protection de `main` e das permissões de Actions retornou 403
+  `Resource not accessible by integration`; proteção, reviews obrigatórias,
+  force-push, exclusão e permissões de Actions permanecem **NOT VERIFIED**.
+- Actions registra zero workflows. Nenhum job de CI foi executado.
+- A API de Dependabot Alerts respondeu explicitamente que o recurso está
+  desativado. Code Scanning, Secret Scanning e Push Protection permanecem
+  **NOT VERIFIED**, sem inferir ausência por 403.
+- Checks externos observados na PR #135 (Socket SUCCESS; CodeRabbit SKIPPED)
+  não são requisitos. Elegibilidade, custo e franquia dos checks automáticos
+  preexistentes não são visíveis e não foram verificados.
+- Não há código de aplicação, dependências ou deployment no repositório.
+- `gh` CLI autenticado como KayzenRoot mostrou `admin:false` e `push:false`;
+  o perfil conectado NexLabsTech confirmou `admin:true` no repositório, mas a
+  integração não expôs permissão para ler a branch protection. Nenhuma
+  credencial foi extraída ou ampliada.
 
 ## Work Orders
 
-- EXN-M00-WO-001 · Issue #2: baseline documental aprovado tecnicamente e
-  integrado por squash na main no commit `b012731f`; issue #2 concluída.
-- EXN-M00-WO-002 · Issue #3: Correction Delta aprovado tecnicamente,
-  branch reconciliada com a main por merge de histórico sem rebase ou force-push;
-  PR #134 precisa de revalidação do novo diff antes do merge.
-- EXN-M00-WO-003 a WO-008 · Issues #4–#9: planejados; não iniciados;
-  aguardam as aprovações correspondentes e não podem iniciar ainda.
+- EXN-M00-WO-001 / Issue #2: integrada por squash; Issue #2 concluída.
+- EXN-M00-WO-002 / Issue #3: integrada por squash; Issue #3 concluída.
+- EXN-M00-WO-003 / Issue #4: matriz R01–R14 integrada; direitos de uso seguem
+  não liberados; Issue #4 concluída.
+- EXN-M00-WO-004 / Issue #5: escopo, requisitos e DoD em elaboração nesta
+  branch; ainda requer auditoria e aceite.
+- EXN-M00-WO-005 / Issue #6: arquitetura e deployment plan; pendente.
+- EXN-M00-WO-006 / Issue #7: segurança, privacidade e controles nativos;
+  pendente.
+- EXN-M00-WO-007 / Issue #8: Test Plan, CI documental e branch protection;
+  pendente.
+- EXN-M00-WO-008 / Issue #9: auditoria final, checkpoint e verificação do
+  backlog GitHub existente; pendente.
 
-## Gate de governança
+## Próximos artefatos canônicos mapeados
 
-Não habilite settings, não promova este checkpoint e não faça merge da PR sem
-auditoria e autorização aplicáveis. Futuros gates obrigatórios devem usar apenas
-checks gratuitos já validados; provedores externos com quotas não podem ser
-obrigatórios conforme EXN-DEC-0001.
+- Deployment plan: WO-005 / Issue #6; planejamento apenas, sem deploy.
+- Security e threat model: WO-006 / Issue #7, incluindo controles gratuitos e
+  leitura posterior.
+- Test Plan e CI documental: WO-007 / Issue #8; checks só se existentes e
+  validados, com branch protection após a validação dos workflows.
+- Backlog canônico: GitHub Issues; WO-008 / Issue #9 audita dependências,
+  prioridades e duplicações sem criar um backlog paralelo.
 
-A PR #133 já foi integrada. A PR #134 deve apontar para main e demonstrar
-somente os arquivos da WO-002; verificar base, HEAD, diff e gates antes de
-qualquer merge. Não fazer rebase nem force-push.
+## Checkpoint Delta proposto para WO-004
+
+Registrar a integração da WO-003 e seu aceite administrativo sem interpretar
+isso como licença. Promover os três documentos da WO-004 somente após auditoria
+técnica, aceite NexLabsTech e merge normal. Manter M00 e direitos de dados em
+estado não concluído até os controles das WOs seguintes serem implementados e
+verificados. Nenhuma funcionalidade ou deployment começa antes da auditoria
+final da fundação e da autorização do Work Order funcional elegível.
