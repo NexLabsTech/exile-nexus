@@ -108,8 +108,7 @@ conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
 ## Checkpoint Delta proposto para WO-007
 
 Após testes e aceite, registrar Test Plan, guia de contribuição e workflow
-`Documentation CI` como controles versionados. O check `Documentation CI / Docs
-validation` só poderá ser exigido depois de executar com sucesso em PR e após
+`Documentation CI` como controles versionados. O check `Docs validation` só poderá ser exigido depois de executar com sucesso em PR e após
 read-back de `main` rulesets/protection confirmar que nenhum serviço externo
 com quota/cobrança é obrigatório. Tentar branch protection apenas pela WO-007;
 se o acesso `Administration: write` continuar ausente, manter o PR/issue

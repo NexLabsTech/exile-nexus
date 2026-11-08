@@ -6,7 +6,8 @@
 - **Work Order:** EXN-M00-WO-007 · Issue #8
 - **Branch:** `exn-m00-wo-007-docs-ci`
 - **Base SHA:** `e8e900feeaadc98f45e47244ad7840d25e1cc871`
-- **HEAD inicial:** igual à base.
+- **PR:** #139 (Draft durante a execução/auditoria)
+- **HEAD inicial/publicado:** `b3c509747d5bd19684cfa0f24b4e0f406f23b089`.
 - **HEAD final:** consultar metadata/timeline da PR desta WO e o comentário de
   auditoria; o commit que contém este Bundle não pode referenciar seu próprio
   SHA.
@@ -83,9 +84,10 @@ Executados localmente nesta branch:
   correção do validador nesta WO: metadata agora é exigida nos documentos
   canônicos atuais e no Evidence Bundle corrente. Não foi reescrito nenhum
   artefato histórico; a execução subsequente passou.
-- GitHub Actions na base antes da PR: zero workflows. Run real do workflow e
-  log remoto ainda serão registrados pela URL/metadata da PR depois da
-  publicação; não declarar como PASS antes de executar.
+- GitHub Actions na base antes da PR: zero workflows. O run #42478978237
+  confirmou a execução do novo workflow no primeiro head. A atualização deste
+  Evidence Bundle cria um novo head; seu run final será registrado na timeline
+  da PR e no relatório final, sem auto-referenciar o SHA do commit deste arquivo.
 - Páginas oficiais GitHub billing, hardening e evento `pull_request`: HTTP 200.
   Releases oficiais consultados e tarballs verificados por SHA-256.
 
@@ -129,6 +131,6 @@ observado após execução com sucesso. Se settings administrativos permanecerem
 sem read-back, registrar `BLOCKED`, não fazer bypass, não concluir Issue #8 e
 não avançar para WO-008 ou funcionalidade.
 
-- **Veredito técnico:** pendente da execução real do workflow, auditoria final e
-  read-back de branch protection.
+- **Veredito técnico:** o workflow no primeiro head passou; veredito da WO-007
+  permanece pendente da auditoria final e read-back de branch protection.
 - **Aceite NexLabsTech:** pendente.
