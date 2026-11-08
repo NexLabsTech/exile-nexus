@@ -177,3 +177,13 @@ O contraste de cores opacas, segurança básica dos SVGs e preferências de
 acessibilidade foram testados. A decisão não é liberação jurídica de marca,
 reprodução de IP da GGG, aprovação de UI real ou autorização de publicação,
 serviço pago, dados externos ou deploy. Direitos R01–R14 continuam válidos.
+
+## EXN-DEC-0010 — Pilotos dark fantasy de referência aprovados, sem direitos de publicação
+
+- **Estado:** ACEITA pelo owner em 2026-11-08 apenas para referência interna e implementação futura condicionada aos gates.
+- **Fonte:** autorização expressa de squash da [PR #145](https://github.com/NexLabsTech/exile-nexus/pull/145), HEAD `c18e37d53c8cf0ff4c236758e261b4d5eb9b8d1f`, issue [#144](https://github.com/NexLabsTech/exile-nexus/issues/144) CLOSED.
+- **Integração:** squash normal `2dc8f2490f97402bc983389831c16f6c1edd5d47`.
+
+Foram versionadas quatro pranchas PNG originais, quatro SVGs ilustrativos e guia de fidelidade em `design/references/`. Direção pretendida: atmosfera dark fantasy independente, superfícies obsidianas, ouro envelhecido, brilho de brasa e teal secundário. **Os mockups são pilotos**, não UI funcional, nem assets autorizados para distribuição comercial, nem reprodução fiel da interface de jogo. Os SVGs são reconstruções gráficas, não cópias pixel a pixel dos PNGs.
+
+A paleta proposta nas pranchas **não substitui** a decisão EXN-DEC-0009 nem `design/tokens.css` sem nova WO, contraste verificado e aceite próprio. Ficam proibidos neste aceite: conteúdo de jogo sem direito R01–R14, trademarks/fontes de terceiros em produção, integração de autenticação ilustrativa, publicação, monetização e deploy. Exigir revisão de origem, direitos e acessibilidade antes do uso de qualquer elemento de terceiros.

@@ -3,7 +3,7 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED · M12-WO-001 em execução; M01-WO-002 ACEITA
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M12-WO-001 · Issue #119
+- **Work Order:** reconciliação EXN-VIS-WO-001 · Issue #144; próximo EXN-M01-WO-003 · Issue #13
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -249,3 +249,15 @@ ainda não aceita nem integrada.
   permanece PROPOSED até CI, auditoria objetiva solo e aceite do owner.
 - Nenhum reviewer externo, deploy, dados de jogo, serviço pago ou início de
   #13 estão autorizados por esta proposta.
+
+## Reconciliação administrativa aprovada em 2026-11-08 — M12 CI e VIS Pilots
+
+Este delta factual registra duas integrações **já executadas e aceitas pelo owner**; não aprova outras WOs ou direitos, nem reinterpreta propostas históricas acima:
+
+- EXN-M12-WO-001, issue [#119](https://github.com/NexLabsTech/exile-nexus/issues/119), foi integrada pela [PR #143](https://github.com/NexLabsTech/exile-nexus/pull/143) após aceite explícito: squash normal `75bcb8c786beda9c4e62677fd325aa9d4c0418c2`, HEAD pré-merge `78d2fce1fee352b0a5d770a4a60b2fba919032b1`. Issue #119 CLOSED. No HEAD, [Docs validation #42522705357](https://github.com/NexLabsTech/exile-nexus/actions/runs/42522705357) e [Quality baseline #42522705338](https://github.com/NexLabsTech/exile-nexus/actions/runs/42522705338) completaram `success`, com 18 testes e cinco cenários negativos. O required check do ruleset #26806979 permanece apenas `Docs validation`; nenhuma aplicação de produto existia.
+- EXN-VIS-WO-001, issue [#144](https://github.com/NexLabsTech/exile-nexus/issues/144), foi integrada pela [PR #145](https://github.com/NexLabsTech/exile-nexus/pull/145) após aceite explícito para o HEAD `c18e37d53c8cf0ff4c236758e261b4d5eb9b8d1f`: squash normal `2dc8f2490f97402bc983389831c16f6c1edd5d47`, issue #144 CLOSED. Quatro PNGs originais 1448 × 1086, quatro SVGs de referência, documentação, importador e testes estão na main. No HEAD pré-merge [Docs validation #42531258487](https://github.com/NexLabsTech/exile-nexus/actions/runs/42531258487) e [Quality baseline #42531258472](https://github.com/NexLabsTech/exile-nexus/actions/runs/42531258472) foram `completed/success`, com 28 testes, sem defeito HIGH/CRITICAL identificado no escopo. Read-back da main no commit `2dc8f2490f97402bc983389831c16f6c1edd5d47` confirmado.
+- Referências: [Visual Pilot Pack](../design/references/README.md) e [Evidence Bundle](evidence/EXN-VIS-WO-001-reference-boards-2026-11-08.md). Os quatro PNGs foram importados sem transformações, com hashes documentados e validados. Os SVGs são reconstruções distintas, não cópias pixel a pixel.
+- Decisão de referência visual `EXN-DEC-0010`: **aceita apenas como direção piloto para desenvolvimento**, sem substituir os tokens operacionais de `design/tokens.css` aprovados em EXN-DEC-0009. Antes de uso visual público/licenciado, validar originalidade, marcas de terceiros, direitos comerciais, proveniência e acessibilidade real. R01–R14 continuam sem liberar ingestão, sprites, preços ou assets de Path of Exile 2.
+- A issue [#13](https://github.com/NexLabsTech/exile-nexus/issues/13), EXN-M01-WO-003, torna-se o **único próximo incremento NECESSARY**, para app shell e navegação responsiva. Implementação exige branch/PR Draft distintas, Astro 7.4.7 + React 19.3.1 islands, TypeScript strict, testes da aplicação, screenshot visual responsivo e auditoria de DoD; nenhum deploy nem merge é autorizado automaticamente.
+- Custo obrigatório segue US$ 0. Não afirmar billing de apps opcionais, clearance jurídico ou produção completos sem evidência; sem reviewer externo, force-push ou bypass. Auditoria técnica solo não é auditoria independente.
+
