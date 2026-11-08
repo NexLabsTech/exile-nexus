@@ -1,7 +1,7 @@
 # EXN-M12-WO-001 — Evidence Bundle: baseline CI quality pipeline
 
 - **Owner:** NexLabsTech
-- **Status:** DRAFT / TESTS PENDING ON PR HEAD
+- **Status:** DRAFT / INITIAL CI PASS; FINAL HEAD CHECK PENDING
 - **Revisão:** 2026-11-08
 - **Risk:** ELEVATED
 - **Work Order:** EXN-M12-WO-001 · Issue #119
@@ -78,3 +78,37 @@ negative failure names, links to both GitHub workflow runs, security lint,
 package discovery outcome, risks, correction deltas, and checkpoint proposal.
 No merge, owner acceptance, issue #119 closure or #13 implementation before
 the gates are complete.
+
+## Executed CI and negative-regression evidence (prior HEAD)
+
+- **PR:** [#143](https://github.com/NexLabsTech/exile-nexus/pull/143)
+  on branch `exn-m12-wo-001-quality-baseline`.
+- Initial complete CI HEAD `bd44ac46455a5ffa900b2d78a315dee3cfc8221d`,
+  BASE `79be738c7af8eda641c4ac4aff52ef7b28931ca0`.
+- [Quality baseline #42522522029](https://github.com/NexLabsTech/exile-nexus/actions/runs/42522522029):
+  `completed/success`. All 10 job steps passed; `python3 -m unittest
+  discover -s tests -p 'test_*.py' -v` ran **18 tests** with `OK`, exit 0.
+  The 7 new quality tests contain 5 deliberately invalid synthetic
+  configurations that call `quality_gate.py` and assert its exit code is
+  **nonzero**. Valid empty-repo and valid synthetic app cases returned 0.
+- `python3 -m compileall -q scripts tests` PASS. Real repository
+  `quality_gate.py` policy PASS: no unauthorized privileges, unpinned
+  external Actions or missing app lockfile. **Production apps = 0** and
+  npm lint/typecheck/test/build/audit **NOT APPLICABLE** (not PASS).
+- [Documentation CI #42522521967](https://github.com/NexLabsTech/exile-nexus/actions/runs/42522521967):
+  `completed/success` on same HEAD. 18 unittests PASS,
+  30 Markdown and 127 links validated; secret heuristics 0 matches;
+  `actionlint` v1.7.12 and `zizmor` v1.32.0 PASS. Zizmor warned it
+  runs offline by default; this is not full external intelligence.
+- All tools are free local/standard runner tools, without external reviewer,
+  API, deploy, secret, billing, new ruleset permission or paid dependency.
+- **Correction Delta 01:** factual stale Source Hierarchy statements that
+  still described PR #140 as Draft were updated to the already integrated
+  commits and accepted decisions M00/M01. No security requirement relaxed.
+- **Audit limits:** no production app, so browser/E2E, real
+  lint/typecheck/build, dependency scan and release are NOT APPLICABLE.
+  Workflow safety checks are baseline heuristics, not comprehensive SAST.
+- This documentation-only correction changes Git HEAD. Verify the final
+  `Quality baseline` and `Docs validation` statuses on the new SHA,
+  and record those exact links in the PR conversation. Do not claim a future
+  run passed before read-back. Owner acceptance/merge remains pending.

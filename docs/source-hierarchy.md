@@ -48,12 +48,19 @@ critérios técnicos.
   pela PR #139 / WO-007 no commit
   `aaf24a660ff2ee2334d713685e2edee1f841eedc`; issue #8 CLOSED.
   O ruleset #26806979 está ativo e o check `Docs validation` é obrigatório.
-- Auditoria final da fundação e do issue graph pertence à WO-008 / Issue #9.
-  O backlog canônico continua em GitHub Issues; não há backlog Markdown
-  duplicado.
+- A auditoria final M00-WO-008 / Issue #9 foi aceita e integrada pela
+  PR #140, squash `26673e9656bfd6aae500f01f508ea53e13718bab`;
+  issue #9 e épico #1 CLOSED. O backlog canônico continua em GitHub Issues.
+- O frontend Astro/React foi aceito pela PR #141, commit
+  `4a6bba78fd1966804895c9f9dafe85bf70175633`, issue #11 CLOSED.
+- Os tokens e SVGs originais foram aceitos pela PR #142, commit
+  `79be738c7af8eda641c4ac4aff52ef7b28931ca0`, issue #12 CLOSED.
+  Nenhuma licença de dados da GGG ou publicação foi concedida.
 
-O Source Pack e o CI documental da WO-007 estão versionados. A auditoria
-final WO-008 está em PR Draft #140 e seu Checkpoint Delta segue PROPOSED.
+O Source Pack M00 está versionado, a WO-008 integrada e o épico M00 encerrado.
+O M01-WO-001 e M01-WO-002 foram aceitos pelo owner. EXN-M12-WO-001 (#119)
+trabalha exclusivamente no pipeline de qualidade, com Checkpoint Delta
+PROPOSED; a interface M01-WO-003 (#13) está bloqueada por sua dependência.
 O owner aprovou auditoria objetiva interna de mantenedor solo, declarando a
 ausência de independência (EXN-DEC-0007), sem review externo obrigatório.
 Não há aplicação ou deployment. Direitos de conteúdo, APIs, árvore, dados
