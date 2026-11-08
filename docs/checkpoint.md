@@ -1,7 +1,7 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · execução da WO-007
+- **Status:** PROPOSED · CI corrigido; configuração administrativa BLOCKED
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M00-WO-007 · Issue #8
 - **Base SHA desta proposta:** `e8e900feeaadc98f45e47244ad7840d25e1cc871`
@@ -87,7 +87,8 @@ conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
 - WO-006 / Issue #7: Threat Model, privacidade e abuso integrados; controles
   sem read-back continuam NOT VERIFIED.
 - WO-007 / Issue #8: Test Plan, CI documental e contribuição nesta branch;
-  branch protection/read-back administrativo pendente.
+  Correction Delta da auditoria em andamento; branch protection/read-back
+  administrativo pendente.
 - WO-008 / Issue #9: auditoria final e revisão do backlog, depende da conclusão
   da WO-007.
 
@@ -105,13 +106,24 @@ conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
   versão e SHA-256 fixos e token read-only. Nenhuma ferramenta SaaS de quota é
   necessária ao gate.
 
-## Checkpoint Delta proposto para WO-007
+## Correction Delta e Checkpoint proposto para WO-007
 
-Após testes e aceite, registrar Test Plan, guia de contribuição e workflow
-`Documentation CI` como controles versionados. O check `Docs validation` só poderá ser exigido depois de executar com sucesso em PR e após
-read-back de `main` rulesets/protection confirmar que nenhum serviço externo
-com quota/cobrança é obrigatório. Tentar branch protection apenas pela WO-007;
-se o acesso `Administration: write` continuar ausente, manter o PR/issue
-BLOCKED e registrar o endpoint/permissão sem bypass. Não iniciar WO-008 nem
-funcionalidade antes da aprovação válida da WO-007 e confirmação dos controles
-essenciais.
+Auditoria COMMENTED da NexLabsTech na PR #139, review #5818146156, aplicada ao
+HEAD `efb4674b55e7300b26857155fbf1e8d0ed1aac0e`, pediu: executar CI em toda PR
+para permitir `Docs validation` como check obrigatório; analisar todos os
+workflows com actionlint e zizmor; reexecutar testes e atualizar evidências.
+O Correction Delta remove `paths` de `pull_request`, mantém filtros de `push`
+e enumera todos os `.yml`/`.yaml` em `.github/workflows/` para ambos scanners.
+
+Após CI e testes passarem, o check `Docs validation` pode ser selecionado como
+required somente na mesma sessão administrativa que confirmar PR obrigatória,
+0 reviews, squash-only, histórico linear, força/exclusão bloqueadas, conversas
+resolvidas e nenhum check de SaaS obrigatório. O acesso atual da integração à
+API de protection retorna 403. Nenhuma regra foi alterada. Se persistir, a
+configuração permanece BLOCKED até sessão autenticada NexLabsTech em Settings
+→ Rules → Rulesets → New ruleset: alvo `main`; PR obrigatória com 0 aprovações;
+status check `Docs validation` e branch atualizada; conversas resolvidas;
+histórico linear; bloquear force-push e deleção; sem bypass. Em Settings →
+General → Pull Requests, deixar somente squash habilitado. Ler novamente essas
+opções nas mesmas telas. Não usar PAT colado em chat ou versionado. Não iniciar
+WO-008 nem funcionalidade antes do aceite e integração válidos da WO-007.

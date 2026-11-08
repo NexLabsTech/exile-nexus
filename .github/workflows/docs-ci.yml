@@ -3,13 +3,6 @@ name: Documentation CI
 on:
   pull_request:
     branches: [main]
-    paths:
-      - '*.md'
-      - 'docs/*.md'
-      - 'docs/**/*.md'
-      - '.github/workflows/**'
-      - 'scripts/validate_docs.py'
-      - 'tests/**'
   push:
     branches: [main]
     paths:
@@ -64,8 +57,19 @@ jobs:
           chmod 755 "$RUNNER_TEMP/exn-tools/actionlint"
           echo "$RUNNER_TEMP/exn-tools" >> "$GITHUB_PATH"
 
-      - name: Lint GitHub Actions workflow
-        run: actionlint .github/workflows/docs-ci.yml
+      - name: Lint all GitHub Actions workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' workflow_files < <(
+            find .github/workflows -maxdepth 1 -type f \
+              \( -name '*.yml' -o -name '*.yaml' \) -print0 | sort -z
+          )
+          if ((${#workflow_files[@]} == 0)); then
+            echo 'No GitHub Actions workflow files found' >&2
+            exit 1
+          fi
+          actionlint "${workflow_files[@]}"
 
       - name: Install zizmor v1.32.0
         timeout-minutes: 2
@@ -84,5 +88,16 @@ jobs:
           chmod 755 "$RUNNER_TEMP/exn-tools/zizmor"
           echo "$RUNNER_TEMP/exn-tools" >> "$GITHUB_PATH"
 
-      - name: Audit GitHub Actions security
-        run: zizmor .github/workflows/docs-ci.yml
+      - name: Audit all workflows for security
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' workflow_files < <(
+            find .github/workflows -maxdepth 1 -type f \
+              \( -name '*.yml' -o -name '*.yaml' \) -print0 | sort -z
+          )
+          if ((${#workflow_files[@]} == 0)); then
+            echo 'No GitHub Actions workflow files found' >&2
+            exit 1
+          fi
+          zizmor "${workflow_files[@]}"

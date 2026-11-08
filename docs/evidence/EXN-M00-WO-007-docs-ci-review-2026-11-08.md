@@ -1,7 +1,7 @@
 # EXN-M00-WO-007 — Evidence Bundle de CI documental e contribuição
 
 - **Owner:** NexLabsTech
-- **Status:** BLOCKED · testes documentais aprovados; gate administrativo sem acesso de leitura/escrita
+- **Status:** BLOCKED somente pela configuração administrativa; Correction Delta local PASS
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M00-WO-007 · Issue #8
 - **Branch:** `exn-m00-wo-007-docs-ci`
@@ -14,6 +14,8 @@
   `0649102eb841104083d574db2a7fab7b95ae960b`.
 - **HEAD antes desta atualização do Evidence Bundle:**
   `7fe2d683f71b03a49e6e1d62d211861e602e448f`.
+- **HEAD auditado antes do Correction Delta atual:**
+  `efb4674b55e7300b26857155fbf1e8d0ed1aac0e`.
 - **HEAD que contém esta revisão:** SHA do commit que atualiza este Bundle,
   visível no histórico/timeline da PR #139.
 
@@ -31,6 +33,11 @@
   ativos ou desativados. Nenhuma configuração foi alterada.
 - Direitos R01–R14 continuam sem autorização para ingestão, persistência,
   reexibição, árvore passiva, dados econômicos, scraping ou monetização.
+- A auditoria mais recente, comentário/review #5818146156 por NexLabsTech,
+  avaliou o HEAD `efb4674b55e7300b26857155fbf1e8d0ed1aac0e` como `CORRECTION
+  REQUIRED` para o workflow e `BLOCKED` para governança administrativa. O
+  comentário declara independência do executor; o estado GitHub é
+  `COMMENTED`, não aprovação formal `APPROVED`.
 
 ## Arquivos e mudanças
 
@@ -44,9 +51,10 @@
 - `scripts/validate_docs.py`: validador stdlib de Source Pack, metadata,
   links locais/URL HTTPS, fences e padrões heurísticos de segredo.
 - `tests/test_validate_docs.py`: testes unitários locais sem dependências.
-- `.github/workflows/docs-ci.yml`: workflow fork-safe, somente `pull_request`
-  e `push` em `main`, `contents: read`, checkout fixado, `persist-credentials:
-  false`, timeout, filtros por path e cancelamento de execução obsoleta.
+- `.github/workflows/docs-ci.yml`: workflow fork-safe, `pull_request` para toda
+  PR com base `main`, `push` filtrado em `main`, `contents: read`, checkout
+  fixado, `persist-credentials: false`, timeout e cancelamento de execução
+  obsoleta. actionlint e zizmor enumeram todos os workflows `.yml`/`.yaml`.
 - Este Evidence Bundle.
 
 Nenhum código funcional, dado de jogo, dependência runtime, segredo, workflow
@@ -82,9 +90,9 @@ Executados localmente nesta branch:
 - `python3 scripts/validate_docs.py` — **PASS**: Source Pack presente; 23
   arquivos Markdown; 56 links; zero correspondências nos padrões heurísticos
   de segredo.
-- `actionlint .github/workflows/docs-ci.yml` com v1.7.12 — **PASS**, exit 0.
-- `zizmor .github/workflows/docs-ci.yml` com v1.32.0 — **PASS**, “No findings
-  to report!”.
+- `mapfile -d '' workflow_files < <(find .github/workflows -maxdepth 1 -type f \( -name '*.yml' -o -name '*.yaml' \) -print0 | sort -z)` — **PASS**, enumerou 1 workflow existente.
+- `actionlint "${workflow_files[@]}"` com v1.7.12 — **PASS**, exit 0 para todos os workflows encontrados.
+- `zizmor "${workflow_files[@]}"` com v1.32.0 — **PASS**, “No findings to report!” para todos os workflows encontrados.
 - `python3 -m py_compile scripts/validate_docs.py tests/test_validate_docs.py`
   — **PASS**.
 - `git diff --check` — **PASS**.
@@ -117,23 +125,29 @@ não substitui scanner dedicado.
 
 ## Correction Delta
 
-- Sinal observado: a instalação do `actionlint` via release URL permaneceu em
-  andamento por mais de um minuto na consulta inicial do run #42479196861,
-  embora o run tenha terminado com sucesso. Para limitar esperas de rede
-  futuras, esta correção acrescenta timeout de 2 minutos à etapa e limites de
-  10 segundos para conectar e 60 segundos para cada download.
-- O cancelamento manual daquele run recebeu 403 da identidade CLI `KayzenRoot`;
-  ele terminou normalmente antes desta correção. Nenhum bypass ou ampliação de
-  credenciais foi usado.
+- Aplicado nesta correção: removido `paths` do evento `pull_request` para que
+  `Docs validation` inicie em qualquer PR para `main`; os filtros `paths` do
+  evento `push` foram preservados.
+- actionlint e zizmor agora coletam, por `find`, todos os arquivos `.yml` e
+  `.yaml` dentro de `.github/workflows/`, falhando explicitamente se nenhum for
+  encontrado. Nesta revisão foi encontrado um workflow.
+- Reexecução local pedida pela auditoria: quatro testes unitários **PASS**;
+  validador documental **PASS** (23 Markdown, 56 links, zero matches
+  heurísticos); actionlint v1.7.12 **PASS**; zizmor v1.32.0 **PASS**, sem
+  findings; `git diff --check` **PASS**.
+- CI remoto no novo HEAD ainda pendente de publicação/execução; será registrado
+  pela timeline da PR e no relatório final.
+- O sinal anterior de demora na instalação do actionlint foi corrigido antes:
+  etapas limitadas a 2 minutos e downloads com conexão de 10 segundos e limite
+  total de 60 segundos; o run #42480225757 no HEAD `efb4674` passou.
 
 ## Governança administrativa
 
 - NexLabsTech tem permissão de colaborador `admin`, confirmada pela API. Porém,
   GET `/branches/main/protection` com a conexão NexLabsTech retorna 403
-  `Resource not accessible by integration`. É necessário conceder à integração
-  GitHub usada nesta sessão `Administration: read` para auditar e
-  `Administration: write` para configurar e ler de volta as regras. A
-  identidade CLI `KayzenRoot` também não tem esse acesso.
+  `Resource not accessible by integration`. A instalação GitHub desta sessão
+  não expõe `Administration: read/write`; a identidade CLI `KayzenRoot` também
+  não pode substituir a sessão administrativa.
 - Rulesets visíveis: resposta `[]`; não prova ausência de proteção efetiva.
 - Dependabot Alerts: último estado explícito na WO-001 foi desativado; leitura
   atual 403. Alertas atuais, Updates, Code Scanning, Secret Scanning, Push
@@ -156,15 +170,19 @@ padrão gratuito do repositório público; a política de billing da conta e o
 custo das instalações externas preexistentes continuam `NOT VERIFIED`. Não
 acionar review manual/quota nem aceitar upgrade.
 
-Checkpoint Delta proposto: registrar Test Plan, workflow documental e guia de
-contribuição depois de aprovação e merge normal. Exigir apenas o check gratuito
-observado após execução com sucesso. Se settings administrativos permanecerem
-sem read-back, registrar `BLOCKED`, não fazer bypass, não concluir Issue #8 e
-não avançar para WO-008 ou funcionalidade.
+Checkpoint Delta proposto: o CI agora é acionável em todas as PRs e audita
+todos os workflows existentes; registrar o run de sucesso após publicação e
+selecionar somente `Docs validation` como check required depois do read-back
+administrativo. Para esse read-back, uma sessão autenticada NexLabsTech deve
+usar Settings → Rules → Rulesets para configurar o alvo `main`, PR obrigatória,
+zero aprovações, `Docs validation` atualizado, conversas resolvidas, histórico
+linear, force-push e deleção bloqueados, sem bypass; Settings → General → Pull
+Requests deve deixar squash como única estratégia. Até verificar esses estados,
+a configuração permanece `BLOCKED`, a Issue #8 não é concluída e WO-008 ou
+funcionalidade não iniciam.
 
-- **Veredito técnico:** `BLOCKED`. Os testes locais e os runs remotos observados
-  passaram, mas as regras administrativas exigidas pela Issue #8 não podem ser
-  inspecionadas nem configuradas com as permissões atuais. Isso impede concluir
-  a auditoria de proteção de `main` e provar que nenhum aplicativo externo está
-  em um gate obrigatório.
+- **Veredito:** correção técnica local `PASS`; Work Order `BLOCKED` somente
+  pela configuração/read-back administrativo. Sem o endpoint de protection,
+  não se pode provar estado de `main`, nem que CodeRabbit/Socket estão fora da
+  lista efetiva de checks obrigatórios.
 - **Aceite NexLabsTech:** pendente.

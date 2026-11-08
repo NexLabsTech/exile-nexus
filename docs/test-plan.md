@@ -22,9 +22,9 @@ pré-requisitos existirem. Cada relatório usa estes estados:
 
 | Fase / risco | Verificação | Gatilho e pré-requisito | Ferramenta/evidência | Estado atual |
 | --- | --- | --- | --- | --- |
-| Documentação e Source Pack | Presença dos documentos canônicos; owner/status/revisão/WO; links locais; fences; sintaxe de URLs externas; padrões de segredo. | PR ou push na `main` que altera Markdown, script, teste ou workflow. | `python3 scripts/validate_docs.py`; log CI `Docs validation`. | Implementado nesta WO; deve passar no PR para ser validado. |
-| Documentação | Testes de regressão do validador. | Cada PR que altera script/tests/workflow/docs. | `python3 -m unittest discover -s tests -p 'test_*.py' -v`. | Implementado nesta WO. |
-| GitHub Actions | Sintaxe e padrões de segurança dos workflows. | Cada PR que altera workflow. | `actionlint` v1.7.12 e `zizmor` v1.32.0, obtidos de releases oficiais com SHA-256 fixo no workflow. | Implementado nesta WO. |
+| Documentação e Source Pack | Presença dos documentos canônicos; owner/status/revisão/WO; links locais; fences; sintaxe de URLs externas; padrões de segredo. | Toda PR para `main`; `push` em `main` quando os caminhos Markdown/CI filtrados mudam. | `python3 scripts/validate_docs.py`; log CI `Docs validation`. | Implementado nesta WO; aguarda run remoto após esta correção. |
+| Documentação | Testes de regressão do validador. | Toda PR para `main`; `push` em `main` quando script, testes, docs ou workflow mudam. | `python3 -m unittest discover -s tests -p 'test_*.py' -v`. | Implementado nesta WO. |
+| GitHub Actions | Sintaxe e padrões de segurança de todos os workflows existentes. | Toda PR para `main`; `push` em `main` quando workflow muda. | `actionlint` v1.7.12 e `zizmor` v1.32.0, obtidos de releases oficiais com SHA-256 fixo no workflow. | Implementado nesta WO. |
 | Código da aplicação | Lint, TypeScript strict, typecheck, build, testes unitários/integration e contratos. | Código, package/lockfile e arquitetura runtime aprovados. | Ferramentas e logs definidos na WO funcional; sem dependência comercial. | `NOT APPLICABLE`: nenhum código ou manifestos existem. |
 | Dependências | Atualização e vulnerabilidades. | Manifesto/lockfile de aplicação existente; settings administrativos verificados. | Dependabot Alerts/Security Updates, Dependency Review, OSV-Scanner, Trivy conforme ecossistema. | `NOT APPLICABLE` para scanner de manifestos; settings GitHub `NOT VERIFIED`. |
 | Análise estática | Fluxo de código e regras de segurança. | Linguagem suportada e código executável. | CodeQL e Semgrep CE local/CI; permissões `security-events: write` somente no job CodeQL se necessário. | `NOT APPLICABLE`: sem código; Code Scanning settings `NOT VERIFIED`. |
@@ -41,17 +41,19 @@ administrativamente antes de serem descritos como ativos.
 
 ## CI documental
 
-O workflow roda em `pull_request` para `main` e em `push` para `main`, com
-filtros por caminhos Markdown/CI, runner padrão `ubuntu-latest`, timeout de dez
-minutos, `contents: read`, checkout fixado em SHA e `persist-credentials: false`.
-A concorrência cancela execuções obsoletas. Não há dependências de pacote para
-cache; ferramentas de lint são pequenas, versionadas e verificadas por SHA-256.
-Nenhum secret, preview/deploy, app com quota ou licença paga é necessário.
+O workflow roda em toda `pull_request` para `main` sem filtro por caminhos; em
+`push` para `main`, mantém filtros por caminhos Markdown/CI. Usa runner padrão
+`ubuntu-latest`, timeout de dez minutos, `contents: read`, checkout fixado em
+SHA e `persist-credentials: false`. A concorrência cancela execuções obsoletas.
+actionlint e zizmor enumeram todos os arquivos `.yml`/`.yaml` diretamente sob
+`.github/workflows/`. Não há dependências de pacote para cache; ferramentas de
+lint são pequenas, versionadas e verificadas por SHA-256. Nenhum secret,
+preview/deploy, app com quota ou licença paga é necessário.
 
 O nome observado do check é `Docs validation` (o nome do workflow é
-`Documentation CI`). Não o torne required até observar sucesso no PR e confirmar
-por leitura administrativa que a política não exige CodeRabbit, Socket ou outro
-check externo cobrado.
+`Documentation CI`). A seleção como required depende da execução com sucesso
+depois da remoção do filtro de PR e de read-back administrativo que confirme
+zero reviews exigidas e nenhum check externo cobrado ou limitado por cota.
 
 ## Regras de parada
 
