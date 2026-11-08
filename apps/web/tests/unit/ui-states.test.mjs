@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, URL } from "node:url";
 import test from "node:test";
 
 const file = fileURLToPath(new URL("../../src/data/ui-states.json", import.meta.url));
