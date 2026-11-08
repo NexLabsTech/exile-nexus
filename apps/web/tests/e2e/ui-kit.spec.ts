@@ -89,16 +89,20 @@ for (const viewport of viewports) {
     expect(overflow).toBeLessThanOrEqual(viewport.width + 1);
 
     await page.screenshot({ path: testInfo.outputPath(`ui-kit-${viewport.name}-full.png`), fullPage: true, animations: "disabled" });
+    const digests: Record<string, string> = {};
     for (const state of ["empty", "error"] as const) {
       if (state === "error") await page.getByRole("button", { name: "Error" }).click();
-      const cropped = await page.locator(".ui-workshop__section").first().screenshot({
+      const cropped = await page.locator("#component-workshop").screenshot({
         path: testInfo.outputPath(`ui-kit-${viewport.name}-${state}.png`),
         animations: "disabled",
         caret: "hide",
       });
       const digest = createHash("sha256").update(cropped).digest("hex");
       console.log(`EXN_VISUAL_DIGEST ${viewport.name}-${state} ${digest}`);
-      expect(digest, `visual snapshot changed: ${viewport.name}-${state}`).toBe(visualBaselines[`${viewport.name}-${state}`]);
+      digests[`${viewport.name}-${state}`] = digest;
+    }
+    for (const [key, digest] of Object.entries(digests)) {
+      expect(digest, `visual snapshot changed: ${key}`).toBe(visualBaselines[key]);
     }
   });
 }
