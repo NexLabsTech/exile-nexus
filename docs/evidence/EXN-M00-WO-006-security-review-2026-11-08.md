@@ -5,10 +5,11 @@
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M00-WO-006 · Issue #7
 - **Branch:** `exn-m00-wo-006-security-privacy`
+- **PR:** #138 (Draft durante a auditoria)
 - **Base SHA:** `2b98db725c883dd9bbef3b080673d0b5b07036ab`
-- **HEAD inicial:** `2b98db725c883dd9bbef3b080673d0b5b07036ab`
-- **HEAD final:** registrar no relatório/comentário após publicar; o commit que
-  contém este bundle não pode conter seu próprio SHA.
+- **HEAD da primeira publicação:** `962dd22a5028a11a21bc6d21ac59c91352fd331e`
+- **HEAD que contém este Evidence Bundle:** consultar a API da PR #138 e o
+  comentário final do owner; o commit não pode conter seu próprio SHA.
 
 ## Source Check e Context Lock
 
@@ -41,7 +42,15 @@ credencial ou deployment no diff.
 ## Controles nativos e evidências de acesso
 
 - `gh api repos/NexLabsTech/exile-nexus/actions/workflows` →
-  `count=0 names=`. Nenhum workflow/check próprio executado.
+  `count=0 names=`. Nenhum workflow/check de GitHub Actions próprio executado.
+- A API de check-runs na primeira publicação da PR #138 (HEAD
+  `962dd22a5028a11a21bc6d21ac59c91352fd331e`) retornou: CodeRabbit
+  `skipped`; Socket Security Project Report `success`; Socket Security Pull
+  Request Alerts `success`. O endpoint de status legacy retornou `pending` com
+  zero contextos; a PR retornou `mergeable=true`, `mergeable_state=clean`, Draft.
+  Nenhuma review formal nem comentário inline foi criado. Os checks externos
+  foram automáticos, não são executados pelo workflow local e não foram usados
+  como critério da auditoria.
 - `gh api repos/NexLabsTech/exile-nexus/rulesets` → `0` rulesets visíveis para
   a credencial CLI. Isso não confirma política efetiva de `main`.
 - GET `/branches/main/protection` pelo conector NexLabsTech → 403
@@ -67,11 +76,15 @@ Push Protection, Dependabot Alerts, Dependabot Security Updates, Dependency
 Review e permissões automáticas de `GITHUB_TOKEN`. URLs e o escopo de cada
 página constam no threat model.
 
-Custo novo desta WO: **US$ 0**. Não foi iniciado runner pago, serviço com quota,
-revisão comercial, upgrade, app, integração ou recurso Cloudflare. A página de
-billing/admin da conta NexLabsTech e os custos de apps automáticos preexistentes
-não são visíveis; custo total da conta permanece NOT VERIFIED. Nenhuma franquia
-CodeRabbit/Socket ou SaaS é necessária para gate.
+Custo direto das validações locais desta WO: **US$ 0**. Não foi iniciado runner
+pago, review comercial/manual, upgrade, app, integração ou recurso Cloudflare.
+CodeRabbit e Socket executaram os check-runs automáticos descritos acima; esses
+resultados não foram usados como gate. A página oficial de preço do CodeRabbit
+retornou HTTP 200 e declara review gratuito para repositórios públicos. A
+página oficial de preços do Socket retornou HTTP 403; custo/plano da instalação
+e billing da conta NexLabsTech permanecem NOT VERIFIED. Nenhum desses serviços
+é requisito para concluir o trabalho, mas custo total da conta não é comprovável
+por esta integração.
 
 ## Testes e verificações
 
@@ -119,13 +132,20 @@ executou as verificações e fará auditoria técnica objetiva no mesmo contexto
 A auditoria técnica objetiva consiste em revisão do diff, verificação de SHA,
 reexecução de checks documentais, scan heurístico e consultas de API/Fontes
 HTTP. O auditor é o executor na mesma sessão; não é independente e não é GitHub
-Review formal `APPROVED`. Aceite administrativo NexLabsTech será registrado em
-comentário separado somente após verificação dos critérios.
+Review formal `APPROVED`. NexLabsTech registrou aceite administrativo no
+comentário #6721102700 para o primeiro head publicado
+`962dd22a5028a11a21bc6d21ac59c91352fd331e`. Esta atualização acrescenta somente
+os estados de check-runs e custo observados na PR; o head final e seu aceite
+vigente ficam registrados na metadata/timeline da PR #138.
 
 Checkpoint Delta proposto: integrar o threat model como base de planejamento;
 manter settings sem read-back como NOT VERIFIED; requerer conexão com
 `Administration: read/write` para as Work Orders administrativas; manter
 rights e deployment gates fechados; deixar WO-007 e WO-008 pendentes.
 
-- **Veredito técnico:** pendente da validação final e auditoria objetiva.
-- **Aceite NexLabsTech:** pendente.
+- **Veredito técnico do primeiro head (`962dd22`):** APPROVED para o conteúdo
+  documental dentro do escopo desta WO; as configurações bloqueadas permanecem
+  explicitamente NOT VERIFIED.
+- **Veredito técnico do head final:** consultar timeline/metadata da PR #138.
+- **Aceite administrativo do primeiro head:** comentário NexLabsTech #6721102700;
+  o comentário de aceite do head final deve ser consultado na timeline da PR.
