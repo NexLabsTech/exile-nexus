@@ -1,0 +1,21 @@
+{
+  "name": "exn-astro-runtime-probe",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "astro check",
+    "build": "astro build"
+  },
+  "dependencies": {
+    "astro": "7.4.7",
+    "@astrojs/react": "7.1.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "typescript": "6.0.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
+  }
+}

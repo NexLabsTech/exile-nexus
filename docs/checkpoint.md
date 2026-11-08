@@ -1,15 +1,16 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · WO-008 em auditoria; WO-007 integrada e regras verificadas
+- **Status:** PROPOSED · M00 integrada e encerrada; WO-001 do M01 em avaliação
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-008 · Issue #9
-- **Base SHA desta proposta:** `aaf24a660ff2ee2334d713685e2edee1f841eedc`
+- **Work Order:** EXN-M01-WO-001 · Issue #11
+- **Base SHA desta proposta:** `26673e9656bfd6aae500f01f508ea53e13718bab`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
-Esta proposta de WO-008 reconcilia a WO-007, já integrada na main após aceite
-NexLabsTech, e inicia exclusivamente auditoria final do M00. O checkpoint
-permanece PROPOSED até auditoria objetiva, aceite e merge da presente WO.
+A fundação M00 foi encerrada no GitHub após a PR #140, com o épico #1 e as
+issues #2–#9 fechados. Esta proposta inicia exclusivamente a avaliação do
+runtime frontend da WO-001 do M01. O delta permanece PROPOSED até os testes,
+a auditoria interna e o aceite do owner antes de qualquer squash merge.
 
 ## Histórico e aceite
 
@@ -45,7 +46,9 @@ permanece PROPOSED até auditoria objetiva, aceite e merge da presente WO.
 
 ## Context Lock e fonte atual
 
-- Issue #8 encerrada; EXN-M00-WO-008 (#9) é a única próxima WO NECESSARY.
+- Issues M00 #2–#9 e épico #1 encerrados; EXN-M01-WO-001 (#11) é a
+  próxima Work Order NECESSARY selecionada. Não iniciar outra enquanto #11
+  exigir auditoria, correção ou aceite.
 - main no início da auditoria: aaf24a660ff2ee2334d713685e2edee1f841eedc.
 - CI documental integrado em .github/workflows/docs-ci.yml, sem app, endpoint,
   banco, manifesto de dependências de runtime ou deploy.
@@ -93,13 +96,15 @@ permanece PROPOSED até auditoria objetiva, aceite e merge da presente WO.
   sem read-back continuam NOT VERIFIED.
 - WO-007 / Issue #8: Test Plan, CI e contribuição integrados na PR #139;
   checks e regras verificados; issue concluída.
-- WO-008 / Issue #9: AUDITORIA EM ANDAMENTO; aceite e merge ainda pendentes.
+- WO-008 / Issue #9: integrada via PR #140 e fechada no commit
+  `26673e9656bfd6aae500f01f508ea53e13718bab` após aceite NexLabsTech;
+  épico M00 #1 também concluído. CI pós-merge #42518316070 PASS.
 
 ## Estado de produto e custos
 
-- O repositório tem CI documental integrado, mas não possui aplicação,
-  dependências de runtime, dados pessoais, API ou deployment. Não desenvolver
-  funcionalidade enquanto WO-008 estiver pendente.
+- M00 foi concluída; não há aplicação de produto, banco, API, dados pessoais
+  ou deployment. A WO-001 do M01 experimenta build estático com fixtures
+  originais, sem selecionar dependências para produção antecipadamente.
 - A arquitetura modular monolith, TypeScript strict e deny-by-default segue
   como restrição; serviços permanecem não selecionados.
 - O plano financeiro obrigatório é US$ 0. Runners GitHub-hosted padrão são
@@ -129,15 +134,16 @@ histórico linear e bypass vazio. A verificação da proteção clássica por
 endpoint administrativo permanece limitada ao acesso disponível, sem
 desautorizar o read-back do ruleset efetivo.
 
-Esta seção registra fatos históricos aceitos da WO-007. Não é um
-Checkpoint Delta ainda pendente para essa Work Order. O próximo gate é
-exclusivamente a auditoria e o aceite da WO-008.
+Esta seção registra fatos históricos aceitos da WO-007. O gate seguinte de
+WO-008 já foi cumprido pela PR #140; a etapa corrente é somente M01-WO-001,
+ainda não aceita nem integrada.
 
 
-## Auditoria WO-008 e Checkpoint Delta PROPOSTO
+## Histórico da auditoria WO-008 (integrada por PR #140)
 
 - Evidence Bundle: [Foundation Audit](evidence/EXN-M00-WO-008-foundation-audit-2026-11-08.md).
-- M00: 7 Work Orders concluídas (#2–#8); a issue #9 segue OPEN.
+- M00: 8 Work Orders concluídas (#2–#9) e épico #1 CLOSED após o squash
+  da PR #140. Registro original pré-merge preservado no Evidence Bundle.
 - GitHub Issues: 132 IDs únicos, sendo 13 épicos e 119 Work Orders;
   sem ciclos, referências inexistentes ou dependências de issues fechadas
   ainda abertas, conforme snapshot do relatório.
@@ -149,21 +155,56 @@ exclusivamente a auditoria e o aceite da WO-008.
 - Direitos de jogo, AdSense e fontes não autorizadas permanecem bloqueados;
   billing, Code Security adicional e serviços existentes não totalmente
   verificados, sem liberar gastos.
-- Não promover este Checkpoint Delta sem auditoria objetiva, aceite do owner
-  e squash merge da WO-008.
+- O delta da WO-008 foi integrado após auditoria objetiva e aceite do owner;
+  nenhuma decisão de runtime ou direito de dado foi automaticamente liberada.
 
 ## Decisão aceita de processo — mantenedor solo (2026-11-08)
 
 - A NexLabsTech determinou expressamente **sem reviews externos** para o
   Exile Nexus. O critério do épico M00 #1 foi reconciliado no GitHub para
   auditoria objetiva da mesma sessão, com ausência de independência declarada.
-- A decisão `EXN-DEC-0007` integra o Decisions Ledger **como decisão aceita**;
-  este Checkpoint Delta permanece **PROPOSED** até merge da WO-008.
+- A decisão `EXN-DEC-0007` foi integrada à main pela PR #140 e aceita pelo
+  owner. A avaliação de runtime M01-WO-001 segue PROPOSED.
 - Não utilizar nem solicitar análises CodeRabbit ou de outros revisores externos.
   Qualquer check emitido historicamente por apps não é gate obrigatório.
   Não afirmar que apps foram desinstalados sem leitura administrativa.
 - Permanecem obrigatórios: evidências Git/CI/segurança, direitos, zero gasto,
   auditoria interna documentada, aceite administrativo explícito para cada PR,
   squash normal sem bypass e sem avanço com defeitos HIGH/CRITICAL.
-- A referência canônica de M00 continua a issue #9 até seu aceite e integração;
-  nenhum incremento do M01 foi iniciado por esta mudança de processo.
+- A issue #9 e o épico M00 #1 foram fechados. M01-WO-001 #11 foi iniciado
+  exclusivamente para uma decisão de runtime e benchmark sintético.
+
+## M01-WO-001 — Frontend Runtime ADR (Checkpoint Delta PROPOSTO)
+
+- M00 foi encerrado após squash normal da PR #140; SHA de main
+  `26673e9656bfd6aae500f01f508ea53e13718bab`, CI de main
+  [#42518316070](https://github.com/NexLabsTech/exile-nexus/actions/runs/42518316070)
+  PASS, issues #1–#9 fechadas.
+- O próximo incremento necessário é
+  [EXN-M01-WO-001 #11](https://github.com/NexLabsTech/exile-nexus/issues/11),
+  dependente de EXN-M00-WO-008, já fechado.
+- Recomendação de runtime ainda PROPOSED:
+  [Frontend Runtime ADR](adr/EXN-M01-WO-001-frontend-runtime.md).
+- A avaliação compara Astro 7 + React 19 e Vite 8 + React 19 sob fixtures
+  sintéticas em GitHub Actions, sem publicar, habilitar Cloudflare, dados de jogo
+  ou custo. Métricas e veredito final pertencem ao
+  [Evidence Bundle](evidence/EXN-M01-WO-001-runtime-evaluation-2026-11-08.md).
+- **Não promover** framework, versões, base de código ou checkpoint à decisão
+  aceita até CI, benchmark, revisão objetiva interna declarando ausência de
+  independência, e aceite administrativo NexLabsTech. Sem próxima WO enquanto
+  esta estiver pendente.
+
+## M01-WO-001 — Métricas do primeiro experimento (somente PROPOSTAS)
+
+- GitHub Actions [run #42519241684](https://github.com/NexLabsTech/exile-nexus/actions/runs/42519241684):
+  Astro e Vite concluíram typecheck/build com PASS no HEAD
+  `c4e8b44a476c16fe3c7a685450f2675767122466`.
+- Astro + React: 1096 ms, 227095 bytes e 4 arquivos estáticos.
+- Vite + React: 360 ms, 220692 bytes e 2 arquivos estáticos.
+- O erro inicial de peer dependency (`@astrojs/check@0.9.12` versus
+  TypeScript 7) foi corrigido sem ignorar resolução npm; Astro usa TS6
+  no probe, Vite TS7. Logs e ressalvas no Evidence Bundle.
+- Recomenda-se **provisoriamente** Astro estático + ilhas React; fallback
+  React/Vite. **Sem framework aceito ou aplicado em produção**.
+- A futura implementação precisa de lockfile commitado, scanner de
+  dependências e testes da UI real. Sem deploy ou acesso a dados externos.
