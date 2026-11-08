@@ -3,10 +3,11 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-004 · Issue #5
+- **Work Order:** EXN-M00-WO-005 · Issue #6
 
-Este ledger registra decisões explícitas de processo. Esta versão ainda aguarda
-revisão e não foi promovida a fonte canônica.
+Este ledger registra decisões explícitas de processo e arquitetura. O documento
+permanece PROPOSED; cada decisão tem seu estado próprio. Uma restrição aceita
+pelo owner não aceita decisões técnicas que a instrução não tenha especificado.
 
 ## EXN-DEC-0001 — Custo zero e gates de CI
 
@@ -56,8 +57,42 @@ importação de árvore ou AdSense.
 
 ## Itens não decididos
 
-Este ledger não aprova fontes de dados, licença, marca, plano de serviço,
-tecnologia de aplicação, arquitetura, retenção, privacidade ou mecanismo de
-deploy. Trate esses itens nos Work Orders correspondentes.
+Este ledger não aprova fonte de dados, licença, marca, serviço de execução,
+framework, ferramenta de build, runtime, banco, retenção, privacidade ou
+mecanismo de deploy. Trate esses itens em Work Orders próprias. As restrições
+de arquitetura aceitas e a proposta estática permanecem identificadas por seus
+estados acima.
 
 [PR #133]: https://github.com/NexLabsTech/exile-nexus/pull/133
+
+## EXN-DEC-0004 — Restrições arquiteturais do produto
+
+- **Status:** ACEITA pelo owner em 2026-11-08.
+- **Fonte:** instrução do owner nesta execução.
+
+Aplicar TypeScript estrito, modular monolith, contratos explícitos, baixo
+acoplamento, dependências mínimas e segurança deny-by-default. Não adicionar
+código morto, dados sem proveniência ou funcionalidades fora de Work Orders
+aprovadas. Nenhum framework, runtime, banco, ORM, fornecedor de IA ou serviço de
+execução foi escolhido por esta decisão. Não iniciar código funcional antes da
+conclusão da fundação M00 e dos controles essenciais verificados.
+
+## EXN-DEC-0005 — Candidato de hospedagem estática
+
+- **Status:** PROPOSTA nesta WO; não ativada.
+- **Fonte:** limites publicados da Cloudflare Pages consultados em
+  2026-11-08; intenção Free-first do owner.
+
+Avaliar Cloudflare Pages no plano Free para servir um frontend estático pelo
+hostname fornecido pela plataforma. Não usar Pages Functions, Workers, banco,
+domínio pago, plugin pago ou integração Git durante M00. Elegibilidade da conta,
+limites atuais e qualquer cobrança permanecem sujeitos a leitura antes de uma
+futura Work Order de deploy. Esta proposta não autoriza criar projeto, conectar
+repositório ou publicar.
+
+## Itens técnicos não decididos
+
+Framework de interface, ferramenta de build, runtime de API, banco, cache
+persistente, autenticação de usuário, fornecedor de IA, provedor de economia,
+retenção e observabilidade permanecem sem decisão. Reavaliar em Work Orders
+próprias, com direitos, segurança, limites e custo comprovados.
