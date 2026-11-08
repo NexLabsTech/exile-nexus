@@ -52,9 +52,10 @@ preview/deploy, app com quota ou licença paga é necessário.
 
 O nome observado do check é `Docs validation` (o nome do workflow é
 `Documentation CI`). A execução #42487843277 passou após a remoção do filtro de
-PR. A seleção como required ainda depende de read-back administrativo que
-confirme zero reviews exigidas e nenhum check externo cobrado ou limitado por
-cota.
+PR. O required check `Docs validation` foi verificado por read-back do ruleset
+#26806979 em 2026-11-08: `strict: true`, zero revisores exigidos e sem
+check de app externo com cota. Testes de aplicação só passam a ser exigíveis
+nas Work Orders que introduzirem runtime aprovado.
 
 ## Regras de parada
 

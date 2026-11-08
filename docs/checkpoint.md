@@ -46,7 +46,9 @@ a auditoria interna e o aceite do owner antes de qualquer squash merge.
 
 ## Context Lock e fonte atual
 
-- Issue #8 encerrada; EXN-M00-WO-008 (#9) é a única próxima WO NECESSARY.
+- Issues M00 #2–#9 e épico #1 encerrados; EXN-M01-WO-001 (#11) é a
+  próxima Work Order NECESSARY selecionada. Não iniciar outra enquanto #11
+  exigir auditoria, correção ou aceite.
 - main no início da auditoria: aaf24a660ff2ee2334d713685e2edee1f841eedc.
 - CI documental integrado em .github/workflows/docs-ci.yml, sem app, endpoint,
   banco, manifesto de dependências de runtime ou deploy.
@@ -132,9 +134,9 @@ histórico linear e bypass vazio. A verificação da proteção clássica por
 endpoint administrativo permanece limitada ao acesso disponível, sem
 desautorizar o read-back do ruleset efetivo.
 
-Esta seção registra fatos históricos aceitos da WO-007. Não é um
-Checkpoint Delta ainda pendente para essa Work Order. O próximo gate é
-exclusivamente a auditoria e o aceite da WO-008.
+Esta seção registra fatos históricos aceitos da WO-007. O gate seguinte de
+WO-008 já foi cumprido pela PR #140; a etapa corrente é somente M01-WO-001,
+ainda não aceita nem integrada.
 
 
 ## Histórico da auditoria WO-008 (integrada por PR #140)
