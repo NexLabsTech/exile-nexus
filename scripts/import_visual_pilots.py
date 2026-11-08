@@ -22,7 +22,7 @@ EXPECTED = {
     "exile-nexus-tools-pages-v1.png": "dc441436ea786df012e12e72362cc97a62fe343050d57cdcbcf30b554d0ae023",
     "exile-nexus-account-pages-v1.png": "b34c427d259b6724e653a81b41f2459752110ffc731e2b4b1e2ec3e588be2fb2",
 }
-PNG_SIG = b"\\x89PNG\\r\\n\\x1a\\n"
+PNG_SIG = b"\x89PNG\r\n\x1a\n"
 MAX_PNG_BYTES = 12_000_000
 DIMENSIONS = (1448, 1086)
 
