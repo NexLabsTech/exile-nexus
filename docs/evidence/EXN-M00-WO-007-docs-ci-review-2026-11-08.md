@@ -149,49 +149,58 @@ não substitui scanner dedicado.
   etapas limitadas a 2 minutos e downloads com conexão de 10 segundos e limite
   total de 60 segundos; o run #42480225757 no HEAD `efb4674` passou.
 
-## Governança administrativa
+## Governança administrativa: read-back realizado
 
-- NexLabsTech tem permissão de colaborador `admin`, confirmada pela API. Porém,
-  GET `/branches/main/protection` com a conexão NexLabsTech retorna 403
-  `Resource not accessible by integration`. A instalação GitHub desta sessão
-  não expõe `Administration: read` (necessário para leitura) nem
-  `Administration: write` (necessário para configurar/read-back); a identidade
-  CLI `KayzenRoot` também não pode substituir a sessão administrativa.
-- Rulesets visíveis: resposta `[]`; não prova ausência de proteção efetiva.
-- Dependabot Alerts: último estado explícito na WO-001 foi desativado; leitura
-  atual 403. Alertas atuais, Updates, Code Scanning, Secret Scanning, Push
-  Protection e Actions permissions: `NOT VERIFIED`.
-- Requisitos efetivos de checks na `main`, proteção PR, squash-only, histórico
-  linear, force-push/exclusão e conversa resolvida também `NOT VERIFIED`.
-- A branch/PR permanece Draft. Não se propõe nenhum check externo com quota
-  como required; não existe permissão `Administration: read/write` nesta
-  conexão para confirmar o estado efetivo ou alterar essa política.
+A dificuldade anterior em `/branches/main/protection` (HTTP 403,
+`Administration: read`) persiste para essa API específica. A verificação
+foi concluída por endpoint alternativo de rulesets, com permissão de leitura
+já existente e sem modificar credenciais.
 
-## Auditoria, custos e Checkpoint Delta
+**Evidência verificada em 2026-11-08:**
 
-Auditoria técnica será objetiva, comparando diff/HEAD remoto, testes locais,
-Actionlint/zizmor e run da GitHub Actions. Executor e auditor compartilham a
-mesma sessão; isso não é auditoria independente nem GitHub Review formal
-`APPROVED`.
+- GET `https://api.github.com/repos/NexLabsTech/exile-nexus/rulesets/26806979`:
+  `id: 26806979`, `name: NexLabs Main Protection`,
+  `enforcement: active`, `conditions.ref_name.include: [~DEFAULT_BRANCH]`,
+  `bypass_actors: []`, `current_user_can_bypass: never`.
+- `deletion` protege contra exclusão; `non_fast_forward` proíbe force-push;
+  `required_linear_history` exige histórico linear.
+- `pull_request`: 0 approvals, code-owner review desabilitado, conversas
+  resolvidas, merge apenas `squash`.
+- `required_status_checks`: `Docs validation` como único contexto requerido,
+  GitHub Actions integration_id 15368 e `strict_required_status_checks_policy:
+  true`. CodeRabbit e Socket Security NÃO são required.
+- Configuração geral do repo: squash habilitado; merge commit/rebase desativados.
+- GitHub Actions run [#42488063183](https://github.com/NexLabsTech/exile-nexus/actions/runs/42488063183)
+  `completed/success` no HEAD `1710126833982cf3f3d50ccd7159cdf87dd78542`;
+  todos os passos do job `Docs validation` com `success`.
 
-Custo direto do validador e testes locais: US$ 0. O CI proposto usa runner
-padrão gratuito do repositório público; a política de billing da conta e o
-custo das instalações externas preexistentes continuam `NOT VERIFIED`. Não
-acionar review manual/quota nem aceitar upgrade.
+**Permanecem NOT VERIFIED, fora deste gate:** detalhes da proteção clássica
+por endpoint 403, Dependabot, Code Scanning, Secret Scanning,
+Push Protection, permissões adicionais de Actions, faturamento total da conta
+e contratos comerciais/custos dos apps externos. Essas lacunas não devem
+ser interpretadas como recursos desabilitados nem como custo confirmado US$ 0.
+Nada foi habilitado em termos de serviços pagos.
 
-Checkpoint Delta proposto: o CI agora é acionável em todas as PRs e audita
-todos os workflows existentes; o run #42487843277 passou no HEAD
-`8d8125502492ae67d3e1b9c9374d7ece8b4f022e`. Selecionar somente `Docs validation`
-como check required depois do read-back administrativo. Para esse read-back, uma sessão autenticada NexLabsTech deve
-usar Settings → Rules → Rulesets para configurar o alvo `main`, PR obrigatória,
-zero aprovações, `Docs validation` atualizado, conversas resolvidas, histórico
-linear, force-push e deleção bloqueados, sem bypass; Settings → General → Pull
-Requests deve deixar squash como única estratégia. Até verificar esses estados,
-a configuração permanece `BLOCKED`, a Issue #8 não é concluída e WO-008 ou
-funcionalidade não iniciam.
+## Auditoria, custos e Checkpoint Delta proposto
 
-- **Veredito:** correção técnica local `PASS`; Work Order `BLOCKED` somente
-  pela configuração/read-back administrativo. Sem o endpoint de protection,
-  não se pode provar estado de `main`, nem que CodeRabbit/Socket estão fora da
-  lista efetiva de checks obrigatórios.
-- **Aceite NexLabsTech:** pendente.
+A revisão técnica independente da sessão do executor, baseada em diff,
+workflow, scripts, testes, run remoto e regras da API, confirma que os
+bloqueios originais de CI e de ruleset estão resolvidos no HEAD acima.
+A leitura independente não é GitHub Review `APPROVED` de outro usuário
+e não substitui aceite administrativo do proprietário.
+
+**Custo:** nenhuma despesa nova foi autorizada; GitHub-hosted runner padrão
+no repositório público e ferramentas open source. Custo consolidado da conta
+e serviços externos: NOT VERIFIED. Não acionar análise manual com franquia.
+
+**Checkpoint Delta proposto:** promover como controle efetivo o workflow
+`Documentation CI`, guia de contribuição e Test Plan após aprovação e
+squash merge normais, registrando ruleset #26806979 e o único required check
+`Docs validation`. Não ativar dados/monetização nem declarar produto pronto.
+Issue #8 e PR #139 continuam abertas até aceite explícito da conta NexLabsTech.
+
+**Veredito técnico para conteúdo da WO-007:** APPROVED condicionado à rechecagem
+do último HEAD após este commit documental e ao aceite do proprietário;
+nenhum erro HIGH/CRITICAL identificado neste escopo. **Aceite NexLabsTech:**
+ainda não registrado para a entrega final; não confundir confirmação de
+configuração do ruleset com autorização para merge da PR #139.

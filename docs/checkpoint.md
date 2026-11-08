@@ -54,27 +54,32 @@ auditoria técnica, aceite NexLabsTech e integração normal.
 - Nenhuma fonte de jogo, API econômica, árvore, scraping ou monetização foi
   autorizada pela matriz R01–R14.
 
-## Estado administrativo observado
+## Estado administrativo observado e revalidado
 
-Rechecado em 2026-11-08; esta WO não tenta alterar settings. A configuração da
-conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
-
-- API de workflows: zero workflows no baseline da branch.
-- Endpoint de rulesets visíveis: lista vazia; isso não prova proteção efetiva
-  ou ausência de proteção clássica.
-- GET `/branches/main/protection`: 403 `Resource not accessible by integration`.
-  O cabeçalho observado na consulta autenticada exige
-  `Administration: read`; configuração exige `Administration: write`.
-- Actions permissions, Settings de Code Scanning, Dependabot Security Updates,
-  Secret Scanning e Push Protection: **NOT VERIFIED**. O conector não oferece
-  os endpoints administrativos; a identidade CLI `KayzenRoot` não é admin.
-- Dependabot Alerts: último estado explícito na WO-001 foi desativado; leitura
-  atual 403, portanto estado atual **NOT VERIFIED**.
-- PR #138 recebeu check-runs automáticos CodeRabbit `skipped` e Socket Security
-  com dois `success`; não foram usados como gate. O custo/plano real do Socket
-  e o faturamento dos apps permanecem NOT VERIFIED. A branch protection não
-  pôde ser lida para confirmar a lista de checks required.
-- Nenhuma credencial foi extraída, ampliada ou usada para gravar settings.
+- Baseline histórico: a credencial GitHub App ainda recebe HTTP 403 ao consultar
+  `/branches/main/protection` (permissão `Administration: read` indisponível).
+  Este fato **não** impede a verificação do ruleset, cujo GET REST foi permitido.
+- Em 2026-11-08, read-back autenticado de
+  `/repos/NexLabsTech/exile-nexus/rulesets/26806979` confirmou:
+  `NexLabs Main Protection`, `enforcement: active`, alvo `~DEFAULT_BRANCH`
+  (main), bypass vazio e `current_user_can_bypass: never`.
+- Regras efetivas do ruleset: `deletion`, `non_fast_forward`,
+  `required_linear_history`, `pull_request` com 0 approvals externos,
+  conversas resolvidas e `allowed_merge_methods: [squash]`, e
+  `required_status_checks` com somente `Docs validation`
+  (GitHub Actions, integration_id 15368, `strict: true`).
+- A API do repositório confirma `allow_squash_merge: true`,
+  `allow_merge_commit: false`, `allow_rebase_merge: false`.
+- O run [#42488063183](https://github.com/NexLabsTech/exile-nexus/actions/runs/42488063183)
+  completou `success` no HEAD `1710126833982cf3f3d50ccd7159cdf87dd78542`,
+  incluindo todos os passos de testes documentais, actionlint e zizmor.
+- Não há CodeRabbit, Socket Security ou outro SaaS com franquia entre os
+  required checks. Apps existentes podem emitir checks opcionais.
+- Dependabot, Code Scanning, Secret Scanning, Push Protection, permissões
+  administrativas adicionais e billing de terceiros seguem NOT VERIFIED
+  e exigem Work Orders específicos. Não declarar cobrança total US$ 0.
+- As regras foram aplicadas pelo proprietário pela UI; não houve bypass,
+  força, escrita em main ou ampliação de credenciais pelo executor.
 
 ## Work Orders
 
@@ -87,8 +92,8 @@ conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
 - WO-006 / Issue #7: Threat Model, privacidade e abuso integrados; controles
   sem read-back continuam NOT VERIFIED.
 - WO-007 / Issue #8: Test Plan, CI documental e contribuição nesta branch;
-  Correction Delta CI PASS; branch protection/read-back administrativo
-  permanece BLOCKED.
+  CI e read-back do ruleset verificados, pendente aceite administrativo da
+  entrega e integração por squash (não declarar concluída antecipadamente).
 - WO-008 / Issue #9: auditoria final e revisão do backlog, depende da conclusão
   da WO-007.
 
@@ -108,23 +113,20 @@ conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
 
 ## Correction Delta e Checkpoint proposto para WO-007
 
-Auditoria COMMENTED da NexLabsTech na PR #139, review #5818146156, aplicada ao
-HEAD `efb4674b55e7300b26857155fbf1e8d0ed1aac0e`, pediu: executar CI em toda PR
-para permitir `Docs validation` como check obrigatório; analisar todos os
-workflows com actionlint e zizmor; reexecutar testes e atualizar evidências.
-O Correction Delta remove `paths` de `pull_request`, mantém filtros de `push`
-e enumera todos os `.yml`/`.yaml` em `.github/workflows/` para ambos scanners.
+Os apontamentos da auditoria da PR #139 foram corrigidos: `Docs validation`
+executa em todas as PRs, independentemente de arquivos alterados; actionlint
+e zizmor cobrem todos os workflows. Verificação remota de HEAD `171012683`
+no run #42488063183: PASS.
 
-O run #42487843277 no HEAD da correção terminou PASS, incluindo os passos de
-actionlint e zizmor para todos os workflows. O check `Docs validation` pode ser
-selecionado como required somente na mesma sessão administrativa que confirmar PR obrigatória,
-0 reviews, squash-only, histórico linear, força/exclusão bloqueadas, conversas
-resolvidas e nenhum check de SaaS obrigatório. O acesso atual da integração à
-API de protection retorna 403. Nenhuma regra foi alterada. Se persistir, a
-configuração permanece BLOCKED até sessão autenticada NexLabsTech em Settings
-→ Rules → Rulesets → New ruleset: alvo `main`; PR obrigatória com 0 aprovações;
-status check `Docs validation` e branch atualizada; conversas resolvidas;
-histórico linear; bloquear force-push e deleção; sem bypass. Em Settings →
-General → Pull Requests, deixar somente squash habilitado. Ler novamente essas
-opções nas mesmas telas. Não usar PAT colado em chat ou versionado. Não iniciar
-WO-008 nem funcionalidade antes do aceite e integração válidos da WO-007.
+O administrador ativou e salvou o ruleset #26806979. A releitura direta
+confirmou PR obrigatória, squash-only, 0 revisores, histórico linear,
+conversas resolvidas, status check `Docs validation` atualizado,
+proibição de force-push e deleção da main, sem bypass. Este controle
+é VERIFICADO; controles distintos de Code Security e billing permanecem
+NOT VERIFIED conforme seção administrativa.
+
+**Checkpoint Delta proposto**: após auditoria independente das alterações
+e aceite administrativo explícito de `NexLabsTech`, integrar WO-007 por
+squash, fechar issue #8, documentar CI efetivo e iniciar apenas WO-008.
+Até esse aceite não promover este documento como checkpoint canônico.
+Nenhuma aplicação ou deploy foi implementado nesta WO.
