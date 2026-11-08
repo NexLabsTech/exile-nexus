@@ -1,7 +1,7 @@
 # EXN-M01-WO-002 — Evidence Bundle: visual tokens and original assets
 
 - **Owner:** NexLabsTech
-- **Status:** DRAFT / TESTS NOT RUN ON PR YET
+- **Status:** DRAFT / INITIAL TESTS PASS; FINAL HEAD OWNER ACCEPTANCE PENDING
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M01-WO-002 · Issue #12
 - **Risk:** STANDARD
@@ -48,12 +48,12 @@ deployment. No external review services are part of the acceptance process.
 
 | Check | Initial state | Acceptance |
 | --- | --- | --- |
-| Design tokens contrast (text) | NOT RUN | WCAG minimum >=4.5 for all declared foreground/background pairs |
-| Design edges / focus | NOT RUN | WCAG >=3 for all declared backgrounds |
-| SVG security + a11y | NOT RUN | no embedded external refs/scripts, proper title/hidden decoration |
+| Design tokens contrast (text) | PASS, run #42520942410 | WCAG minimum >=4.5 for all declared foreground/background pairs |
+| Design edges / focus | PASS, run #42520942410 | WCAG >=3 for all declared backgrounds |
+| SVG security + a11y | PASS, run #42520942410 | no embedded external refs/scripts, proper title/hidden decoration |
 | Rights provenance | DOCUMENTED, review pending | all new assets inventoried; no copied GGG assets |
-| Docs validation (includes design unittest) | NOT RUN | GitHub Actions success at exact HEAD |
-| actionlint/zizmor | NOT RUN on this HEAD | included in Docs validation |
+| Docs validation (includes design unittest) | PASS on initial HEAD `e952343af8f2d3fd248fbc8a46ed01f4e9a28ee5`; final HEAD must be rechecked | GitHub Actions success at exact HEAD |
+| actionlint/zizmor | PASS, run #42520942410 | included in Docs validation |
 | Runtime build | NOT APPLICABLE | no app/scaffold changed |
 | Browser E2E / visual similarity | NOT APPLICABLE / NOT VERIFIED | requires actual UI and legal review later |
 | External review | NOT APPLICABLE | forbidden as required gate by EXN-DEC-0007 |
@@ -79,3 +79,39 @@ and objective solo audit in pt-BR disclosing same-author review.
 Checkpoint Delta remains PROPOSED for #12; only the owner-accepted #11 runtime
 direction is marked ACCEPTED. No PR merge, deploy, issue closure or next WO
 without explicit NexLabsTech acceptance and checks on exact HEAD.
+
+## Executed tests and deterministic contrast evidence
+
+- CI initial HEAD `e952343af8f2d3fd248fbc8a46ed01f4e9a28ee5`:
+  [Docs validation #42520942410](https://github.com/NexLabsTech/exile-nexus/actions/runs/42520942410)
+  `completed/success`.
+- GitHub Actions job `Docs validation`: all 10 steps `success`;
+  Python unittest `Ran 11 tests`, exit code 0, `OK`. These include
+  **7 new token/asset tests** and 4 existing documentation tests.
+- `scripts/validate_docs.py`: `PASS: Source Pack present; 29 Markdown
+  files; 120 links checked; secret heuristics found no matches`.
+- `actionlint` v1.7.12 and `zizmor` v1.32.0 both passed all workflow
+  files, without ignoring a failed security finding.
+- Contrast calculations on declared opaque surfaces:
+  main text on raised **12.23:1**, muted **7.88:1**, accent **9.07:1**;
+  structural border on raised **3.30:1**, focus **11.09:1**.
+  Dark-on-accent text and all three opaque backgrounds pass test cases.
+- XML SVG checks parsed and passed for both files: no embedded external
+  href, image, script, foreignObject or inline handlers; accessible mark,
+  decorative lattice hidden from assistive technology.
+- This evidence-only change creates a **new Git HEAD**. A successful
+  `Docs validation` check on that final SHA must be verified in the
+  PR conversation, because the commit cannot contain its own future run ID.
+  Do not claim that new run passed until GitHub reports it.
+
+## Audit limitations
+
+- These tests validate the token/asset source, **not** actual browser pixels,
+  glass overlay compositing, 200% text scaling, device interactions,
+  trademark clearance or commercial-rights ownership. Those gates apply
+  when the actual UI is built and before public distribution.
+- Runtime build, typecheck and E2E remain NOT APPLICABLE to this WO:
+  no application or manifest changed. The accepted Astro+React direction
+  is recorded by EXN-DEC-0008, not by new runtime code in this PR.
+- Scope unchanged: 11 files in this Work Order. User approval is required
+  before merging the PR, accepting design tokens or moving to #13.
