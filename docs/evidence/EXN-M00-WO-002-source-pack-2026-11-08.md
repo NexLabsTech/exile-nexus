@@ -7,20 +7,24 @@
 
 ## Work Order e contexto
 
-- Base de main: 23ec93e0fb174fb84db38298ce890f693a62abf1.
-- Base da PR #134: exn-m00-wo-001-baseline em
-  fda049e31f92fcb7b1294eb9bbe5daa26f30b291.
+- Baseline histórico de main: `23ec93e0fb174fb84db38298ce890f693a62abf1`.
+- PR #133 integrada na main via squash: `b012731fd052e4c08aaa005b4e269b4d7e8ed7f4`.
+- A PR #134 originalmente usava como base `exn-m00-wo-001-baseline` no SHA
+  `fda049e31f92fcb7b1294eb9bbe5daa26f30b291`. Agora a branch é
+  reconciliada com a main por merge de dois pais, sem rebase nem force-push.
 - HEAD auditado antes deste Correction Delta:
   5ed38b7986a640cb8003eddde7dcefce8f477c02.
 - O veredito textual na PR #133 foi APPROVED apenas para o conteúdo do
   baseline. A review GitHub é COMMENTED pela conta NexLabsTech; não comprova
   aprovação formal da dependência nem libera merge/progressão.
-- A instrução atual do owner autoriza executar somente este Correction Delta
-  na WO-002; ela não comprova aceite formal da dependência.
-- A WO-002 foi iniciada em branch empilhada com aprovação formal de dependência
-  pendente; não liberada para merge/progressão.
-- Após o commit, o HEAD final é o SHA exibido nos metadados da PR #134. A PR
-  permanece baseada na branch da WO-001; sem merge, rebase ou force-push.
+- A revisão independente do conteúdo do Correction Delta em `7fb06a6` foi
+  favorável. A continuação solicitada pelo proprietário permitiu concluir
+  WO-001 via squash, sem tratar COMMENTED como aprovação GitHub formal.
+- Esta alteração apenas reconcilia a base/histórico e o estado documental com
+  a main atual; a PR #134 ainda precisa de nova validação da diferença contra
+  a main antes de integrar. Nenhum rebase nem force-push é permitido.
+- O SHA da reconciliação consta no HEAD remoto e na PR #134; os dois pais são
+  o HEAD anterior `7fb06a6` e o squash de main `b012731f`.
 - Escopo: Source Pack, hierarquia, visão, Decisions Ledger e checkpoint
   proposto. Nenhum setting, workflow, código de aplicação ou deploy.
 
