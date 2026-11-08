@@ -1,19 +1,19 @@
 # Exile Nexus — Visual Pilot Reference Pack (EXN-VIS-WO-001)
 
-**Status:** PILOT / REFERENCE ONLY, pending owner review, original raster import and CI; **Risk:** STANDARD.  
+**Status:** PILOT / REFERENCE ONLY, original raster boards imported and hash-verified in PR #145; final GitHub read-back and CI evidence are recorded in the PR; owner acceptance remains pending. **Risk:** STANDARD.
 **Baseline:** main at `75bcb8c786beda9c4e62677fd325aa9d4c0418c2`, after quality PR #143.  
 **Visual direction:** owner's 2026-11-08 acceptance of a **PoE2-inspired atmosphere**, NOT a copy of GGG's UI, characters, art, textures, logos, fonts, map, icons or trade dress.
 
 ## Previewable in-repository images
 
-| Vector image | What it references | Implementation priority |
+| Raster board | Editable vector reference | What it references | Implementation priority |
 | --- | --- | --- |
-| [Brand board](exile-nexus-brand-board-v1.svg) | Exile Nexus original geometric jewel-mark, logotype, favicon concepts, hero banners, palette, type and buttons | Shared shell, original logo and reusable tokens |
-| [Public pages](exile-nexus-public-pages-v1.svg) | Home, catalog, item detail, build listing, site-wide discovery and guides | M01 / M03 / M04 / M10, only via their WOs |
-| [Tools and features](exile-nexus-tools-pages-v1.svg) | Passive tree, build planner, economy, farm calculator, patch intelligence and AI Advisor | M04–M08, only with authorized sources |
-| [Account and utilities](exile-nexus-account-pages-v1.svg) | Login, registration, profile, saved builds, account settings and 404 | Future product WOs; no unapproved auth/provider selection |
+| [Brand board PNG](exile-nexus-brand-board-v1.png) | [Brand board SVG](exile-nexus-brand-board-v1.svg) | Exile Nexus geometric jewel-mark, logotype, favicon concepts, hero banners, palette, type and buttons | Shared shell, original logo and reusable tokens |
+| [Public pages PNG](exile-nexus-public-pages-v1.png) | [Public pages SVG](exile-nexus-public-pages-v1.svg) | Home, catalog, item detail, build listing, site-wide discovery and guides | M01 / M03 / M04 / M10, only via their WOs |
+| [Tools and features PNG](exile-nexus-tools-pages-v1.png) | [Tools and features SVG](exile-nexus-tools-pages-v1.svg) | Passive tree, build planner, economy, farm calculator, patch intelligence and AI Advisor | M04–M08, only with authorized sources |
+| [Account and utilities PNG](exile-nexus-account-pages-v1.png) | [Account and utilities SVG](exile-nexus-account-pages-v1.svg) | Login, registration, profile, saved builds, account settings and 404 | Future product WOs; no unapproved auth/provider selection |
 
-**Important fidelity distinction:** the four committed SVG images are newly constructed **editable pilot reconstructions** in the desired style. They are not byte-for-byte versions of the four full-size generated PNG concept sheets from the chat. **Do not mark the raster references as stored in GitHub.** The original PNGs remain a separate handoff artifact until their bytes are imported and verified in a dedicated revision. Source PNG manifest (SHA-256) below.
+**Important fidelity distinction:** the four committed SVG images are newly constructed **editable pilot reconstructions** in the desired style. They are not byte-for-byte versions of the four full-size PNG concept sheets. The PNGs linked above are the original user-provided raster references, imported and hash-verified in PR #145; final authenticated GitHub read-back is recorded in the PR evidence comment. Neither format is a functional UI or authoritative source of game facts.
 
 ## Intended visual language and hierarchy
 
@@ -34,24 +34,24 @@
 6. Keep original assets distinct from reference screens; version the logo, favicon, textures, icons and hero artwork individually with origins, license, accessibility and dimension inventory in later approved WOs. Avoid directly cropping conceptual images into production art.
 7. Preserve EXN's independence disclaimer: **Exile Nexus is an independent community tool, not affiliated with or endorsed by Grinding Gear Games.**
 
-## Original generated PNGs (NOT YET IN GITHUB)
+## Original pilot PNGs (imported in PR #145)
 
-The full-resolution source pilot PNGs, each 1448 × 1086 px, are provided separately with this chat's downloadable package. They have the following source identifiers and SHA-256 digests for lossless import verification:
+The exact four PNG entries were imported from the user-provided `exile-nexus-visual-pilots-originals.zip`. The input ZIP SHA-256 is `ccb03d7e1b74036f8188e858ed021bdf83205161fc073bd014862ffa34294077`. The importer passed its allowlist, digest and IHDR checks; local byte-for-byte comparison with the ZIP entries and ImageMagick decoding also passed. Each image is 1448 × 1086 px.
 
-| Intended eventual repo path | Source filename | SHA-256 |
+| Versioned file | Bytes | SHA-256 |
 | --- | --- | --- |
-| `exile-nexus-brand-board-v1.png` | `painel_de_identidade_exile_nexus.png` | `569ba69a3b9e0a45fc30a7f6388d2bee5065f4400d438ac28a007cc41bfebe2a` |
-| `exile-nexus-public-pages-v1.png` | `painel_de_referência_do_exile_nexus.png` | `b30695b21dc976737c3719d93a59f8d123407e6e22c289cce3703e9f0c9fe8dc` |
-| `exile-nexus-tools-pages-v1.png` | `quadro_de_referência_exile_nexus.png` | `dc441436ea786df012e12e72362cc97a62fe343050d57cdcbcf30b554d0ae023` |
-| `exile-nexus-account-pages-v1.png` | `painel_de_referência_ui_gótica_do_exile_nexus.png` | `b34c427d259b6724e653a81b41f2459752110ffc731e2b4b1e2ec3e588be2fb2` |
+| [Brand board](exile-nexus-brand-board-v1.png) | 2,610,656 | `569ba69a3b9e0a45fc30a7f6388d2bee5065f4400d438ac28a007cc41bfebe2a` |
+| [Public pages](exile-nexus-public-pages-v1.png) | 2,933,868 | `b30695b21dc976737c3719d93a59f8d123407e6e22c289cce3703e9f0c9fe8dc` |
+| [Tools pages](exile-nexus-tools-pages-v1.png) | 2,899,710 | `dc441436ea786df012e12e72362cc97a62fe343050d57cdcbcf30b554d0ae023` |
+| [Account pages](exile-nexus-account-pages-v1.png) | 2,777,842 | `b34c427d259b6724e653a81b41f2459752110ffc731e2b4b1e2ec3e588be2fb2` |
 
-**Import gate:** after actual files exist at the paths above on the design branch, compare their SHA-256 digests to this manifest and perform image review, size validation and ownership/right clearance. No filename link or assertion alone counts as asset import.
+**Use and rights:** these are visual pilot mockups. Item names, prices, rates, user/profile details and game-like content are illustrative placeholders, not verified game data. The visual review found no unmistakable official GGG logo or game screenshot. The account mockup depicts Steam, Google and Discord marks as examples only; no provider selection or integration is approved. This visual review does not establish source provenance, copyright, trademark or commercial-use clearance. Rights R01–R14 and all data-use restrictions remain unchanged. Do not publish these as licensed game content or ingest their depicted values.
 
 ## Binary-import handoff (verified and fail-closed)
 
 A source importer is versioned in [`scripts/import_visual_pilots.py`](../../scripts/import_visual_pilots.py). It accepts the exact `exile-nexus-visual-pilots-originals.zip` package from the user conversation. It checks the ZIP entry allowlist, each PNG's original SHA-256 and 1448×1086 IHDR, and refuses replacement of conflicting files before committing **any** image data. It never performs a network call or a Git write.
 
-Run inside a checked-out `exn-vis-wo-001-pilot-boards` branch after making the original ZIP available:
+The following commands were run in this Work Order on the existing `exn-vis-wo-001-pilot-boards` branch. The ZIP hash was checked before either command:
 
 ```sh
 python3 scripts/import_visual_pilots.py exile-nexus-visual-pilots-originals.zip --verify-only
@@ -60,7 +60,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 git status --short
 ```
 
-Stage **only** the four `design/references/*.png` outputs and reviewed scope, commit/push via normal branch flow, and update the existing Draft PR #145. Then run both CI workflows again on the exact new HEAD and verify the four image files can be downloaded from GitHub and match this manifest. **Until that happens, there is no claim that the original PNGs were uploaded.** Do not store the original ZIP itself in the repository. No force-push, direct-main write, external data, service or paid dependency.
+The Evidence Bundle and PR #145 record the normal commit/push, authenticated GitHub blob read-back, final workflow runs and exact HEAD. The ZIP is not stored in the repository. No force-push, direct-main write, external data service or paid dependency was used.
 
 ## Scope and provenance
 
