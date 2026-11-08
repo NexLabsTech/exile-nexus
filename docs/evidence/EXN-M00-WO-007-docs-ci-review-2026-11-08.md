@@ -10,6 +10,8 @@
 - **HEAD inicial/publicado:** `b3c509747d5bd19684cfa0f24b4e0f406f23b089`.
 - **HEAD publicado antes desta Correction Delta:**
   `69219982d978c556e52e48b0e008804d59104d9c`.
+- **HEAD publicado com os limites de rede desta correção:**
+  `0649102eb841104083d574db2a7fab7b95ae960b`.
 - **HEAD que contém esta revisão:** SHA do commit que atualiza este Bundle,
   visível no histórico/timeline da PR #139.
 
@@ -60,9 +62,13 @@ de deploy ou configuração da conta é introduzido.
 - `zizmor` v1.32.0, release oficial; asset e digest consultados na API do
   repositório oficial; SHA-256 do tarball x86_64 verificado localmente:
   `bb110cc765eca9cd7efb2e284a956be5974c60027b0970f16397d86208a9957b`.
-- Nenhum app de análise comercial ou review com quota foi invocado. O Socket
-  automático na PR #138 é preexistente, não foi usado como gate; seu custo não
-  é legível e permanece `NOT VERIFIED`.
+- Aplicativos automáticos preexistentes executaram checks nesta PR: CodeRabbit
+  concluiu `skipped` porque a PR está Draft; Socket PR Alerts concluiu
+  `success` sem mudança de dependências e Socket Project Report concluiu
+  `success`. Nenhum foi solicitado manualmente ou usado como gate técnico.
+  Elegibilidade/plano e custo do Socket não são legíveis e permanecem
+  `NOT VERIFIED`; a proteção administrativa inacessível também impede provar se
+  algum check externo foi marcado como obrigatório.
 
 ## Testes e logs
 
@@ -93,6 +99,11 @@ Executados localmente nesta branch:
   ainda em andamento; ela terminou posteriormente. A etapa não foi cancelada.
   O run do novo HEAD com limites de tempo também será registrado na timeline da
   PR e no relatório final.
+- No HEAD `0649102eb841104083d574db2a7fab7b95ae960b`, o run #42479831940
+  terminou `success` em aproximadamente seis segundos; `Docs validation` e os
+  oito passos foram concluídos. Os check-runs associados registraram
+  `Docs validation: success`, `CodeRabbit: skipped` (Draft), `Socket Security:
+  Pull Request Alerts: success` e `Socket Security: Project Report: success`.
 - Páginas oficiais GitHub billing, hardening e evento `pull_request`: HTTP 200.
   Releases oficiais consultados e tarballs verificados por SHA-256.
 
@@ -127,9 +138,9 @@ não substitui scanner dedicado.
   Protection e Actions permissions: `NOT VERIFIED`.
 - Requisitos efetivos de checks na `main`, proteção PR, squash-only, histórico
   linear, force-push/exclusão e conversa resolvida também `NOT VERIFIED`.
-- A branch/PR permanece Draft. Nenhum check
-  externo com quota será configurado como required; não existe API permitida
-  nesta conexão para confirmar read-back ou alterar essa política.
+- A branch/PR permanece Draft. Não se propõe nenhum check externo com quota
+  como required; não existe permissão `Administration: read/write` nesta
+  conexão para confirmar o estado efetivo ou alterar essa política.
 
 ## Auditoria, custos e Checkpoint Delta
 
