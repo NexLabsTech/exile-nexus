@@ -4,9 +4,9 @@ export default defineConfig({
   testDir: "./tests/e2e",
   testMatch: "**/*.spec.ts",
   fullyParallel: true,
-  forbidOnly: Boolean(process.env.CI),
+  forbidOnly: true,
   retries: 0,
-  workers: process.env.CI ? 2 : undefined,
+  workers: 2,
   reporter: [["list"], ["html", { open: "never" }]],
   outputDir: "test-results",
   use: {
@@ -18,7 +18,7 @@ export default defineConfig({
   webServer: {
     command: "npm run preview",
     url: "http://127.0.0.1:4321/",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 90_000,
   },
 });
