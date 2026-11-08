@@ -160,3 +160,20 @@ auditoria de dependências, testes da aplicação e verificação de limites/cus
 O aceite NÃO libera criação de deploy, Cloudflare, backend, API, ingestão,
 dados do jogo, publicidade, custo pago, marca/asset de terceiro ou qualquer
 decisão visual da WO-002. Tais gates seguem seus Work Orders e R01–R14.
+
+## EXN-DEC-0009 — Design tokens e SVGs originais aprovados
+
+- **Status da decisão:** ACEITA pelo owner em 2026-11-08.
+- **Fonte:** autorização explícita de
+  [EXN-M01-WO-002 / PR #142](https://github.com/NexLabsTech/exile-nexus/pull/142),
+  HEAD `c1acb13dfb5166720ba4a4fdacd2ba8d90f8a177`.
+- **Merge:** squash no commit
+  `79be738c7af8eda641c4ac4aff52ef7b28931ca0`;
+  [issue #12](https://github.com/NexLabsTech/exile-nexus/issues/12) CLOSED.
+
+O owner aprovou os tokens de `design/tokens.css` e a geometria original
+de `nexus-prism.svg` e `lattice.svg` como identidade visual inicial.
+O contraste de cores opacas, segurança básica dos SVGs e preferências de
+acessibilidade foram testados. A decisão não é liberação jurídica de marca,
+reprodução de IP da GGG, aprovação de UI real ou autorização de publicação,
+serviço pago, dados externos ou deploy. Direitos R01–R14 continuam válidos.
