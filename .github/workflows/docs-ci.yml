@@ -1,0 +1,103 @@
+name: Documentation CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - '*.md'
+      - 'docs/*.md'
+      - 'docs/**/*.md'
+      - '.github/workflows/**'
+      - 'scripts/validate_docs.py'
+      - 'tests/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: documentation-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    name: Docs validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Test documentation validator
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Validate Source Pack, Markdown links and secret patterns
+        run: python3 scripts/validate_docs.py
+
+      - name: Install actionlint v1.7.12
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/actionlint_1.7.12_linux_amd64.tar.gz"
+          curl --fail --location --silent --show-error --connect-timeout 10 --max-time 60 \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
+            --output "$archive"
+          printf '%s  %s\n' \
+            8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8 \
+            "$archive" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/exn-tools"
+          tar -xzf "$archive" -C "$RUNNER_TEMP/exn-tools" actionlint
+          chmod 755 "$RUNNER_TEMP/exn-tools/actionlint"
+          echo "$RUNNER_TEMP/exn-tools" >> "$GITHUB_PATH"
+
+      - name: Lint all GitHub Actions workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' workflow_files < <(
+            find .github/workflows -maxdepth 1 -type f \
+              \( -name '*.yml' -o -name '*.yaml' \) -print0 | sort -z
+          )
+          if ((${#workflow_files[@]} == 0)); then
+            echo 'No GitHub Actions workflow files found' >&2
+            exit 1
+          fi
+          actionlint "${workflow_files[@]}"
+
+      - name: Install zizmor v1.32.0
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/zizmor_1.32.0_x86_64-unknown-linux-gnu.tar.gz"
+          curl --fail --location --silent --show-error --connect-timeout 10 --max-time 60 \
+            https://github.com/woodruffw/zizmor/releases/download/v1.32.0/zizmor-x86_64-unknown-linux-gnu.tar.gz \
+            --output "$archive"
+          printf '%s  %s\n' \
+            bb110cc765eca9cd7efb2e284a956be5974c60027b0970f16397d86208a9957b \
+            "$archive" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/exn-tools"
+          tar -xzf "$archive" -C "$RUNNER_TEMP/exn-tools" zizmor
+          chmod 755 "$RUNNER_TEMP/exn-tools/zizmor"
+          echo "$RUNNER_TEMP/exn-tools" >> "$GITHUB_PATH"
+
+      - name: Audit all workflows for security
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' workflow_files < <(
+            find .github/workflows -maxdepth 1 -type f \
+              \( -name '*.yml' -o -name '*.yaml' \) -print0 | sort -z
+          )
+          if ((${#workflow_files[@]} == 0)); then
+            echo 'No GitHub Actions workflow files found' >&2
+            exit 1
+          fi
+          zizmor "${workflow_files[@]}"

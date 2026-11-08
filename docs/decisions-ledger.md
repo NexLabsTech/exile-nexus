@@ -3,7 +3,7 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-006 · Issue #7
+- **Work Order:** EXN-M00-WO-007 · Issue #8
 
 Este ledger registra decisões explícitas de processo e arquitetura. O documento
 permanece PROPOSED; cada decisão tem seu estado próprio. Uma restrição aceita

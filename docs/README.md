@@ -3,7 +3,7 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-006 · Issue #7
+- **Work Order:** EXN-M00-WO-007 · Issue #8
 
 Este índice registra documentos presentes, sua Work Order e as dependências
 restantes. Um arquivo listado ou integrado não concede direitos de dados nem
@@ -17,42 +17,48 @@ promove automaticamente uma proposta a decisão aceita.
 - [Definition of Done](definition-of-done.md) — WO-004, aceita para planejamento.
 - [Architecture](architecture.md) — WO-005, aceita como referência documental.
 - [Data Contracts](data-contracts.md) — WO-005, aceitos como contratos planejados.
-- [Deployment Plan](deployment-plan.md) — WO-005, plano sem implantação ou provisionamento.
-- [Threat Model, privacidade e abuso](security-privacy-threat-model.md) — WO-006, proposta nesta branch; settings administrativos seguem NOT VERIFIED onde indicado.
+- [Deployment Plan](deployment-plan.md) — WO-005, plano sem implantação/provisionamento.
+- [Threat Model, privacidade e abuso](security-privacy-threat-model.md) — WO-006, integrado como referência de planejamento; settings administrativos seguem NOT VERIFIED onde indicado.
+- [Test Plan](test-plan.md) — WO-007, proposta nesta branch.
+- [Guia de contribuição](../CONTRIBUTING.md) — WO-007, proposta nesta branch.
 - [Source Hierarchy](source-hierarchy.md) — reconciliação e precedência.
 - [Decisions Ledger](decisions-ledger.md) — decisões individuais identificadas; documento PROPOSED.
 - [Checkpoint](checkpoint.md) — estado e dependências da fundação.
 - [Matriz de direitos e fontes](rights-and-data-sources.md) — WO-003; direitos de ingestão/exibição/monetização não liberados.
-- Evidence Bundle histórico da WO-001: [baseline](evidence/EXN-M00-WO-001-baseline-2026-11-08.md).
+- Evidence Bundle da WO-001: [baseline](evidence/EXN-M00-WO-001-baseline-2026-11-08.md).
 - Evidence Bundle da WO-002: [Source Pack](evidence/EXN-M00-WO-002-source-pack-2026-11-08.md).
 - Evidence Bundle da WO-003: [direitos e APIs](evidence/EXN-M00-WO-003-rights-review-2026-11-08.md).
 - Evidence Bundle da WO-004: [scope, requirements e DoD](evidence/EXN-M00-WO-004-scope-review-2026-11-08.md).
 - Evidence Bundle da WO-005: [architecture, data contracts e deployment](evidence/EXN-M00-WO-005-architecture-review-2026-11-08.md).
 - Evidence Bundle da WO-006: [segurança, privacidade e abuso](evidence/EXN-M00-WO-006-security-review-2026-11-08.md).
+- Evidence Bundle da WO-007: [CI documental, testes e contribuição](evidence/EXN-M00-WO-007-docs-ci-review-2026-11-08.md).
 
-As WOs 003–005 foram integradas por squash após aceite administrativo NexLabsTech registrado em comentário. Esses comentários não são GitHub Reviews formais `APPROVED`. O WO-006 segue proposto até auditoria técnica, aceite e integração normal.
+As WOs 003–006 foram integradas por squash após aceite administrativo
+NexLabsTech registrado em comentário. Esses comentários não são GitHub Reviews
+formais `APPROVED`. O modelo de ameaças foi aceito com os settings sem read-back
+explicitamente `NOT VERIFIED`. A WO-007 está proposta nesta branch; a proteção
+efetiva da `main` ainda requer leitura e alteração administrativas.
 
-## Artefatos mapeados às Work Orders existentes
+## Artefatos por Work Order
 
-- Architecture e contratos de dados: EXN-M00-WO-005 / Issue #6.
+- Direitos, APIs e atribuição: EXN-M00-WO-003 / Issue #4.
+- Scope, Requirements e DoD: EXN-M00-WO-004 / Issue #5.
+- Architecture, contratos de dados e deployment plan: EXN-M00-WO-005 / Issue #6.
 - Security, privacy, abuse e controles nativos gratuitos: EXN-M00-WO-006 / Issue #7.
-- Test Plan, CI documental e branch protection: EXN-M00-WO-007 / Issue #8.
-- Auditoria final da fundação e do backlog existente: EXN-M00-WO-008 / Issue #9. GitHub Issues é o backlog canônico; não criar uma cópia em Markdown.
-
-As issues #6–#9 foram ajustadas minimamente para tornar explícitos os
-entregáveis, controles e gates; IDs estáveis foram preservados e não foram
-criadas issues duplicadas.
+- Test Plan, CI documental, contribuição e branch protection: EXN-M00-WO-007 / Issue #8.
+- Auditoria final da fundação e do backlog: EXN-M00-WO-008 / Issue #9. GitHub Issues continua sendo o backlog canônico; não criar duplicatas em Markdown.
 
 ## Estado e regras
 
-O Source Pack continua parcial até as WOs 006–008 estarem concluídas e os
-controles essenciais verificáveis. A matriz de direitos documenta fontes, mas
-não concede licença ou autorização de uso. Fontes `CONDICIONADO` e `NÃO
-VERIFICADO` permanecem bloqueadas para ingestão, persistência, reexibição e
+O Source Pack continua parcial até WO-007 e WO-008, com os controles essenciais
+verificados. A matriz R01–R14 documenta fontes, mas não concede licença. Fontes
+`CONDICIONADO` e `NÃO VERIFICADO` bloqueiam ingestão, persistência, reexibição e
 monetização; fontes `PROIBIDO` não devem ser integradas.
 
-Cada documento identifica owner, status, revisão e Work Order. Use `PROPOSED`,
-`NOT VERIFIED` ou `BLOCKED` enquanto não houver evidência e aceite adequados.
-Registre decisões aceitas no ledger e deltas aprovados no checkpoint. Um
-comentário `COMMENTED` não é GitHub Review `APPROVED`; relate o aceite
-administrativo separadamente.
+A CI documental usa runner padrão gratuito de repositório público, permissões
+mínimas e nenhum segredo. Apps externos com cota ou preço por análise não são
+gates. A execução do workflow não configura proteção de `main`; leia de volta
+os settings antes de declarar checks obrigatórios. Cada Evidence Bundle
+separa `PASS`, `FAIL`, `NOT APPLICABLE`, `NOT RUN` e `BLOCKED`. Um comentário
+`COMMENTED` não é review formal `APPROVED`; reporte aceite administrativo
+separadamente.

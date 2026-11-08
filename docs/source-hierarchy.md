@@ -3,7 +3,7 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-006 · Issue #7
+- **Work Order:** EXN-M00-WO-007 · Issue #8
 
 ## Precedência
 
@@ -29,29 +29,31 @@ critérios técnicos.
 - O Source Pack inicial foi integrado pela PR #134; status e limites dos
   documentos seguem os respectivos arquivos.
 - A matriz R01–R14 e o Evidence Bundle da WO-003 foram integrados pela PR #135
-  no commit `1e786ad840a12762e1f98424f927f48638f7a036`. O aceite administrativo
-  foi registrado em comentário, sem GitHub Review `APPROVED`. A matriz não
-  libera ingestão, persistência, reexibição, árvore ou monetização.
-- Scope, Requirements e Definition of Done da WO-004 foram integrados na main
-  pela PR #136 no commit `23ee602f0f934b38342f75137c6a82c136de980e`, com aceite
-  administrativo em comentário, sem review formal `APPROVED`.
+  no commit `1e786ad840a12762e1f98424f927f48638f7a036`; aceite administrativo
+  em comentário, sem GitHub Review `APPROVED`. Direitos operacionais continuam
+  restritos.
+- Scope, Requirements e Definition of Done da WO-004 foram integrados pela
+  PR #136 no commit `23ee602f0f934b38342f75137c6a82c136de980e`; aceite em
+  comentário, sem review formal `APPROVED`.
 - Architecture, Data Contracts e Deployment Plan da WO-005 foram integrados
-  por squash pela PR #137 no commit `2b98db725c883dd9bbef3b080673d0b5b07036ab`.
-  O aceite administrativo está no comentário #6720828484; não houve
-  GitHub Review formal `APPROVED`. Os documentos são uma referência de
-  planejamento, não implementação nem autorização de deploy.
-- Threat Model, privacidade e abuso pertencem à WO-006 / Issue #7 e estão em
-  proposta nesta branch. Settings sem leitura administrativa disponível estão
-  explicitamente `NOT VERIFIED`.
-- Test Plan, CI documental e branch protection pertencem à WO-007 / Issue #8.
+  pela PR #137 no commit `2b98db725c883dd9bbef3b080673d0b5b07036ab`; aceite
+  administrativo no comentário #6720828484, sem review formal `APPROVED`.
+- Threat Model, privacidade e abuso da WO-006 foram integrados pela PR #138
+  por squash no commit `e8e900feeaadc98f45e47244ad7840d25e1cc871`, a partir do
+  head `653b721a796cafa2d2bed500c2c720d3c4a079d7`. Aceite NexLabsTech no
+  comentário #6721135679; Issue #7 concluída; não houve review formal
+  `APPROVED`. Configurações administrativas permanecem `NOT VERIFIED` conforme
+  o Evidence Bundle.
+- Test Plan, CI documental, contribuição e branch protection pertencem à
+  WO-007 / Issue #8 e estão em proposta nesta branch.
 - Auditoria final da fundação e do issue graph pertence à WO-008 / Issue #9.
   O backlog canônico continua em GitHub Issues; não há backlog Markdown
   duplicado.
 
-O Source Pack permanece parcial até WOs 006–008 e a verificação dos controles
-essenciais. Não há aplicação ou deployment. Direitos de conteúdo, APIs,
+O Source Pack permanece parcial até WO-007 e WO-008, com controles essenciais
+lidos de volta. Não há aplicação ou deployment. Direitos de conteúdo, APIs,
 árvore, dados econômicos, scraping e monetização continuam bloqueados ou não
-verificados. Um settings administrativo inacessível não deve ser inferido como
+verificados. Erro de acesso administrativo não demonstra que setting esteja
 ativo ou inativo.
 
 ## Mudanças de hierarquia

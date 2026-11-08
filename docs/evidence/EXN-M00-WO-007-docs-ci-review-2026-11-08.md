@@ -1,0 +1,206 @@
+# EXN-M00-WO-007 — Evidence Bundle de CI documental e contribuição
+
+- **Owner:** NexLabsTech
+- **Status:** BLOCKED somente pela configuração administrativa; Correction Delta local e remoto PASS
+- **Revisão:** 2026-11-08
+- **Work Order:** EXN-M00-WO-007 · Issue #8
+- **Branch:** `exn-m00-wo-007-docs-ci`
+- **Base SHA:** `e8e900feeaadc98f45e47244ad7840d25e1cc871`
+- **PR:** #139 (Draft durante a execução/auditoria)
+- **HEAD inicial/publicado:** `b3c509747d5bd19684cfa0f24b4e0f406f23b089`.
+- **HEAD publicado antes desta Correction Delta:**
+  `69219982d978c556e52e48b0e008804d59104d9c`.
+- **HEAD publicado com os limites de rede desta correção:**
+  `0649102eb841104083d574db2a7fab7b95ae960b`.
+- **HEAD antes desta atualização do Evidence Bundle:**
+  `7fe2d683f71b03a49e6e1d62d211861e602e448f`.
+- **HEAD auditado antes do Correction Delta atual:**
+  `efb4674b55e7300b26857155fbf1e8d0ed1aac0e`.
+- **HEAD da Correction Delta validada pelo Actions:**
+  `8d8125502492ae67d3e1b9c9374d7ece8b4f022e`.
+- **HEAD que contém esta revisão:** SHA do commit que atualiza este Bundle,
+  visível no histórico/timeline da PR #139.
+
+## Source Check e Context Lock
+
+- Issue #8 está aberta e depende da WO-006, concluída na PR #138. Issue #7 foi
+  fechada após merge normal por squash no commit
+  `e8e900feeaadc98f45e47244ad7840d25e1cc871`.
+- No início da WO, `main` remota e checkout coincidiam em
+  `e8e900feeaadc98f45e47244ad7840d25e1cc871`; não havia PR aberta.
+- Baseline de CI: zero workflow do GitHub Actions, zero manifesto/lockfile,
+  zero código de aplicação, endpoint ou deployment.
+- Settings de proteção de branch e segurança foram rechecados como `NOT
+  VERIFIED` se API/integração não permite leitura; não são inferidos como
+  ativos ou desativados. Nenhuma configuração foi alterada.
+- Direitos R01–R14 continuam sem autorização para ingestão, persistência,
+  reexibição, árvore passiva, dados econômicos, scraping ou monetização.
+- A auditoria mais recente, comentário/review #5818146156 por NexLabsTech,
+  avaliou o HEAD `efb4674b55e7300b26857155fbf1e8d0ed1aac0e` como `CORRECTION
+  REQUIRED` para o workflow e `BLOCKED` para governança administrativa. O
+  comentário declara independência do executor; o estado GitHub é
+  `COMMENTED`, não aprovação formal `APPROVED`.
+
+## Arquivos e mudanças
+
+- `README.md`, `docs/README.md`, `docs/source-hierarchy.md`,
+  `docs/decisions-ledger.md`, `docs/checkpoint.md`: atualização do contexto,
+  ordem, dependências e limitações.
+- `docs/test-plan.md`: matriz de testes por risco/pré-requisito, status,
+  ferramentas, gates e custos.
+- `CONTRIBUTING.md`: fluxo branch→PR→testes→auditoria→aceite, custo zero e
+  direitos.
+- `scripts/validate_docs.py`: validador stdlib de Source Pack, metadata,
+  links locais/URL HTTPS, fences e padrões heurísticos de segredo.
+- `tests/test_validate_docs.py`: testes unitários locais sem dependências.
+- `.github/workflows/docs-ci.yml`: workflow fork-safe, `pull_request` para toda
+  PR com base `main`, `push` filtrado em `main`, `contents: read`, checkout
+  fixado, `persist-credentials: false`, timeout e cancelamento de execução
+  obsoleta. actionlint e zizmor enumeram todos os workflows `.yml`/`.yaml`.
+- Este Evidence Bundle.
+
+Nenhum código funcional, dado de jogo, dependência runtime, segredo, workflow
+de deploy ou configuração da conta é introduzido.
+
+## Ações e ferramentas fixadas
+
+- `actions/checkout` v7.0.1: SHA de commit oficial
+  `3d3c42e5aac5ba805825da76410c181273ba90b1`; `action.yml` lido na origem
+  oficial. Action usa `contents: read`, fetch-depth 1 e `persist-credentials:
+  false`.
+- `actionlint` v1.7.12, release oficial; asset e digest consultados na API do
+  repositório oficial; SHA-256 do tarball Linux AMD64 verificado localmente:
+  `8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8`.
+- `zizmor` v1.32.0, release oficial; asset e digest consultados na API do
+  repositório oficial; SHA-256 do tarball x86_64 verificado localmente:
+  `bb110cc765eca9cd7efb2e284a956be5974c60027b0970f16397d86208a9957b`.
+- Aplicativos automáticos preexistentes executaram checks nesta PR: CodeRabbit
+  concluiu `skipped` porque a PR está Draft; Socket PR Alerts concluiu
+  `success` sem mudança de dependências e Socket Project Report concluiu
+  `success`. Nenhum foi solicitado manualmente ou usado como gate técnico.
+  Elegibilidade/plano e custo do Socket não são legíveis e permanecem
+  `NOT VERIFIED`; a proteção administrativa inacessível também impede provar se
+  algum check externo foi marcado como obrigatório.
+
+## Testes e logs
+
+Executados localmente nesta branch:
+
+- `python3 -m unittest discover -s tests -p 'test_*.py' -v` — **PASS**, 4
+  testes: link local presente/ausente, rejeição de URL HTTP e detecção de
+  padrão sintético de token sem exibir o valor.
+- `python3 scripts/validate_docs.py` — **PASS**: Source Pack presente; 23
+  arquivos Markdown; 56 links; zero correspondências nos padrões heurísticos
+  de segredo.
+- `mapfile -d '' workflow_files < <(find .github/workflows -maxdepth 1 -type f \( -name '*.yml' -o -name '*.yaml' \) -print0 | sort -z)` — **PASS**, enumerou 1 workflow existente.
+- `actionlint "${workflow_files[@]}"` com v1.7.12 — **PASS**, exit 0 para todos os workflows encontrados.
+- `zizmor "${workflow_files[@]}"` com v1.32.0 — **PASS**, “No findings to report!” para todos os workflows encontrados.
+- `python3 -m py_compile scripts/validate_docs.py tests/test_validate_docs.py`
+  — **PASS**.
+- `git diff --check` — **PASS**.
+- A primeira execução do validador falhou porque aplicava metadata obrigatória
+  também a dois Evidence Bundles históricos que não usam esse formato. Foi
+  correção do validador nesta WO: metadata agora é exigida nos documentos
+  canônicos atuais e no Evidence Bundle corrente. Não foi reescrito nenhum
+  artefato histórico; a execução subsequente passou.
+- GitHub Actions na base antes da PR: zero workflows. O run #42478978237
+  confirmou a execução do workflow no primeiro head. No HEAD
+  `69219982d978c556e52e48b0e008804d59104d9c`, o run #42479196861 terminou
+  `success`; o job `Docs validation` e seus oito passos foram concluídos com
+  sucesso. Uma consulta anterior observou a etapa de instalação de `actionlint`
+  ainda em andamento; ela terminou posteriormente. A etapa não foi cancelada.
+- No HEAD `0649102eb841104083d574db2a7fab7b95ae960b`, o run #42479831940
+  terminou `success` em aproximadamente seis segundos; `Docs validation` e os
+  oito passos foram concluídos. Os check-runs associados registraram
+  `Docs validation: success`, `CodeRabbit: skipped` (Draft), `Socket Security:
+  Pull Request Alerts: success` e `Socket Security: Project Report: success`.
+- No HEAD `7fe2d683f71b03a49e6e1d62d211861e602e448f`, o run #42480060997
+  terminou `success`; `Docs validation` e os oito passos passaram novamente.
+- No HEAD `8d8125502492ae67d3e1b9c9374d7ece8b4f022e`, após esta Correction
+  Delta, o run #42487843277 concluiu `success`. O job `Docs validation` e os
+  oito passos passaram, inclusive `Lint all GitHub Actions workflows` e
+  `Audit all workflows for security`. O check associado `Docs validation`
+  concluiu `success`.
+- Páginas oficiais GitHub billing, hardening e evento `pull_request`: HTTP 200.
+  Releases oficiais consultados e tarballs verificados por SHA-256.
+
+Build, typecheck, lint de app, testes de aplicação/E2E, CodeQL de produto,
+Dependency Review e análise de dependências: `NOT APPLICABLE` sem aplicação ou
+manifestos. Nenhum teste dinâmico de browser/deploy foi executado. Gitleaks,
+TruffleHog e detect-secrets não estão instalados; o validador é heurístico e
+não substitui scanner dedicado.
+
+## Correction Delta
+
+- Aplicado nesta correção: removido `paths` do evento `pull_request` para que
+  `Docs validation` inicie em qualquer PR para `main`; os filtros `paths` do
+  evento `push` foram preservados.
+- actionlint e zizmor agora coletam, por `find`, todos os arquivos `.yml` e
+  `.yaml` dentro de `.github/workflows/`, falhando explicitamente se nenhum for
+  encontrado. Nesta revisão foi encontrado um workflow.
+- Reexecução local pedida pela auditoria: quatro testes unitários **PASS**;
+  validador documental **PASS** (23 Markdown, 56 links, zero matches
+  heurísticos); actionlint v1.7.12 **PASS**; zizmor v1.32.0 **PASS**, sem
+  findings; `git diff --check` **PASS**.
+- CI remoto no novo HEAD `8d8125502492ae67d3e1b9c9374d7ece8b4f022e` passou no
+  run #42487843277; o run do próximo head, que atualiza este Bundle, será
+  informado na timeline da PR e no relatório final.
+- O sinal anterior de demora na instalação do actionlint foi corrigido antes:
+  etapas limitadas a 2 minutos e downloads com conexão de 10 segundos e limite
+  total de 60 segundos; o run #42480225757 no HEAD `efb4674` passou.
+
+## Governança administrativa: read-back realizado
+
+A dificuldade anterior em `/branches/main/protection` (HTTP 403,
+`Administration: read`) persiste para essa API específica. A verificação
+foi concluída por endpoint alternativo de rulesets, com permissão de leitura
+já existente e sem modificar credenciais.
+
+**Evidência verificada em 2026-11-08:**
+
+- GET `https://api.github.com/repos/NexLabsTech/exile-nexus/rulesets/26806979`:
+  `id: 26806979`, `name: NexLabs Main Protection`,
+  `enforcement: active`, `conditions.ref_name.include: [~DEFAULT_BRANCH]`,
+  `bypass_actors: []`, `current_user_can_bypass: never`.
+- `deletion` protege contra exclusão; `non_fast_forward` proíbe force-push;
+  `required_linear_history` exige histórico linear.
+- `pull_request`: 0 approvals, code-owner review desabilitado, conversas
+  resolvidas, merge apenas `squash`.
+- `required_status_checks`: `Docs validation` como único contexto requerido,
+  GitHub Actions integration_id 15368 e `strict_required_status_checks_policy:
+  true`. CodeRabbit e Socket Security NÃO são required.
+- Configuração geral do repo: squash habilitado; merge commit/rebase desativados.
+- GitHub Actions run [#42488063183](https://github.com/NexLabsTech/exile-nexus/actions/runs/42488063183)
+  `completed/success` no HEAD `1710126833982cf3f3d50ccd7159cdf87dd78542`;
+  todos os passos do job `Docs validation` com `success`.
+
+**Permanecem NOT VERIFIED, fora deste gate:** detalhes da proteção clássica
+por endpoint 403, Dependabot, Code Scanning, Secret Scanning,
+Push Protection, permissões adicionais de Actions, faturamento total da conta
+e contratos comerciais/custos dos apps externos. Essas lacunas não devem
+ser interpretadas como recursos desabilitados nem como custo confirmado US$ 0.
+Nada foi habilitado em termos de serviços pagos.
+
+## Auditoria, custos e Checkpoint Delta proposto
+
+A revisão técnica independente da sessão do executor, baseada em diff,
+workflow, scripts, testes, run remoto e regras da API, confirma que os
+bloqueios originais de CI e de ruleset estão resolvidos no HEAD acima.
+A leitura independente não é GitHub Review `APPROVED` de outro usuário
+e não substitui aceite administrativo do proprietário.
+
+**Custo:** nenhuma despesa nova foi autorizada; GitHub-hosted runner padrão
+no repositório público e ferramentas open source. Custo consolidado da conta
+e serviços externos: NOT VERIFIED. Não acionar análise manual com franquia.
+
+**Checkpoint Delta proposto:** promover como controle efetivo o workflow
+`Documentation CI`, guia de contribuição e Test Plan após aprovação e
+squash merge normais, registrando ruleset #26806979 e o único required check
+`Docs validation`. Não ativar dados/monetização nem declarar produto pronto.
+Issue #8 e PR #139 continuam abertas até aceite explícito da conta NexLabsTech.
+
+**Veredito técnico para conteúdo da WO-007:** APPROVED condicionado à rechecagem
+do último HEAD após este commit documental e ao aceite do proprietário;
+nenhum erro HIGH/CRITICAL identificado neste escopo. **Aceite NexLabsTech:**
+ainda não registrado para a entrega final; não confundir confirmação de
+configuração do ruleset com autorização para merge da PR #139.
