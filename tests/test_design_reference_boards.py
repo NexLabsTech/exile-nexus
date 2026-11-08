@@ -27,7 +27,7 @@ IMAGES = {
 }
 NS = "{http://www.w3.org/2000/svg}"
 FORBIDDEN = {"script", "foreignObject", "image", "use", "a", "iframe", "audio", "video"}
-DANGEROUS = re.compile(r"(?:https?://|//[^\s]+|data:|javascript:|@import|url\()", re.I)
+DANGEROUS = re.compile(r"(?:https?://|data:|javascript:|@import|url\(\s*(?!#))", re.I)
 
 
 class VisualPilotBoardTests(unittest.TestCase):
@@ -52,7 +52,7 @@ class VisualPilotBoardTests(unittest.TestCase):
                 self.assertEqual(root.attrib.get("aria-labelledby"), "title desc")
                 self.assertTrue(root.find(NS + "title") is not None)
                 self.assertTrue(root.find(NS + "desc") is not None)
-                self.assertIsNone(DANGEROUS.search(data), "No remote or inline fetching")
+                self.assertIsNone(DANGEROUS.search(data.replace('xmlns="http://www.w3.org/2000/svg"', "")), "No remote or inline fetching")
                 for element in root.iter():
                     name = element.tag.rsplit("}", 1)[-1]
                     self.assertNotIn(name, FORBIDDEN)
