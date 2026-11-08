@@ -1,7 +1,7 @@
 # EXN-M01-WO-002 — Original visual tokens and accessibility
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED / NOT ACCEPTED
+- **Status:** ACCEPTED initial design baseline, PR #142 merged
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M01-WO-002 · Issue #12
 
@@ -70,5 +70,5 @@ license is inferred.
 - [Evidence Bundle](evidence/EXN-M01-WO-002-visual-tokens-2026-11-08.md)
 
 Criteria: automated contrast and SVG safety checks, docs CI, rights inventory,
-scope diff, transparent solo audit per EXN-DEC-0007 and owner approval. All
-design choices here are PROPOSED until those gates pass; no merge/deploy.
+scope diff, transparent solo audit per EXN-DEC-0007 and owner approval. Specific tokens and SVGs here are ACCEPTED under EXN-DEC-0009; real UI,
+legal clearance and deployment remain unapproved.

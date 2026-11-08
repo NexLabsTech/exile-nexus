@@ -82,3 +82,22 @@ nesta conexão. Revalidar limites e custo antes de adicionar qualquer integraç�
 - [actions/checkout v7.0.1](https://github.com/actions/checkout/tree/3d3c42e5aac5ba805825da76410c181273ba90b1)
 - [actionlint v1.7.12](https://github.com/rhysd/actionlint/releases/tag/v1.7.12) — SHA-256 do tarball Linux AMD64: `8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8`.
 - [zizmor v1.32.0](https://github.com/woodruffw/zizmor/releases/tag/v1.32.0) — SHA-256 do tarball Linux x86_64: `bb110cc765eca9cd7efb2e284a956be5974c60027b0970f16397d86208a9957b`.
+
+## M12-WO-001 — Quality CI (PROPOSTO)
+
+- Uma nova Action `Quality baseline` roda em toda PR para `main` e todo
+  push na `main`, em runner `ubuntu-latest` de repo público, read-only,
+  sem deploy, segredos ou app com cota.
+- `scripts/quality_gate.py` exige Actions externas fixadas por SHA,
+  proíbe gatilhos privilegiados e permissões elevadas não aprovadas.
+  Detecta `package.json` de produto fora de `experiments/` e exige
+  `package-lock.json` e scripts `lint`, `typecheck`, `test`, `build`.
+- Havendo app, workflow executa `npm ci`, lint, typecheck, test, build e
+  `npm audit --audit-level=high`; sem app, registra `NOT APPLICABLE`.
+- Testes negativos verificam que código de validação retorna não zero para
+  lock ausente, script ausente, Action sem SHA, trigger privilegiado e
+  permissão write; prova positiva valida pacote sintético.
+- `Docs validation` continua único check required do ruleset #26806979.
+  Novo check não se torna obrigatório sem autorização administrativa explícita.
+- E2E/browser/DAST/migração/deploy de produto são NOT APPLICABLE nesta WO
+  sem aplicação ou ambiente. Nenhuma revisão externa (EXN-DEC-0007).

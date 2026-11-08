@@ -103,7 +103,7 @@ class DesignTokensTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertIn(path, text)
         self.assertIn("R14", text)
-        self.assertIn("INTERNAL_PROTOTYPE_ONLY", text)
+        self.assertIn("APPROVED_DESIGN_BASELINE", text)
 
 
 if __name__ == "__main__":

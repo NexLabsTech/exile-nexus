@@ -1,17 +1,18 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · M01-WO-002 em execução; runtime da WO-001 ACEITO
+- **Status:** PROPOSED · M12-WO-001 em execução; M01-WO-002 ACEITA
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M01-WO-002 · Issue #12
-- **Base SHA desta proposta:** `4a6bba78fd1966804895c9f9dafe85bf70175633`
+- **Work Order:** EXN-M12-WO-001 · Issue #119
+- **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
 A fundação M00 foi encerrada no GitHub. A escolha Astro 7.4.7 + React 19.3.1
 islands (fallback React/Vite) foi aceita pelo owner, integrada pela PR #141 e
-a issue #11 encerrada. Esta atualização inicia apenas M01-WO-002 (#12):
-tokens visuais e assets originais, ainda PROPOSED até testes e aceite.
-Nenhuma decisão visual desta WO é promovida antecipadamente.
+a issue #11 encerrada. M01-WO-002 (#12) também foi aceita pelo owner e
+integrada pela PR #142; esta proposta inicia exclusivamente M12-WO-001 (#119),
+fundação do CI de qualidade necessária antes de M01-WO-003 (#13). Nenhuma
+decisão de build, release ou deployment é antecipadamente aprovada.
 
 ## Histórico e aceite
 
@@ -214,7 +215,7 @@ ainda não aceita nem integrada.
 - A futura implementação precisa de lockfile commitado, scanner de
   dependências e testes da UI real. Sem deploy ou acesso a dados externos.
 
-## M01-WO-002 — Visual Tokens and Original Assets (Checkpoint Delta PROPOSTO)
+## M01-WO-002 — Visual Tokens and Original Assets (aceite PR #142)
 
 - **Base:** `4a6bba78fd1966804895c9f9dafe85bf70175633`.
 - **Scope NECESSARY:** [issue #12](https://github.com/NexLabsTech/exile-nexus/issues/12):
@@ -224,8 +225,27 @@ ainda não aceita nem integrada.
   e [Evidence Bundle](evidence/EXN-M01-WO-002-visual-tokens-2026-11-08.md).
 - WCAG 2.2 AA: texto normal mínimo 4.5:1 e limites de UI não textual 3:1,
   com cálculo automático em testes Python sem pacotes externos.
-- **Decisão da identidade visual permanece PROPOSED** até avaliação objetiva
-  de contraste, validação dos SVGs, Docs validation, revisão solo declarada
-  (EXN-DEC-0007) e aceite explícito NexLabsTech.
+- **Identidade visual inicial ACEITA:** design/tokens.css e dois SVGs
+  originais, após aceite explícito do owner, PR #142 integrada por squash em
+  `79be738c7af8eda641c4ac4aff52ef7b28931ca0` e issue #12 CLOSED.
+  EXN-DEC-0009 documenta limites; isso não é licença jurídica de terceiros.
 - Nenhum direito de conteúdo de jogo é liberado; R01–R14 preservados.
-  Sem fontes externas, data ingestion, deploy ou gasto. Não avançar outro WO.
+  Sem fontes externas, data ingestion, deploy ou gasto. Só avançar na
+  M12-WO-001 (#119), que bloqueia a interface da M01-WO-003 (#13).
+
+## M12-WO-001 — Quality Baseline CI (Checkpoint Delta PROPOSTO)
+
+- Base: `79be738c7af8eda641c4ac4aff52ef7b28931ca0` (PR #142).
+- [Issue #119](https://github.com/NexLabsTech/exile-nexus/issues/119):
+  baseline de CI fail-closed, testes positivos e negativos e detecção de
+  manifestos de aplicações de produção.
+- Enquanto não houver pacote real fora de `experiments/`, os comandos de
+  lint/typecheck/test/build/npm audit da aplicação são **NOT APPLICABLE**,
+  não PASS. Os testes do projeto e o scan de workflows são executáveis.
+- `Docs validation` segue como único check obrigatório no ruleset.
+  O workflow adicional exige auditoria de evidências mas não vira required
+  sem autorização/admin read-back.
+- [Evidence Bundle](evidence/EXN-M12-WO-001-quality-baseline-2026-11-08.md)
+  permanece PROPOSED até CI, auditoria objetiva solo e aceite do owner.
+- Nenhum reviewer externo, deploy, dados de jogo, serviço pago ou início de
+  #13 estão autorizados por esta proposta.

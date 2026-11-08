@@ -1,7 +1,7 @@
 # EXN-M01-WO-002 — Evidence Bundle: visual tokens and original assets
 
 - **Owner:** NexLabsTech
-- **Status:** DRAFT / INITIAL TESTS PASS; FINAL HEAD OWNER ACCEPTANCE PENDING
+- **Status:** ACCEPTED by owner via PR #142; historical evidence retained
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M01-WO-002 · Issue #12
 - **Risk:** STANDARD
@@ -115,3 +115,12 @@ without explicit NexLabsTech acceptance and checks on exact HEAD.
   is recorded by EXN-DEC-0008, not by new runtime code in this PR.
 - Scope unchanged: 11 files in this Work Order. User approval is required
   before merging the PR, accepting design tokens or moving to #13.
+
+## Owner acceptance addendum after integration
+
+- PR #142 squash normal merged into main at
+  `79be738c7af8eda641c4ac4aff52ef7b28931ca0`; issue #12 CLOSED.
+- Post-merge CI [run #42521540531](https://github.com/NexLabsTech/exile-nexus/actions/runs/42521540531)
+  `completed/success`. Approval covers only initial design tokens and the
+  two original SVGs; EXN-DEC-0009 records its limits. No legal/publication
+  clearance, GGG assets or app release approved by this acceptance.
