@@ -18,7 +18,7 @@ def synthetic_png() -> bytes:
     return (
         PNG_SIG + struct.pack(">I", 13) + b"IHDR"
         + struct.pack(">II", 1448, 1086)
-        + bytes([8, 2, 0, 0, 0]) + b"\\x00" * 4
+        + bytes([8, 2, 0, 0, 0]) + b"\x00" * 4
     )
 
 
