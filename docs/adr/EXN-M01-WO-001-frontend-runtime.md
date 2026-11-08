@@ -1,7 +1,7 @@
-# EXN-M01-WO-001 — Frontend Runtime ADR (proposta)
+# EXN-M01-WO-001 — Frontend Runtime ADR (decisão aceita)
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED / NOT ACCEPTED
+- **Status:** ACCEPTED for frontend direction only, PR #141 merged
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M01-WO-001 · Issue #11
 - **Base SHA:** `26673e9656bfd6aae500f01f508ea53e13718bab`
@@ -15,8 +15,9 @@ Selecionar um frontend estático compatível com Cloudflare Free para páginas
 informacionais com SEO e módulos altamente interativos, preservando modular
 monolith TypeScript strict, direitos por fonte, design original e custo zero.
 O M00 foi encerrado por squash da PR #140; issue #9 e épico #1 CLOSED.
-O framework **não** foi decidido pelo Decisions Ledger. Sem API, banco,
-autenticação, anúncios, assets de jogo ou dados externos.
+O framework foi **aceito após os experimentos**, conforme EXN-DEC-0008
+em Decisions Ledger e merge da PR #141. Sem API, banco, autenticação,
+anúncios, assets de jogo ou dados externos.
 
 ## Alternativas avaliadas
 
@@ -26,10 +27,10 @@ autenticação, anúncios, assets de jogo ou dados externos.
 | React 19 + Vite 8 | SPA estática com roteamento cliente futuro, sem server runtime. | Simplicidade de uma árvore React, controle de interações muito complexas. | SEO/prerender por rota exige estratégia adicional; output `dist/`. |
 | Next.js static export | Static HTML export sem runtime server. | Rotas, metadata e ecossistema React. | Recursos SSR, middleware, rotas server e estado dinâmico exigem runtime; `out/`. Não benchmarkado neste incremento. |
 
-**Preferência arquitetural provisória, agora sustentada por build real:** Astro + ilhas React, porque o portal
-combina conteúdo indexável e ferramentas gráficas interativas. **Fallback:** React + Vite, especialmente se complexidade do stack Astro
-ou peer range TypeScript 6 impedir evolução segura. O benchmark confirmou
-builds de ambos, mas a preferência continua PROPOSTA até aceite do owner.
+**Decisão aprovada:** Astro 7.4.7 estático + React 19.3.1 islands, pois o
+portal reúne conteúdo indexável e ferramentas interativas. **Fallback:**
+React + Vite, especialmente se o stack Astro/React ou a cadeia de typecheck
+impedir evolução segura. Os dois builds passaram, sem desempenho de UI medido.
 
 ## Prova mensurável e teste de compatibilidade
 
@@ -77,10 +78,9 @@ O ganho de geração estática e fragmentação de componentes favorece Astro
 para páginas SEO; build Vite foi mais rápido neste único probe. Não afirmar
 vantagem medida em tráfego, velocidade de renderização ou SEO real.
 
-**Veredito proposto:** Astro static + React islands para implementação inicial
-como `modular monolith`; fallback Vite+React documentado. **Não é decisão
-ACEITA até aprovação explícita do owner**, com lockfile e auditoria de
-dependências exigidos na WO do scaffold real.
+**Veredito aceito pelo owner:** Astro static + React islands como direção
+inicial de `modular monolith`, fallback Vite+React. Lockfile e auditoria
+de dependências são obrigatórios na WO do scaffold real, não nesta ADR.
 
 ## Cloudflare Free e portabilidade
 
@@ -119,5 +119,6 @@ e evidências de custo.
   Evidence Bundle com CI, riscos, plano de fallback e delta.
 - Auditoria objetiva interna de mantenedor solo conforme EXN-DEC-0007,
   declarando ausência de independência, sem revisão de bot externo.
-- **Decisão: PROPOSTA.** Somente NexLabsTech pode aceitar seleção do runtime
-  para implementação. Não fazer merge nem iniciar WO seguinte antes de aceite.
+- **Decisão: ACEITA pela NexLabsTech**, PR #141 integrada no commit
+  `4a6bba78fd1966804895c9f9dafe85bf70175633` e issue #11 fechada.
+  Não declarar app pronto/deploy aprovado; evolução somente por WOs próprias.

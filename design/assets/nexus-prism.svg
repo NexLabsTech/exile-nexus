@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="prism-title prism-desc">
+  <title id="prism-title">Exile Nexus abstract prism</title>
+  <desc id="prism-desc">An original concentric hexagonal frame around an angular central prism.</desc>
+  <path d="M64 8 111 35 111 93 64 120 17 93 17 35Z" fill="#151E29" stroke="#87E6CC" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M64 24 95 42 95 86 64 104 33 86 33 42Z" fill="none" stroke="#F7D295" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M64 38 84 64 64 90 44 64Z" fill="#223041" stroke="#D0F877" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M64 38V90M44 64H84" fill="none" stroke="#87E6CC" stroke-width="2" stroke-linecap="round"/>
+</svg>

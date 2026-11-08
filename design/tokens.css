@@ -1,0 +1,63 @@
+/*
+ * EXN-M01-WO-002: design tokens for Exile Nexus.
+ * Original in-repository definitions. No licensed game assets or external fonts.
+ * Do not assume glass overlays retain contrast without compositing checks.
+ */
+:root {
+  color-scheme: dark;
+  --exn-color-canvas: #0A0F17;
+  --exn-color-surface: #151E29;
+  --exn-color-raised: #223041;
+  --exn-color-text: #F1F5F9;
+  --exn-color-text-muted: #B7C9D7;
+  --exn-color-accent: #87E6CC;
+  --exn-color-gold: #F7D295;
+  --exn-color-border: #688197;
+  --exn-color-focus: #D0F877;
+  --exn-color-error: #FFB5AE;
+  --exn-color-success: #94E3AD;
+  --exn-color-on-accent: #0A0F17;
+
+  --exn-font-ui: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --exn-font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+  --exn-text-sm: 0.875rem;
+  --exn-text-base: 1rem;
+  --exn-text-lg: 1.25rem;
+  --exn-text-xl: 1.75rem;
+  --exn-line-height-body: 1.55;
+
+  --exn-space-1: 0.25rem;
+  --exn-space-2: 0.5rem;
+  --exn-space-3: 0.75rem;
+  --exn-space-4: 1rem;
+  --exn-space-6: 1.5rem;
+  --exn-space-8: 2rem;
+  --exn-radius-sm: 0.375rem;
+  --exn-radius-md: 0.75rem;
+  --exn-radius-panel: 1.25rem;
+  --exn-focus-width: 3px;
+  --exn-focus-offset: 3px;
+  --exn-glass-blur: 16px;
+  --exn-duration-fast: 140ms;
+  --exn-duration-standard: 240ms;
+}
+
+/* Optional focus utility; future UI must preserve visible keyboard focus. */
+:where(.exn-focusable):focus-visible {
+  outline: var(--exn-focus-width) solid var(--exn-color-focus);
+  outline-offset: var(--exn-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --exn-duration-fast: 0ms;
+    --exn-duration-standard: 0ms;
+    --exn-glass-blur: 0px;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(.exn-focusable):focus-visible {
+    outline-color: Highlight;
+  }
+}

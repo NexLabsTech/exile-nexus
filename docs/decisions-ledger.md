@@ -137,3 +137,26 @@ A remoção de qualquer instalação/configuração administrativa remanescente 
 app de terceiros exige ação na configuração do repositório, com read-back e
 autorização no escopo próprio. Ausência de permissão de administração deve
 ser registrada como NOT VERIFIED, nunca como desinstalação concluída.
+
+## EXN-DEC-0008 — Frontend Astro + React islands aprovado
+
+- **Status da decisão:** ACEITA pelo owner em 2026-11-08.
+- **Fonte:** aceite explícito de
+  [EXN-M01-WO-001 / PR #141](https://github.com/NexLabsTech/exile-nexus/pull/141);
+  [registro da issue #11](https://github.com/NexLabsTech/exile-nexus/issues/11#issuecomment-6726702083).
+- **Merge:** squash normal no commit
+  `4a6bba78fd1966804895c9f9dafe85bf70175633`.
+
+A direção inicial de frontend é **Astro 7.4.7 estático + React 19.3.1
+islands**, com **React/Vite** como fallback quando as restrições de interação,
+toolchain ou manutenção exigirem. A decisão arquitetural é compatível com
+Cloudflare Pages Free como **candidato** de hospedagem, ainda não ativado.
+
+O probe experimental Astro usou TypeScript 6.0.2 por restrição de peer
+dependency de `@astrojs/check@0.9.12`. Isto não fixa automaticamente
+versão de TypeScript em produção. O scaffold futuro exige lockfile no Git,
+auditoria de dependências, testes da aplicação e verificação de limites/custo.
+
+O aceite NÃO libera criação de deploy, Cloudflare, backend, API, ingestão,
+dados do jogo, publicidade, custo pago, marca/asset de terceiro ou qualquer
+decisão visual da WO-002. Tais gates seguem seus Work Orders e R01–R14.

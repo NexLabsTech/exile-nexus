@@ -1,16 +1,17 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · M00 integrada e encerrada; WO-001 do M01 em avaliação
+- **Status:** PROPOSED · M01-WO-002 em execução; runtime da WO-001 ACEITO
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M01-WO-001 · Issue #11
-- **Base SHA desta proposta:** `26673e9656bfd6aae500f01f508ea53e13718bab`
+- **Work Order:** EXN-M01-WO-002 · Issue #12
+- **Base SHA desta proposta:** `4a6bba78fd1966804895c9f9dafe85bf70175633`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
-A fundação M00 foi encerrada no GitHub após a PR #140, com o épico #1 e as
-issues #2–#9 fechados. Esta proposta inicia exclusivamente a avaliação do
-runtime frontend da WO-001 do M01. O delta permanece PROPOSED até os testes,
-a auditoria interna e o aceite do owner antes de qualquer squash merge.
+A fundação M00 foi encerrada no GitHub. A escolha Astro 7.4.7 + React 19.3.1
+islands (fallback React/Vite) foi aceita pelo owner, integrada pela PR #141 e
+a issue #11 encerrada. Esta atualização inicia apenas M01-WO-002 (#12):
+tokens visuais e assets originais, ainda PROPOSED até testes e aceite.
+Nenhuma decisão visual desta WO é promovida antecipadamente.
 
 ## Histórico e aceite
 
@@ -46,9 +47,9 @@ a auditoria interna e o aceite do owner antes de qualquer squash merge.
 
 ## Context Lock e fonte atual
 
-- Issues M00 #2–#9 e épico #1 encerrados; EXN-M01-WO-001 (#11) é a
-  próxima Work Order NECESSARY selecionada. Não iniciar outra enquanto #11
-  exigir auditoria, correção ou aceite.
+- Issues M00 #2–#9 e épico #1 encerrados; EXN-M01-WO-001 (#11) fechada
+  após a PR #141. EXN-M01-WO-002 (#12) é o incremento NECESSARY selecionado.
+  Não avançar outra WO enquanto #12 exigir validação ou correção.
 - main no início da auditoria: aaf24a660ff2ee2334d713685e2edee1f841eedc.
 - CI documental integrado em .github/workflows/docs-ci.yml, sem app, endpoint,
   banco, manifesto de dependências de runtime ou deploy.
@@ -103,8 +104,8 @@ a auditoria interna e o aceite do owner antes de qualquer squash merge.
 ## Estado de produto e custos
 
 - M00 foi concluída; não há aplicação de produto, banco, API, dados pessoais
-  ou deployment. A WO-001 do M01 experimenta build estático com fixtures
-  originais, sem selecionar dependências para produção antecipadamente.
+  ou deployment. A WO-001 do M01 aprovou apenas a direção de runtime,
+  com fixtures sintéticas; a WO-002 cria tokens/assets sem app funcional.
 - A arquitetura modular monolith, TypeScript strict e deny-by-default segue
   como restrição; serviços permanecem não selecionados.
 - O plano financeiro obrigatório é US$ 0. Runners GitHub-hosted padrão são
@@ -163,8 +164,9 @@ ainda não aceita nem integrada.
 - A NexLabsTech determinou expressamente **sem reviews externos** para o
   Exile Nexus. O critério do épico M00 #1 foi reconciliado no GitHub para
   auditoria objetiva da mesma sessão, com ausência de independência declarada.
-- A decisão `EXN-DEC-0007` foi integrada à main pela PR #140 e aceita pelo
-  owner. A avaliação de runtime M01-WO-001 segue PROPOSED.
+- A decisão `EXN-DEC-0007` foi integrada pela PR #140 e aceita pelo owner.
+  A direção de runtime M01-WO-001 foi aceita pela PR #141 e issue #11;
+  `EXN-DEC-0008` registra essa escolha, sem autorizar deploy.
 - Não utilizar nem solicitar análises CodeRabbit ou de outros revisores externos.
   Qualquer check emitido historicamente por apps não é gate obrigatório.
   Não afirmar que apps foram desinstalados sem leitura administrativa.
@@ -174,7 +176,7 @@ ainda não aceita nem integrada.
 - A issue #9 e o épico M00 #1 foram fechados. M01-WO-001 #11 foi iniciado
   exclusivamente para uma decisão de runtime e benchmark sintético.
 
-## M01-WO-001 — Frontend Runtime ADR (Checkpoint Delta PROPOSTO)
+## M01-WO-001 — Frontend Runtime ADR (decisão aceita em PR #141)
 
 - M00 foi encerrado após squash normal da PR #140; SHA de main
   `26673e9656bfd6aae500f01f508ea53e13718bab`, CI de main
@@ -183,18 +185,21 @@ ainda não aceita nem integrada.
 - O próximo incremento necessário é
   [EXN-M01-WO-001 #11](https://github.com/NexLabsTech/exile-nexus/issues/11),
   dependente de EXN-M00-WO-008, já fechado.
-- Recomendação de runtime ainda PROPOSED:
-  [Frontend Runtime ADR](adr/EXN-M01-WO-001-frontend-runtime.md).
+- Frontend inicial ACEITO pelo owner: Astro 7.4.7 estático + React 19.3.1
+  islands, fallback React/Vite. [ADR aceito](adr/EXN-M01-WO-001-frontend-runtime.md).
+  A PR #141 foi integrada por squash em
+  `4a6bba78fd1966804895c9f9dafe85bf70175633`, com a issue #11 fechada
+  e o [CI da main #42520216223](https://github.com/NexLabsTech/exile-nexus/actions/runs/42520216223) PASS.
 - A avaliação compara Astro 7 + React 19 e Vite 8 + React 19 sob fixtures
   sintéticas em GitHub Actions, sem publicar, habilitar Cloudflare, dados de jogo
   ou custo. Métricas e veredito final pertencem ao
   [Evidence Bundle](evidence/EXN-M01-WO-001-runtime-evaluation-2026-11-08.md).
-- **Não promover** framework, versões, base de código ou checkpoint à decisão
-  aceita até CI, benchmark, revisão objetiva interna declarando ausência de
-  independência, e aceite administrativo NexLabsTech. Sem próxima WO enquanto
-  esta estiver pendente.
+- A aceitação de Astro/React é limitada à direção de runtime e ao fallback;
+  **não aprova** scaffold, versão final do TypeScript, integração externa,
+  app funcional, dados do jogo, deployment ou serviço pago. Lockfile,
+  segurança de dependências e testes funcionais pertencem às WOs futuras.
 
-## M01-WO-001 — Métricas do primeiro experimento (somente PROPOSTAS)
+## M01-WO-001 — Métricas históricas de prova de viabilidade
 
 - GitHub Actions [run #42519241684](https://github.com/NexLabsTech/exile-nexus/actions/runs/42519241684):
   Astro e Vite concluíram typecheck/build com PASS no HEAD
@@ -204,7 +209,23 @@ ainda não aceita nem integrada.
 - O erro inicial de peer dependency (`@astrojs/check@0.9.12` versus
   TypeScript 7) foi corrigido sem ignorar resolução npm; Astro usa TS6
   no probe, Vite TS7. Logs e ressalvas no Evidence Bundle.
-- Recomenda-se **provisoriamente** Astro estático + ilhas React; fallback
-  React/Vite. **Sem framework aceito ou aplicado em produção**.
+- O owner **aceitou** Astro estático + ilhas React, fallback React/Vite,
+  na PR #141. Continua **sem aplicação implantada** ou autorização de produção.
 - A futura implementação precisa de lockfile commitado, scanner de
   dependências e testes da UI real. Sem deploy ou acesso a dados externos.
+
+## M01-WO-002 — Visual Tokens and Original Assets (Checkpoint Delta PROPOSTO)
+
+- **Base:** `4a6bba78fd1966804895c9f9dafe85bf70175633`.
+- **Scope NECESSARY:** [issue #12](https://github.com/NexLabsTech/exile-nexus/issues/12):
+  tokens estáticos acessíveis, dois SVGs geométricos próprios, inventário de
+  proveniência e testes locais/CI. Não implementar UI real ou assets de PoE2.
+- [Visual Tokens](visual-tokens.md), [Asset Rights Inventory](visual-assets-inventory.md)
+  e [Evidence Bundle](evidence/EXN-M01-WO-002-visual-tokens-2026-11-08.md).
+- WCAG 2.2 AA: texto normal mínimo 4.5:1 e limites de UI não textual 3:1,
+  com cálculo automático em testes Python sem pacotes externos.
+- **Decisão da identidade visual permanece PROPOSED** até avaliação objetiva
+  de contraste, validação dos SVGs, Docs validation, revisão solo declarada
+  (EXN-DEC-0007) e aceite explícito NexLabsTech.
+- Nenhum direito de conteúdo de jogo é liberado; R01–R14 preservados.
+  Sem fontes externas, data ingestion, deploy ou gasto. Não avançar outro WO.
