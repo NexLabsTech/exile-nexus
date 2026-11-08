@@ -11,6 +11,8 @@ aprovação do seu conteúdo.
 
 ## Documentos presentes
 
+- Matriz de direitos e fontes (PROPOSED): [rights-and-data-sources.md](rights-and-data-sources.md).
+
 - [Visão do projeto](project-overview.md)
 - [Hierarquia de fontes](source-hierarchy.md)
 - [Decisions Ledger](decisions-ledger.md)
@@ -22,7 +24,6 @@ aprovação do seu conteúdo.
 
 ## Documentos planejados
 
-- Direitos, atribuição e uso de APIs: EXN-M00-WO-003, issue #4.
 - Escopo, requisitos e Definition of Done: EXN-M00-WO-004, issue #5.
 - Arquitetura e contratos de dados: EXN-M00-WO-005, issue #6.
 - Segurança, privacidade e abuso: EXN-M00-WO-006, issue #7.
