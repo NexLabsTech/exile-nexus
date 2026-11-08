@@ -47,6 +47,21 @@ The full-resolution source pilot PNGs, each 1448 × 1086 px, are provided separa
 
 **Import gate:** after actual files exist at the paths above on the design branch, compare their SHA-256 digests to this manifest and perform image review, size validation and ownership/right clearance. No filename link or assertion alone counts as asset import.
 
+## Binary-import handoff (verified and fail-closed)
+
+A source importer is versioned in [`scripts/import_visual_pilots.py`](../../scripts/import_visual_pilots.py). It accepts the exact `exile-nexus-visual-pilots-originals.zip` package from the user conversation. It checks the ZIP entry allowlist, each PNG's original SHA-256 and 1448×1086 IHDR, and refuses replacement of conflicting files before committing **any** image data. It never performs a network call or a Git write.
+
+Run inside a checked-out `exn-vis-wo-001-pilot-boards` branch after making the original ZIP available:
+
+```sh
+python3 scripts/import_visual_pilots.py exile-nexus-visual-pilots-originals.zip --verify-only
+python3 scripts/import_visual_pilots.py exile-nexus-visual-pilots-originals.zip
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+git status --short
+```
+
+Stage **only** the four `design/references/*.png` outputs and reviewed scope, commit/push via normal branch flow, and update the existing Draft PR #145. Then run both CI workflows again on the exact new HEAD and verify the four image files can be downloaded from GitHub and match this manifest. **Until that happens, there is no claim that the original PNGs were uploaded.** Do not store the original ZIP itself in the repository. No force-push, direct-main write, external data, service or paid dependency.
+
 ## Scope and provenance
 
 EXN-VIS-WO-001 / GitHub issue #144. All in-repository SVGs are authored as original geometric/vector UI references, with no embedded raster, script, external image, downloadable font or GGG art. This is a provenance declaration, not independent copyright/trademark clearance. Rights R01–R14 and the DoD remain unchanged. Visual sign-off is not a deployment authorization or a release of blocked data sources.
