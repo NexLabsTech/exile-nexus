@@ -3,7 +3,7 @@
 **Coletado em:** 2026-11-08 01:01 UTC  
 **Repositório:** `NexLabsTech/exile-nexus`  
 **Issue:** [#2 — Repository baseline and access audit](https://github.com/NexLabsTech/exile-nexus/issues/2)  
-**Resultado:** coleta local concluída; publicação e aprovação independentes pendentes.
+**Resultado:** baseline publicado em Draft PR para revisão; aprovação independente pendente.
 
 ## Context Lock
 
@@ -13,7 +13,7 @@
 | Base SHA / HEAD observado | `23ec93e0fb174fb84db38298ce890f693a62abf1` |
 | Referência remota | `origin/main` aponta para o mesmo SHA; `git ls-remote` confirmou `main` como HEAD remoto |
 | Estado inicial do workspace | Limpo, `main...origin/main` |
-| PRs | Nenhuma PR aberta ou fechada retornada pela API |
+| PRs | Na captura inicial, nenhuma PR aberta ou fechada. Após a captura, Draft PR [#133](https://github.com/NexLabsTech/exile-nexus/pull/133) foi aberta para este Work Order |
 | Issue #2 | Aberta, sem labels ou comentários; corpo indica `PROPOSED` |
 | Issues #3–#9 | Todas abertas; representam dependências posteriores do M00 |
 | Fonte de precedência | `README.md` é o único arquivo versionado. Checkpoint, Decisions Ledger, Scope, Definition of Done, Architecture e Requirements não existem neste HEAD; hierarquia canônica ainda pendente |
@@ -42,7 +42,7 @@ O snapshot do PDF coincide com o HEAD observado. Não há drift Git local no in�
 | Segurança avançada | Não verificável: o campo `security_and_analysis` veio `null`; endpoint de Code Scanning respondeu 403. Não interpretar como recurso desativado |
 | Alertas de dependência | Não verificáveis: consulta de Dependabot/Vulnerability Alerts respondeu 403 |
 | Secret Scanning / Push Protection | Não verificáveis com a permissão disponível; nenhum alerta foi consultado ou exposto |
-| Aplicativos externos | O check run comprova atividade do app Socket Security. Instalação, escopos, plano/licença e custo não foram verificados |
+| Aplicativos externos | O check run comprova atividade do Socket Security; a Draft PR #133 recebeu comentário automático do CodeRabbit indicando que drafts não são revisados automaticamente. Plano/licença e custo efetivo de ambos não foram verificados |
 
 A integração de leitura usada nesta coleta não tem `push` nem `admin`. As permissões do `GITHUB_TOKEN` de workflows são **não aplicáveis/não verificáveis**, pois não há workflow. Nenhuma configuração de segurança foi alterada.
 
@@ -74,7 +74,7 @@ Os erros de permissão são evidência de **não verificado**, não de configura
 
 ## Checkpoint Delta proposto
 
-1. Registrar que o baseline inicial está documentado em PR dedicada após obter acesso de escrita.
+1. Submeter o baseline à revisão independente na PR #133; aprovação ainda não registrada.
 2. Obter visibilidade administrativa somente de leitura para auditar branch protection, Actions e controles nativos; não alterar settings nesta Work Order.
 3. Verificar com o proprietário a licença e o custo do Socket Security.
 4. Manter Work Orders M00 posteriores bloqueadas até revisão independente e aprovação explícita desta Work Order.
@@ -83,8 +83,10 @@ Este delta é uma proposta e não altera checkpoint canônico, pois ele ainda n�
 
 ## Estado de entrega
 
-- Branch local: `exn-m00-wo-001-baseline`.
-- Evidence Bundle local: este arquivo.
-- Commit e Draft PR: pendentes. A credencial conectada não tem `push`; nenhum push, alteração remota ou PR foi tentado.
+- Branch: `exn-m00-wo-001-baseline`, sincronizada localmente com `origin/exn-m00-wo-001-baseline`.
+- Evidence Bundle: este arquivo na branch e na [Draft PR #133](https://github.com/NexLabsTech/exile-nexus/pull/133).
+- HEAD remoto da PR no momento desta atualização: `081923dd14faaeffd4709421ca75e3574c96812d`.
+- A credencial CLI usada para auditar settings é somente leitura; a conexão GitHub da conta proprietária NexLabsTech foi usada para criar a branch e a Draft PR. Nenhuma configuração de segurança foi alterada.
 - Veredito de auditoria independente: pendente.
-- Próxima ação permitida: revisar este baseline; para abrir a PR, conectar uma integração autorizada a criar branch/PR. Não avançar para outra Work Order antes da auditoria APPROVED.
+- O comentário do CodeRabbit informa que Draft PRs não recebem revisão automática por padrão; revisão manual ainda é necessária.
+- Próxima ação permitida: revisar o baseline e completar a leitura administrativa pendente. Não avançar para outra Work Order antes da auditoria APPROVED.
