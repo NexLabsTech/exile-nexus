@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { UiShowcase } from "../../components/ui/UiShowcase";
+import "../../styles/ui-kit.css";
+---
+<BaseLayout
+  title="Component Workshop"
+  description="Internal UI reference for original Exile Nexus components and accessible interactive states."
+  currentPath="/ui-kit/"
+  robots="noindex,nofollow"
+>
+  <section class="inner-hero" aria-labelledby="ui-kit-heading">
+    <div class="inner-hero-art" aria-hidden="true"><span class="inner-hero-sigil">✦</span></div>
+    <div class="inner-hero-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumbs">
+        <a class="exn-focusable" href="/">Home</a><span aria-hidden="true">›</span>
+        <span aria-current="page">Component Workshop</span>
+      </nav>
+      <p class="eyebrow">DESIGN SYSTEM / EXN-M01-WO-004</p>
+      <h1 id="ui-kit-heading">The component workshop</h1>
+      <p>Original, reusable interface primitives with clearly announced states. All examples are synthetic and remain inside this browser session.</p>
+      <span class="ribbon-status"><span aria-hidden="true">✦</span> DEMONSTRATION / NO DATA</span>
+    </div>
+  </section>
+  <UiShowcase client:load />
+</BaseLayout>
