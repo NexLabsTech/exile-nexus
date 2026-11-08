@@ -37,6 +37,17 @@ test("desktop navigation uses stable deep links", async ({ page }) => {
   await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Items" })).toHaveAttribute("aria-current", "page");
 });
 
+test("desktop header links share the same navigation row", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const primary = page.getByRole("navigation", { name: "Primary navigation" });
+  const home = await primary.getByRole("link", { name: "Home" }).boundingBox();
+  const guides = await primary.getByRole("link", { name: "Guides" }).boundingBox();
+  expect(home).not.toBeNull();
+  expect(guides).not.toBeNull();
+  if (home && guides) expect(Math.abs(home.y - guides.y)).toBeLessThanOrEqual(2);
+});
+
 test("mobile menu supports keyboard Escape and closes after navigation", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
