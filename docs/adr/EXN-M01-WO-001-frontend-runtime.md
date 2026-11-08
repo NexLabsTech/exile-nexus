@@ -1,0 +1,98 @@
+# EXN-M01-WO-001 — Frontend Runtime ADR (proposta)
+
+- **Owner:** NexLabsTech
+- **Status:** PROPOSED / NOT ACCEPTED
+- **Revisão:** 2026-11-08
+- **Work Order:** EXN-M01-WO-001 · Issue #11
+- **Base SHA:** `26673e9656bfd6aae500f01f508ea53e13718bab`
+- **HEAD:** obter metadata da PR atual após criar commit; não autoinserir SHA
+- **Risk:** STANDARD
+- **Requisito:** NFR-ARCH-001, NFR-COST-001, NFR-CI-001, FR-CORE-001/002/003
+
+## OBJECTIVE / Context Lock
+
+Selecionar um frontend estático compatível com Cloudflare Free para páginas
+informacionais com SEO e módulos altamente interativos, preservando modular
+monolith TypeScript strict, direitos por fonte, design original e custo zero.
+O M00 foi encerrado por squash da PR #140; issue #9 e épico #1 CLOSED.
+O framework **não** foi decidido pelo Decisions Ledger. Sem API, banco,
+autenticação, anúncios, assets de jogo ou dados externos.
+
+## Alternativas avaliadas
+
+| Candidato | Modelo e custo | Prós | Limitações / saída estática |
+| --- | --- | --- | --- |
+| Astro 7 + React 19 islands | Páginas pré-renderizadas; hidratação React apenas em ferramentas interativas. Sem servidor de produção necessário para rotas estáticas. | HTML SEO por padrão, ilhas para Build Hub e ferramentas, isolamento por domínio. | Adiciona integração Astro/React e complexidade de dois modelos de componentes; output `dist/`. |
+| React 19 + Vite 8 | SPA estática com roteamento cliente futuro, sem server runtime. | Simplicidade de uma árvore React, controle de interações muito complexas. | SEO/prerender por rota exige estratégia adicional; output `dist/`. |
+| Next.js static export | Static HTML export sem runtime server. | Rotas, metadata e ecossistema React. | Recursos SSR, middleware, rotas server e estado dinâmico exigem runtime; `out/`. Não benchmarkado neste incremento. |
+
+**Preferência arquitetural provisória:** Astro + ilhas React, porque o portal
+combina conteúdo indexável e ferramentas gráficas interativas. **Fallback:**
+React + Vite, se o build Astro/React não passar ou a complexidade extra não
+for compensada pelos resultados. Não aceitar a preferência até executar
+benchmark comparável e documentar decisão pelo owner.
+
+## Prova mensurável e teste de compatibilidade
+
+A pasta [experiments/frontend-runtime](../../experiments/frontend-runtime/README.md)
+contém **duas fixtures sintéticas** com uma página original e um contador React
+hidratado, sem material ou API do jogo. A Action
+[Runtime ADR Benchmark](../../.github/workflows/runtime-adr-benchmark.yml)
+executa para cada candidato no mesmo runner ubuntu-latest / Node 22:
+
+1. Instalar versões diretas exatas, criar lockfile **temporário no runner**
+   e instalar com `npm ci`. Como o lockfile não está commitado, o teste de
+   viabilidade é repetível com as versões diretas, mas o grafo transitivo
+   pode mudar entre execuções. A WO de implementação deve commitar lockfile.
+2. `npm run check` (strict TS/astro check), depois `npm run build`.
+3. Verificar `dist/index.html` e medir duração wall-clock, número de arquivos
+   e tamanho total gerado; logar versões e SHA na execução Actions.
+4. Registrar os resultados por candidato no
+   [Evidence Bundle](../evidence/EXN-M01-WO-001-runtime-evaluation-2026-11-08.md).
+   Sem valores medidos até os jobs concluírem.
+
+**Comparabilidade:** fixtures equivalentes, mas o benchmark de um contador
+não representa desempenho real de uma árvore gráfica, acessibilidade, SEO,
+crawling ou tempo de interação da aplicação. Cronometragem no runner compartilhado
+não é garantia de latência de produção. Comparar as métricas como evidência
+de viabilidade, nunca como meta de produto.
+
+## Cloudflare Free e portabilidade
+
+A documentação oficial Cloudflare Pages lista tanto Astro quanto React/Vite
+com `npm run build` e `dist/`; Next.js static export gera `out/`.
+O Pages Free publica 500 builds/mês, um build concorrente, timeout de 20 min,
+20.000 assets/site e arquivo individual até 25 MiB. **Limites publicados
+não provam assinatura/billing da conta**. Não fazer deploy/preview.
+
+A aplicação deverá expor artefatos estáticos HTML/CSS/JS sem Pages Functions,
+Workers, D1, KV ou segredos. Domínio/aplicação/caso de uso são isolados em
+TypeScript puro; React só na camada de interface. Uma futura migração para
+React/Vite ou outro host deve manter contratos e URLs, com adaptação
+de entrypoints/pages. SSR/backend depende de nova decisão, rights gate
+e evidências de custo.
+
+## Referências oficiais consultadas em 2026-11-08
+
+- [Cloudflare Pages build configuration](https://developers.cloudflare.com/pages/configuration/build-configuration/)
+- [Cloudflare Pages Astro](https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/)
+- [Cloudflare Pages React](https://developers.cloudflare.com/pages/framework-guides/deploy-a-react-site/)
+- [Cloudflare Pages limits](https://developers.cloudflare.com/pages/platform/limits/)
+- [Cloudflare Next.js static](https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/)
+- [Vite static build](https://vite.dev/guide/build)
+- [Astro React integration](https://docs.astro.build/en/guides/integrations-guide/react/)
+
+## Security, acceptance and STOP CONDITION
+
+- Não coletar, publicar ou importar dados/arte/árvore do jogo. Rights R01–R14
+  permanecem em HOLD/CONDITIONAL/PROHIBITED quando aplicável.
+- Nenhum segredo, conta Cloudflare, serviço pago ou deploy. CI de comparação é
+  gratuito de forma documentada para runner padrão de repo público, sujeito
+  a limites finitos e verificação posterior do billing global.
+- Antes de APPROVED: métricas e ambos builds/typechecks registrados por SHA;
+  `Docs validation` required verde; teste de segurança actionlint/zizmor;
+  Evidence Bundle com CI, riscos, plano de fallback e delta.
+- Auditoria objetiva interna de mantenedor solo conforme EXN-DEC-0007,
+  declarando ausência de independência, sem revisão de bot externo.
+- **Decisão: PROPOSTA.** Somente NexLabsTech pode aceitar seleção do runtime
+  para implementação. Não fazer merge nem iniciar WO seguinte antes de aceite.
