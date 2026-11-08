@@ -60,11 +60,11 @@ league, licença, observação ou atribuição com valores presumidos.
 | Contrato | Campos mínimos | Restrições |
 | --- | --- | --- |
 | SourceRegistration | source_id, proprietário identificado, URLs allowlisted, superfície publicada, rights status, evidência, finalidades, limites, atribuição e revisão | Sem operador ou licença verificável, permanece NÃO VERIFICADO. |
-| SourceObservation<T> | Envelope versionado, payload T e resultado de validação | T só pode ser criado após o gate de fonte e operação. |
+| SourceObservation genérico | Envelope versionado, payload tipado e resultado de validação | Payload só pode ser criado após o gate de fonte e operação. |
 | GameVersionRef | game_id, patch, league, observed_at | Patch e league podem ser nulos quando a fonte não fornece; não misturar eras. |
 | UserInput | user_id pseudônimo quando indispensável, finalidade, conteúdo mínimo, created_at e retenção | Privacidade, consentimento e retenção dependem da WO-006. |
-| SyntheticFixture<T> | fixture_id, schema_version, payload, synthetic=true, descrição de geração | Não pode conter texto, número, nome, ícone ou geometria protegida copiada; UI nunca apresenta fixture como dado atual. |
-| CalculationResult<T> | input_version, algorithm_version, result, units, warnings, calculated_at e referências de entrada | Deve ser determinístico ou documentar a fonte de variação. Registrar incerteza e arredondamento. |
+| Fixture sintética genérica | fixture_id, schema_version, payload, synthetic=true, descrição de geração | Não pode conter texto, número, nome, ícone ou geometria protegida copiada; UI nunca apresenta fixture como dado atual. |
+| Resultado de cálculo genérico | input_version, algorithm_version, result, units, warnings, calculated_at e referências de entrada | Deve ser determinístico ou documentar a fonte de variação. Registrar incerteza e arredondamento. |
 | Recommendation | texto, referências de evidência, regras usadas, versão do modelo se aplicável e limitações | Texto gerado não substitui regras, autorização ou cálculo determinístico; nenhum provedor foi escolhido. |
 
 Valores que representam moedas, quantidades ou pontos devem ter unidades
