@@ -1,6 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { mkdir } from "node:fs/promises";
-import path from "node:path";
 
 const screenSizes = [
   { name: "desktop", width: 1440, height: 900 },
