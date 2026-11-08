@@ -1,0 +1,33 @@
+---
+import { routes, isCurrentPath } from "../lib/navigation";
+import { MobileNav } from "./MobileNav";
+
+const { currentPath = "/" } = Astro.props as { currentPath?: string };
+const featured = routes.slice(0, 5);
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand exn-focusable" href="/" aria-label="Exile Nexus, home">
+      <svg class="brand-prism" viewBox="0 0 72 72" role="img" aria-label="Original Exile Nexus geometric prism emblem">
+        <path d="M36 4 64 20 64 52 36 68 8 52 8 20Z" fill="#101116" stroke="#d6b478" stroke-width="2.4" />
+        <path d="M36 14 54 25 54 47 36 58 18 47 18 25Z" fill="none" stroke="#e35a2d" stroke-width="2" />
+        <path d="M36 17 48 36 36 55 24 36Z" fill="#792321" stroke="#f0d3a0" stroke-width="1.7" />
+        <path d="M36 16v40M24 36h24" stroke="#f6ac72" stroke-width="1.2" />
+      </svg>
+      <span class="brand-type">EXILE <span>NEXUS</span><small>INDEPENDENT COMPANION</small></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a class:list={["header-link", { "is-current": isCurrentPath(currentPath, "/") }]} href="/" aria-current={isCurrentPath(currentPath, "/") ? "page" : undefined}>Home</a>
+      {featured.map((route) => (
+        <a class:list={["header-link", { "is-current": isCurrentPath(currentPath, route.href) }]} href={route.href} aria-current={isCurrentPath(currentPath, route.href) ? "page" : undefined}>{route.short}</a>
+      ))}
+      <div class="more-link"><a class:list={["header-link", { "is-current": ["/advisor/", "/guides/"].some((p) => isCurrentPath(currentPath, p)) }]} href="/guides/">Guides</a></div>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-utility exn-focusable" href="/advisor/" aria-label="Explore AI Advisor">✳ <span>Advisor</span></a>
+      <MobileNav client:load currentPath={currentPath} />
+    </div>
+  </div>
+</header>
