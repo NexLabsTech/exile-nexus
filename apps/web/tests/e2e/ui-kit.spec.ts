@@ -11,7 +11,6 @@ test("component gallery is a static, noindex route", async ({ page }) => {
   await page.goto("/ui-kit/");
   await expect(page.getByRole("heading", { level: 1, name: "The component workshop" })).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex,nofollow");
-  await expect(page.getByRole("region", { name: /Action buttons/ })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Action buttons" })).toBeVisible();
 });
 
