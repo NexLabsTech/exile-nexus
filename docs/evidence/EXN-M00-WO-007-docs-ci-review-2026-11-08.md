@@ -12,6 +12,8 @@
   `69219982d978c556e52e48b0e008804d59104d9c`.
 - **HEAD publicado com os limites de rede desta correção:**
   `0649102eb841104083d574db2a7fab7b95ae960b`.
+- **HEAD antes desta atualização do Evidence Bundle:**
+  `7fe2d683f71b03a49e6e1d62d211861e602e448f`.
 - **HEAD que contém esta revisão:** SHA do commit que atualiza este Bundle,
   visível no histórico/timeline da PR #139.
 
@@ -97,13 +99,13 @@ Executados localmente nesta branch:
   `success`; o job `Docs validation` e seus oito passos foram concluídos com
   sucesso. Uma consulta anterior observou a etapa de instalação de `actionlint`
   ainda em andamento; ela terminou posteriormente. A etapa não foi cancelada.
-  O run do novo HEAD com limites de tempo também será registrado na timeline da
-  PR e no relatório final.
 - No HEAD `0649102eb841104083d574db2a7fab7b95ae960b`, o run #42479831940
   terminou `success` em aproximadamente seis segundos; `Docs validation` e os
   oito passos foram concluídos. Os check-runs associados registraram
   `Docs validation: success`, `CodeRabbit: skipped` (Draft), `Socket Security:
   Pull Request Alerts: success` e `Socket Security: Project Report: success`.
+- No HEAD `7fe2d683f71b03a49e6e1d62d211861e602e448f`, o run #42480060997
+  terminou `success`; `Docs validation` e os oito passos passaram novamente.
 - Páginas oficiais GitHub billing, hardening e evento `pull_request`: HTTP 200.
   Releases oficiais consultados e tarballs verificados por SHA-256.
 
