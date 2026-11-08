@@ -113,9 +113,12 @@ not PASS for the future product.
   was changed by this proposed audit.
 - Review must verify base/head SHA, only proposed documentation diff, links,
   source hierarchy consistency, rights, CI results and risks.
-- The author may not certify their own audit artifact as independently approved.
-  Separate objective audit and explicit NexLabsTech owner acceptance are
-  required before ordinary squash merge.
+- On 2026-11-08, NexLabsTech explicitly approved a solo-maintainer audit
+  process, recorded as EXN-DEC-0007 and reconciled in epic #1. The same
+  assistant/executor may objectively review the work **without claiming
+  independence**. External or bot review is not required or used as a gate.
+  A substantive evidence-backed technical verdict, mandatory CI and explicit
+  NexLabsTech owner acceptance are still required before squash merge.
 
 ## 5. PROPOSED CHECKPOINT DELTA AND STOP CONDITION
 
@@ -126,7 +129,26 @@ rights constraints in effect. Next eligible issue is not automatically started.
 Do not declare the product FUNCIONAL + TESTADA + DOCUMENTADA + DEPLOYADA +
 VALIDADA while no application or deployment exists.
 
-Current verdict: CORRECTION DELTA SUBMITTED / IN REVIEW, not APPROVED.
+Current verdict: objective technical audit PASS for the previously verified
+HEAD; explicit disclosure: reviewer and executor share the same identity,
+therefore this is NOT an independent audit. After this governance/documentation
+delta, CI on its new exact HEAD must be checked again before the owner can
+accept normal squash merge. No external review is required by EXN-DEC-0007.
 WO-008 #9 stays open. Any corrections
 remain on the same Draft PR; no merge, deployment or functional work without
 its own approval.
+
+## 6. Owner governance delta / minimal reconciliations
+
+- Owner instruction: no outside reviews and no CodeRabbit in project gates.
+  This overrides only the earlier independent-review requirement, not the
+  requirement for objective evidence, CI or explicit merge acceptance.
+- Epic #1 acceptance criteria changed in GitHub; decision recorded as
+  EXN-DEC-0007. Source Hierarchy and Test Plan historical status statements
+  were reconciled because their previous text incorrectly treated integrated
+  WO-007 and the required CI as pending.
+- The existing external-app installation status is NOT VERIFIED. Do not
+  claim it was uninstalled; do not use its comments as an approval or gate.
+- This is a solo-authored and solo-audited Correction Delta. It must be
+  revalidated at the exact new HEAD, with any PASS evidence captured in the
+  PR discussion. Merge remains owner-controlled and not yet authorized.

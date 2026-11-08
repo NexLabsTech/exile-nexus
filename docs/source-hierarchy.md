@@ -44,17 +44,21 @@ critérios técnicos.
   comentário #6721135679; Issue #7 concluída; não houve review formal
   `APPROVED`. Configurações administrativas permanecem `NOT VERIFIED` conforme
   o Evidence Bundle.
-- Test Plan, CI documental, contribuição e branch protection pertencem à
-  WO-007 / Issue #8 e estão em proposta nesta branch.
+- Test Plan, CI documental, contribuição e branch protection foram integrados
+  pela PR #139 / WO-007 no commit
+  `aaf24a660ff2ee2334d713685e2edee1f841eedc`; issue #8 CLOSED.
+  O ruleset #26806979 está ativo e o check `Docs validation` é obrigatório.
 - Auditoria final da fundação e do issue graph pertence à WO-008 / Issue #9.
   O backlog canônico continua em GitHub Issues; não há backlog Markdown
   duplicado.
 
-O Source Pack permanece parcial até WO-007 e WO-008, com controles essenciais
-lidos de volta. Não há aplicação ou deployment. Direitos de conteúdo, APIs,
-árvore, dados econômicos, scraping e monetização continuam bloqueados ou não
-verificados. Erro de acesso administrativo não demonstra que setting esteja
-ativo ou inativo.
+O Source Pack e o CI documental da WO-007 estão versionados. A auditoria
+final WO-008 está em PR Draft #140 e seu Checkpoint Delta segue PROPOSED.
+O owner aprovou auditoria objetiva interna de mantenedor solo, declarando a
+ausência de independência (EXN-DEC-0007), sem review externo obrigatório.
+Não há aplicação ou deployment. Direitos de conteúdo, APIs, árvore, dados
+econômicos, scraping e monetização continuam bloqueados ou não verificados.
+Erro de acesso administrativo não demonstra que setting esteja ativo ou inativo.
 
 ## Mudanças de hierarquia
 

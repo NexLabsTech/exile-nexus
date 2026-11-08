@@ -112,3 +112,28 @@ controle administrativo só pode ser declarado configurado após read-back.
 A indisponibilidade de leitura deve ser registrada como `NOT VERIFIED` e
 bloquear a atividade que dependa daquele controle. Esta decisão documental não
 altera settings, aprova coleta, concede licença ou autoriza deployment.
+
+## EXN-DEC-0007 — Auditoria interna para mantenedor solo e exclusão de reviews externos
+
+- **Status da decisão:** ACEITA explicitamente pelo owner em 2026-11-08.
+- **Fonte:** instrução explícita mais recente do owner durante a WO-008;
+  reconciliação dos critérios de aceite do épico
+  [EXN-M00-EPIC #1](https://github.com/NexLabsTech/exile-nexus/issues/1).
+
+O Exile Nexus é mantido individualmente. Não exigir nem solicitar review externo,
+segunda conta, auditor separado ou parecer de bot para aceitar Work Orders,
+PRs ou releases. Não usar CodeRabbit para decisão ou gate; não iniciar novas
+revisões desse aplicativo. Eventuais mensagens/checks históricos do aplicativo
+não são evidência de aceite e não integram o `required_status_checks`.
+
+Revisão técnica objetiva pelo mesmo orquestrador/executor é permitida quando
+a ausência de independência for **declarada expressamente**. Esta decisão
+**não elimina** Source Check, Context Lock, Evidence Bundle, validações,
+testes proporcionais ao risco, CI obrigatório, análise de segurança/direitos,
+veredito fundamentado, correção de defeitos nem o **aceite administrativo
+explícito do owner antes do merge**. Squash normal, sem bypass/force-push.
+
+A remoção de qualquer instalação/configuração administrativa remanescente de
+app de terceiros exige ação na configuração do repositório, com read-back e
+autorização no escopo próprio. Ausência de permissão de administração deve
+ser registrada como NOT VERIFIED, nunca como desinstalação concluída.

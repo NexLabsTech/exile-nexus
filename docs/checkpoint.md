@@ -151,3 +151,19 @@ exclusivamente a auditoria e o aceite da WO-008.
   verificados, sem liberar gastos.
 - Não promover este Checkpoint Delta sem auditoria objetiva, aceite do owner
   e squash merge da WO-008.
+
+## Decisão aceita de processo — mantenedor solo (2026-11-08)
+
+- A NexLabsTech determinou expressamente **sem reviews externos** para o
+  Exile Nexus. O critério do épico M00 #1 foi reconciliado no GitHub para
+  auditoria objetiva da mesma sessão, com ausência de independência declarada.
+- A decisão `EXN-DEC-0007` integra o Decisions Ledger **como decisão aceita**;
+  este Checkpoint Delta permanece **PROPOSED** até merge da WO-008.
+- Não utilizar nem solicitar análises CodeRabbit ou de outros revisores externos.
+  Qualquer check emitido historicamente por apps não é gate obrigatório.
+  Não afirmar que apps foram desinstalados sem leitura administrativa.
+- Permanecem obrigatórios: evidências Git/CI/segurança, direitos, zero gasto,
+  auditoria interna documentada, aceite administrativo explícito para cada PR,
+  squash normal sem bypass e sem avanço com defeitos HIGH/CRITICAL.
+- A referência canônica de M00 continua a issue #9 até seu aceite e integração;
+  nenhum incremento do M01 foi iniciado por esta mudança de processo.
