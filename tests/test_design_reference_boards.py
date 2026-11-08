@@ -63,11 +63,12 @@ class VisualPilotBoardTests(unittest.TestCase):
     def test_page_coverage_and_original_identity(self) -> None:
         for filename, labels in IMAGES.items():
             with self.subTest(filename=filename):
-                text, _ = self._get(filename)
-                self.assertIn("EXILE NEXUS", text)
-                self.assertIn("NOT AFFILIATED WITH OR ENDORSED", text)
+                _, root = self._get(filename)
+                rendered_text = " ".join(root.itertext())
+                self.assertIn("EXILE NEXUS", rendered_text)
+                self.assertIn("NOT AFFILIATED WITH OR ENDORSED", rendered_text)
                 for label in labels:
-                    self.assertIn(label, text)
+                    self.assertIn(label, rendered_text)
 
     def test_concept_palette_is_present_without_asset_urls(self) -> None:
         for filename in IMAGES:
