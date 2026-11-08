@@ -34,6 +34,12 @@ segurança/abuso estão pendentes das issues #4–#7. CI documental está penden
 da issue #8, que depende da fundação documental e do modelo de segurança. A
 auditoria da fundação está pendente da issue #9.
 
+O Source Pack é parcial. Scope, Requirements e Definition of Done pertencem à
+issue #5; Architecture, à #6; Security, à #7. Test Plan, Deployment e Backlog
+não têm WO atribuída entre as issues #4–#9 consultadas. Esses documentos não
+são canônicos e só devem ser criados ou validados em WOs autorizadas e antes da
+implementação funcional.
+
 Não há ADRs aceitos no baseline consultado. Referências da aplicação, direitos
 de uso, quotas, disponibilidade dos serviços e fontes de dados permanecem
 NOT VERIFIED até revisão própria.

@@ -11,17 +11,16 @@ checkpoint aceito; não havia checkpoint no main do baseline.
 ## Base e auditoria
 
 - main no início do WO-001: 23ec93e0fb174fb84db38298ce890f693a62abf1.
-- A auditoria independente aprovou o entregável documental do WO-001 no
-  comentário da PR #133, para o HEAD
+- O veredito textual da auditoria registrada na PR #133 foi APPROVED apenas
+  para o conteúdo documental no HEAD
   fda049e31f92fcb7b1294eb9bbe5daa26f30b291.
-- Estado da review GitHub na PR #133: COMMENTED, autoria NexLabsTech. Não é
-  aprovação formal de outra conta.
-- PR #133 permanece aberta e Draft, sem merge. Nenhum status foi alterado ou
-  tratado como aprovação formal.
-- A revisão do conteúdo não aprovou settings administrativos, que permanecem
+- A review GitHub da PR #133 está COMMENTED e foi enviada pela conta
+  NexLabsTech; isso não é aprovação formal de outra conta nem aceite formal da
+  dependência para merge ou progressão.
+- PR #133 permanece aberta e Draft, sem merge. Settings administrativas seguem
   NOT VERIFIED conforme o Evidence Bundle do WO-001.
-- O owner reconciliou que essa aprovação de conteúdo permite iniciar a issue #3
-  em branch e PR separadas, sem merge ou bypass de aprovação obrigatória.
+- A instrução atual do owner autoriza somente executar este Correction Delta
+  na WO-002. Não comprova aceite formal da WO-001 nem libera merge/progressão.
 
 ## Estado de repositório observado
 
@@ -34,12 +33,12 @@ checkpoint aceito; não havia checkpoint no main do baseline.
 
 ## Work Orders
 
-- EXN-M00-WO-001 · Issue #2: conteúdo aprovado na auditoria; PR COMMENTED,
-  aberta e Draft; sem merge.
-- EXN-M00-WO-002 · Issue #3: em execução em branch empilhada sobre a #133;
-  aguarda auditoria independente desta PR.
+- EXN-M00-WO-001 · Issue #2: veredito textual APPROVED para o conteúdo;
+  aprovação formal da dependência pendente; PR COMMENTED, aberta e Draft.
+- EXN-M00-WO-002 · Issue #3: iniciada em branch empilhada com aprovação formal
+  de dependência pendente; não liberada para merge/progressão.
 - EXN-M00-WO-003 a WO-008 · Issues #4–#9: planejados; não iniciados;
-  dependem da auditoria e aprovação formal do WO-002.
+  aguardam as aprovações correspondentes e não podem iniciar ainda.
 
 ## Gate de governança
 
@@ -47,3 +46,6 @@ Não habilite settings, não promova este checkpoint e não faça merge da PR se
 auditoria e autorização aplicáveis. Futuros gates obrigatórios devem usar apenas
 checks gratuitos já validados; provedores externos com quotas não podem ser
 obrigatórios conforme EXN-DEC-0001.
+
+Depois de eventual merge autorizado da PR #133, revalidar base, head e diff da
+PR #134. Não fazer rebase ou force-push como parte deste checkpoint.

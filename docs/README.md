@@ -29,6 +29,19 @@ aprovação do seu conteúdo.
 - CI documental e fluxo de contribuição: EXN-M00-WO-007, issue #8.
 - Auditoria da fundação e checkpoint: EXN-M00-WO-008, issue #9.
 
+## Artefatos ainda não canônicos
+
+Este Source Pack é parcial. A menção a um artefato não o torna canônico nem
+autoriza implementação antes de sua Work Order correspondente.
+
+- Scope, Requirements e Definition of Done: issue #5, EXN-M00-WO-004.
+- Architecture e contratos: issue #6, EXN-M00-WO-005.
+- Security e threat model: issue #7, EXN-M00-WO-006.
+- Test Plan, Deployment e Backlog: não atribuídos como entregáveis nas issues
+  #4–#9 consultadas; permanecem sem documento canônico e sem WO mapeada.
+- Para esses três artefatos, mapear a Work Order em decisão autorizada antes
+  de criá-los ou validá-los, sempre antes da implementação funcional.
+
 ## Regras de manutenção
 
 Cada documento criado deve identificar owner, status e revisão. Use PROPOSED ou
