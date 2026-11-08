@@ -48,11 +48,12 @@ jobs:
         run: python3 scripts/validate_docs.py
 
       - name: Install actionlint v1.7.12
+        timeout-minutes: 2
         shell: bash
         run: |
           set -euo pipefail
           archive="$RUNNER_TEMP/actionlint_1.7.12_linux_amd64.tar.gz"
-          curl --fail --location --silent --show-error \
+          curl --fail --location --silent --show-error --connect-timeout 10 --max-time 60 \
             https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
             --output "$archive"
           printf '%s  %s\n' \
@@ -67,11 +68,12 @@ jobs:
         run: actionlint .github/workflows/docs-ci.yml
 
       - name: Install zizmor v1.32.0
+        timeout-minutes: 2
         shell: bash
         run: |
           set -euo pipefail
           archive="$RUNNER_TEMP/zizmor_1.32.0_x86_64-unknown-linux-gnu.tar.gz"
-          curl --fail --location --silent --show-error \
+          curl --fail --location --silent --show-error --connect-timeout 10 --max-time 60 \
             https://github.com/woodruffw/zizmor/releases/download/v1.32.0/zizmor-x86_64-unknown-linux-gnu.tar.gz \
             --output "$archive"
           printf '%s  %s\n' \

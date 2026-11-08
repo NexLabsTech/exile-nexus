@@ -1,16 +1,17 @@
 # EXN-M00-WO-007 — Evidence Bundle de CI documental e contribuição
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · testes e gate administrativo pendentes
+- **Status:** BLOCKED · testes documentais aprovados; gate administrativo sem acesso de leitura/escrita
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M00-WO-007 · Issue #8
 - **Branch:** `exn-m00-wo-007-docs-ci`
 - **Base SHA:** `e8e900feeaadc98f45e47244ad7840d25e1cc871`
 - **PR:** #139 (Draft durante a execução/auditoria)
 - **HEAD inicial/publicado:** `b3c509747d5bd19684cfa0f24b4e0f406f23b089`.
-- **HEAD final:** consultar metadata/timeline da PR desta WO e o comentário de
-  auditoria; o commit que contém este Bundle não pode referenciar seu próprio
-  SHA.
+- **HEAD publicado antes desta Correction Delta:**
+  `69219982d978c556e52e48b0e008804d59104d9c`.
+- **HEAD que contém esta revisão:** SHA do commit que atualiza este Bundle,
+  visível no histórico/timeline da PR #139.
 
 ## Source Check e Context Lock
 
@@ -85,9 +86,13 @@ Executados localmente nesta branch:
   canônicos atuais e no Evidence Bundle corrente. Não foi reescrito nenhum
   artefato histórico; a execução subsequente passou.
 - GitHub Actions na base antes da PR: zero workflows. O run #42478978237
-  confirmou a execução do novo workflow no primeiro head. A atualização deste
-  Evidence Bundle cria um novo head; seu run final será registrado na timeline
-  da PR e no relatório final, sem auto-referenciar o SHA do commit deste arquivo.
+  confirmou a execução do workflow no primeiro head. No HEAD
+  `69219982d978c556e52e48b0e008804d59104d9c`, o run #42479196861 terminou
+  `success`; o job `Docs validation` e seus oito passos foram concluídos com
+  sucesso. Uma consulta anterior observou a etapa de instalação de `actionlint`
+  ainda em andamento; ela terminou posteriormente. A etapa não foi cancelada.
+  O run do novo HEAD com limites de tempo também será registrado na timeline da
+  PR e no relatório final.
 - Páginas oficiais GitHub billing, hardening e evento `pull_request`: HTTP 200.
   Releases oficiais consultados e tarballs verificados por SHA-256.
 
@@ -97,19 +102,32 @@ manifestos. Nenhum teste dinâmico de browser/deploy foi executado. Gitleaks,
 TruffleHog e detect-secrets não estão instalados; o validador é heurístico e
 não substitui scanner dedicado.
 
+## Correction Delta
+
+- Sinal observado: a instalação do `actionlint` via release URL permaneceu em
+  andamento por mais de um minuto na consulta inicial do run #42479196861,
+  embora o run tenha terminado com sucesso. Para limitar esperas de rede
+  futuras, esta correção acrescenta timeout de 2 minutos à etapa e limites de
+  10 segundos para conectar e 60 segundos para cada download.
+- O cancelamento manual daquele run recebeu 403 da identidade CLI `KayzenRoot`;
+  ele terminou normalmente antes desta correção. Nenhum bypass ou ampliação de
+  credenciais foi usado.
+
 ## Governança administrativa
 
-- GET `/branches/main/protection`: 403 `Resource not accessible by integration`.
-  O cabeçalho de permissões aceitas indica `Administration: read` para a leitura;
-  alteração/read-back administrativo requer conexão NexLabsTech com
-  `Administration: write`.
+- NexLabsTech tem permissão de colaborador `admin`, confirmada pela API. Porém,
+  GET `/branches/main/protection` com a conexão NexLabsTech retorna 403
+  `Resource not accessible by integration`. É necessário conceder à integração
+  GitHub usada nesta sessão `Administration: read` para auditar e
+  `Administration: write` para configurar e ler de volta as regras. A
+  identidade CLI `KayzenRoot` também não tem esse acesso.
 - Rulesets visíveis: resposta `[]`; não prova ausência de proteção efetiva.
 - Dependabot Alerts: último estado explícito na WO-001 foi desativado; leitura
   atual 403. Alertas atuais, Updates, Code Scanning, Secret Scanning, Push
   Protection e Actions permissions: `NOT VERIFIED`.
 - Requisitos efetivos de checks na `main`, proteção PR, squash-only, histórico
   linear, force-push/exclusão e conversa resolvida também `NOT VERIFIED`.
-- A branch/PR permanece Draft até testes, auditoria e aceite. Nenhum check
+- A branch/PR permanece Draft. Nenhum check
   externo com quota será configurado como required; não existe API permitida
   nesta conexão para confirmar read-back ou alterar essa política.
 
@@ -131,6 +149,9 @@ observado após execução com sucesso. Se settings administrativos permanecerem
 sem read-back, registrar `BLOCKED`, não fazer bypass, não concluir Issue #8 e
 não avançar para WO-008 ou funcionalidade.
 
-- **Veredito técnico:** o workflow no primeiro head passou; veredito da WO-007
-  permanece pendente da auditoria final e read-back de branch protection.
+- **Veredito técnico:** `BLOCKED`. Os testes locais e os runs remotos observados
+  passaram, mas as regras administrativas exigidas pela Issue #8 não podem ser
+  inspecionadas nem configuradas com as permissões atuais. Isso impede concluir
+  a auditoria de proteção de `main` e provar que nenhum aplicativo externo está
+  em um gate obrigatório.
 - **Aceite NexLabsTech:** pendente.
