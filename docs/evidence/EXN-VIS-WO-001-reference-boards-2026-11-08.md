@@ -6,10 +6,11 @@
 - Draft PR: [#145](https://github.com/NexLabsTech/exile-nexus/pull/145)
 - Branch: `exn-vis-wo-001-pilot-boards`
 - Risk: STANDARD
-- Status: import and local checks PASS; final GitHub read-back, Actions and owner acceptance are pending
+- Status: PNG import, authenticated GitHub read-back and local checks PASS; Docs validation and Quality baseline PASS on image-import commit; PR remains Draft; owner acceptance pending
 - Base: `75bcb8c786beda9c4e62677fd325aa9d4c0418c2`
 - Branch HEAD before this import: `8ddcfd538bce2618f91b503bc0cbe2e8ccc5de50` (matches the expected remote branch HEAD before changes)
-- Final commit SHA and final workflow run IDs: recorded in the closing PR evidence comment because they cannot be embedded self-referentially in this commit
+- Image-import commit: `dcd3db39cd2cca509e602d8bf5274545115923a2` (tree `0ce53843669de3fcfd5f1c1bddfd03cdb0effbd8`, parent is the branch HEAD above)
+- The Evidence Bundle-only commit SHA and its final workflow run IDs are recorded in the closing PR evidence comment because they cannot be embedded self-referentially in that commit
 
 ## Objective and scope
 
@@ -56,7 +57,7 @@ The importer, importer tests, SVG references and their tests already existed on 
 | `python3 -m unittest discover -s tests -p 'test_*.py' -v` | PASS, 28 tests |
 | `python3 -m compileall -q scripts tests` | PASS, exit 0 |
 | `python3 scripts/quality_gate.py` | PASS; reports `production apps=0`; app npm checks NOT APPLICABLE |
-| `python3 scripts/validate_docs.py` | PASS, 31 Markdown files, 132 links, no secret heuristic matches |
+| `python3 scripts/validate_docs.py` | PASS, 31 Markdown files, 136 links, no secret heuristic matches |
 | `git diff --check` | PASS after Correction Delta 02 below |
 | Local actionlint and zizmor | NOT RUN locally; final Docs validation workflow must supply these results |
 | App lint, typecheck, build, browser/E2E | NOT APPLICABLE; no production application exists in this scope |
@@ -66,15 +67,16 @@ The first local `git diff --check` found trailing whitespace in the new status l
 
 ## GitHub read-back and workflow results
 
-Before the import, PR #145 was open and Draft, based on `main` at `75bcb8c786beda9c4e62677fd325aa9d4c0418c2`, with branch HEAD `8ddcfd538bce2618f91b503bc0cbe2e8ccc5de50`. The user-provided package, prompt and temporary extraction were outside the repository.
+Before the import, PR #145 was open and Draft, based on `main` at `75bcb8c786beda9c4e62677fd325aa9d4c0418c2`, with branch HEAD `8ddcfd538bce2618f91b503bc0cbe2e8ccc5de50`. The user-provided package, prompt and temporary extraction were outside the repository. The remote image-import commit is `dcd3db39cd2cca509e602d8bf5274545115923a2`; its Git tree `0ce53843669de3fcfd5f1c1bddfd03cdb0effbd8` exactly matches the locally prepared file tree and it is a single-parent fast-forward from the branch HEAD.
 
-Final authenticated GitHub read-back is required to confirm the four Git blobs, sizes and hashes at the pushed HEAD. Record the exact final base/head, blob read-back results and workflow run links in the closing evidence comment on PR #145. The pre-import PR-head checks are historical only and do not count as final checks:
+Authenticated Git Blobs API read-back at the image-import commit returned all four files with the byte counts and SHA-256 digests in the table above. Each response's Git blob SHA and byte size matched the tree; the downloaded bytes were hashed locally. This confirms the GitHub branch actually contains the original files.
 
-- Docs validation run `42527989828`: PASS on the pre-import HEAD only.
-- Quality baseline run `42527989714`: PASS on the pre-import HEAD only.
+- [Docs validation run #42530768627](https://github.com/NexLabsTech/exile-nexus/actions/runs/42530768627): PASS on `dcd3db39cd2cca509e602d8bf5274545115923a2`; 31 Markdown files / 132 links / no secret heuristic matches; actionlint v1.7.12 and zizmor v1.32.0 steps succeeded on all three workflow files. zizmor reported its expected offline-mode limitation.
+- [Quality baseline run #42530768582](https://github.com/NexLabsTech/exile-nexus/actions/runs/42530768582): PASS on the same HEAD; 28 tests, Python compilation and policy checks passed; zero production npm apps, so app package checks are NOT APPLICABLE.
+- Earlier pre-import runs [Docs #42527989828](https://github.com/NexLabsTech/exile-nexus/actions/runs/42527989828) and [Quality #42527989714](https://github.com/NexLabsTech/exile-nexus/actions/runs/42527989714) are historical and not used as evidence for the imported files.
 - CodeRabbit was skipped for the Draft PR; no external or quota-limited review is required or requested.
 
-The final acceptance gate requires both **Docs validation** and **Quality baseline** to PASS on the exact pushed HEAD. The Docs validation logs must show actionlint and zizmor results for all workflow files. Record warnings or tool limitations verbatim in the closing PR comment. No app build is expected while the repository has no production app.
+The final Evidence Bundle-only commit must also pass both **Docs validation** and **Quality baseline** on its exact HEAD. Its head and run links, plus the verified blob digests, are recorded in the closing PR evidence comment. No app build is expected while the repository has no production app.
 
 ## Security, rights and costs
 
