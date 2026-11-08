@@ -23,7 +23,7 @@ promove automaticamente uma proposta a decisão aceita.
 - [Guia de contribuição](../CONTRIBUTING.md) — WO-007, integrado pela PR #139.
 - [Source Hierarchy](source-hierarchy.md) — reconciliação e precedência.
 - [Decisions Ledger](decisions-ledger.md) — decisões individuais identificadas; documento PROPOSED.
-- [Checkpoint](checkpoint.md) — M00 encerrada; delta da WO-001 M01 PROPOSTO.
+- [Checkpoint](checkpoint.md) — M00 encerrada; M01-WO-001 aceita; delta M01-WO-002 PROPOSTO.
 - [Matriz de direitos e fontes](rights-and-data-sources.md) — WO-003; direitos de ingestão/exibição/monetização não liberados.
 - Evidence Bundle da WO-001: [baseline](evidence/EXN-M00-WO-001-baseline-2026-11-08.md).
 - Evidence Bundle da WO-002: [Source Pack](evidence/EXN-M00-WO-002-source-pack-2026-11-08.md).
@@ -33,8 +33,10 @@ promove automaticamente uma proposta a decisão aceita.
 - Evidence Bundle da WO-006: [segurança, privacidade e abuso](evidence/EXN-M00-WO-006-security-review-2026-11-08.md).
 - Evidence Bundle da WO-007: [CI documental, testes e contribuição](evidence/EXN-M00-WO-007-docs-ci-review-2026-11-08.md).
 - Evidence Bundle da WO-008: [auditoria final do M00](evidence/EXN-M00-WO-008-foundation-audit-2026-11-08.md).
-- ADR da WO M01-001: [Frontend Runtime](adr/EXN-M01-WO-001-frontend-runtime.md) — apenas PROPOSTO.
+- ADR da WO M01-001: [Frontend Runtime](adr/EXN-M01-WO-001-frontend-runtime.md) — ACEITO pela PR #141.
 - Evidence Bundle da M01-001: [comparação de builds](evidence/EXN-M01-WO-001-runtime-evaluation-2026-11-08.md).
+- M01-WO-002: [Design Tokens](visual-tokens.md), [Inventário de Assets](visual-assets-inventory.md)
+  e [Evidence Bundle](evidence/EXN-M01-WO-002-visual-tokens-2026-11-08.md).
 
 As WOs 003–007 foram integradas por squash com aceite administrativo de
 NexLabsTech. O aceite registrado não equivale a GitHub Review formal
@@ -54,7 +56,8 @@ e o check obrigatório foram verificados pelo ruleset #26806979.
 ## Estado e regras
 
 O Source Pack e CI documental estão versionados; a WO-008 foi integrada
-pela PR #140 e o épico M00 encerrado. A avaliação M01-WO-001 permanece PROPOSED. A matriz R01–R14 documenta fontes,
+pela PR #140 e o épico M00 encerrado. A decisão de runtime M01-WO-001 foi aceita com PR #141. O conjunto de tokens
+visuais M01-WO-002 permanece PROPOSED. A matriz R01–R14 documenta fontes,
 mas não concede licença. Fontes
 `CONDICIONADO` e `NÃO VERIFICADO` bloqueiam ingestão, persistência, reexibição e
 monetização; fontes `PROIBIDO` não devem ser integradas.

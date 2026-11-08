@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160" role="presentation" aria-hidden="true" focusable="false">
+  <g fill="none" stroke="#688197" stroke-width="1.5" opacity="0.7">
+    <path d="M0 80 80 0 160 80 80 160ZM160 80 240 0 320 80 240 160Z"/>
+    <path d="M0 0 80 80 0 160M160 0 80 80 160 160M320 0 240 80 320 160"/>
+    <circle cx="80" cy="80" r="16"/><circle cx="240" cy="80" r="16"/>
+  </g>
+</svg>
