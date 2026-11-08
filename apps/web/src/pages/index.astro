@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { routes } from "../lib/navigation";
+
+const highlights = routes.slice(0, 6);
+const quickLinks = routes.slice(0, 4);
+---
+<BaseLayout
+  title="Plan. Build. Optimize."
+  description="Exile Nexus is an independent community companion with future build, research and analysis tools. Original dark-fantasy portal, currently in development."
+  currentPath="/"
+>
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-scene" aria-hidden="true">
+      <div class="hero-moon"></div>
+      <div class="hero-ruins"></div>
+      <div class="hero-silhouette"></div>
+      <div class="hero-flare"></div>
+    </div>
+    <div class="hero-content">
+      <p class="eyebrow"><span class="eyebrow-diamond" aria-hidden="true">✦</span> THE INDEPENDENT COMPANION</p>
+      <h1 id="hero-heading">PLAN. BUILD.<br /><span>OPTIMIZE.</span></h1>
+      <p class="hero-lead">Your journey is yours to forge. A new home for thoughtful builds, deeper knowledge and transparent tools is taking shape.</p>
+      <div class="hero-actions">
+        <a class="button button-primary exn-focusable" href="/builds/"><span>Explore Build Hub</span><span aria-hidden="true">↗</span></a>
+        <a class="button button-ghost exn-focusable" href="/items/">Browse the Archives <span aria-hidden="true">◇</span></a>
+      </div>
+      <p class="hero-status"><span class="status-dot" aria-hidden="true"></span> FOUNDATIONS IN PROGRESS <span class="hero-status-rule" aria-hidden="true"></span> ORIGINAL VISUAL PILOT</p>
+    </div>
+    <div class="hero-side-rail" aria-hidden="true"><span>EXILE NEXUS / I</span><span>✧</span></div>
+  </section>
+
+  <section class="quick-strip" aria-label="Explore the portal">
+    {quickLinks.map((route) => (
+      <a class="quick-item exn-focusable" href={route.href}>
+        <span class="quick-glyph" aria-hidden="true">{route.mark}</span>
+        <span class="quick-text"><strong>{route.label}</strong><small>{route.category}</small></span>
+        <span class="quick-arrow" aria-hidden="true">↗</span>
+      </a>
+    ))}
+  </section>
+
+  <section class="content-section" aria-labelledby="section-tools">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">THE ARCHIVES ARE OPENING</p>
+        <h2 id="section-tools">A portal for every <em>path</em></h2>
+      </div>
+      <p>These routes are accessible previews. Each feature will be implemented only after its own data, security and quality gates.</p>
+    </div>
+    <div class="feature-grid">
+      {highlights.map((route, index) => (
+        <article class:list={["feature-card", { "feature-card-wide": index === 0 }]}>
+          <a class="feature-card-link exn-focusable" href={route.href} aria-label={`Explore ${route.label}`}>
+            <div class="feature-card-art" aria-hidden="true">
+              <span class="feature-card-ring"></span>
+              <span class="feature-glyph">{route.mark}</span>
+            </div>
+            <div class="feature-card-body">
+              <span class="feature-category">{route.category} <span> / 0{index + 1}</span></span>
+              <h3>{route.label}</h3>
+              <p>{route.description}</p>
+              <span class="feature-card-bottom"><span>VIEW PREVIEW</span><span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="manifesto-section" aria-labelledby="manifesto-title">
+    <span class="ornament-line" aria-hidden="true">✦</span>
+    <p class="eyebrow">BUILT WITH INTENT</p>
+    <h2 id="manifesto-title">Clarity before <em>chaos.</em></h2>
+    <p>Real facts need verifiable sources. Meaningful decisions need transparent calculations. Exile Nexus is being built with both in mind.</p>
+    <a class="text-link exn-focusable" href="/guides/">Enter the knowledge hall <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>
