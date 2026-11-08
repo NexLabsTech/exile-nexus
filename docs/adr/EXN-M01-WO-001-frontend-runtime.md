@@ -26,11 +26,10 @@ autenticação, anúncios, assets de jogo ou dados externos.
 | React 19 + Vite 8 | SPA estática com roteamento cliente futuro, sem server runtime. | Simplicidade de uma árvore React, controle de interações muito complexas. | SEO/prerender por rota exige estratégia adicional; output `dist/`. |
 | Next.js static export | Static HTML export sem runtime server. | Rotas, metadata e ecossistema React. | Recursos SSR, middleware, rotas server e estado dinâmico exigem runtime; `out/`. Não benchmarkado neste incremento. |
 
-**Preferência arquitetural provisória:** Astro + ilhas React, porque o portal
-combina conteúdo indexável e ferramentas gráficas interativas. **Fallback:**
-React + Vite, se o build Astro/React não passar ou a complexidade extra não
-for compensada pelos resultados. Não aceitar a preferência até executar
-benchmark comparável e documentar decisão pelo owner.
+**Preferência arquitetural provisória, agora sustentada por build real:** Astro + ilhas React, porque o portal
+combina conteúdo indexável e ferramentas gráficas interativas. **Fallback:** React + Vite, especialmente se complexidade do stack Astro
+ou peer range TypeScript 6 impedir evolução segura. O benchmark confirmou
+builds de ambos, mas a preferência continua PROPOSTA até aceite do owner.
 
 ## Prova mensurável e teste de compatibilidade
 
@@ -56,13 +55,32 @@ executa para cada candidato no mesmo runner ubuntu-latest / Node 22:
    e tamanho total gerado; logar versões e SHA na execução Actions.
 4. Registrar os resultados por candidato no
    [Evidence Bundle](../evidence/EXN-M01-WO-001-runtime-evaluation-2026-11-08.md).
-   Sem valores medidos até os jobs concluírem.
+   Benchmarks foram executados no HEAD `c4e8b44a476c16fe3c7a685450f2675767122466`;
+   ver tabela e links com métricas no Evidence Bundle.
 
 **Comparabilidade:** fixtures equivalentes, mas o benchmark de um contador
 não representa desempenho real de uma árvore gráfica, acessibilidade, SEO,
 crawling ou tempo de interação da aplicação. Cronometragem no runner compartilhado
 não é garantia de latência de produção. Comparar as métricas como evidência
 de viabilidade, nunca como meta de produto.
+
+## Resultado de builds (GitHub Actions #42519241684)
+
+| Experimento | Typecheck | Build wall-clock | Bytes em dist/ | Arquivos |
+| --- | --- | ---: | ---: | ---: |
+| Astro 7.4.7 + React 19.3.1 | PASS | 1,096 ms | 227,095 | 4 |
+| React 19.3.1 + Vite 8.3.6 | PASS | 360 ms | 220,692 | 2 |
+
+Todos produziram `dist/index.html`. Astro usa TypeScript 6.0.2 devido
+à restrição de peer dependency `@astrojs/check`; Vite usa 7.0.2.
+O ganho de geração estática e fragmentação de componentes favorece Astro
+para páginas SEO; build Vite foi mais rápido neste único probe. Não afirmar
+vantagem medida em tráfego, velocidade de renderização ou SEO real.
+
+**Veredito proposto:** Astro static + React islands para implementação inicial
+como `modular monolith`; fallback Vite+React documentado. **Não é decisão
+ACEITA até aprovação explícita do owner**, com lockfile e auditoria de
+dependências exigidos na WO do scaffold real.
 
 ## Cloudflare Free e portabilidade
 

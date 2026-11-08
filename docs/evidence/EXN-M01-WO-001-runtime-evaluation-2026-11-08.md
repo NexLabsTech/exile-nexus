@@ -1,7 +1,7 @@
 # EXN-M01-WO-001 — Evidence Bundle de runtime e compatibilidade
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED / MEASUREMENTS PENDING
+- **Status:** PROPOSED / MEASUREMENTS RECORDED; OWNER ACCEPTANCE PENDING
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M01-WO-001 · Issue #11
 - **Risk:** STANDARD
@@ -30,17 +30,17 @@ externos, monetização ou alterações em main.
 - Plano de gastos: nenhuma compra, upgrade ou serviço habilitado.
   O custo global da conta e apps preexistentes é NOT VERIFIED.
 
-## Matriz de experimentos e evidências a completar
+## Matriz de experimentos medidos (mesmo runner Ubuntu/Node 22)
 
 | Teste | Astro + React | Vite + React |
 | --- | --- | --- |
-| npm install + npm ci | FAIL (`ERESOLVE`, TS7 peer mismatch; correction in progress) | PASS (run #42519095743) |
-| TypeScript / astro check | NOT RUN (install failed) | PASS |
-| npm run build | NOT RUN (install failed) | PASS |
-| dist/index.html | NOT RUN (install failed) | PASS |
-| Build ms (runner) | NOT MEASURED | 343 ms (cold runner) |
-| Total dist bytes | NOT MEASURED | 220,692 bytes |
-| Generated files | NOT MEASURED | 2 |
+| npm install + npm ci | PASS (corrected run #42519241684) | PASS (run #42519241684) |
+| TypeScript / astro check | PASS (0 errors / 0 warnings) | PASS (`tsc --noEmit`) |
+| npm run build | PASS (`astro build`) | PASS (`vite build`) |
+| dist/index.html | PASS | PASS |
+| Build ms (runner) | **1,096 ms** | **360 ms** |
+| Total dist bytes | **227,095 bytes** | **220,692 bytes** |
+| Generated files | **4** | **2** |
 | Cloudflare Pages config | DOCUMENTED, not deployed | DOCUMENTED, not deployed |
 
 O ambiente local de auditoria não conseguiu resolver `registry.npmjs.org`
@@ -70,8 +70,9 @@ futura aplicação de produção.
 - Após aceite administrativo NexLabsTech e squash, promover ADR selecionado,
   registrar o build result e atualizar Checkpoint. Não iniciar scaffold
   operacional, dado de jogo ou deploy nesta WO.
-- STATUS ATUAL: **IN REVIEW / BENCHMARK NOT RUN**. Nenhum APP/RELEASE DoD
-  pode ser declarado entregue.
+- STATUS ATUAL: **BENCHMARK EXECUTED / ADR PROPOSED**. Benchmarks documentados;
+  nenhum produto, deploy ou APP/RELEASE DoD foi entregue. Aceite do owner
+  ainda pendente.
 
 ## Correction Delta 01 — Astro TypeScript peer constraint
 
@@ -85,5 +86,29 @@ futura aplicação de produção.
   `--force` / `--legacy-peer-deps` or disable checks. No app code changed.
 - Existing Vite outcome: Node 22.23.4, `tsc --noEmit` PASS,
   `vite build` PASS, 343ms wall-clock, 220,692 bytes, 2 files.
-- All results on the new correction HEAD still require fresh CI evidence;
-  do not promote a benchmark recommendation prematurely.
+- Revalidação de CI no HEAD `c4e8b44a476c16fe3c7a685450f2675767122466`:
+  [benchmark run #42519241684](https://github.com/NexLabsTech/exile-nexus/actions/runs/42519241684)
+  PASS para Astro e Vite; [Docs validation #42519241678](https://github.com/NexLabsTech/exile-nexus/actions/runs/42519241678)
+  PASS. Ambos os jobs de benchmark completaram com conclusão `success`.
+  Os logs de cada job contêm versões, typecheck, durações e tamanhos acima.
+
+## Resultado comparativo, limites e recomendação
+
+- Runner: `ubuntu-latest`, Node `v22.23.4`, mesmo conteúdo sintético e
+  medição de duração `date +%s%3N` para o comando de build (sem instalação).
+- Astro `7.4.7`, @astrojs/react `7.1.4`, React `19.3.1`,
+  TypeScript `6.0.2`, 4 arquivos, 227095 bytes, build 1096 ms.
+- Vite `8.3.6`, React `19.3.1`, TypeScript `7.0.2`, 2 arquivos,
+  220692 bytes, build 360 ms.
+- Delta neste experimento: Astro +6403 bytes (2.90%) e +736 ms de build.
+  Uma execução por candidato não estabelece média estatística nem performance
+  da aplicação real. Não foi realizado runtime browser/SEO/Cloudflare deploy.
+- **Recomendação PROPOSTA:** Astro estático com ilhas React para conteúdo
+  indexável e ferramentas interativas, apesar do build mais lento do probe
+  e do pin TypeScript 6 (suporte do @astrojs/check). **Fallback:**
+  React/Vite se as rotas forem majoritariamente interativas ou se a
+  compatibilidade do typecheck Astro/React não permanecer segura.
+- NEXT GATE: revisar logs, diff, regras, direitos e evidências no HEAD
+  documental final. Uma mudança de documento após o benchmark não modifica
+  o código testado; revalidar `Docs validation` nesse HEAD e identificar o
+  SHA `c4e8b44` dos builds como provenance. Nenhum merge sem aceite explícito.
