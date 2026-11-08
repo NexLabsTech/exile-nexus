@@ -49,8 +49,9 @@ GitHub PR #139, issues #1–#132, active ruleset #26806979 and workflow runs.
 
 ## 2. CANONICAL BACKLOG GRAPH
 
-GitHub REST GET issues?state=all&per_page=100 pages 1 and 2 returned 139
-entries including 7 PRs. Excluding PRs leaves exactly 132 project issues:
+At the initial baseline snapshot, before PR #140 was created, GitHub REST GET
+issues?state=all&per_page=100 pages 1 and 2 returned 139 entries including
+7 PRs. Excluding those PRs left exactly 132 project issues:
 13 epic issues and 119 Work Orders, 132 unique stable IDs. 7 CLOSED (#2–#8),
 125 OPEN.
 
@@ -72,7 +73,9 @@ Depends on) were normalized and checked by topological ordering. Results:
 
 F01 (document drift, low): canonical overview, Source Pack index and checkpoint
 incorrectly described WO-007 / workflow as pending after the squash merge.
-This Draft PR proposes minimal factual corrections, without promoting new decisions.
+This Draft PR corrects these claims and the obsolete project-overview claim
+that the WO-004 planning requirements were never accepted, without promoting
+new architectural or commercial decisions.
 
 F02 (rights, blocking future game-data use): Rights Matrix R01–R14 does not
 grant redistribution/commercial use of PoE2 content, passive tree export,
@@ -93,7 +96,10 @@ not PASS for the future product.
 
 - REST verification of repo/tree/ruleset/PR/issue graph: EXECUTED.
 - Existing main CI run #42510645690: PASS.
-- New PR checks must run on its own HEAD after publication; until then NOT RUN.
+- PR #140 original HEAD `5a4ef68ff73cda7161063876de5e1cd9ea34d4ce`:
+  [run #42511563927](https://github.com/NexLabsTech/exile-nexus/actions/runs/42511563927)
+  `completed/success`, `Docs validation` passed with all job steps.
+  A new run on the amended HEAD remains required after this Correction Delta.
 - No new runtime tests in this Work Order: NOT APPLICABLE.
 - No source code, workflow implementation, settings, API, payments or deployment
   was changed by this proposed audit.
@@ -112,6 +118,7 @@ rights constraints in effect. Next eligible issue is not automatically started.
 Do not declare the product FUNCIONAL + TESTADA + DOCUMENTADA + DEPLOYADA +
 VALIDADA while no application or deployment exists.
 
-Current verdict: IN REVIEW, not APPROVED. WO-008 #9 stays open. Any corrections
+Current verdict: CORRECTION DELTA SUBMITTED / IN REVIEW, not APPROVED.
+WO-008 #9 stays open. Any corrections
 remain on the same Draft PR; no merge, deployment or functional work without
 its own approval.

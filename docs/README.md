@@ -34,11 +34,11 @@ promove automaticamente uma proposta a decisão aceita.
 - Evidence Bundle da WO-007: [CI documental, testes e contribuição](evidence/EXN-M00-WO-007-docs-ci-review-2026-11-08.md).
 - Evidence Bundle da WO-008: [auditoria final do M00](evidence/EXN-M00-WO-008-foundation-audit-2026-11-08.md).
 
-As WOs 003–006 foram integradas por squash após aceite administrativo
-NexLabsTech registrado em comentário. Esses comentários não são GitHub Reviews
-formais `APPROVED`. O modelo de ameaças foi aceito com os settings sem read-back
-explicitamente `NOT VERIFIED`. A WO-007 foi integrada com aceite de NexLabsTech; a proteção
-ativa da main foi verificada por consulta ao ruleset #26806979.
+As WOs 003–007 foram integradas por squash com aceite administrativo de
+NexLabsTech. O aceite registrado não equivale a GitHub Review formal
+`APPROVED`. O modelo de ameaças foi aceito documentalmente; controles de
+Code Security sem read-back permanecem `NOT VERIFIED`. A proteção da `main`
+e o check obrigatório foram verificados pelo ruleset #26806979.
 
 ## Artefatos por Work Order
 
@@ -52,14 +52,15 @@ ativa da main foi verificada por consulta ao ruleset #26806979.
 ## Estado e regras
 
 O Source Pack e CI documental estão versionados; a auditoria final WO-008
-continua PROPOSED até aceite e merge. A matriz R01–R14 documenta fontes, mas não concede licença. Fontes
+continua PROPOSED até aceite e merge. A matriz R01–R14 documenta fontes,
+mas não concede licença. Fontes
 `CONDICIONADO` e `NÃO VERIFICADO` bloqueiam ingestão, persistência, reexibição e
 monetização; fontes `PROIBIDO` não devem ser integradas.
 
 A CI documental usa runner padrão gratuito de repositório público, permissões
 mínimas e nenhum segredo. Apps externos com cota ou preço por análise não são
-gates. A proteção da main foi relida pelo endpoint REST do ruleset; somente
-Docs validation é check obrigatório. Cada Evidence Bundle
+gates. A proteção da `main` foi relida pelo endpoint REST do ruleset; somente
+`Docs validation` é check obrigatório. Cada Evidence Bundle
 separa `PASS`, `FAIL`, `NOT APPLICABLE`, `NOT RUN` e `BLOCKED`. Um comentário
 `COMMENTED` não é review formal `APPROVED`; reporte aceite administrativo
 separadamente.

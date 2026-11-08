@@ -8,9 +8,10 @@
 ## Propósito
 
 Exile Nexus é um projeto proposto de portal público de apoio a Path of Exile 2.
-O backlog prevê experiências de consulta e ferramentas para jogadores, mas o
-produto, os requisitos funcionais e os dados permitidos ainda não foram
-aprovados.
+O backlog prevê experiências de consulta e ferramentas para jogadores.
+Escopo, requisitos e Definition of Done foram aceitos para planejamento na
+WO-004, mas o produto ainda não foi implementado e o uso operacional de
+fontes externas permanece condicionado à matriz de direitos.
 
 ## Estado atual, verificado na proposta WO-008
 

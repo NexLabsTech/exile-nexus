@@ -110,25 +110,29 @@ permanece PROPOSED até auditoria objetiva, aceite e merge da presente WO.
   versão e SHA-256 fixos e token read-only. Nenhuma ferramenta SaaS de quota é
   necessária ao gate.
 
-## Correction Delta e Checkpoint proposto para WO-007
+## Histórico concluído de correções da WO-007
 
-Os apontamentos da auditoria da PR #139 foram corrigidos: `Docs validation`
-executa em todas as PRs, independentemente de arquivos alterados; actionlint
-e zizmor cobrem todos os workflows. Verificação remota de HEAD `171012683`
-no run #42488063183: PASS.
+A PR #139 corrigiu o filtro de arquivos do evento `pull_request` e ampliou
+actionlint e zizmor para todos os workflows. No HEAD
+`4905d4c068467198ebe2100ed2c29257da428a84`, o run
+[#42510310274](https://github.com/NexLabsTech/exile-nexus/actions/runs/42510310274)
+foi `completed/success`. A integração por squash autorizada ocorreu no commit
+`aaf24a660ff2ee2334d713685e2edee1f841eedc`, com a issue #8 encerrada.
+O run de `push` da `main`
+[#42510645690](https://github.com/NexLabsTech/exile-nexus/actions/runs/42510645690)
+também passou.
 
-O administrador ativou e salvou o ruleset #26806979. A releitura direta
-confirmou PR obrigatória, squash-only, 0 revisores, histórico linear,
-conversas resolvidas, status check `Docs validation` atualizado,
-proibição de force-push e deleção da main, sem bypass. Este controle
-é VERIFICADO; controles distintos de Code Security e billing permanecem
-NOT VERIFIED conforme seção administrativa.
+O ruleset #26806979 foi relido como `ACTIVE`, com
+`Docs validation` obrigatório, `strict: true`, PR obrigatória,
+squash-only, zero revisores exigidos, exclusão e force-push bloqueados,
+histórico linear e bypass vazio. A verificação da proteção clássica por
+endpoint administrativo permanece limitada ao acesso disponível, sem
+desautorizar o read-back do ruleset efetivo.
 
-**Checkpoint Delta proposto**: após auditoria independente das alterações
-e aceite administrativo explícito de `NexLabsTech`, integrar WO-007 por
-squash, fechar issue #8, documentar CI efetivo e iniciar apenas WO-008.
-Até esse aceite não promover este documento como checkpoint canônico.
-Nenhuma aplicação ou deploy foi implementado nesta WO.
+Esta seção registra fatos históricos aceitos da WO-007. Não é um
+Checkpoint Delta ainda pendente para essa Work Order. O próximo gate é
+exclusivamente a auditoria e o aceite da WO-008.
+
 
 ## Auditoria WO-008 e Checkpoint Delta PROPOSTO
 
