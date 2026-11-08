@@ -22,7 +22,7 @@ pré-requisitos existirem. Cada relatório usa estes estados:
 
 | Fase / risco | Verificação | Gatilho e pré-requisito | Ferramenta/evidência | Estado atual |
 | --- | --- | --- | --- | --- |
-| Documentação e Source Pack | Presença dos documentos canônicos; owner/status/revisão/WO; links locais; fences; sintaxe de URLs externas; padrões de segredo. | Toda PR para `main`; `push` em `main` quando os caminhos Markdown/CI filtrados mudam. | `python3 scripts/validate_docs.py`; log CI `Docs validation`. | Implementado nesta WO; aguarda run remoto após esta correção. |
+| Documentação e Source Pack | Presença dos documentos canônicos; owner/status/revisão/WO; links locais; fences; sintaxe de URLs externas; padrões de segredo. | Toda PR para `main`; `push` em `main` quando os caminhos Markdown/CI filtrados mudam. | `python3 scripts/validate_docs.py`; log CI `Docs validation`. | `PASS` local e run Actions #42487843277 no HEAD da Correction Delta; required check aguarda read-back admin. |
 | Documentação | Testes de regressão do validador. | Toda PR para `main`; `push` em `main` quando script, testes, docs ou workflow mudam. | `python3 -m unittest discover -s tests -p 'test_*.py' -v`. | Implementado nesta WO. |
 | GitHub Actions | Sintaxe e padrões de segurança de todos os workflows existentes. | Toda PR para `main`; `push` em `main` quando workflow muda. | `actionlint` v1.7.12 e `zizmor` v1.32.0, obtidos de releases oficiais com SHA-256 fixo no workflow. | Implementado nesta WO. |
 | Código da aplicação | Lint, TypeScript strict, typecheck, build, testes unitários/integration e contratos. | Código, package/lockfile e arquitetura runtime aprovados. | Ferramentas e logs definidos na WO funcional; sem dependência comercial. | `NOT APPLICABLE`: nenhum código ou manifestos existem. |
@@ -51,9 +51,10 @@ lint são pequenas, versionadas e verificadas por SHA-256. Nenhum secret,
 preview/deploy, app com quota ou licença paga é necessário.
 
 O nome observado do check é `Docs validation` (o nome do workflow é
-`Documentation CI`). A seleção como required depende da execução com sucesso
-depois da remoção do filtro de PR e de read-back administrativo que confirme
-zero reviews exigidas e nenhum check externo cobrado ou limitado por cota.
+`Documentation CI`). A execução #42487843277 passou após a remoção do filtro de
+PR. A seleção como required ainda depende de read-back administrativo que
+confirme zero reviews exigidas e nenhum check externo cobrado ou limitado por
+cota.
 
 ## Regras de parada
 

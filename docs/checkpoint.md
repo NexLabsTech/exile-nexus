@@ -1,7 +1,7 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · CI corrigido; configuração administrativa BLOCKED
+- **Status:** PROPOSED · CI corrigido e validado; configuração administrativa BLOCKED
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M00-WO-007 · Issue #8
 - **Base SHA desta proposta:** `e8e900feeaadc98f45e47244ad7840d25e1cc871`
@@ -87,8 +87,8 @@ conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
 - WO-006 / Issue #7: Threat Model, privacidade e abuso integrados; controles
   sem read-back continuam NOT VERIFIED.
 - WO-007 / Issue #8: Test Plan, CI documental e contribuição nesta branch;
-  Correction Delta da auditoria em andamento; branch protection/read-back
-  administrativo pendente.
+  Correction Delta CI PASS; branch protection/read-back administrativo
+  permanece BLOCKED.
 - WO-008 / Issue #9: auditoria final e revisão do backlog, depende da conclusão
   da WO-007.
 
@@ -115,8 +115,9 @@ workflows com actionlint e zizmor; reexecutar testes e atualizar evidências.
 O Correction Delta remove `paths` de `pull_request`, mantém filtros de `push`
 e enumera todos os `.yml`/`.yaml` em `.github/workflows/` para ambos scanners.
 
-Após CI e testes passarem, o check `Docs validation` pode ser selecionado como
-required somente na mesma sessão administrativa que confirmar PR obrigatória,
+O run #42487843277 no HEAD da correção terminou PASS, incluindo os passos de
+actionlint e zizmor para todos os workflows. O check `Docs validation` pode ser
+selecionado como required somente na mesma sessão administrativa que confirmar PR obrigatória,
 0 reviews, squash-only, histórico linear, força/exclusão bloqueadas, conversas
 resolvidas e nenhum check de SaaS obrigatório. O acesso atual da integração à
 API de protection retorna 403. Nenhuma regra foi alterada. Se persistir, a

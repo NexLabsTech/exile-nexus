@@ -1,7 +1,7 @@
 # EXN-M00-WO-007 — Evidence Bundle de CI documental e contribuição
 
 - **Owner:** NexLabsTech
-- **Status:** BLOCKED somente pela configuração administrativa; Correction Delta local PASS
+- **Status:** BLOCKED somente pela configuração administrativa; Correction Delta local e remoto PASS
 - **Revisão:** 2026-11-08
 - **Work Order:** EXN-M00-WO-007 · Issue #8
 - **Branch:** `exn-m00-wo-007-docs-ci`
@@ -16,6 +16,8 @@
   `7fe2d683f71b03a49e6e1d62d211861e602e448f`.
 - **HEAD auditado antes do Correction Delta atual:**
   `efb4674b55e7300b26857155fbf1e8d0ed1aac0e`.
+- **HEAD da Correction Delta validada pelo Actions:**
+  `8d8125502492ae67d3e1b9c9374d7ece8b4f022e`.
 - **HEAD que contém esta revisão:** SHA do commit que atualiza este Bundle,
   visível no histórico/timeline da PR #139.
 
@@ -114,6 +116,11 @@ Executados localmente nesta branch:
   Pull Request Alerts: success` e `Socket Security: Project Report: success`.
 - No HEAD `7fe2d683f71b03a49e6e1d62d211861e602e448f`, o run #42480060997
   terminou `success`; `Docs validation` e os oito passos passaram novamente.
+- No HEAD `8d8125502492ae67d3e1b9c9374d7ece8b4f022e`, após esta Correction
+  Delta, o run #42487843277 concluiu `success`. O job `Docs validation` e os
+  oito passos passaram, inclusive `Lint all GitHub Actions workflows` e
+  `Audit all workflows for security`. O check associado `Docs validation`
+  concluiu `success`.
 - Páginas oficiais GitHub billing, hardening e evento `pull_request`: HTTP 200.
   Releases oficiais consultados e tarballs verificados por SHA-256.
 
@@ -135,8 +142,9 @@ não substitui scanner dedicado.
   validador documental **PASS** (23 Markdown, 56 links, zero matches
   heurísticos); actionlint v1.7.12 **PASS**; zizmor v1.32.0 **PASS**, sem
   findings; `git diff --check` **PASS**.
-- CI remoto no novo HEAD ainda pendente de publicação/execução; será registrado
-  pela timeline da PR e no relatório final.
+- CI remoto no novo HEAD `8d8125502492ae67d3e1b9c9374d7ece8b4f022e` passou no
+  run #42487843277; o run do próximo head, que atualiza este Bundle, será
+  informado na timeline da PR e no relatório final.
 - O sinal anterior de demora na instalação do actionlint foi corrigido antes:
   etapas limitadas a 2 minutos e downloads com conexão de 10 segundos e limite
   total de 60 segundos; o run #42480225757 no HEAD `efb4674` passou.
@@ -146,8 +154,9 @@ não substitui scanner dedicado.
 - NexLabsTech tem permissão de colaborador `admin`, confirmada pela API. Porém,
   GET `/branches/main/protection` com a conexão NexLabsTech retorna 403
   `Resource not accessible by integration`. A instalação GitHub desta sessão
-  não expõe `Administration: read/write`; a identidade CLI `KayzenRoot` também
-  não pode substituir a sessão administrativa.
+  não expõe `Administration: read` (necessário para leitura) nem
+  `Administration: write` (necessário para configurar/read-back); a identidade
+  CLI `KayzenRoot` também não pode substituir a sessão administrativa.
 - Rulesets visíveis: resposta `[]`; não prova ausência de proteção efetiva.
 - Dependabot Alerts: último estado explícito na WO-001 foi desativado; leitura
   atual 403. Alertas atuais, Updates, Code Scanning, Secret Scanning, Push
@@ -171,9 +180,9 @@ custo das instalações externas preexistentes continuam `NOT VERIFIED`. Não
 acionar review manual/quota nem aceitar upgrade.
 
 Checkpoint Delta proposto: o CI agora é acionável em todas as PRs e audita
-todos os workflows existentes; registrar o run de sucesso após publicação e
-selecionar somente `Docs validation` como check required depois do read-back
-administrativo. Para esse read-back, uma sessão autenticada NexLabsTech deve
+todos os workflows existentes; o run #42487843277 passou no HEAD
+`8d8125502492ae67d3e1b9c9374d7ece8b4f022e`. Selecionar somente `Docs validation`
+como check required depois do read-back administrativo. Para esse read-back, uma sessão autenticada NexLabsTech deve
 usar Settings → Rules → Rulesets para configurar o alvo `main`, PR obrigatória,
 zero aprovações, `Docs validation` atualizado, conversas resolvidas, histórico
 linear, force-push e deleção bloqueados, sem bypass; Settings → General → Pull
