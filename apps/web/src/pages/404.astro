@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="404 — Lost Path" description="The page you are looking for does not exist." currentPath="/missing/">
+  <section class="lost-page" aria-labelledby="lost-heading">
+    <div class="lost-portal" aria-hidden="true"><span>✦</span></div>
+    <p class="eyebrow">A PATH LOST TO THE DARK</p>
+    <h1 id="lost-heading">404</h1>
+    <h2>Not all roads lead home.</h2>
+    <p>That page has faded into the archives. Find your way back to the Nexus.</p>
+    <a class="button button-primary exn-focusable" href="/">Return to Home <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>
