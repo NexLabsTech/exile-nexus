@@ -1,9 +1,9 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · M12-WO-001 em execução; M01-WO-002 ACEITA
+- **Status:** ACCEPTED through EXN-M01-WO-003 (#13); next EXN-M01-WO-004 (#14) not yet accepted
 - **Revisão:** 2026-11-08
-- **Work Order:** reconciliação EXN-VIS-WO-001 · Issue #144; próximo EXN-M01-WO-003 · Issue #13
+- **Work Order:** reconciliação de aceite EXN-M01-WO-003 · Issue #13; próximo EXN-M01-WO-004 · Issue #14
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -261,3 +261,13 @@ Este delta factual registra duas integrações **já executadas e aceitas pelo o
 - A issue [#13](https://github.com/NexLabsTech/exile-nexus/issues/13), EXN-M01-WO-003, torna-se o **único próximo incremento NECESSARY**, para app shell e navegação responsiva. Implementação exige branch/PR Draft distintas, Astro 7.4.7 + React 19.3.1 islands, TypeScript strict, testes da aplicação, screenshot visual responsivo e auditoria de DoD; nenhum deploy nem merge é autorizado automaticamente.
 - Custo obrigatório segue US$ 0. Não afirmar billing de apps opcionais, clearance jurídico ou produção completos sem evidência; sem reviewer externo, force-push ou bypass. Auditoria técnica solo não é auditoria independente.
 
+## Reconciliação aprovada em 2026-11-08 — M01-WO-003: Shell público
+
+Este delta registra somente a decisão e o merge já aceitos pelo owner em 2026-11-08. Os registros anteriores conservam o status histórico que tinham em seus próprios momentos, e não descrevem o estado atual.
+
+- **WO aprovada:** [EXN-M01-WO-003 issue #13](https://github.com/NexLabsTech/exile-nexus/issues/13), `NECESSARY / STANDARD`. A autorização administrativa foi dada exclusivamente para [PR #147](https://github.com/NexLabsTech/exile-nexus/pull/147) no HEAD `c9b20f5d9fa0230f709ef519086a335116454668` após auditoria técnica objetiva solo. Squash merge normal confirmado na `main` em `0cc006ff48fbecf92be628c2599881bd7d1c3ce8`. Issue #13 CLOSED.
+- **Implementação comprovada:** `apps/web/` inclui aplicação Astro 7.4.7 estática + React 19.3.1 islands com lockfile npm, TypeScript strict, shell responsivo, Home, sete rotas de seções com placeholders explicitamente não-live, 404, navegação teclado/mobile/Escape, favicon original e no-affiliation disclaimer. Não existe backend, autenticação, banco, ingestão de dados, IA real ou deploy.
+- **Evidências no exato HEAD pré-merge:** [Docs validation #42535382989](https://github.com/NexLabsTech/exile-nexus/actions/runs/42535382989) PASS; [Quality baseline #42535383014](https://github.com/NexLabsTech/exile-nexus/actions/runs/42535383014) PASS; [Responsive browser #42535382996](https://github.com/NexLabsTech/exile-nexus/actions/runs/42535382996) PASS com 12 Playwright E2E e 6 screenshots (Home/Builds em 1440/768/390). 28 testes Python, lint, typecheck, unit, build e `npm audit --audit-level=high` PASS. [Evidence Bundle](evidence/EXN-M01-WO-003-public-shell-2026-11-08.md).
+- **Riscos conhecidos:** sete findings MODERATE transitivos do npm audit permanecem sem mitigação documentada; não houve achados HIGH/CRITICAL no gate. Teste de acessibilidade automatizado axe, leitor de tela manual, benchmark de produção e clearance comercial de direitos NÃO foram concluídos. Screenshots validam somente a experiência do shell, não páginas de módulos futuros.
+- **Restrições preservadas:** decisões EXN-DEC-0008/0009/0010, `design/tokens.css`, R01–R14, limite de custo US$0, auditoria solo sem independência e ruleset #26806979. Sem autorização para deploy, monetização, assets protegidos, fontes externas, serviço pago, bypass ou merge da próxima PR.
+- **Próximo incremento exclusivamente necessário:** [EXN-M01-WO-004 issue #14](https://github.com/NexLabsTech/exile-nexus/issues/14), biblioteca pequena de componentes acessíveis e estados visuais. Depende de #13 (CLOSED); requer branch, PR Draft, testes unit/axe/visuais, Evidence Bundle, auditoria e novo aceite owner antes de merge. Nenhuma outra WO será aberta até concluir a #14.
