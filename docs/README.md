@@ -3,7 +3,7 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-004 · Issue #5
+- **Work Order:** EXN-M00-WO-005 · Issue #6
 
 Este índice registra documentos presentes, sua Work Order e as dependências
 restantes. Um arquivo listado ou integrado não concede direitos de dados nem
@@ -15,10 +15,13 @@ promove automaticamente uma proposta a decisão aceita.
 - [Product Scope](scope.md) — WO-004, PROPOSED.
 - [Requirements Baseline](requirements.md) — WO-004, PROPOSED.
 - [Definition of Done](definition-of-done.md) — WO-004, PROPOSED.
-- [Source Hierarchy](source-hierarchy.md) — WO-004, PROPOSED.
+- [Architecture](architecture.md) — WO-005, proposta nesta branch.
+- [Data Contracts](data-contracts.md) — WO-005, proposta nesta branch.
+- [Deployment Plan](deployment-plan.md) — WO-005, plano sem implantação.
+- [Source Hierarchy](source-hierarchy.md) — reconciliação WO-005, PROPOSED.
 - [Decisions Ledger](decisions-ledger.md) — decisões individuais identificadas;
   documento PROPOSED.
-- [Checkpoint](checkpoint.md) — WO-004, PROPOSED.
+- [Checkpoint](checkpoint.md) — reconciliação WO-005, PROPOSED.
 - [Matriz de direitos e fontes](rights-and-data-sources.md) — WO-003; direitos
   de ingestão/exibição/monetização não liberados.
 - Evidence Bundle histórico do WO-001:
@@ -27,11 +30,15 @@ promove automaticamente uma proposta a decisão aceita.
   [Source Pack](evidence/EXN-M00-WO-002-source-pack-2026-11-08.md).
 - Evidence Bundle do WO-003:
   [direitos e APIs](evidence/EXN-M00-WO-003-rights-review-2026-11-08.md).
-- Evidence Bundle desta Work Order:
+- Evidence Bundle da WO-004:
   [scope, requirements e DoD](evidence/EXN-M00-WO-004-scope-review-2026-11-08.md).
+- Evidence Bundle desta Work Order:
+  [architecture, data contracts e deployment plan](evidence/EXN-M00-WO-005-architecture-review-2026-11-08.md).
 
-Os três documentos da WO-004 estão propostos nesta branch e só entram na
-`main` após auditoria, aceite do owner e integração normal.
+Scope, requirements e DoD da WO-004 foram integrados na main pela PR #136,
+com aceite administrativo registrado no comentário #6720619493; não houve
+GitHub Review formal APPROVED. Os documentos desta WO-005 permanecem
+propostos até auditoria, aceite do owner e integração normal.
 
 ## Artefatos mapeados às Work Orders existentes
 
