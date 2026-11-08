@@ -23,7 +23,7 @@ promove automaticamente uma proposta a decisão aceita.
 - [Guia de contribuição](../CONTRIBUTING.md) — WO-007, integrado pela PR #139.
 - [Source Hierarchy](source-hierarchy.md) — reconciliação e precedência.
 - [Decisions Ledger](decisions-ledger.md) — decisões individuais identificadas; documento PROPOSED.
-- [Checkpoint](checkpoint.md) — M00, M01-WO-001/002/003, M12-WO-001 e EXN-VIS-WO-001 aceitos; #14 é a próxima WO elegível.
+- [Checkpoint](checkpoint.md) — M00, M01-WO-001/002/003/004, M12-WO-001 e EXN-VIS-WO-001 aceitos; #15 é a próxima WO elegível.
 - [Matriz de direitos e fontes](rights-and-data-sources.md) — WO-003; direitos de ingestão/exibição/monetização não liberados.
 - Evidence Bundle da WO-001: [baseline](evidence/EXN-M00-WO-001-baseline-2026-11-08.md).
 - Evidence Bundle da WO-002: [Source Pack](evidence/EXN-M00-WO-002-source-pack-2026-11-08.md).
@@ -39,7 +39,8 @@ promove automaticamente uma proposta a decisão aceita.
   e [Evidence Bundle](evidence/EXN-M01-WO-002-visual-tokens-2026-11-08.md) — ACEITOS na PR #142.
 - M12-WO-001: [Quality CI Evidence](evidence/EXN-M12-WO-001-quality-baseline-2026-11-08.md) — aceita na PR #143.
 - EXN-VIS-WO-001: [pilotos visuais e hashes](../design/references/README.md), [evidências](evidence/EXN-VIS-WO-001-reference-boards-2026-11-08.md) — aceito como referência na PR #145, sem liberar uso comercial de IP de terceiro.
-- M01-WO-003: [evidências da UI pública](evidence/EXN-M01-WO-003-public-shell-2026-11-08.md) — código Astro/React testado, PR #147 integrada; #14 segue pendente.
+- M01-WO-003: [evidências da UI pública](evidence/EXN-M01-WO-003-public-shell-2026-11-08.md) — código Astro/React testado, PR #147 integrada.
+- M01-WO-004: [evidências de componentes acessíveis](evidence/EXN-M01-WO-004-accessible-ui-states-2026-11-08.md) — PR #149 integrada; #15 segue pendente.
 
 As WOs 003–007 foram integradas por squash com aceite administrativo de
 NexLabsTech. O aceite registrado não equivale a GitHub Review formal
@@ -60,7 +61,7 @@ e o check obrigatório foram verificados pelo ruleset #26806979.
 
 O Source Pack e CI documental estão versionados; a WO-008 foi integrada
 pela PR #140 e o épico M00 encerrado. A decisão de runtime M01-WO-001 foi aceita com PR #141. Os tokens visuais
-M01-WO-002 foram aprovados na PR #142; o Quality CI M12-WO-001 foi aceito na PR #143, e referências visuais EXN-VIS-WO-001 foram aceitas na PR #145. A WO #13 foi integrada pela PR #147 e issue #13 encerrada; próxima WO necessária é #14, ainda não aprovada. A matriz R01–R14 documenta fontes,
+M01-WO-002 foram aprovados na PR #142; o Quality CI M12-WO-001 foi aceito na PR #143, e referências visuais EXN-VIS-WO-001 foram aceitas na PR #145. A WO #13 foi integrada pela PR #147 e issue #13 encerrada; a WO #14 foi integrada pela PR #149, com issue #14 encerrada; a próxima WO NECESSARY é #15, ainda pendente. A matriz R01–R14 documenta fontes,
 mas não concede licença. Fontes
 `CONDICIONADO` e `NÃO VERIFICADO` bloqueiam ingestão, persistência, reexibição e
 monetização; fontes `PROIBIDO` não devem ser integradas.
