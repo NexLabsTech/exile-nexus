@@ -3,7 +3,7 @@
 - **Owner:** NexLabsTech
 - **Status:** PROPOSED
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-005 · Issue #6
+- **Work Order:** EXN-M00-WO-006 · Issue #7
 
 Este ledger registra decisões explícitas de processo e arquitetura. O documento
 permanece PROPOSED; cada decisão tem seu estado próprio. Uma restrição aceita
@@ -96,3 +96,19 @@ Framework de interface, ferramenta de build, runtime de API, banco, cache
 persistente, autenticação de usuário, fornecedor de IA, provedor de economia,
 retenção e observabilidade permanecem sem decisão. Reavaliar em Work Orders
 próprias, com direitos, segurança, limites e custo comprovados.
+
+
+## EXN-DEC-0006 — Postura de segurança e privacidade
+
+- **Status:** ACEITA pelo owner em 2026-11-08.
+- **Fonte:** instruções explícitas do owner para execução M00 e Issue #7.
+
+Aplicar deny-by-default, menor privilégio e proteção proporcional ao risco; não
+colocar segredo de produção em código ou workflow de PR; não exigir serviço
+externo sujeito a quota ou cobrança; manter custo obrigatório em US$ 0; não
+coletar dados pessoais sem finalidade, transparência e controles previamente
+definidos; não ingerir ou redistribuir fonte sem autorização específica. Um
+controle administrativo só pode ser declarado configurado após read-back.
+A indisponibilidade de leitura deve ser registrada como `NOT VERIFIED` e
+bloquear a atividade que dependa daquele controle. Esta decisão documental não
+altera settings, aprova coleta, concede licença ou autoriza deployment.
