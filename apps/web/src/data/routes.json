@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "builds",
+    "href": "/builds/",
+    "label": "Build Hub",
+    "short": "Builds",
+    "category": "PLANNING",
+    "eyebrow": "PLAN YOUR EXILE",
+    "title": "Shape your next build",
+    "description": "Explore the structure for build planning, routes and character progression. The live planner arrives in a future, separately validated module.",
+    "mark": "✦"
+  },
+  {
+    "slug": "items",
+    "href": "/items/",
+    "label": "Item Database",
+    "short": "Items",
+    "category": "CATALOGUE",
+    "eyebrow": "EXPLORE THE ARCHIVES",
+    "title": "A catalogue worth exploring",
+    "description": "A dedicated space for item discovery and filtering once rights-cleared source data is available.",
+    "mark": "◇"
+  },
+  {
+    "slug": "economy",
+    "href": "/economy/",
+    "label": "Economy Hub",
+    "short": "Economy",
+    "category": "INSIGHTS",
+    "eyebrow": "THE VALUE OF KNOWLEDGE",
+    "title": "See the economy clearly",
+    "description": "Market observations will appear here only with permitted sources, provenance and timestamps.",
+    "mark": "◈"
+  },
+  {
+    "slug": "farm",
+    "href": "/farm/",
+    "label": "Farm Lab",
+    "short": "Farm Lab",
+    "category": "ANALYSIS",
+    "eyebrow": "MEASURE YOUR JOURNEY",
+    "title": "Turn sessions into insight",
+    "description": "An upcoming deterministic workspace for your own farming sessions and transparent calculations.",
+    "mark": "⌁"
+  },
+  {
+    "slug": "patches",
+    "href": "/patches/",
+    "label": "Patch Intelligence",
+    "short": "Patches",
+    "category": "CHANGELOG",
+    "eyebrow": "KNOW WHAT CHANGED",
+    "title": "Every change has a story",
+    "description": "Verified patch comparisons and their source links will be presented here when authorized.",
+    "mark": "✧"
+  },
+  {
+    "slug": "advisor",
+    "href": "/advisor/",
+    "label": "AI Advisor",
+    "short": "Advisor",
+    "category": "GUIDANCE",
+    "eyebrow": "EXPLAINED, NOT INVENTED",
+    "title": "Guidance you can inspect",
+    "description": "Future recommendations will cite their inputs and distinguish verified facts from uncertainty.",
+    "mark": "✳"
+  },
+  {
+    "slug": "guides",
+    "href": "/guides/",
+    "label": "Guides",
+    "short": "Guides",
+    "category": "KNOWLEDGE",
+    "eyebrow": "THE LIBRARY AWAITS",
+    "title": "Learn the deeper systems",
+    "description": "Original tutorials and approved community guides will have a home here.",
+    "mark": "✥"
+  }
+]
