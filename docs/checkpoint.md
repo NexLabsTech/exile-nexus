@@ -1,119 +1,118 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** PROPOSED · atualização da WO-006
+- **Status:** PROPOSED · execução da WO-007
 - **Revisão:** 2026-11-08
-- **Work Order:** EXN-M00-WO-006 · Issue #7
-- **Base SHA desta proposta:** `2b98db725c883dd9bbef3b080673d0b5b07036ab`
-- **HEAD desta proposta:** registrar no comentário e relatório da PR após o commit; um commit não pode conter seu próprio SHA.
+- **Work Order:** EXN-M00-WO-007 · Issue #8
+- **Base SHA desta proposta:** `e8e900feeaadc98f45e47244ad7840d25e1cc871`
+- **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
-Este checkpoint reconcilia a WO-005 integrada e registra o modelo de ameaças
-proposto pela WO-006. Continua PROPOSED até auditoria técnica, aceite
-administrativo NexLabsTech e integração normal.
+Este checkpoint reconcilia a WO-006 integrada e registra a proposta de Test
+Plan, CI documental e contribuição da WO-007. Continua PROPOSED até testes,
+auditoria técnica, aceite NexLabsTech e integração normal.
 
 ## Histórico e aceite
 
 - Baseline consultado na main no início da WO-001:
   `23ec93e0fb174fb84db38298ce890f693a62abf1`.
 - PR #133 integrou WO-001 por squash no commit
-  `b012731fd052e4c08aaa005b4e269b4d7e8ed7f4`. GitHub Review da NexLabsTech
-  ficou COMMENTED, não APPROVED; Issue #2 foi concluída.
+  `b012731fd052e4c08aaa005b4e269b4d7e8ed7f4`. Issue #2 concluída; review
+  GitHub ficou COMMENTED, não APPROVED.
 - PR #134 integrou WO-002 por squash no commit
-  `5cf7ab69d8a2b80b245cd64966d9d40f13a8c8e1`. Reviews ficaram COMMENTED, não
-  APPROVED; Issue #3 foi concluída.
+  `5cf7ab69d8a2b80b245cd64966d9d40f13a8c8e1`. Issue #3 concluída; sem
+  GitHub Review formal APPROVED.
 - PR #135 integrou WO-003 por squash no commit
   `1e786ad840a12762e1f98424f927f48638f7a036`, a partir do head
-  `63ea494518296b0e85c40f979ba042a644489a4b`. Aceite administrativo no
-  comentário #6720404361; Issue #4 foi concluída.
+  `63ea494518296b0e85c40f979ba042a644489a4b`. Aceite administrativo
+  #6720404361; Issue #4 concluída.
 - PR #136 integrou WO-004 por squash no commit
   `23ee602f0f934b38342f75137c6a82c136de980e`, a partir do head
-  `f9f046189d2b5bffe060f625dc11f2641f545394`. Aceite NexLabsTech no comentário
-  #6720619493; auditoria pelo executor na mesma sessão, não independente;
-  Issue #5 foi concluída.
+  `f9f046189d2b5bffe060f625dc11f2641f545394`. Aceite #6720619493; Issue #5
+  concluída.
 - PR #137 integrou WO-005 por squash no commit
   `2b98db725c883dd9bbef3b080673d0b5b07036ab`, a partir do head
-  `989e6995b17df7d844100b2ca20e670a6681bfb0`. Aceite NexLabsTech no comentário
-  #6720828484; auditoria pelo executor na mesma sessão, não independente;
-  Issue #6 foi concluída.
-- Aceites documentais não modificam a matriz R01–R14 e não concedem licença,
-  direito sobre conteúdo ou autorização de implantação.
+  `989e6995b17df7d844100b2ca20e670a6681bfb0`. Aceite #6720828484; Issue #6
+  concluída.
+- PR #138 integrou WO-006 por squash no commit
+  `e8e900feeaadc98f45e47244ad7840d25e1cc871`, a partir do head
+  `653b721a796cafa2d2bed500c2c720d3c4a079d7`. Aceite administrativo
+  NexLabsTech #6721135679; Issue #7 concluída. Auditoria na mesma sessão do
+  executor; não independente e sem GitHub Review formal `APPROVED`.
+- Aceite documental não libera direitos R01–R14, configuração da conta ou
+  deployment.
 
-## Context Lock desta WO
+## Context Lock e fonte atual
 
-- Issue #7 está aberta e depende de EXN-M00-WO-005, satisfeita pela PR #137.
-- `main` remota e checkout no início da WO: SHA
-  `2b98db725c883dd9bbef3b080673d0b5b07036ab`.
-- Não havia PR aberta no início desta branch.
-- O repositório tem 18 arquivos rastreados, todos documentais; não há aplicação,
-  manifesto/lockfile, workflow, endpoint, banco ou implantação.
-- Direitos R01–R14 seguem sem autorização operacional para fontes de jogo,
-  APIs econômicas, árvore, scraping ou monetização.
+- Issue #8 está aberta e sua dependência EXN-M00-WO-006 foi concluída pela
+  PR #138.
+- `main` remota e checkout no início desta WO tinham o mesmo SHA
+  `e8e900feeaadc98f45e47244ad7840d25e1cc871`.
+- Não havia PR aberta, workflow de Actions ou manifesto/lockfile. O repo tem
+  documentação; ainda não há app, endpoint, banco ou deployment.
+- As atualizações anteriores deixam o threat model como referência de
+  planejamento e documentam os settings que continuam NOT VERIFIED.
+- Nenhuma fonte de jogo, API econômica, árvore, scraping ou monetização foi
+  autorizada pela matriz R01–R14.
 
-## Estado administrativo verificado / não verificado
+## Estado administrativo observado
 
-Consulta em 2026-11-08; nenhuma configuração administrativa foi alterada nesta
-WO.
+Rechecado em 2026-11-08; esta WO não tenta alterar settings. A configuração da
+conexão GitHub NexLabsTech continua sem acesso administrativo às APIs:
 
-- API de Actions: `total_count=0`, nomes vazios; não há workflow ou check de
-  CI próprio no repositório.
-- `/repos/NexLabsTech/exile-nexus/rulesets` via CLI retornou lista vazia. A
-  leitura `/branches/main/protection` via conexão GitHub NexLabsTech retornou
-  403 `Resource not accessible by integration`. Proteção efetiva da `main`,
-  exigência de PR, número de aprovações, conversas, checks atualizados,
-  force-push e exclusão permanecem **NOT VERIFIED**.
-- O endpoint `/vulnerability-alerts` via CLI retornou 403 e o cabeçalho
-  `X-Accepted-Github-Permissions: administration=read`. A leitura anterior na
-  WO-001 trouxe mensagem explícita “Dependabot alerts are disabled for this
-  repository”. Portanto o último estado explicitamente observado era
-  **desativado**, mas o estado atual é **NOT VERIFIED**.
-- CodeQL/Code Scanning, Dependabot Security Updates, Secret Scanning, Push
-  Protection e permissões globais do Actions não puderam ser lidos; permanecem
-  **NOT VERIFIED**. Endpoint administrativo de Actions/segurança também não é
-  oferecido pela allowlist do conector. Erro de acesso não significa recurso
-  desligado.
-- A conexão NexLabsTech reporta permissão de colaborador `admin`, mas é uma
-  integração GitHub App gerenciada que exclui leitura administrativa. O CLI
-  autenticado como `KayzenRoot` não tem `admin` nem `push`. O API 403 indica
-  `Administration: read` como permissão necessária à leitura tentada. Para
-  escrita de settings, a conexão teria de possuir `Administration: write`.
-  Nenhuma credencial foi extraída nem privilégio ampliado.
-- Recursos GitHub para repositório público foram consultados na documentação
-  oficial e estão listados no modelo; elegibilidade documentada não comprova
-  setting ativo nem custo total/billing da conta.
+- API de workflows: zero workflows no baseline da branch.
+- Endpoint de rulesets visíveis: lista vazia; isso não prova proteção efetiva
+  ou ausência de proteção clássica.
+- GET `/branches/main/protection`: 403 `Resource not accessible by integration`.
+  O cabeçalho observado na consulta autenticada exige
+  `Administration: read`; configuração exige `Administration: write`.
+- Actions permissions, Settings de Code Scanning, Dependabot Security Updates,
+  Secret Scanning e Push Protection: **NOT VERIFIED**. O conector não oferece
+  os endpoints administrativos; a identidade CLI `KayzenRoot` não é admin.
+- Dependabot Alerts: último estado explícito na WO-001 foi desativado; leitura
+  atual 403, portanto estado atual **NOT VERIFIED**.
+- PR #138 recebeu check-runs automáticos CodeRabbit `skipped` e Socket Security
+  com dois `success`; não foram usados como gate. O custo/plano real do Socket
+  e o faturamento dos apps permanecem NOT VERIFIED. A branch protection não
+  pôde ser lida para confirmar a lista de checks required.
+- Nenhuma credencial foi extraída, ampliada ou usada para gravar settings.
 
 ## Work Orders
 
-- WO-001 / Issue #2: integrada; Issue concluída.
-- WO-002 / Issue #3: integrada; Issue concluída.
-- WO-003 / Issue #4: matriz R01–R14 integrada; direitos operacionais continuam
-  restritos; Issue concluída.
-- WO-004 / Issue #5: Scope, Requirements e DoD integrados; Issue concluída.
+- WO-001 / Issue #2: integrada; concluída.
+- WO-002 / Issue #3: integrada; concluída.
+- WO-003 / Issue #4: matriz R01–R14 integrada; ingestão continua sem liberação.
+- WO-004 / Issue #5: Scope, Requirements e DoD integrados.
 - WO-005 / Issue #6: Architecture, Data Contracts e Deployment Plan integrados;
-  proposta de Cloudflare Pages sem provisão; Issue concluída.
-- WO-006 / Issue #7: modelo de ameaças, privacidade e abuso nesta branch; settings
-  nativos inacessíveis marcados NOT VERIFIED; Issue aberta.
-- WO-007 / Issue #8: Test Plan, CI documental e governança de main; pendente.
-- WO-008 / Issue #9: auditoria final da fundação e backlog; pendente.
+  nenhuma conta/projeto/deploy provisionado.
+- WO-006 / Issue #7: Threat Model, privacidade e abuso integrados; controles
+  sem read-back continuam NOT VERIFIED.
+- WO-007 / Issue #8: Test Plan, CI documental e contribuição nesta branch;
+  branch protection/read-back administrativo pendente.
+- WO-008 / Issue #9: auditoria final e revisão do backlog, depende da conclusão
+  da WO-007.
 
-## Estado de produto e bloqueios
+## Estado de produto e custos
 
-- Modular monolith TypeScript strict, contratos e least privilege permanecem
-  decisões/restrições de planejamento. Nenhuma aplicação foi implementada.
-- Cloudflare Pages estático é uma opção documental não provisionada. Conta,
-  plano e faturamento não foram lidos; nenhum deploy, segredo ou integração foi
-  criado.
-- Nenhuma ferramenta externa sujeita a quota é necessária para esta WO.
-- M00 permanece incompleto: configuração essencial de segurança e branch
-  protection precisa de leitura/read-back administrativo. Não iniciar
-  funcionalidade ou deployment antes da auditoria WO-008 e da verificação dos
-  controles essenciais.
+- O repositório continua sem código de produto, dependências, workflow integrado
+  ou dados de usuários. Não iniciar implementação funcional ou deployment.
+- A arquitetura modular monolith, TypeScript strict e deny-by-default segue
+  como restrição; serviços permanecem não selecionados.
+- O plano financeiro obrigatório é US$ 0. Runners GitHub-hosted padrão são
+  descritos como gratuitos para repositórios públicos; limites não são
+  ilimitados. Faturamento total da conta e custo do Socket permanecem
+  NOT VERIFIED.
+- O pipeline proposto usa somente Actions padrão, ferramentas open source com
+  versão e SHA-256 fixos e token read-only. Nenhuma ferramenta SaaS de quota é
+  necessária ao gate.
 
-## Checkpoint Delta proposto para WO-006
+## Checkpoint Delta proposto para WO-007
 
-Após auditoria do diff e aceite NexLabsTech, registrar o Threat Model como
-referência aprovada de planejamento, mantendo riscos futuros separados de
-achados ativos. Não alterar settings nesta WO. Manter os controles administrativos
-sem leitura como NOT VERIFIED e exigir `Administration: read/write` na conexão
-administrativa legitimamente autorizada para concluir settings em suas Work
-Orders próprias. Manter direitos R01–R14 fechados; manter WO-007 e WO-008
-pendentes; não iniciar aplicação ou deploy.
+Após testes e aceite, registrar Test Plan, guia de contribuição e workflow
+`Documentation CI` como controles versionados. O check `Documentation CI / Docs
+validation` só poderá ser exigido depois de executar com sucesso em PR e após
+read-back de `main` rulesets/protection confirmar que nenhum serviço externo
+com quota/cobrança é obrigatório. Tentar branch protection apenas pela WO-007;
+se o acesso `Administration: write` continuar ausente, manter o PR/issue
+BLOCKED e registrar o endpoint/permissão sem bypass. Não iniciar WO-008 nem
+funcionalidade antes da aprovação válida da WO-007 e confirmação dos controles
+essenciais.
