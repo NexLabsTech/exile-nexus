@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { copy } from "../../i18n";
 
 export type ActionVariant = "primary" | "secondary" | "quiet";
 
@@ -26,7 +27,7 @@ export function ActionButton({
       className={`ui-action ui-action--${variant} ${className}`.trim()}
     >
       <span className="ui-action__spinner" aria-hidden="true" hidden={!loading} />
-      <span className="ui-action__label">{loading ? "Working…" : children}</span>
+      <span className="ui-action__label">{loading ? copy.action.working : children}</span>
     </button>
   );
 }
