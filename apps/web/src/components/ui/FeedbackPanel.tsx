@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { ActionButton } from "./ActionButton";
 import statusDefinitions from "../../data/ui-states.json";
+import { copy } from "../../i18n";
 
 export type FeedbackState = "loading" | "error" | "empty" | "success";
 
@@ -25,7 +26,7 @@ export function FeedbackPanel({ state, onRetry, children }: FeedbackPanelProps) 
       <div className="ui-feedback__body">
         <h3 className="ui-feedback__title">{details.title}</h3>
         <p>{children ?? details.message}</p>
-        {state === "error" && onRetry ? <ActionButton variant="secondary" onClick={onRetry}>Try again</ActionButton> : null}
+        {state === "error" && onRetry ? <ActionButton variant="secondary" onClick={onRetry}>{copy.action.tryAgain}</ActionButton> : null}
       </div>
     </section>
   );
