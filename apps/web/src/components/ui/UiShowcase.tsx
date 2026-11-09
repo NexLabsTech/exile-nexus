@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { ActionButton } from "./ActionButton";
 import { TextField } from "./TextField";
 import { FeedbackPanel, type FeedbackState } from "./FeedbackPanel";
+import { copy } from "../../i18n";
 
 const STATE_CHOICES: readonly FeedbackState[] = ["loading", "empty", "error", "success"];
 
@@ -11,7 +12,7 @@ export function UiShowcase() {
   const [attempted, setAttempted] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const error = attempted && query.trim().length < 3 ? "Enter at least three characters." : undefined;
+  const error = attempted && query.trim().length < 3 ? copy.kit.shortQueryError : undefined;
 
   function handlePreview(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,27 +26,27 @@ export function UiShowcase() {
         <div className="ui-workshop__heading">
           <span className="ui-workshop__number">01</span>
           <div>
-            <p className="eyebrow">INTERACTIVE CONTROLS</p>
-            <h2 id="ui-buttons-heading">Action buttons</h2>
-            <p>Explicit enabled, loading and disabled states. Focus remains visible to keyboard users.</p>
+            <p className="eyebrow">{copy.kit.controlEyebrow}</p>
+            <h2 id="ui-buttons-heading">{copy.kit.controlHeading}</h2>
+            <p>{copy.kit.controlInfo}</p>
           </div>
         </div>
         <div className="ui-workshop__sample-grid">
           <div className="ui-workshop__sample">
-            <p className="ui-workshop__label">PRIMARY</p>
-            <ActionButton data-testid="primary-action" onClick={() => setStatus("success")}>Confirm action</ActionButton>
+            <p className="ui-workshop__label">{copy.kit.primary}</p>
+            <ActionButton data-testid="primary-action" onClick={() => setStatus("success")}>{copy.kit.primaryAction}</ActionButton>
           </div>
           <div className="ui-workshop__sample">
-            <p className="ui-workshop__label">SECONDARY</p>
-            <ActionButton variant="secondary" onClick={() => setStatus("empty")}>Clear results</ActionButton>
+            <p className="ui-workshop__label">{copy.kit.secondary}</p>
+            <ActionButton variant="secondary" onClick={() => setStatus("empty")}>{copy.kit.secondaryAction}</ActionButton>
           </div>
           <div className="ui-workshop__sample">
-            <p className="ui-workshop__label">LOADING</p>
-            <ActionButton loading data-testid="loading-action">Loading example</ActionButton>
+            <p className="ui-workshop__label">{copy.kit.loading}</p>
+            <ActionButton loading data-testid="loading-action">{copy.kit.loadingExample}</ActionButton>
           </div>
           <div className="ui-workshop__sample">
-            <p className="ui-workshop__label">DISABLED</p>
-            <ActionButton disabled data-testid="disabled-action">Unavailable</ActionButton>
+            <p className="ui-workshop__label">{copy.kit.disabled}</p>
+            <ActionButton disabled data-testid="disabled-action">{copy.kit.unavailable}</ActionButton>
           </div>
         </div>
       </section>
@@ -54,16 +55,16 @@ export function UiShowcase() {
         <div className="ui-workshop__heading">
           <span className="ui-workshop__number">02</span>
           <div>
-            <p className="eyebrow">FORMS AND VALIDATION</p>
-            <h2 id="ui-form-heading">Labeled text field</h2>
-            <p>Required, hint, validation error and disabled states are announced appropriately.</p>
+            <p className="eyebrow">{copy.kit.formEyebrow}</p>
+            <h2 id="ui-form-heading">{copy.kit.formHeading}</h2>
+            <p>{copy.kit.formInfo}</p>
           </div>
         </div>
         <div className="ui-workshop__form-grid">
           <form className="ui-workshop__form" onSubmit={handlePreview} noValidate>
             <TextField
               data-testid="preview-input"
-              label="Search label (local demo)"
+              label={copy.kit.fieldLabel}
               name="search"
               autoComplete="off"
               value={query}
@@ -73,18 +74,18 @@ export function UiShowcase() {
                 setQuery(event.currentTarget.value);
                 if (attempted) setAttempted(false);
               }}
-              hint="Use three or more characters. Nothing is transmitted."
+              hint={copy.kit.fieldHint}
               error={error}
             />
-            <ActionButton type="submit">Validate locally</ActionButton>
+            <ActionButton type="submit">{copy.kit.validate}</ActionButton>
           </form>
           <div className="ui-workshop__form">
             <label className="ui-workshop__toggle">
               <input type="checkbox" checked={disabled} onChange={(event) => setDisabled(event.currentTarget.checked)} />
-              <span>Disable the example field</span>
+              <span>{copy.kit.disableExample}</span>
             </label>
-            <TextField label="Disabled field" defaultValue="Example only" disabled={disabled} hint="Toggle above to switch input availability." />
-            <p className="ui-workshop__minor">The example does not store user information.</p>
+            <TextField label={copy.kit.disabledField} defaultValue={copy.kit.disabledDefault} disabled={disabled} hint={copy.kit.disabledHint} />
+            <p className="ui-workshop__minor">{copy.kit.noStoredData}</p>
           </div>
         </div>
       </section>
@@ -93,12 +94,12 @@ export function UiShowcase() {
         <div className="ui-workshop__heading">
           <span className="ui-workshop__number">03</span>
           <div>
-            <p className="eyebrow">FEEDBACK AND RECOVERY</p>
-            <h2 id="ui-states-heading">Explicit status panels</h2>
-            <p>Loading, empty, error and success states, each with a text label rather than color alone.</p>
+            <p className="eyebrow">{copy.kit.statesEyebrow}</p>
+            <h2 id="ui-states-heading">{copy.kit.statesHeading}</h2>
+            <p>{copy.kit.statesInfo}</p>
           </div>
         </div>
-        <div className="ui-state-selector" role="group" aria-label="Choose preview status">
+        <div className="ui-state-selector" role="group" aria-label={copy.kit.selectStatus}>
           {STATE_CHOICES.map((choice) => (
             <ActionButton
               key={choice}
@@ -106,13 +107,13 @@ export function UiShowcase() {
               aria-pressed={status === choice}
               onClick={() => setStatus(choice)}
             >
-              {choice === "loading" ? "Loading" : choice === "empty" ? "Empty" : choice === "error" ? "Error" : "Success"}
+              {choice === "loading" ? copy.kit.loadingState : choice === "empty" ? copy.kit.emptyState : choice === "error" ? copy.kit.errorState : copy.kit.successState}
             </ActionButton>
           ))}
         </div>
         <FeedbackPanel state={status} onRetry={() => setStatus("loading")} />
       </section>
-      <p className="ui-workshop__footnote">All components use original typography and geometry. This is a demo route, not a live game feature or a data source.</p>
+      <p className="ui-workshop__footnote">{copy.kit.footnote}</p>
     </div>
   );
 }
