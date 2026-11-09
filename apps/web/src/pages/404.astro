@@ -1,13 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { copy } from "../i18n";
 ---
-<BaseLayout title="404 — Lost Path" description="The page you are looking for does not exist." currentPath="/missing/">
+<BaseLayout title={copy.lost.title} description={copy.lost.description} currentPath="/missing/">
   <section class="lost-page" aria-labelledby="lost-heading">
     <div class="lost-portal" aria-hidden="true"><span>✦</span></div>
-    <p class="eyebrow">A PATH LOST TO THE DARK</p>
+    <p class="eyebrow">{copy.lost.eyebrow}</p>
     <h1 id="lost-heading">404</h1>
-    <h2>Not all roads lead home.</h2>
-    <p>That page has faded into the archives. Find your way back to the Nexus.</p>
-    <a class="button button-primary exn-focusable" href="/">Return to Home <span aria-hidden="true">↗</span></a>
+    <h2>{copy.lost.heading}</h2>
+    <p>{copy.lost.body}</p>
+    <a class="button button-primary exn-focusable" href="/">{copy.common.returnHome} <span aria-hidden="true">↗</span></a>
   </section>
 </BaseLayout>
