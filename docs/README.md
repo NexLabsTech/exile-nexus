@@ -12,6 +12,9 @@ promove automaticamente uma proposta a decisão aceita.
 ## Documentos presentes
 
 - [Visão do projeto](project-overview.md)
+
+- [ADR de autenticação e runtime (EXN-M01-WO-010, PROPOSED, NÃO ACEITO)](adr/EXN-M01-WO-010-identity-runtime-PROPOSED.md) — avaliação Cloudflare/D1/Google OIDC e alternativas, sem implementação de backend ou mudança no Decisions Ledger.
+- [Plano HIGH_ASSURANCE da EXN-M01-WO-010 (PROPOSED)](plans/EXN-M01-WO-010-high-assurance-implementation-plan.md) — subetapas futuras sob aprovação expressa, sem nova WO, deploy ou merge.
 - [Product Scope](scope.md) — WO-004, aceita para planejamento.
 - [Requirements Baseline](requirements.md) — WO-004, aceita para planejamento.
 - [Definition of Done](definition-of-done.md) — WO-004, aceita para planejamento.
