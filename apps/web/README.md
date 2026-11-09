@@ -181,3 +181,32 @@ npm audit --audit-level=high
 The dedicated read-only `.github/workflows/wo18-localization.yml` gate emits the JSON coverage artifact. Unit regression tests include invalid-placeholder, missing-key, unlocalized Astro/JSX and incomplete source fixtures, plus all previous safety contracts. Playwright verifies English copy under desktop/mobile viewports and a `pt-BR` browser, with screenshots; the pre-existing six SHA-256 UI-kit pixel baselines, keyboard/axe, reduced-motion and Lighthouse gates remain unchanged. Any legitimate visual difference must be reviewed with actual images, never silently rebaseline.
 
 SEO remains **PREVIEW_ONLY**, all eleven compiled pages **noindex**, no public canonical origin or site deployment, and content rights R01–R14 remain unchanged. This localization increment does not grant external data rights or authorize a production release. See [EXN-M01-WO-008 Evidence Bundle](../../docs/evidence/EXN-M01-WO-008-english-localization-2026-11-08.md) and PR #157 for exact CI, findings, risks, corrections and proposed checkpoint delta.
+
+
+## EXN-M01-WO-009: full-route automated accessibility and responsive release gate
+
+The source of truth for the new automated audit is `tests/fixtures/accessibility-matrix.json`: **11 current HTML routes**, four widths **1440/768/390/320 CSS px**, WCAG 2.2 A/AA axe tag categories and six mandatory interactive states. Its validation logic, in `scripts/verify-a11y-matrix.mjs`, compares against the **actual approved route JSON** and rejects omitted/duplicated pages, missing responsive sizes, skipped WCAG tags/states, or any attempted relaxation of **zero critical/serious failures**. `tests/unit/a11y-matrix.test.mjs` contains explicit negative controls for those regressions.
+
+`tests/e2e/accessibility-release.spec.ts` runs locally, without a third-party data service, and checks:
+- **Full-page axe WCAG A/AA** on each of 11 current routes at desktop and mobile, **no violations** in the tested automated rules.
+- Search empty/error and UI workshop form error/disabled/loading, including status/alert semantics, mobile-menu-open state, keyboard skip-link/focus/ArrowDown/Escape recovery.
+- Reflow at 320/390/768/1440 across Home, Builds, Search and UI Kit; 200% text resize with reflow assertion and screenshot, forced-colors focus ring, reduced-motion feedback without animation.
+- Actual responsive screenshots and existing six SHA-256 UI-kit visual baselines, **not** silently regenerated. A newly detected 200% text overflow in the header was corrected by enabling flex wrap and min-width handling, without changing approved tokens, navigation routes, UI copy or default screenshot hashes.
+- Existing English, static SEO `PREVIEW_ONLY`, quality, Lighthouse and zero external IP/content gates remain active.
+
+The read-only `.github/workflows/wo19-accessibility.yml` executes lint/typecheck/build/unit/negative policy checks, npm audit HIGH gate and the dedicated E2E suite; it uploads evidence. The existing broad browser CI executes the entire Playwright collection separately. Failures of either are corrections, not PASS. New pages and states must be added to the route/state matrix before claiming full automated coverage.
+
+```sh
+npm ci --no-audit --no-fund
+npm run a11y:matrix
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run seo:verify
+npm run test:e2e -- tests/e2e/accessibility-release.spec.ts
+npm run test:e2e
+npm audit --audit-level=high
+```
+
+**Important boundaries:** Automated axe checks do **not** establish full WCAG 2.2 AA certification; genuine manual NVDA, VoiceOver, TalkBack, high-contrast, mobile touch and real browser zoom checks are **NOT_RUN** until separately performed with recorded tester/date/evidence. See [manual validation checklist](../../docs/a11y-manual-checklist.md). No public deploy, domain, search indexing, external data rights R01–R14, gameplay assets, user tracking or paid services are authorized by passing this release gate. See [EXN-M01-WO-009 Evidence Bundle](../../docs/evidence/EXN-M01-WO-009-accessibility-release-gate-2026-11-08.md) and PR #159 for exact HEAD gates and residual risks.
