@@ -2,26 +2,27 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { GlobalSearch } from "../../components/search/GlobalSearch";
 import "../../styles/search.css";
+import { copy } from "../../i18n";
 ---
 <BaseLayout
-  title="Search the Nexus"
-  description="Search Exile Nexus public sections and synthetic demonstrations. No external game data is connected."
+  title={copy.searchPage.title}
+  description={copy.searchPage.description}
   currentPath="/search/"
   robots="noindex,nofollow"
 >
   <section class="inner-hero" aria-labelledby="search-page-heading">
     <div class="inner-hero-art" aria-hidden="true"><span class="inner-hero-sigil">⌕</span></div>
     <div class="inner-hero-content">
-      <nav class="breadcrumbs" aria-label="Breadcrumbs">
-        <a href="/" class="exn-focusable">Home</a><span aria-hidden="true">›</span>
-        <span aria-current="page">Global search</span>
+      <nav class="breadcrumbs" aria-label={copy.common.breadcrumb}>
+        <a href="/" class="exn-focusable">{copy.common.home}</a><span aria-hidden="true">›</span>
+        <span aria-current="page">{copy.searchPage.breadcrumb}</span>
       </nav>
-      <p class="eyebrow">THE NEXUS ARCHIVE / ORIGINAL PREVIEW</p>
-      <h1 id="search-page-heading">Find your path</h1>
-      <p>Explore the site's public sections and fictional examples. All external game content remains unavailable until its source rights are verified.</p>
-      <span class="ribbon-status">SITE-ONLY SEARCH · NOT LIVE GAME DATA</span>
+      <p class="eyebrow">{copy.searchPage.eyebrow}</p>
+      <h1 id="search-page-heading">{copy.searchPage.heading}</h1>
+      <p>{copy.searchPage.lead}</p>
+      <span class="ribbon-status">{copy.searchPage.ribbon}</span>
     </div>
   </section>
   <GlobalSearch client:load />
-  <noscript><p class="search-noscript">The local search demonstration requires JavaScript. The main navigation remains usable without it.</p></noscript>
+  <noscript><p class="search-noscript">{copy.searchPage.noscript}</p></noscript>
 </BaseLayout>
