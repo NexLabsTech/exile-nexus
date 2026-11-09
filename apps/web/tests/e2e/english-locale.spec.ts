@@ -42,7 +42,7 @@ test("English-first default is stable even with pt-BR browser settings", async (
 
 test("failure and empty search messages originate in English catalog with local-only UI", async ({ page }) => {
   await page.goto("/search/?q=nonexistent-local-example-999");
-  await expect(page.getByRole("status")).toContainText(messages.search.noResults);
+  await expect(page.locator(".search-results-count")).toContainText(messages.search.noResults);
   await expect(page.getByRole("heading", { name:messages.search.emptyTitle })).toBeVisible();
   await page.goto(`/search/?q=${"x".repeat(81)}`);
   await expect(page.getByRole("alert")).toContainText(messages.search.queryTooLong);
