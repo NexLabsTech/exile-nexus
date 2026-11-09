@@ -89,3 +89,35 @@ npm run perf:static
 **Measured initial lab result on [browser run #42538969067](https://github.com/NexLabsTech/exile-nexus/actions/runs/42538969067) and [Lighthouse #42538969095](https://github.com/NexLabsTech/exile-nexus/actions/runs/42538969095):** 23 browser tests PASS; low-end hydration 1,385 ms and menu response 173 ms; four Lighthouse runs reported 100/100 performance and accessibility for the two **local static** pages. Static gzip results: JS 72,934 B; CSS 8,200 B; Home HTML 5,103 B; total uncompressed dist 386,750 B. **These are CI laboratory measurements, not real user Core Web Vitals, production hosting performance, or an assurance for future modules.** Lighthouse/Chromium versions, runner load, internet and operating systems may change measured results; review future changes before relaxing gates. Existing seven MODERATE transitive npm audit findings are tracked; no HIGH/CRITICAL findings reported in the applicable `npm audit --audit-level=high` gate.
 
 See [EXN-M01-WO-005 Evidence Bundle](../../docs/evidence/EXN-M01-WO-005-motion-performance-2026-11-08.md) for exact CI run links, corrections, risk register and checkpoint delta proposal. Deployment remains unauthorized.
+
+
+## EXN-M01-WO-006: global navigation search, currently demo-only
+
+`/search/` is a responsive, noindex page with an accessible React search form. It searches the seven approved **internal navigation routes** and three explicitly **fictional** demonstration records, drawn from `src/data/routes.json` and `src/data/search-fixtures.json`. All results link only to known public local routes. No game items, gems, classes, mechanics, markets, patch announcements or live results are indexed. No remote request, user profile, persistence, private search log, API credential or external upload exists.
+
+### Contract and rights gate
+
+`src/lib/search-contract.ts` declares `SearchRecord` (`id,title,summary,category,href,origin,permission,sourceLabel,sourceVersion,observedAt,expiresAt,evidenceId`) and a deterministic source-safe ranker. Two permitted origins only:
+- `internal-navigation/INTERNAL`: original site-owned route title and description; freshness is the **static build**, not an external observation.
+- `synthetic/SYNTHETIC`: explicit fixture records, with fictional labels and no real timestamp/patch provenance.
+
+Every `external` record is rejected **even if untrusted input claims `AUTHORIZED`**. Connecting a third-party or game source requires its own approved R01–R14 rights evidence, purpose/frequency/attribution/license/provenance/expiration contract and adapter Work Order. A string flag is not evidence of permission. There is deliberately **no external-data adapter** in this release.
+
+The index is deterministic, bounded to 20 results, normalizes case and accents and rejects unsafe/private/out-of-scope route targets. Queries over 80 characters fail closed with a visible error. Unknown queries have a clear empty state. URLs are local `/search/?q=...` links, with no analytics or export; JavaScript is required for the client-side filtered demonstration, while the ordinary navigation remains usable without it. The route is `noindex,nofollow` and that is **not** an access-control measure. This is not full search over licensed game datasets.
+
+### Tests and release guard
+
+`tests/unit/search-contract.test.mjs` loads the production TypeScript logic with the locally installed TypeScript transpiler and tests indexing, ordering, case/diacritics, absent matches, too-long queries, forged external-rights markers, unsafe hrefs and deduplication. `tests/e2e/global-search.spec.ts` validates keyboard navigation, direct query links, mobile menu, synthetic labels, empty/error states, absence of third-party requests, axe WCAG tags and screenshots at 1440/768/390. Existing shell, component visual-baseline, reduced-motion and Lighthouse checks remain enabled.
+
+```sh
+npm ci --no-audit --no-fund
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run test:e2e
+npm run perf:static
+npm audit --audit-level=high
+```
+
+All future modules and real datasets require separate acceptance. See [EXN-M01-WO-006 Evidence Bundle](../../docs/evidence/EXN-M01-WO-006-global-search-2026-11-08.md). No deploy, merge or new commercial IP rights are authorized by this WO.
