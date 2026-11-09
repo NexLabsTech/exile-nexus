@@ -1,5 +1,15 @@
 import { expect, test } from "@playwright/test";
-import budgets from "../../performance-budgets.json";
+import { readFileSync } from "node:fs";
+import { URL } from "node:url";
+
+const budgets = JSON.parse(readFileSync(new URL("../../performance-budgets.json", import.meta.url), "utf8")) as {
+  lowEnd: {
+    viewportWidth: number; viewportHeight: number; cpuSlowdownFactor: number;
+    latencyMs: number; downloadBytesPerSecond: number; uploadBytesPerSecond: number;
+    maximumMenuResponseMs: number;
+  };
+  motion: { maximumHoverTransitionMs: number; reducedMotionMaxAnimationMs: number; reducedMotionMaxTransitionMs: number };
+};
 
 test("reduced-motion keeps content accessible and removes active animation", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
