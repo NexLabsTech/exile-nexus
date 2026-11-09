@@ -1,9 +1,9 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** ACEITO até EXN-M01-WO-005 (#15); próxima EXN-M01-WO-006 (#16) ainda não implementada
+- **Status:** ACEITO até EXN-M01-WO-006 (#16); próxima EXN-M01-WO-007 (#17) ainda não implementada
 - **Revisão:** 2026-11-08
-- **Work Order:** reconciliação do aceite EXN-M01-WO-005 · Issue #15; próxima EXN-M01-WO-006 · Issue #16
+- **Work Order:** reconciliação do aceite EXN-M01-WO-006 · Issue #16; próxima EXN-M01-WO-007 · Issue #17
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -291,3 +291,13 @@ Este delta factual registra somente a aprovação administrativa específica da 
 - **Limitações:** os resultados de Lighthouse (100/100 nas duas páginas estáticas ensaiadas) são de laboratório, não Core Web Vitals reais, campo de produção ou hardware móvel físico. Sete vulnerabilidades transitivas MODERATE no npm audit seguem registradas; nenhum HIGH/CRITICAL reportado no gate. Dependências transitivas da ferramenta Lighthouse efêmera não foram integralmente travadas por lockfile. Auditoria pré-merge é solo, não independente.
 - **Preservado:** tokens e ADRs aprovadas, direitos R01–R14, teto obrigatório US$0, gates de segurança, `main` protegida. Nenhuma mudança em fontes reais do jogo, backend, autenticação, cobrança, deploy ou permissão comercial de terceiros.
 - **Próxima NECESSARY:** [EXN-M01-WO-006 issue #16](https://github.com/NexLabsTech/exile-nexus/issues/16), UI de busca global e contratos de navegação. Por ausência de direito verificado de dados do jogo, o incremento limitar-se-á a UI navegável, contratos claros de proveniência/freshness, índices de rotas públicas e fixtures sintéticas explicitamente rotuladas. Integração de datasets externos fica bloqueada até próprio gate R01–R14; nova branch, PR Draft, testes/Evidence Bundle/auditoria sem merge ou deploy automático.
+
+## Reconciliação aprovada em 2026-11-08 — M01-WO-006
+
+Este delta documenta somente o aceite administrativo explícito para a PR [#153](https://github.com/NexLabsTech/exile-nexus/pull/153) no HEAD `f3396cb857573eb501d357b1141cbef162d17517`. Squash normal integrado e confirmado na `main` como `bd95b41471d45959b967492da29acf564c96481a`; [issue #16](https://github.com/NexLabsTech/exile-nexus/issues/16) encerrada. Os deltas anteriores permanecem registros históricos do estado em suas datas.
+
+- **Implementado:** `/search/` estática com busca determinística client-side, navegação do cabeçalho, menu móvel e rodapé, parâmetros de consulta e acessibilidade, estados vazio/erro, contratos TypeScript e testes fail-closed; índice contém apenas sete rotas públicas próprias e três exemplos declaradamente fictícios.
+- **Evidências do HEAD aceito:** [Docs #42541427650](https://github.com/NexLabsTech/exile-nexus/actions/runs/42541427650), [Quality #42541427834](https://github.com/NexLabsTech/exile-nexus/actions/runs/42541427834), [Playwright #42541427676](https://github.com/NexLabsTech/exile-nexus/actions/runs/42541427676) e [Lighthouse local #42541427634](https://github.com/NexLabsTech/exile-nexus/actions/runs/42541427634): 4/4 PASS, 28 Python, 19 testes unitários Node, 33 E2E e quatro medições locais em Home/Builds. [Evidence Bundle](evidence/EXN-M01-WO-006-global-search-2026-11-08.md). O Lighthouse não certificou a rota de busca nem performance real de produção.
+- **Riscos existentes:** npm audit mantém sete vulnerabilidades transitivas MODERATE, nenhuma HIGH/CRITICAL reportada no gate; teste manual completo de leitor de tela, licenças/direitos de conteúdo externo e desempenho de dispositivos reais NÃO verificados. A ferramenta Lighthouse efêmera tem risco de dependências transitivas não travadas.
+- **Preservação de direitos e arquitetura:** o código rejeita qualquer registro externo (inclusive flag `AUTHORIZED` falsificada); não há ingestão, dados reais do jogo, preços, patch/league observados, contas, monetização, deploy ou novas autorizações R01–R14. Mantidos Astro/React, `design/tokens.css`, Source Hierarchy e proteção da `main`.
+- **Próxima WO NECESSARY:** [EXN-M01-WO-007 issue #17](https://github.com/NexLabsTech/exile-nexus/issues/17), SEO, structured data e indexability. Exigir metadados para páginas públicas próprias e excluir rotas sintéticas, previews e conteúdo sem direitos. Sem domínio público/deploy aprovado, qualquer URL canônica absoluta ou sitemap de produção depende de configuração explícita verificável; não inventar endereço público. Nova branch e PR Draft com testes, Evidence Bundle, auditoria, sem merge ou deploy automático.

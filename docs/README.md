@@ -23,7 +23,7 @@ promove automaticamente uma proposta a decisão aceita.
 - [Guia de contribuição](../CONTRIBUTING.md) — WO-007, integrado pela PR #139.
 - [Source Hierarchy](source-hierarchy.md) — reconciliação e precedência.
 - [Decisions Ledger](decisions-ledger.md) — decisões individuais identificadas; documento PROPOSED.
-- [Checkpoint](checkpoint.md) — M00, M01-WO-001/002/003/004/005, M12-WO-001 e EXN-VIS-WO-001 aceitos; #16 é a próxima WO elegível.
+- [Checkpoint](checkpoint.md) — M00, M01-WO-001/002/003/004/005/006, M12-WO-001 e EXN-VIS-WO-001 aceitos; #17 é a próxima WO elegível.
 - [Matriz de direitos e fontes](rights-and-data-sources.md) — WO-003; direitos de ingestão/exibição/monetização não liberados.
 - Evidence Bundle da WO-001: [baseline](evidence/EXN-M00-WO-001-baseline-2026-11-08.md).
 - Evidence Bundle da WO-002: [Source Pack](evidence/EXN-M00-WO-002-source-pack-2026-11-08.md).
@@ -41,7 +41,8 @@ promove automaticamente uma proposta a decisão aceita.
 - EXN-VIS-WO-001: [pilotos visuais e hashes](../design/references/README.md), [evidências](evidence/EXN-VIS-WO-001-reference-boards-2026-11-08.md) — aceito como referência na PR #145, sem liberar uso comercial de IP de terceiro.
 - M01-WO-003: [evidências da UI pública](evidence/EXN-M01-WO-003-public-shell-2026-11-08.md) — código Astro/React testado, PR #147 integrada.
 - M01-WO-004: [evidências de componentes acessíveis](evidence/EXN-M01-WO-004-accessible-ui-states-2026-11-08.md) — PR #149 integrada.
-- M01-WO-005: [evidências de motion e performance](evidence/EXN-M01-WO-005-motion-performance-2026-11-08.md) — PR #151 integrada; #16 segue pendente.
+- M01-WO-005: [evidências de motion e performance](evidence/EXN-M01-WO-005-motion-performance-2026-11-08.md) — PR #151 integrada.
+- M01-WO-006: [busca local e contratos de navegação](evidence/EXN-M01-WO-006-global-search-2026-11-08.md) — PR #153 integrada; #17 segue pendente.
 
 As WOs 003–007 foram integradas por squash com aceite administrativo de
 NexLabsTech. O aceite registrado não equivale a GitHub Review formal
