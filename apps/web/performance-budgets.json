@@ -21,7 +21,8 @@
     "latencyMs": 200,
     "downloadBytesPerSecond": 150000,
     "uploadBytesPerSecond": 75000,
-    "maximumMenuResponseMs": 2200
+    "maximumMenuResponseMs": 2200,
+    "maximumHydrationMs": 12000
   },
   "motion": {
     "maximumHoverTransitionMs": 250,
