@@ -1,9 +1,9 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** ACEITO até EXN-M01-WO-004 (#14); próxima EXN-M01-WO-005 (#15) ainda não implementada
+- **Status:** ACEITO até EXN-M01-WO-005 (#15); próxima EXN-M01-WO-006 (#16) ainda não implementada
 - **Revisão:** 2026-11-08
-- **Work Order:** reconciliação do aceite EXN-M01-WO-004 · Issue #14; próxima EXN-M01-WO-005 · Issue #15
+- **Work Order:** reconciliação do aceite EXN-M01-WO-005 · Issue #15; próxima EXN-M01-WO-006 · Issue #16
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -281,3 +281,13 @@ Delta factual após autorização expressa do owner para [PR #149](https://githu
 - **Riscos não eliminados:** npm audit registrou 7 findings MODERATE transitivos, não HIGH/CRITICAL no gate; axe na galeria não prova conformidade acessível do site completo, testes manuais de leitores de tela e benchmark de produção ainda NÃO FORAM EXECUTADOS. Pixel parity completa com painéis-piloto não foi afirmada.
 - **Preservado:** EXN-DEC-0008–0010, tokens operacionais `design/tokens.css`, gates de direitos R01–R14, custo obrigatório US$0 e proteção da main. Sem deploy, contas, scraping, dados reais, autenticação ou direitos comerciais de terceiros promovidos.
 - **Próxima única WO NECESSARY:** [EXN-M01-WO-005 (#15)](https://github.com/NexLabsTech/exile-nexus/issues/15), motion e performance budget. Dependência #14 satisfeita, mas a próxima PR exige baseline medido Lighthouse, simulação de dispositivo modesto, reduzido movimento, controles de regressão e auditoria objetiva. Sua abertura **não** autoriza merge/deploy nem encerramento antecipado.
+
+## Reconciliação aprovada em 2026-11-08 — M01-WO-005
+
+Este delta factual registra somente a aprovação administrativa específica da PR [#151](https://github.com/NexLabsTech/exile-nexus/pull/151) pelo owner no HEAD `91e78eda5cf2f563f6dad105f01298ecb0fe4e8f` e seu squash normal confirmado na main `ba01dd9b083583fc422aff96b5372bcfb4f8fd90`. Issue [#15](https://github.com/NexLabsTech/exile-nexus/issues/15) CLOSED. Os registros históricos anteriores permanecem historicamente corretos, mas não expressam o estado corrente.
+
+- **Implementado:** `apps/web/performance-budgets.json`, `apps/web/scripts/verify-budget.mjs`, testes positivos/negativos e perfis Playwright de movimento reduzido, teclado e CPU/rede limitada; `lighthouserc.cjs` e workflow read-only com quatro medições simuladas localmente, sem upload a serviço externo.
+- **Evidências no HEAD autorizado:** [Docs #42539382845](https://github.com/NexLabsTech/exile-nexus/actions/runs/42539382845), [Quality #42539382947](https://github.com/NexLabsTech/exile-nexus/actions/runs/42539382947), [Playwright #42539382848](https://github.com/NexLabsTech/exile-nexus/actions/runs/42539382848) e [Lighthouse #42539382870](https://github.com/NexLabsTech/exile-nexus/actions/runs/42539382870), todos `completed/success`. 28 Python, 11 Node unit, 23 E2E, quatro Lighthouse local mobile simulados. JS gzip 72.934 B, CSS gzip 8.200 B, Home gzip 5.103 B, build cru 386.750 B; hidratação CPU×6 1.373ms e resposta menu 127ms após hidratação. [Evidence Bundle](evidence/EXN-M01-WO-005-motion-performance-2026-11-08.md).
+- **Limitações:** os resultados de Lighthouse (100/100 nas duas páginas estáticas ensaiadas) são de laboratório, não Core Web Vitals reais, campo de produção ou hardware móvel físico. Sete vulnerabilidades transitivas MODERATE no npm audit seguem registradas; nenhum HIGH/CRITICAL reportado no gate. Dependências transitivas da ferramenta Lighthouse efêmera não foram integralmente travadas por lockfile. Auditoria pré-merge é solo, não independente.
+- **Preservado:** tokens e ADRs aprovadas, direitos R01–R14, teto obrigatório US$0, gates de segurança, `main` protegida. Nenhuma mudança em fontes reais do jogo, backend, autenticação, cobrança, deploy ou permissão comercial de terceiros.
+- **Próxima NECESSARY:** [EXN-M01-WO-006 issue #16](https://github.com/NexLabsTech/exile-nexus/issues/16), UI de busca global e contratos de navegação. Por ausência de direito verificado de dados do jogo, o incremento limitar-se-á a UI navegável, contratos claros de proveniência/freshness, índices de rotas públicas e fixtures sintéticas explicitamente rotuladas. Integração de datasets externos fica bloqueada até próprio gate R01–R14; nova branch, PR Draft, testes/Evidence Bundle/auditoria sem merge ou deploy automático.
