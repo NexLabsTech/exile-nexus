@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sample-build-note",
+    "title": "Sample Adventurer Plan (fictional)",
+    "summary": "Illustrative planning record; not a playable game build or a verified class.",
+    "category": "SYNTHETIC BUILD",
+    "href": "/builds/",
+    "fictional": true
+  },
+  {
+    "id": "sample-inventory",
+    "title": "Imaginary Inventory Entry (fictional)",
+    "summary": "Fictional catalogue demonstration, not an item, gem, statistic or market quote from any game.",
+    "category": "SYNTHETIC ITEM",
+    "href": "/items/",
+    "fictional": true
+  },
+  {
+    "id": "sample-patch-note",
+    "title": "Illustrative Change Note (fictional)",
+    "summary": "Made-up example of a future change record; not a real patch or league announcement.",
+    "category": "SYNTHETIC PATCH",
+    "href": "/patches/",
+    "fictional": true
+  }
+]

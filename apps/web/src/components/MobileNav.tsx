@@ -55,6 +55,9 @@ export function MobileNav({ currentPath }: MobileNavProps) {
         aria-label="Mobile primary navigation"
         hidden={!open}
       >
+        <a className="mobile-home exn-focusable" href="/search/" aria-current={currentPath === "/search/" || currentPath === "/search" ? "page" : undefined}>
+          Search <span aria-hidden="true">↗</span>
+        </a>
         <a className="mobile-home exn-focusable" href="/" aria-current={currentPath === "/" ? "page" : undefined}>
           Home <span aria-hidden="true">↗</span>
         </a>

@@ -1,0 +1,52 @@
+/* EXN-M01-WO-006: original static search archive. No external images, fonts or network. */
+.search-workspace { max-width:1080px; margin:0 auto; padding:46px 28px 100px; }
+.search-form { margin:0 auto 20px; padding:30px; background:linear-gradient(140deg,#212025,#101418); border:1px solid #96724f; box-shadow:0 16px 46px #0007; }
+.search-form label { display:block; color:#f4d6ae; font:700 1.24rem Georgia,serif; margin-bottom:14px; }
+.search-input-row { display:flex; gap:12px; align-items:stretch; }
+.search-input-row input { min-width:0; flex:1; min-height:53px; background:#0b1013; border:1px solid #b89a74; padding:12px 17px; border-radius:3px; color:#f7e9d6; font:400 1rem/1.45 system-ui,sans-serif; }
+.search-input-row input::placeholder { color:#b5bcc7; opacity:1; }
+.search-input-row input:focus-visible, .search-form button:focus-visible, .search-empty-state button:focus-visible { outline:3px solid #87e6cc; outline-offset:3px; }
+.search-input-row .button { min-width:125px; }
+.search-data-notice { display:flex; align-items:center; gap:9px; margin:0 0 43px; padding:12px 15px; color:#e4d5c6; background:#2b201e; border-left:3px solid #c8895e; font-size:.78rem; line-height:1.65; }
+.search-data-notice span { color:#f1bd7c; font-size:1.15rem; flex-shrink:0; }
+.search-results-heading { display:flex; align-items:end; justify-content:space-between; gap:24px; padding:0 0 21px; border-bottom:1px solid #99704d; margin:0 0 20px; }
+.search-results-heading h2 { font:700 clamp(1.65rem,3.2vw,2.5rem)/1.1 Georgia,serif; color:#f6dab3; margin:0; }
+.search-results-count { max-width:350px; margin:0; font-size:.82rem; color:#e1e1dd; }
+.search-results-list { list-style:none; margin:0; padding:0; display:grid; gap:13px; }
+.search-result { min-width:0; background:linear-gradient(125deg,#1b1c22,#111418); border:1px solid #765a3e; position:relative; }
+.search-result::before { content:""; position:absolute; left:0; top:0; width:22px; height:22px; border-left:2px solid #bc8a54; border-top:2px solid #bc8a54; pointer-events:none; }
+.search-result:hover, .search-result:focus-within { border-color:#e7b579; background:linear-gradient(125deg,#302123,#171a1c); }
+.search-result-link { display:flex; align-items:center; gap:23px; min-height:125px; padding:22px 24px; color:inherit; }
+.search-result-mark { display:grid; flex-shrink:0; place-items:center; width:55px; height:55px; font:700 2.1rem Georgia,serif; color:#eac78f; border:1px solid #a47c4a; background:#151519; }
+.search-result-copy { display:grid; flex:1; min-width:0; gap:5px; }
+.search-result-category { font-size:.59rem; font-weight:800; letter-spacing:.17em; color:#f2bb89; }
+.search-result-copy strong { font:700 1.28rem/1.3 Georgia,serif; color:#f8dfbd; }
+.search-result-summary { color:#d1d8dc; font-size:.82rem; line-height:1.5; }
+.search-result-source { color:#bfcdcb; font-size:.6rem; letter-spacing:.12em; font-weight:700; margin-top:5px; }
+.search-result-arrow { align-self:flex-end; font-size:1.35rem; color:#f0c291; }
+.search-empty-state { display:flex; flex-direction:column; align-items:center; gap:15px; text-align:center; background:#191b20; border:1px solid #8c6b4b; padding:50px 24px; }
+.search-empty-state h3 { font:700 clamp(1.3rem,2.8vw,1.8rem) Georgia,serif; color:#f6dab3; margin:0; }
+.search-empty-state p { color:#d4dce0; font-size:.88rem; margin:0 0 8px; }
+.search-empty-icon { font:700 4rem Georgia,serif; color:#dda775; }
+.search-error { border-color:#df957b; background:#2b1c20; }
+.search-keyboard-help { margin:21px 0 0; color:#c1cbd1; font-size:.75rem; line-height:1.6; }
+.search-noscript { max-width:1050px; margin:0 auto; padding:20px; color:#ffd5a4; }
+@media (max-width:650px) {
+  .search-workspace { padding:26px 14px 65px; }
+  .search-form { padding:18px 14px; }
+  .search-form label { font-size:1.04rem; }
+  .search-input-row { flex-direction:column; }
+  .search-results-heading { align-items:flex-start; flex-direction:column; gap:12px; }
+  .search-result-link { align-items:flex-start; min-height:120px; gap:12px; padding:17px 12px; }
+  .search-result-mark { width:38px; height:38px; font-size:1.4rem; }
+  .search-result-copy strong { font-size:1.12rem; }
+  .search-result-arrow { font-size:1rem; }
+  .search-result-category { letter-spacing:.11em; }
+  .search-result-source { letter-spacing:.04em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-result, .search-result-link, .search-input-row input { animation:none!important; transition:none!important; }
+}
+@media (forced-colors: active) {
+  .search-result, .search-form, .search-empty-state, .search-input-row input { border:1px solid CanvasText; }
+}
