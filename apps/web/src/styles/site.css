@@ -31,13 +31,13 @@ button { font: inherit; }
 /* Header: an original prism sigil and delicate gilded separation. */
 .site-header { position:relative; z-index:60; background: rgba(9, 11, 14, .96); border-bottom: 1px solid #8a6a3f80; box-shadow: 0 2px 34px #0008; }
 .site-header::after { position:absolute; content:""; bottom:-3px; left:calc(50% - 27px); width:54px; height:4px; background:linear-gradient(90deg,transparent,#efaf68,transparent); }
-.header-inner { max-width: var(--shell-max-width); min-height:86px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:36px; }
+.header-inner { max-width: var(--shell-max-width); min-height:86px; margin:0 auto; padding:0 28px; display:flex; flex-wrap:wrap; align-items:center; gap:36px; }
 .brand { display:flex; align-items:center; flex-shrink:0; gap:10px; min-width:246px; }
 .brand-prism { width:57px; height:57px; filter:drop-shadow(0 0 14px #e35a2d4b); }
 .brand-type { display:block; letter-spacing:.12em; font-family:Georgia, "Palatino Linotype",serif; font-size:1.32rem; font-weight:700; white-space:nowrap; line-height:1.1; color:var(--shell-gold); text-shadow:0 1px 14px #f0b07830; }
 .brand-type>span { color:#e7c080; }
 .brand-type small { display:block; margin-top:6px; font: 500 .57rem/1.3 var(--exn-font-ui,system-ui); letter-spacing:.25em; color:var(--shell-muted); }
-.desktop-nav { align-self:stretch; display:flex; justify-content:center; align-items:stretch; gap:4px; flex:1; }
+.desktop-nav { align-self:stretch; display:flex; flex-wrap:wrap; min-width:0; justify-content:center; align-items:stretch; gap:4px; flex:1; }
 .more-link { display:flex; align-items:stretch; }
 .more-link > .header-link { height:100%; }
 
