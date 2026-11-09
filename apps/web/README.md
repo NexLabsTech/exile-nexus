@@ -121,3 +121,33 @@ npm audit --audit-level=high
 ```
 
 All future modules and real datasets require separate acceptance. See [EXN-M01-WO-006 Evidence Bundle](../../docs/evidence/EXN-M01-WO-006-global-search-2026-11-08.md). No deploy, merge or new commercial IP rights are authorized by this WO.
+
+
+## EXN-M01-WO-007: SEO, structured data and indexability (fail closed)
+
+The **source of truth** for search indexing is `src/data/publication-policy.json`. Its current state is `PREVIEW_ONLY`, `approvedSiteOrigin: null`, `approvalEvidence: null` because the project has **no verified public production domain or owner-approved publication rights** in this Work Order. The app is not deployed. Do not invent an official URL or third-party affiliation. `noindex,nofollow` is a crawler instruction, **not security or privacy access control**.
+
+### Build behavior
+
+- Every compiled route receives unique, descriptive HTML `title` and `description`, `html lang=en` and the fail-closed robots meta tag.
+- With no verified origin: **all 11 static pages remain `noindex,nofollow`**; no absolute canonical URL or JSON-LD is emitted. A generated `/robots.txt` responds `User-agent: * / Disallow: /`; `/sitemap.xml` is a valid XML `urlset` containing **zero** `<loc>` entries. These files are preparation artifacts, not evidence of live indexability.
+- `src/lib/seo-policy.ts` defines the future **conditional** published policy. The original editorial Home is eligible only after a *separate owner-reviewed* origin/publication decision carrying `EXN-SEO-PUBLISH-...` evidence and a verified HTTPS origin. If and only if approved, the Home gets exactly one canonical URL, original `WebSite` / `WebPage` JSON-LD, indexable robots, an exact sitemap entry and robots sitemap directive.
+- The seven game-tool module placeholders, local search page with **fictional examples**, internal UI kit and 404 remain **noindex even under an approved origin**, until individually rights-cleared and accepted. No real game item, class, patch or price is published.
+- Changing the JSON values alone **is not legal approval or DNS ownership evidence**. A future Work Order must independently verify and document domain ownership, URL/DNS behavior, rights and deployment before permitting publication. Current review process must reject an unsanctioned change to `APPROVED` even if a user invents an approval string.
+
+### Reproducible gates
+
+```sh
+npm ci --no-audit --no-fund
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run seo:verify -- --output=seo-reports/indexability.json
+npm run test:e2e
+npm audit --audit-level=high
+```
+
+`tests/unit/seo-policy.test.mjs` exercises the actual TypeScript policy with nine positive/negative cases, including invented origin, protocol, private host, overlapping routes, unsafe paths, JSON-LD and sitemap rules; `tests/unit/seo-build.test.mjs` covers five **negative and positive** compiled-output cases. `tests/e2e/seo-indexability.spec.ts` checks robots, sitemap, distinct titles/descriptions across all 11 compiled pages, no canonical or schema leaks, external-request absence and screenshots at 1440/768/390. The read-only CI workflow `.github/workflows/wo17-seo.yml` runs all static output checks and saves a machine-readable JSON report. Existing E2E, axe, budget and Lighthouse checks continue to run.
+
+The simulated approved origin in **unit tests only** (`https://illustrative-seo-fixture.org`) is a fictional test value, **not an actual approved domain or deployment destination**, and is never written into the built site. Static previews are not a production release. See [EXN-M01-WO-007 Evidence Bundle](../../docs/evidence/EXN-M01-WO-007-seo-indexability-2026-11-08.md).
