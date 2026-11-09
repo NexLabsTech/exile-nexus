@@ -6,7 +6,7 @@ const budgets = JSON.parse(readFileSync(new URL("../../performance-budgets.json"
   lowEnd: {
     viewportWidth: number; viewportHeight: number; cpuSlowdownFactor: number;
     latencyMs: number; downloadBytesPerSecond: number; uploadBytesPerSecond: number;
-    maximumMenuResponseMs: number;
+    maximumMenuResponseMs: number; maximumHydrationMs: number;
   };
   motion: { maximumHoverTransitionMs: number; reducedMotionMaxAnimationMs: number; reducedMotionMaxTransitionMs: number };
 };
@@ -75,7 +75,21 @@ test("low-end phone with CPU/network throttling keeps mobile navigation responsi
       downloadThroughput: budgets.lowEnd.downloadBytesPerSecond,
       uploadThroughput: budgets.lowEnd.uploadBytesPerSecond,
     });
+    const loadStarted = Date.now();
     await page.goto("/");
+    await page.waitForFunction(
+      () => {
+        const island = document.querySelector("astro-island");
+        return Boolean(island && !island.hasAttribute("ssr"));
+      },
+      undefined,
+      { timeout: budgets.lowEnd.maximumHydrationMs },
+    );
+    const hydrationMs = Date.now() - loadStarted;
+    console.log(`EXN_LOW_END_HYDRATION_MS ${hydrationMs}`);
+    expect(hydrationMs, "slow-device interactive hydration exceeded time budget").toBeLessThanOrEqual(
+      budgets.lowEnd.maximumHydrationMs,
+    );
     const trigger = page.getByRole("button", { name: "Open menu" });
     await expect(trigger).toBeVisible();
     const started = Date.now();
