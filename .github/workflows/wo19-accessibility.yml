@@ -1,0 +1,65 @@
+name: EXN WO19 accessibility responsive release gate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - '.github/workflows/wo19-accessibility.yml'
+      - 'design/tokens.css'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: exn-wo19-accessibility-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  accessibility:
+    name: Full route WCAG AA and responsive release gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js 22
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "22"
+      - name: Install locked application dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate accessibility matrix, syntax, typecheck, unit tests
+        run: |
+          set -euo pipefail
+          npm run a11y:matrix
+          npm run lint
+          npm run typecheck
+          npm test
+          npm run build
+          npm run seo:verify
+          npm audit --audit-level=high
+      - name: Install browser engine for local-only coverage
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Run all-route WCAG, keyboard, forced-colors, reduced motion and reflow
+        run: npm run test:e2e -- tests/e2e/accessibility-release.spec.ts
+      - name: Archive reproducible screenshots, report and failure traces
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: exn-m01-wo-009-accessibility-evidence
+          path: |
+            apps/web/test-results/
+            apps/web/playwright-report/
+            apps/web/tests/fixtures/accessibility-matrix.json
+          retention-days: 7
+          if-no-files-found: warn

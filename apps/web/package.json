@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "perf:static": "node scripts/verify-budget.mjs",
     "seo:verify": "node scripts/verify-seo.mjs",
-    "i18n:verify": "node scripts/verify-i18n.mjs"
+    "i18n:verify": "node scripts/verify-i18n.mjs",
+    "a11y:matrix": "node scripts/verify-a11y-matrix.mjs"
   },
   "dependencies": {
     "astro": "7.4.7",
