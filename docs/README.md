@@ -23,7 +23,7 @@ promove automaticamente uma proposta a decisão aceita.
 - [Guia de contribuição](../CONTRIBUTING.md) — WO-007, integrado pela PR #139.
 - [Source Hierarchy](source-hierarchy.md) — reconciliação e precedência.
 - [Decisions Ledger](decisions-ledger.md) — decisões individuais identificadas; documento PROPOSED.
-- [Checkpoint](checkpoint.md) — M00, M01-WO-001/002/003/004/005/006/007, M12-WO-001 e EXN-VIS-WO-001 aceitos; #18 é a próxima WO elegível.
+- [Checkpoint](checkpoint.md) — M00, M01-WO-001/002/003/004/005/006/007/008, M12-WO-001 e EXN-VIS-WO-001 aceitos; #19 é a próxima WO elegível.
 - [Matriz de direitos e fontes](rights-and-data-sources.md) — WO-003; direitos de ingestão/exibição/monetização não liberados.
 - Evidence Bundle da WO-001: [baseline](evidence/EXN-M00-WO-001-baseline-2026-11-08.md).
 - Evidence Bundle da WO-002: [Source Pack](evidence/EXN-M00-WO-002-source-pack-2026-11-08.md).
@@ -43,7 +43,8 @@ promove automaticamente uma proposta a decisão aceita.
 - M01-WO-004: [evidências de componentes acessíveis](evidence/EXN-M01-WO-004-accessible-ui-states-2026-11-08.md) — PR #149 integrada.
 - M01-WO-005: [evidências de motion e performance](evidence/EXN-M01-WO-005-motion-performance-2026-11-08.md) — PR #151 integrada.
 - M01-WO-006: [busca local e contratos de navegação](evidence/EXN-M01-WO-006-global-search-2026-11-08.md) — PR #153 integrada.
-- M01-WO-007: [infraestrutura SEO PREVIEW_ONLY](evidence/EXN-M01-WO-007-seo-indexability-2026-11-08.md) — PR #155 integrada; domínio, indexação pública e deploy continuam BLOCKED; próxima #18.
+- M01-WO-007: [infraestrutura SEO PREVIEW_ONLY](evidence/EXN-M01-WO-007-seo-indexability-2026-11-08.md) — PR #155 integrada; domínio, indexação pública e deploy continuam BLOCKED.
+- M01-WO-008: [localização English-first](evidence/EXN-M01-WO-008-english-localization-2026-11-08.md) — PR #157 integrada, somente inglês, 132 mensagens, 44 E2E; próxima NECESSARY #19.
 
 As WOs 003–007 foram integradas por squash com aceite administrativo de
 NexLabsTech. O aceite registrado não equivale a GitHub Review formal
