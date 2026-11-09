@@ -1,9 +1,9 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** ACEITO até EXN-M01-WO-006 (#16); próxima EXN-M01-WO-007 (#17) ainda não implementada
+- **Status:** ACEITO até EXN-M01-WO-007 (#17), somente infraestrutura SEO PREVIEW_ONLY; próxima EXN-M01-WO-008 (#18) ainda não implementada
 - **Revisão:** 2026-11-08
-- **Work Order:** reconciliação do aceite EXN-M01-WO-006 · Issue #16; próxima EXN-M01-WO-007 · Issue #17
+- **Work Order:** reconciliação do aceite EXN-M01-WO-007 · Issue #17 (PREVIEW_ONLY); próxima EXN-M01-WO-008 · Issue #18
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -301,3 +301,13 @@ Este delta documenta somente o aceite administrativo explícito para a PR [#153]
 - **Riscos existentes:** npm audit mantém sete vulnerabilidades transitivas MODERATE, nenhuma HIGH/CRITICAL reportada no gate; teste manual completo de leitor de tela, licenças/direitos de conteúdo externo e desempenho de dispositivos reais NÃO verificados. A ferramenta Lighthouse efêmera tem risco de dependências transitivas não travadas.
 - **Preservação de direitos e arquitetura:** o código rejeita qualquer registro externo (inclusive flag `AUTHORIZED` falsificada); não há ingestão, dados reais do jogo, preços, patch/league observados, contas, monetização, deploy ou novas autorizações R01–R14. Mantidos Astro/React, `design/tokens.css`, Source Hierarchy e proteção da `main`.
 - **Próxima WO NECESSARY:** [EXN-M01-WO-007 issue #17](https://github.com/NexLabsTech/exile-nexus/issues/17), SEO, structured data e indexability. Exigir metadados para páginas públicas próprias e excluir rotas sintéticas, previews e conteúdo sem direitos. Sem domínio público/deploy aprovado, qualquer URL canônica absoluta ou sitemap de produção depende de configuração explícita verificável; não inventar endereço público. Nova branch e PR Draft com testes, Evidence Bundle, auditoria, sem merge ou deploy automático.
+
+## Reconciliação de aceite em 2026-11-08 — EXN-M01-WO-007 (PREVIEW_ONLY)
+
+Somente o escopo técnico da PR [#155](https://github.com/NexLabsTech/exile-nexus/pull/155) foi aprovado pelo owner, no HEAD `b70dfb6abf8004e1e162dfd7855b207dcf55f234`, integrado por squash normal na main `b7941aaa9fd51607cc705e656d7647a3ba96522c`. A issue [#17](https://github.com/NexLabsTech/exile-nexus/issues/17) foi CLOSED após o merge confirmado. Histórico das reconciliações anteriores continua válido na época em que foi redigido.
+
+- **Implementado e testado:** contrato tipado `apps/web/src/lib/seo-policy.ts`, política única `apps/web/src/data/publication-policy.json`, `BaseLayout.astro` condicionando metadados, endpoints estáticos `robots.txt` e `sitemap.xml`, script de verificação do build e testes unitários/negativos/Playwright/CI. **Policy READ-BACK em main:** `PREVIEW_ONLY`, `approvedSiteOrigin:null`, `approvalEvidence:null`. Onze páginas existentes têm metadados únicos e permanecem `noindex,nofollow`, sitemap sem URLs e `robots.txt` deny-all; nenhum canonical público ou JSON-LD emitido. O caminho positivo para `WebSite`/`WebPage` existe apenas em fixture sintética de teste, sem publicar domínio.
+- **Evidência HEAD exato:** [Docs #42543340983](https://github.com/NexLabsTech/exile-nexus/actions/runs/42543340983), [Quality #42543340987](https://github.com/NexLabsTech/exile-nexus/actions/runs/42543340987), [SEO #42543340974](https://github.com/NexLabsTech/exile-nexus/actions/runs/42543340974), [Browser #42543341044](https://github.com/NexLabsTech/exile-nexus/actions/runs/42543341044), [Lighthouse #42543340979](https://github.com/NexLabsTech/exile-nexus/actions/runs/42543340979), todos completed/success. 28 testes Python, 33 Node unit, 39 Playwright; Lighthouse de laboratório performance/acessibilidade/boas práticas 100/100 e **SEO 63/100** por bloqueio deliberado `noindex`. [Evidence Bundle](evidence/EXN-M01-WO-007-seo-indexability-2026-11-08.md).
+- **Limites explícitos:** publicação pública, origem/DNS/SSL, indexação buscadores, SEO produção e direitos comerciais de fontes externas **BLOCKED / NOT VERIFIED**, não concluídos por este aceite. `noindex` não é controle de acesso. Nenhum deploy ou gasto. Sete achados npm MODERATE transitivos continuam registrados; nenhum HIGH/CRITICAL foi observado no gate executado. Lighthouse CLI com transitivas fora de lock, teste manual completo de leitor de tela e dados de uso reais não verificados.
+- **Decisões preservadas:** Source Hierarchy, EXN-DEC-0003–0010, Astro/React, design original, gate R01–R14, main protegida, US$0 obrigatório. Nenhum conteúdo real/estatística/mercado/patch de jogo publicado, nem novos direitos ou domínio inferidos.
+- **Próxima NECESSARY:** [EXN-M01-WO-008 issue #18](https://github.com/NexLabsTech/exile-nexus/issues/18): localização English-first, externalização de strings da UI pública e consistência de terminologia. Iniciar somente em branch/PR Draft próprias com auditoria, testes de chaves e snapshots. Não adicionar idiomas não aprovados, conteúdos de jogo nem promover publicação/deploy automaticamente.
