@@ -1,6 +1,6 @@
 # EXN-M01-WO-010 · ADR PROPOSED — Identity runtime, provider, sessions and zero-cost guard
 
-- **Status:** PROPOSED — **NOT ACCEPTED / NO IMPLEMENTATION AUTHORIZATION**
+- **Status:** OWNER-APPROVED ARCHITECTURAL DIRECTION (2026-11-09); **PROPOSED / NOT ACCEPTED** for actual hosting/provider registration, backend implementation, secrets and deployment. Decision pending canonical PR merge.
 - **Date of research:** 2026-11-09
 - **Owner:** NexLabsTech · **Issue:** #20 · **PR:** #161 Draft
 - **Risk:** HIGH_ASSURANCE (accounts, privileged authorization, sessions and PII); proposed issue label STANDARD does not override owner risk policy
@@ -114,3 +114,7 @@ Define indexes, cleanup thresholds, reversible migrations, export/deletion and b
 - [Google OpenID Connect authentication](https://developers.google.com/identity/openid-connect/openid-connect) and [production OAuth/brand/domain policies](https://developers.google.com/identity/protocols/oauth2/production-readiness/policy-compliance)
 - [Supabase Free pricing](https://supabase.com/pricing) and [inactivity pausing](https://supabase.com/docs/guides/platform/free-project-pausing)
 - [OWASP Session Management](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) and [OWASP CSRF Prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+
+## Owner direction acceptance (2026-11-09; integration not approved)
+
+The owner replied **“Aprovado continue”** following the architecture evaluation. This approves the **conditional architectural direction** of same-origin Cloudflare BFF + D1 + Google OIDC, while preserving anonymous public routes and HIGH_ASSURANCE gates; it does **not** authorize choosing Pages Functions versus Workers Static Assets, creating Cloudflare/Google accounts or OAuth credentials, enabling backend/session cookies, processing PII, paying fees, merging or deploying. The associated [proposed ledger record EXN-DEC-0011](../decisions-ledger.md) stays on PR #161 Draft until owner authorizes normal merge. G01 account Free/billing evidence, G02 privacy, G03 isolated test environment authority and G04 security evidence verification remain pending. Therefore S01 is still BLOCKED. Public Free plan docs are not account-specific cost proof.
