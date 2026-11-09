@@ -1,0 +1,62 @@
+name: EXN WO17 static SEO and indexability
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - '.github/workflows/wo17-seo.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: exn-wo17-seo-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: SEO publishing gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js 22
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "22"
+      - name: Install locked app dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Lint, typecheck and unit policy tests
+        run: |
+          set -euo pipefail
+          npm run lint
+          npm run typecheck
+          npm test
+      - name: Build and verify true static output
+        run: |
+          set -euo pipefail
+          npm run build
+          npm run seo:verify -- --output=seo-reports/indexability.json
+          npm audit --audit-level=high
+      - name: Upload generated SEO policy and report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: exn-m01-wo-007-seo-evidence
+          path: |
+            apps/web/seo-reports/
+            apps/web/dist/robots.txt
+            apps/web/dist/sitemap.xml
+          retention-days: 7
+          if-no-files-found: warn

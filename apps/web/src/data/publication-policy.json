@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "PREVIEW_ONLY",
+  "approvedSiteOrigin": null,
+  "approvalEvidence": null,
+  "publicEditorialPaths": [
+    "/"
+  ],
+  "previewPaths": [
+    "/builds/",
+    "/items/",
+    "/economy/",
+    "/farm/",
+    "/patches/",
+    "/advisor/",
+    "/guides/",
+    "/search/",
+    "/ui-kit/",
+    "/404.html"
+  ],
+  "notice": "Fail closed: no public domain, live game data or publication rights approved. Only original editorial Home may become indexable after a separate accepted site-origin and publication decision."
+}

@@ -11,7 +11,8 @@
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1 --port 4321",
     "test:e2e": "playwright test",
-    "perf:static": "node scripts/verify-budget.mjs"
+    "perf:static": "node scripts/verify-budget.mjs",
+    "seo:verify": "node scripts/verify-seo.mjs"
   },
   "dependencies": {
     "astro": "7.4.7",
