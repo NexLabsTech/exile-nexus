@@ -1,9 +1,9 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** ACEITO até EXN-M01-WO-007 (#17), somente infraestrutura SEO PREVIEW_ONLY; próxima EXN-M01-WO-008 (#18) ainda não implementada
+- **Status:** ACEITO até EXN-M01-WO-008 (#18), English-first localizado; SEO permanece PREVIEW_ONLY; próxima EXN-M01-WO-009 (#19) ainda não implementada
 - **Revisão:** 2026-11-08
-- **Work Order:** reconciliação do aceite EXN-M01-WO-007 · Issue #17 (PREVIEW_ONLY); próxima EXN-M01-WO-008 · Issue #18
+- **Work Order:** reconciliação do aceite EXN-M01-WO-008 · Issue #18; próxima EXN-M01-WO-009 · Issue #19
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -311,3 +311,13 @@ Somente o escopo técnico da PR [#155](https://github.com/NexLabsTech/exile-nexu
 - **Limites explícitos:** publicação pública, origem/DNS/SSL, indexação buscadores, SEO produção e direitos comerciais de fontes externas **BLOCKED / NOT VERIFIED**, não concluídos por este aceite. `noindex` não é controle de acesso. Nenhum deploy ou gasto. Sete achados npm MODERATE transitivos continuam registrados; nenhum HIGH/CRITICAL foi observado no gate executado. Lighthouse CLI com transitivas fora de lock, teste manual completo de leitor de tela e dados de uso reais não verificados.
 - **Decisões preservadas:** Source Hierarchy, EXN-DEC-0003–0010, Astro/React, design original, gate R01–R14, main protegida, US$0 obrigatório. Nenhum conteúdo real/estatística/mercado/patch de jogo publicado, nem novos direitos ou domínio inferidos.
 - **Próxima NECESSARY:** [EXN-M01-WO-008 issue #18](https://github.com/NexLabsTech/exile-nexus/issues/18): localização English-first, externalização de strings da UI pública e consistência de terminologia. Iniciar somente em branch/PR Draft próprias com auditoria, testes de chaves e snapshots. Não adicionar idiomas não aprovados, conteúdos de jogo nem promover publicação/deploy automaticamente.
+
+## Reconciliação de aceite em 2026-11-08 — EXN-M01-WO-008 (localização English-first)
+
+Somente o escopo técnico da PR [#157](https://github.com/NexLabsTech/exile-nexus/pull/157), HEAD `ebd8b11a532cf04adfda4a046a82fb3cda1f580f`, foi aprovado pelo owner para squash normal. GitHub confirmou o commit `cb9925c23db0b90bc8b32085519cfe1d3d7f232d` na `main` e a [issue #18](https://github.com/NexLabsTech/exile-nexus/issues/18) foi encerrada. Os registros anteriores neste checkpoint permanecem históricos.
+
+- **Implementado:** `apps/web/src/i18n/en.json` contém **132 mensagens** em inglês; **126 chaves referenciadas** em 14 arquivos de UI pública; registries `routes.json` (7), `ui-states.json` (4) e `search-fixtures.json` (3 ficções) continuam externos, com interface visual/semântica preservada. Formatador determinístico rejeita placeholders inválidos e chaves ausentes; `scripts/verify-i18n.mjs` audita literais, chaves e cobertura; browser `pt-BR` mantém UI `en`. Não existem outros idiomas, seleção de locale, hreflang ou tradução remota.
+- **Evidência HEAD exato:** Docs [#42545825299](https://github.com/NexLabsTech/exile-nexus/actions/runs/42545825299), Quality [#42545825266](https://github.com/NexLabsTech/exile-nexus/actions/runs/42545825266), inglês [#42545825361](https://github.com/NexLabsTech/exile-nexus/actions/runs/42545825361), browser [#42545825315](https://github.com/NexLabsTech/exile-nexus/actions/runs/42545825315), SEO [#42545825308](https://github.com/NexLabsTech/exile-nexus/actions/runs/42545825308), Lighthouse [#42545825260](https://github.com/NexLabsTech/exile-nexus/actions/runs/42545825260): **6/6 SUCCESS**, 28 Python, 42 Node unit, 44 E2E, seis snapshots visuais mantidos, performance e acessibilidade de laboratório em Home/Builds 100/100. SEO laboratório 63/100 por `noindex` deliberado. [Evidence Bundle](evidence/EXN-M01-WO-008-english-localization-2026-11-08.md).
+- **Correction Delta concluído antes do aceite:** um E2E usava seletor ambíguo `role=status`, corrigido exclusivamente para `.search-results-count`; reexecução 44/44 PASS, sem enfraquecer CI ou rebaseline.
+- **Riscos/limites:** sete achados npm MODERATE transitivos; nenhum HIGH/CRITICAL observado no gate `npm audit --audit-level=high`. Leitor de tela manual completo, dispositivo real, domínio público, SEO de produção e direitos externos R01–R14 continuam NOT RUN/BLOCKED quando aplicável. A política de SEO permanece `PREVIEW_ONLY`: sem origem pública aprovada, nenhuma URL pública canônica, deploy ou novas permissões.
+- **Próxima NECESSARY:** [EXN-M01-WO-009 issue #19](https://github.com/NexLabsTech/exile-nexus/issues/19), gate de acessibilidade e responsividade, com matriz de axe/teclado, leitura com efeitos desabilitados, verificações automatizadas e checklist manual documentado. Branch e PR Draft próprias, testes, Evidence Bundle e auditoria, sem deploy ou merge automático.
