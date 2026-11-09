@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { Buffer } from "node:buffer";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -49,7 +50,7 @@ test("missing route blocks performance evidence", (t) => {
 test("budget breach fails closed with exact measured bytes", (t) => {
   const root = fixture();
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  const narrow = structuredClone(budget);
+  const narrow = { ...budget, staticAssets: { ...budget.staticAssets } };
   narrow.staticAssets.scriptGzipBytes = 2;
   const report = inspectDist(root, narrow);
   assert.equal(report.passed, false);
@@ -58,7 +59,7 @@ test("budget breach fails closed with exact measured bytes", (t) => {
 });
 
 test("missing or disabled threshold cannot turn a test green", () => {
-  const bad = structuredClone(budget);
+  const bad = { ...budget, staticAssets: { ...budget.staticAssets } };
   bad.staticAssets.styleGzipBytes = 0;
   assert.throws(() => validateBudgets(bad), /Invalid finite positive budget/);
   assert.throws(() => validateBudgets({ schemaVersion: 999 }), /Unsupported/);
