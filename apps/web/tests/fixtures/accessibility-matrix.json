@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "standard": "WCAG 2.2 AA automated coverage (not manual certification)",
+  "routes": [
+    {
+      "path": "/",
+      "kind": "home"
+    },
+    {
+      "path": "/builds/",
+      "kind": "placeholder"
+    },
+    {
+      "path": "/items/",
+      "kind": "placeholder"
+    },
+    {
+      "path": "/economy/",
+      "kind": "placeholder"
+    },
+    {
+      "path": "/farm/",
+      "kind": "placeholder"
+    },
+    {
+      "path": "/patches/",
+      "kind": "placeholder"
+    },
+    {
+      "path": "/advisor/",
+      "kind": "placeholder"
+    },
+    {
+      "path": "/guides/",
+      "kind": "placeholder"
+    },
+    {
+      "path": "/search/",
+      "kind": "interactive"
+    },
+    {
+      "path": "/ui-kit/",
+      "kind": "interactive"
+    },
+    {
+      "path": "/404.html",
+      "kind": "recovery"
+    }
+  ],
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "reflow-320",
+      "width": 320,
+      "height": 768
+    }
+  ],
+  "axeTags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "requiredStates": [
+    "default",
+    "search-empty",
+    "search-error",
+    "ui-error",
+    "ui-disabled",
+    "mobile-menu"
+  ],
+  "criticalViolationLimit": 0,
+  "seriousViolationLimit": 0,
+  "notes": "Automated axe tests, focus/keyboard, reflow, reduced-motion, forced-colors and screenshots are release gate evidence. Real screen reader/manual QA is NOT_RUN until performed and documented; no claim of full WCAG conformance."
+}
