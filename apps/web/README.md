@@ -151,3 +151,33 @@ npm audit --audit-level=high
 `tests/unit/seo-policy.test.mjs` exercises the actual TypeScript policy with nine positive/negative cases, including invented origin, protocol, private host, overlapping routes, unsafe paths, JSON-LD and sitemap rules; `tests/unit/seo-build.test.mjs` covers five **negative and positive** compiled-output cases. `tests/e2e/seo-indexability.spec.ts` checks robots, sitemap, distinct titles/descriptions across all 11 compiled pages, no canonical or schema leaks, external-request absence and screenshots at 1440/768/390. The read-only CI workflow `.github/workflows/wo17-seo.yml` runs all static output checks and saves a machine-readable JSON report. Existing E2E, axe, budget and Lighthouse checks continue to run.
 
 The simulated approved origin in **unit tests only** (`https://illustrative-seo-fixture.org`) is a fictional test value, **not an actual approved domain or deployment destination**, and is never written into the built site. Static previews are not a production release. See [EXN-M01-WO-007 Evidence Bundle](../../docs/evidence/EXN-M01-WO-007-seo-indexability-2026-11-08.md).
+
+
+## EXN-M01-WO-008: English-first localization and content formatting
+
+Exile Nexus currently supports one explicit locale: **English (`en`)**. All core public interface text in the Home, static module previews, header/footer/mobile navigation, search, demo UI kit, 404 and accessible labels is sourced from the typed, versioned `src/i18n/en.json` catalog through `src/i18n/index.ts`. The existing externalized data registries remain in `src/data/routes.json` (seven route descriptions), `src/data/ui-states.json` (four status title/messages) and `src/data/search-fixtures.json` (three conspicuously fictional preview records). They are text data contracts, not independently approved translated game datasets.
+
+**English-first is not a language selector.** A visitor whose browser sends `pt-BR` still sees the approved English copy and `html lang="en"`. No region negotiation, machine translation, locale routing, paid translation service, hreflang, other language packs or third-party game statistics have been added. The UI retains the approved original visual words and design tokens. The logo wordmark `EXILE NEXUS`, numeric section indices and decorative symbols are intentionally invariant names/symbols, not unlocalized sentences.
+
+`formatMessage(template, params)` in `src/i18n/format.ts` is deterministic and **plain text only**. It rejects missing/extra parameters, malformed placeholders and non-finite numeric values; it does not evaluate HTML or use user data to construct markup. The documented placeholders are `{name}` for Home previews and `{count}` for the one/many local search results. Search ranking, rights filtering, route paths and URL/sitemap publication policy have not changed.
+
+The fail-closed English coverage script audits public-facing components and pages for undeclared `copy.*` keys, **literal English JSX/HTML content**, HTML in messages, invalid templates, source-file omissions and incomplete route/feedback/synthetic registries. It is deliberately limited to the 14 explicitly listed files under `PUBLIC_FILES`; new user-visible files must be included as part of their own Work Order. The catalog and its referenced keys are counted in the evidence report, not assumed complete from mere file existence. If a key is removed, or a hardcoded label is introduced, the CI must fail. A brand wordmark exception is explicit and narrowly bounded.
+
+### Verification
+
+```sh
+npm ci --no-audit --no-fund
+npm run lint
+npm run typecheck
+npm test
+npm run i18n:verify -- --output=i18n-reports/english-coverage.json
+npm run build
+npm run seo:verify -- --output=i18n-reports/seo-preview-report.json
+npm run test:e2e
+npm run perf:static
+npm audit --audit-level=high
+```
+
+The dedicated read-only `.github/workflows/wo18-localization.yml` gate emits the JSON coverage artifact. Unit regression tests include invalid-placeholder, missing-key, unlocalized Astro/JSX and incomplete source fixtures, plus all previous safety contracts. Playwright verifies English copy under desktop/mobile viewports and a `pt-BR` browser, with screenshots; the pre-existing six SHA-256 UI-kit pixel baselines, keyboard/axe, reduced-motion and Lighthouse gates remain unchanged. Any legitimate visual difference must be reviewed with actual images, never silently rebaseline.
+
+SEO remains **PREVIEW_ONLY**, all eleven compiled pages **noindex**, no public canonical origin or site deployment, and content rights R01–R14 remain unchanged. This localization increment does not grant external data rights or authorize a production release. See [EXN-M01-WO-008 Evidence Bundle](../../docs/evidence/EXN-M01-WO-008-english-localization-2026-11-08.md) and PR #157 for exact CI, findings, risks, corrections and proposed checkpoint delta.

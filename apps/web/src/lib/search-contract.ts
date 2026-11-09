@@ -34,6 +34,14 @@ export interface SyntheticFixture {
   href: string;
   fictional: true;
 }
+export interface SearchMessages {
+  queryTooLong: string;
+  initialMessage: string;
+  oneResult: string;
+  manyResults: string;
+  noResults: string;
+}
+
 export interface SearchResponse {
   state: "ready" | "empty" | "error";
   records: SearchRecord[];
@@ -106,15 +114,15 @@ export function createSearchIndex(routes: readonly NavigationRoute[], fixtures: 
   });
 }
 
-export function searchRecords(index: readonly SearchRecord[], rawQuery: string, allowedRoutes: readonly NavigationRoute[]): SearchResponse {
+export function searchRecords(index: readonly SearchRecord[], rawQuery: string, allowedRoutes: readonly NavigationRoute[], messages: SearchMessages): SearchResponse {
   if (rawQuery.length > MAX_QUERY_LENGTH) {
-    return { state: "error", records: [], message: "Search query exceeds the 80-character limit." };
+    return { state: "error", records: [], message: messages.queryTooLong };
   }
   const allowedHrefs = new Set(allowedRoutes.map((route) => route.href).filter(safeRoute));
   const permitted = index.filter((record) => isAllowed(record, allowedHrefs));
   const terms = normalize(rawQuery).split(" ").filter(Boolean);
   if (!terms.length) {
-    return { state: permitted.length ? "ready" : "empty", records: permitted.slice(0, MAX_RESULTS), message: "Showing local pages and fictional examples only." };
+    return { state: permitted.length ? "ready" : "empty", records: permitted.slice(0, MAX_RESULTS), message: messages.initialMessage };
   }
   const scored = permitted.flatMap((record, position) => {
     const title = normalize(record.title);
@@ -131,6 +139,8 @@ export function searchRecords(index: readonly SearchRecord[], rawQuery: string, 
   return {
     state: records.length ? "ready" : "empty",
     records,
-    message: records.length ? `${records.length} local result${records.length === 1 ? "" : "s"} found.` : "No matching local pages or fictional examples.",
+    message: records.length
+      ? (records.length === 1 ? messages.oneResult : messages.manyResults).replace("{count}", String(records.length))
+      : messages.noResults,
   };
 }

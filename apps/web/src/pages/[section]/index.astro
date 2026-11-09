@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { routes, type RouteEntry } from "../../lib/navigation";
+import { copy } from "../../i18n";
 
 export function getStaticPaths() {
   return routes.map((route) => ({ params: { section: route.slug }, props: { route } }));
@@ -14,36 +15,36 @@ const { route } = Astro.props as { route: RouteEntry };
       <span class="inner-hero-sigil">{route.mark}</span>
     </div>
     <div class="inner-hero-content">
-      <nav class="breadcrumbs" aria-label="Breadcrumbs">
-        <a class="exn-focusable" href="/">Home</a><span aria-hidden="true">›</span><span aria-current="page">{route.label}</span>
+      <nav class="breadcrumbs" aria-label={copy.common.breadcrumb}>
+        <a class="exn-focusable" href="/">{copy.common.home}</a><span aria-hidden="true">›</span><span aria-current="page">{route.label}</span>
       </nav>
       <p class="eyebrow">{route.eyebrow}</p>
       <h1 id="section-heading">{route.title}</h1>
       <p>{route.description}</p>
-      <span class="ribbon-status"><span aria-hidden="true">✦</span> PREVIEW / NOT LIVE</span>
+      <span class="ribbon-status"><span aria-hidden="true">✦</span> {copy.common.previewNotLive}</span>
     </div>
   </section>
 
   <div class="interior-grid">
     <section class="panel panel-primary" aria-labelledby="panel-heading">
-      <div class="panel-heading"><span class="panel-diamond" aria-hidden="true">◇</span><h2 id="panel-heading">{route.label} preview</h2><span class="panel-tag">DEVELOPMENT</span></div>
+      <div class="panel-heading"><span class="panel-diamond" aria-hidden="true">◇</span><h2 id="panel-heading">{route.label}{copy.section.previewSuffix}</h2><span class="panel-tag">{copy.common.development}</span></div>
       <div class="empty-state" role="status">
         <span class="empty-sigil" aria-hidden="true">{route.mark}</span>
-        <h3>The next chapter is being written</h3>
-        <p>No verified content is available in this module yet. We will only display real game facts after the required source rights and data checks are complete.</p>
-        <a class="button button-ghost exn-focusable" href="/">Return to the Nexus <span aria-hidden="true">↗</span></a>
+        <h3>{copy.section.emptyTitle}</h3>
+        <p>{copy.section.emptyBody}</p>
+        <a class="button button-ghost exn-focusable" href="/">{copy.common.returnToNexus} <span aria-hidden="true">↗</span></a>
       </div>
     </section>
     <aside class="panel panel-side" aria-labelledby="next-paths-heading">
-      <div class="panel-heading"><span class="panel-diamond" aria-hidden="true">✧</span><h2 id="next-paths-heading">Other paths</h2></div>
-      <nav class="side-paths" aria-label="Other sections">
+      <div class="panel-heading"><span class="panel-diamond" aria-hidden="true">✧</span><h2 id="next-paths-heading">{copy.common.otherPaths}</h2></div>
+      <nav class="side-paths" aria-label={copy.common.otherSections}>
         {routes.filter((item) => item.slug !== route.slug).slice(0, 5).map((item) => (
           <a class="side-link exn-focusable" href={item.href}><span aria-hidden="true">{item.mark}</span><span>{item.label}</span><span aria-hidden="true">↗</span></a>
         ))}
       </nav>
       <div class="side-note">
-        <strong>Independent by design</strong>
-        <p>Original interface concepts. No official association, no live prices, no unverified game information.</p>
+        <strong>{copy.section.sideTitle}</strong>
+        <p>{copy.section.sideBody}</p>
       </div>
     </aside>
   </div>
