@@ -1,0 +1,66 @@
+name: EXN WO20 anonymous identity security boundary
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - '.github/workflows/wo20-identity-boundary.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: exn-wo20-identity-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  identity-contract:
+    name: HIGH_ASSURANCE anonymous security contract gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js 22
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "22"
+      - name: Install locked dependencies and run negative security contracts
+        run: |
+          set -euo pipefail
+          npm ci --no-audit --no-fund
+          npm run lint
+          npm run typecheck
+          npm test
+      - name: Build anonymous site and deny accidental identity endpoints
+        run: |
+          set -euo pipefail
+          npm run build
+          npm run identity:verify -- --output=security-reports/identity-boundary.json
+          npm run seo:verify -- --output=security-reports/seo-policy.json
+          npm audit --audit-level=high
+      - name: Install local browser without auth credentials
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Verify public anonymous browser behavior
+        run: npm run test:e2e -- tests/e2e/identity-boundary.spec.ts
+      - name: Preserve contract test output and browser traces
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: exn-m01-wo-010-identity-contract-evidence
+          path: |
+            apps/web/security-reports/
+            apps/web/test-results/
+            apps/web/playwright-report/
+          retention-days: 7
+          if-no-files-found: warn
