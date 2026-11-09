@@ -4,3 +4,6 @@ dist/
 playwright-report/
 test-results/
 *.log
+perf-reports/
+lhci-reports/
+.lighthouseci/

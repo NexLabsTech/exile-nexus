@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "profile": "EXN-M01-WO-005, synthetic preview, Node 22 + Chromium headless, mobile simulated",
+  "staticAssets": {
+    "scriptGzipBytes": 200000,
+    "styleGzipBytes": 100000,
+    "homeHtmlGzipBytes": 16000,
+    "entireDistRawBytes": 2500000
+  },
+  "lighthouse": {
+    "minimumPerformanceScore": 0.65,
+    "minimumAccessibilityScore": 0.9,
+    "maximumLargestContentfulPaintMs": 5500,
+    "maximumCumulativeLayoutShift": 0.1,
+    "maximumTotalBlockingTimeMs": 600
+  },
+  "lowEnd": {
+    "viewportWidth": 390,
+    "viewportHeight": 844,
+    "cpuSlowdownFactor": 6,
+    "latencyMs": 200,
+    "downloadBytesPerSecond": 150000,
+    "uploadBytesPerSecond": 75000,
+    "maximumMenuResponseMs": 2200,
+    "maximumHydrationMs": 12000
+  },
+  "motion": {
+    "maximumHoverTransitionMs": 250,
+    "reducedMotionMaxAnimationMs": 0,
+    "reducedMotionMaxTransitionMs": 0
+  },
+  "notes": "Preview-only performance budgets: Lighthouse uses simulated mobile, results are CI-lab estimates not Core Web Vitals measured from real users. No production domain or external data."
+}

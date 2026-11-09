@@ -1,0 +1,72 @@
+name: EXN WO15 measured motion and performance
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - '.github/workflows/wo15-performance.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: exn-wo15-performance-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  performance:
+    name: Static budget and Lighthouse mobile
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+      npm_config_ignore_scripts: "true"
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - name: Checkout without credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "22"
+      - name: Locked dependencies, lint, typecheck, unit and build
+        run: |
+          set -euo pipefail
+          npm ci --no-audit --no-fund
+          npm run lint
+          npm run typecheck
+          npm test
+          npm run build
+          npm audit --audit-level=high
+      - name: Check static compressed asset budgets
+        run: |
+          set -euo pipefail
+          node --check scripts/verify-budget.mjs
+          node scripts/verify-budget.mjs --output=perf-reports/static-budget.json
+      - name: Install local Chromium for Lighthouse
+        run: |
+          set -euo pipefail
+          npx --no-install playwright install --with-deps chromium
+          node -e "console.log('CHROME_PATH='+require('playwright').chromium.executablePath())" >> "$GITHUB_ENV"
+      - name: Lighthouse local mobile laboratory budget
+        run: |
+          set -euo pipefail
+          npm exec --yes --package=@lhci/cli@0.16.0 -- lhci autorun --config=./lighthouserc.cjs
+      - name: Archive lab reports and raw evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: exn-m01-wo-005-performance-evidence
+          path: |
+            apps/web/perf-reports/
+            apps/web/lhci-reports/
+            apps/web/.lighthouseci/
+          retention-days: 7
+          if-no-files-found: warn
