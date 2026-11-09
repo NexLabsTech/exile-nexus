@@ -38,11 +38,11 @@
 
 | Gate | Necessary evidence | Verifiable state now |
 | --- | --- | --- |
-| G00 · Architecture owner approval | Signed owner choice: Pages Functions vs Workers Static Assets, Google OIDC vs alternative, D1/strict limiter, security/privacy policy; accept ADR with explicit scope and budget | **BLOCKED: ADR PROPOSED** |
+| G00 · Architecture owner approval | Owner approved **conditional direction** Cloudflare BFF/D1 + Google OIDC on 2026-11-09 (EXN-DEC-0011 staged in PR #161); **final Pages Functions vs Workers Static Assets and operational gates not decided** | **PARTIAL / IMPLEMENTATION BLOCKED** |
 | G01 · Cloud account and cost read-back | Exact Free plan, billing/upgrade controls, existing usage/quotas, Workers CPU, D1/DO Free eligibility, OAuth branding/domain and legal processor terms. No cost source can be guessed. | **NOT_RUN** |
 | G02 · Legal/privacy and roles approval | LGPD purpose/legal basis, notices, retention/deletion/export, processor transfers, admin provisioning and incident owner, approved retention durations | **BLOCKED** |
-| G03 · Test environment authority | Permission for isolated local emulator and future hosted test env; secrets never injected into untrusted PR CI; real Google project only after explicit authorization | **BLOCKED** |
-| G04 · Independent security review method | Qualified separate reviewer or explicitly authorized independent verifier with distinct context, complete security threat findings, audited proof report. No false independence claims | **NOT_RUN** |
+| G03 · Test environment authority | Synthetic local-only contract tests authorized under same WO; no hosted test env, provider credentials, secrets or Cloudflare resources authorized | **PARTIAL / HOSTED BLOCKED** |
+| G04 · Independent security review method | Independent security **test evidence** and objective solo audit with lack of reviewer independence disclosed per accepted EXN-DEC-0007; external human reviewers are not mandatory. Higher assurance proof obligations remain non-negotiable. | **NOT_RUN** |
 
 ## Conditional implementation sequence within the SAME EXN-M01-WO-010
 
@@ -120,3 +120,9 @@
 ## Ownership / review output
 
 After the owner decides among the ADR options, provide a new Context Lock and EXACTLY the next NECESSARY subincrement S01 in the current PR, without skipping S02..S06. If approval is absent or scope conflicts with the Source Pack, report **BLOCKED** with the precise missing evidence and STOP. No automatic GitHub writes beyond this requested documentary plan.
+
+## G01 read-only preflight established 2026-11-09 (no account verification)
+
+The owner-approved direction is staged as EXN-DEC-0011 in the PR only; account-specific evidence is **NOT_VERIFIED** and S01 remains blocked. `apps/web/src/data/auth-zero-cost-preflight.json` records only **PUBLIC_REFERENCE_ONLY** Worker/D1 Free quotas and primary-source URLs, not a verified bill. `apps/web/scripts/check-auth-preflight.mjs` returns `status:BLOCKED`, `accountBillingVerified:false`, `productionAuthAuthorized:false` even if someone submits a fictional attestation. `tests/unit/auth-zero-cost-preflight.test.mjs` validates rejection of changed limits, a nonzero cost ceiling, unapproved flags, malformed sources and forged proof claims. CI executes `npm run auth:preflight -- --expect-blocked` and archives a machine-readable BLOCKED report. **CI success means the fail-closed guard is intact; it does not mean Cloudflare or Google account eligibility, costs, privacy, sessions or security are approved.**
+
+Official Workers docs (2026-10-29) say a typical heavy authentication handler can consume 10–20ms CPU; Free caps at **10ms**, making CPU benchmark a mandatory feasibility stop. Cloudflare Rate Limiting bindings are approximate and location-local; they cannot provide a strict worldwide login threshold. Cloudflare recommends Workers Static Assets for new sites; because the accepted Exile Nexus frontend is Astro static, a Pages Functions vs Workers Assets evaluation must be owner-approved before G01 and S01 can be treated as ready. No account connector is available to establish actual Free/billing settings in this chat. `G04` is independent **testing** and disclosed solo review, not a mandatory external reviewer against EXN-DEC-0007.
