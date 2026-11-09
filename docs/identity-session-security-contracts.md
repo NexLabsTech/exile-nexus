@@ -54,3 +54,13 @@ Write repeatable negative tests for forged admin roles, session IDs, bearer stri
 This PR can earn **APPROVED TÉCNICO only for the anonymous fail-closed safety contract** and CI gating, not for the actual identity/session/login issue Definition of Done. Overall issue #20 remains **BLOCKED / INCOMPLETE** until a separately accepted architecture, privacy plan, provider/storage, test environment and actual high-assurance implementation are proven. Owner may approve future work after assessing the decision dossier; do not promote this proposed choice to the Decisions Ledger or close #20 while blocked.
 
 No merge, deploy, source/rights promotion, spending, secrets, accounts or advance to another WO. Keep PR Draft and record objective risks, source fingerprints, exact SHA and pending proofs in an Evidence Bundle and pt-BR audit.
+
+## Adendo de avaliação arquitetural — 2026-11-09 (PROPOSED)
+
+O [ADR PROPOSED de identidade e runtime](adr/EXN-M01-WO-010-identity-runtime-PROPOSED.md) compara Cloudflare Pages Functions/Workers + D1 + Google OIDC, Supabase Auth Free, autenticação própria de senhas e o estado anônimo. Recomenda condicionalmente o primeiro, mas **não escolhe nem provisiona** backend, D1 ou provedor, e não promove nenhuma decisão aceita.
+
+O [plano HIGH_ASSURANCE de implementação](plans/EXN-M01-WO-010-high-assurance-implementation-plan.md) define as etapas dependentes S01–S06 **dentro da mesma EXN-M01-WO-010**. As fases não são novas Work Orders nem autorização para executá-las. Antes do primeiro incremento funcional são obrigatórios aceite explícito do ADR, elegibilidade US$0 lida na conta, decisão de privacidade/LGPD, segurança da sessão, teste de limite global atômico, revisão independente e ambiente de prova autorizado.
+
+A documentação pública da Cloudflare confirma que seu Rate Limiting binding é **aproximado/local**, não um limitador global estrito; D1 e Workers Free têm quotas finitas. A proposta de rate limit atômico via D1 ou Durable Object depende de prova de concorrência e cota antes de adoção. Google OIDC exige verificação de emissor/audiência/nonce/PKCE/state e conformidade de produção (domínio/verificação de marca e política de privacidade). Sem essas provas, a única política atual segue `ANONYMOUS_ONLY`, e issue #20 continua **BLOCKED** para autenticação real.
+
+Nenhum valor de quota, decisão de fornecedor, cenário de custo, prova simulada ou recomendação desta seção pode ser interpretado como liberação de domínio, serviço, segredo, dado pessoal, indexação, deploy ou merge da PR #161.
