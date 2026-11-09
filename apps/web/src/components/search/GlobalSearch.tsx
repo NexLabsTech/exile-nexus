@@ -87,6 +87,7 @@ export function GlobalSearch() {
         </p>
       </div>
 
+      <div id="global-search-results">
       {response.state === "error" ? (
         <div role="alert" className="search-empty-state search-error">
           <h3>Search needs a shorter phrase</h3>
@@ -103,7 +104,7 @@ export function GlobalSearch() {
           <button type="button" className="button button-ghost" onClick={() => { setQuery(""); field.current?.focus(); window.history.replaceState(null, "", "/search/"); }}>Clear search</button>
         </div>
       ) : (
-        <ul id="global-search-results" className="search-results-list" aria-label="Local search results">
+        <ul className="search-results-list" aria-label="Local search results">
           {response.records.map((item, position) => (
             <li key={item.id} className="search-result">
               <a
@@ -127,6 +128,7 @@ export function GlobalSearch() {
           ))}
         </ul>
       )}
+      </div>
       <p className="search-keyboard-help">Keyboard: Tab through links, ↓ from the search field, ↑/↓ between results, Escape to return to the field.</p>
     </div>
   );
