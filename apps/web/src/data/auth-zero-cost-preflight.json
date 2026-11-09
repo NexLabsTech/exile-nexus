@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "classification": "PUBLIC_REFERENCE_ONLY",
+  "ownerDirection": "CONDITIONALLY_APPROVED_2026_11_09",
+  "monthlySpendCeilingUSD": 0,
+  "plan": "Workers Free + D1 Free",
+  "limits": {
+    "workerRequestsPerDay": 100000,
+    "workerCpuMsPerInvocation": 10,
+    "d1RowsReadPerDay": 5000000,
+    "d1RowsWrittenPerDay": 100000,
+    "d1TotalStorageGB": 5,
+    "d1MaxDatabaseMB": 500
+  },
+  "hostingChoice": "PENDING_ACCOUNT_AND_RUNTIME_BENCHMARK",
+  "accountFreeEligibility": "NOT_VERIFIED",
+  "domainAndGoogleOidc": "NOT_VERIFIED",
+  "lgpdPrivacy": "NOT_APPROVED",
+  "limiterStrictness": "NOT_VERIFIED",
+  "independentProof": "NOT_RUN",
+  "productionAuth": "BLOCKED",
+  "documentation": {
+    "workerLimits": "https://developers.cloudflare.com/workers/platform/limits/",
+    "d1Pricing": "https://developers.cloudflare.com/d1/platform/pricing/",
+    "d1Limits": "https://developers.cloudflare.com/d1/platform/limits/",
+    "rateLimit": "https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/",
+    "pagesPricing": "https://developers.cloudflare.com/pages/functions/pricing/",
+    "workerAssets": "https://developers.cloudflare.com/workers/static-assets/"
+  }
+}
