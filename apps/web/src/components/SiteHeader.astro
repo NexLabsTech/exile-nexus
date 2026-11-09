@@ -26,6 +26,7 @@ const featured = routes.slice(0, 5);
     </nav>
 
     <div class="header-actions">
+      <a class="header-utility exn-focusable" href="/search/" aria-label="Open site search" aria-current={isCurrentPath(currentPath, "/search/") ? "page" : undefined}>⌕ <span>Search</span></a>
       <a class="header-utility exn-focusable" href="/advisor/" aria-label="Explore AI Advisor">✳ <span>Advisor</span></a>
       <MobileNav client:load currentPath={currentPath} />
     </div>
