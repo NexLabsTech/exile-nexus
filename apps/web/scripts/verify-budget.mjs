@@ -47,8 +47,8 @@ export function inspectDist(distDir, budget) {
     if (!existsSync(join(dist, path))) throw new Error(`Required page missing from build: ${path}`);
   }
   const files = scanDist(dist);
-  const scripts = files.filter((f) => /\\.(?:js|mjs)$/.test(f.path));
-  const styles = files.filter((f) => /\\.css$/.test(f.path));
+  const scripts = files.filter((f) => /\.(?:js|mjs)$/.test(f.path));
+  const styles = files.filter((f) => /\.css$/.test(f.path));
   if (scripts.length === 0 || styles.length === 0) throw new Error("Missing compiled scripts or styles");
   const home = files.find((f) => f.path === "index.html");
   const metrics = {
