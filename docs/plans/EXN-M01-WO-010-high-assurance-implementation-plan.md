@@ -1,6 +1,6 @@
 # EXN-M01-WO-010 · HIGH_ASSURANCE Implementation Plan (PROPOSED)
 
-- **Status:** PROPOSED, not executable without owner architecture approval; issue #20 stays OPEN/BLOCKED, PR #161 stays Draft
+- **Status:** owner approved preferred architectural DIRECTION on 2026-11-09, but G00 is only PARTIALLY SATISFIED, G01/G02/G03/G04 remain BLOCKED/NOT_RUN; S01 NOT AUTHORIZED. Issue #20 stays OPEN/BLOCKED, PR #161 Draft.
 - **Scope:** exclusively stable Work Order `EXN-M01-WO-010`; no #21, no new issue, no independent PR/branch unless an owner-approved correction requires it
 - **Baseline:** accepted `main` `9d575553c36658f80245c30f494d4a090983bc57`; existing PR #161 branch `exn-m01-wo-010-identity-security-contracts`
 - **Risk:** HIGH_ASSURANCE (privileged access, user identity, session cookies, CSRF, persistent state and reversible/unrecoverable data mutations)
@@ -46,7 +46,7 @@
 
 ## Conditional implementation sequence within the SAME EXN-M01-WO-010
 
-**Do NOT execute these stages now.** Each stage is a *future gated subincrement* of the same stable WO; it must reach auditable PASS and owner authorization where required before proceeding. The current PR #161 remains Draft, and the existing anonymous policy remains unchanged until the gate authorizes a future adjustment.
+**OWNER APPROVED the architectural direction, not G01/G02/G03/G04 or S01; do NOT execute these stages now.** Each stage is a *future gated subincrement* of the same stable WO; it must reach auditable PASS and owner authorization where required before proceeding. The current PR #161 remains Draft, and the existing anonymous policy remains unchanged until the gate authorizes a future adjustment.
 
 ### EXN-M01-WO-010 / S01 · Backend threat contracts and runtime adapter (NECESSARY only after G00/G01/G03)
 
