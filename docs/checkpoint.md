@@ -1,9 +1,9 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** ACCEPTED through EXN-M01-WO-003 (#13); next EXN-M01-WO-004 (#14) not yet accepted
+- **Status:** ACEITO até EXN-M01-WO-004 (#14); próxima EXN-M01-WO-005 (#15) ainda não implementada
 - **Revisão:** 2026-11-08
-- **Work Order:** reconciliação de aceite EXN-M01-WO-003 · Issue #13; próximo EXN-M01-WO-004 · Issue #14
+- **Work Order:** reconciliação do aceite EXN-M01-WO-004 · Issue #14; próxima EXN-M01-WO-005 · Issue #15
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -271,3 +271,13 @@ Este delta registra somente a decisão e o merge já aceitos pelo owner em 2026-
 - **Riscos conhecidos:** sete findings MODERATE transitivos do npm audit permanecem sem mitigação documentada; não houve achados HIGH/CRITICAL no gate. Teste de acessibilidade automatizado axe, leitor de tela manual, benchmark de produção e clearance comercial de direitos NÃO foram concluídos. Screenshots validam somente a experiência do shell, não páginas de módulos futuros.
 - **Restrições preservadas:** decisões EXN-DEC-0008/0009/0010, `design/tokens.css`, R01–R14, limite de custo US$0, auditoria solo sem independência e ruleset #26806979. Sem autorização para deploy, monetização, assets protegidos, fontes externas, serviço pago, bypass ou merge da próxima PR.
 - **Próximo incremento exclusivamente necessário:** [EXN-M01-WO-004 issue #14](https://github.com/NexLabsTech/exile-nexus/issues/14), biblioteca pequena de componentes acessíveis e estados visuais. Depende de #13 (CLOSED); requer branch, PR Draft, testes unit/axe/visuais, Evidence Bundle, auditoria e novo aceite owner antes de merge. Nenhuma outra WO será aberta até concluir a #14.
+
+## Reconciliação de aceite de 2026-11-08 — M01-WO-004
+
+Delta factual após autorização expressa do owner para [PR #149](https://github.com/NexLabsTech/exile-nexus/pull/149), exclusivamente no HEAD `7ff883fc684317b36fd827efc62919e6f4a50d68`, e merge squash normal já concluído no commit `81dda433cb2115fa71d7e627fb2b0cb1ed79876f`. A issue [#14](https://github.com/NexLabsTech/exile-nexus/issues/14) foi CLOSED após confirmação da `main`.
+
+- **Implementado e demonstrado:** em `apps/web/`, componentes tipados `ActionButton`, `TextField`, `FeedbackPanel`, `UiShowcase`; estados `loading`, `error`, `empty`, `success`; galeria local de UI sob `/ui-kit/` marcada `noindex,nofollow` (não é autenticação); estilos originais e conteúdo sem persistência nem fontes externas.
+- **Evidência de teste no HEAD aprovado:** [Docs validation #42537191625](https://github.com/NexLabsTech/exile-nexus/actions/runs/42537191625) `completed/success`; [Quality baseline #42537191576](https://github.com/NexLabsTech/exile-nexus/actions/runs/42537191576) `completed/success`; [Playwright/axe #42537191653](https://github.com/NexLabsTech/exile-nexus/actions/runs/42537191653) `completed/success`. 28 testes Python; 20 E2E; 6 baselines visuais SHA-256 verificadas (1440/768/390 px, estado vazio/erro). Lint, TypeScript strict, build estático e `npm audit --audit-level=high` PASS. [Evidence Bundle](evidence/EXN-M01-WO-004-accessible-ui-states-2026-11-08.md).
+- **Riscos não eliminados:** npm audit registrou 7 findings MODERATE transitivos, não HIGH/CRITICAL no gate; axe na galeria não prova conformidade acessível do site completo, testes manuais de leitores de tela e benchmark de produção ainda NÃO FORAM EXECUTADOS. Pixel parity completa com painéis-piloto não foi afirmada.
+- **Preservado:** EXN-DEC-0008–0010, tokens operacionais `design/tokens.css`, gates de direitos R01–R14, custo obrigatório US$0 e proteção da main. Sem deploy, contas, scraping, dados reais, autenticação ou direitos comerciais de terceiros promovidos.
+- **Próxima única WO NECESSARY:** [EXN-M01-WO-005 (#15)](https://github.com/NexLabsTech/exile-nexus/issues/15), motion e performance budget. Dependência #14 satisfeita, mas a próxima PR exige baseline medido Lighthouse, simulação de dispositivo modesto, reduzido movimento, controles de regressão e auditoria objetiva. Sua abertura **não** autoriza merge/deploy nem encerramento antecipado.
