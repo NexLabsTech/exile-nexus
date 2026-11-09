@@ -210,3 +210,41 @@ npm audit --audit-level=high
 ```
 
 **Important boundaries:** Automated axe checks do **not** establish full WCAG 2.2 AA certification; genuine manual NVDA, VoiceOver, TalkBack, high-contrast, mobile touch and real browser zoom checks are **NOT_RUN** until separately performed with recorded tester/date/evidence. See [manual validation checklist](../../docs/a11y-manual-checklist.md). No public deploy, domain, search indexing, external data rights R01–R14, gameplay assets, user tracking or paid services are authorized by passing this release gate. See [EXN-M01-WO-009 Evidence Bundle](../../docs/evidence/EXN-M01-WO-009-accessibility-release-gate-2026-11-08.md) and PR #159 for exact HEAD gates and residual risks.
+
+
+## EXN-M01-WO-010: HIGH_ASSURANCE identity security foundation (anonymous-only)
+
+**Important:** Exile Nexus currently has **no live identity, login, session cookies, session store, role granting, OAuth provider, CSRF endpoint, server rate limiting or user database**. The Astro application remains static and accessible to anonymous visitors; new features requiring accounts are intentionally **BLOCKED**. No account information, credentials, user tracking, private APIs, Cloudflare account or paid identity provider have been created or connected.
+
+The source of truth for current capabilities is `src/data/identity-security-policy.json`, version 1 with `mode:"ANONYMOUS_ONLY"`, null provider/server/storage/approval values and all identity/cookie/privileged capability switches `false`. The typed `src/lib/identity-contract.ts` implements a small **read-only contract**, not security enforcement for a real server: only an exact null principal with `read_public` on one of the current 11 HTML routes returns a positive decision. Supplying a forged admin role, bearer string, non-null principal, fake session token, extra client claims or any private operation fails closed. This must **never** be interpreted as a legitimate authenticated authorization layer. Future server code will require separate approval, independent security review and request-scoped authorization.
+
+`scripts/verify-auth-boundary.mjs` checks actual compiled pages against the route allowlist, rejects new `/login/`, `/admin/` or other unapproved account endpoints, rejects password capture/login form markup and confirms SEO `PREVIEW_ONLY`. It deliberately reports `sessionBackendVerified:false`, `logoutVerified:false`, `csrfVerified:false`, `rateLimiterVerified:false` and manual review `NOT_RUN`. A CI PASS is **not proof** of those blocked capabilities.
+
+```sh
+npm ci --no-audit --no-fund
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run identity:verify -- --output=security-reports/identity-boundary.json
+npm run seo:verify
+npm run test:e2e -- tests/e2e/identity-boundary.spec.ts
+npm run test:e2e
+npm audit --audit-level=high
+```
+
+**Tests:** `tests/unit/identity-contract.test.mjs` validates policy invariants, anonymous public navigation, and negative roles/tokens/privileged operations; `tests/unit/auth-build.test.mjs` injects fake auth routes, login forms, password inputs and SEO violations into temporary static fixture builds, and verifies blocked session/CSRF proofs remain false. `tests/e2e/identity-boundary.spec.ts` confirms cookies and storage remain empty, unauthorized login/admin paths do not exist, role query parameters never elevate, and public navigation doesn't contact external identity endpoints. `.github/workflows/wo20-identity-boundary.yml` runs these in **read-only** public PR CI without secrets, uploads JSON and browser evidence. Existing Docs/Quality/English/SEO/axe/Lighthouse checks are unchanged.
+
+**Risk gate:** This issue is **HIGH_ASSURANCE** because privileged authentication and user data would be high risk, despite the issue's preliminary STANDARD label. The owner must separately approve a real backend/provider/session store, origin, privacy collection/retention, cookie/CSRF/rate-limit design, recovery and cost proof before implementing live sessions. Full real login/logout/CSRF/rate-limit security integration tests and independent security review are **BLOCKED / NOT_RUN**, not satisfied by these contract tests. [Security decision dossier](../../docs/identity-session-security-contracts.md) lists 14 required proofs, alternatives and reasons for deferral; [Evidence Bundle](../../docs/evidence/EXN-M01-WO-010-identity-security-contracts-2026-11-08.md) records exact HEAD, test results and checkpoint delta PROPOSED. No release/deploy/merge is authorized for this PR.
+
+### Conditional architectural approval and fail-closed US$0 preflight (2026-11-09)
+
+The owner approved the **design direction only** (Cloudflare BFF + D1 + Google OIDC) under EXN-DEC-0011, staged in PR #161, not a production project or permission to enable auth. Hosting choice, live account billing/quotas, OAuth production origin, LGPD/privacy/retention, strict limiter and hosted test environment remain unverified. Authentication remains `ANONYMOUS_ONLY`.
+
+`src/data/auth-zero-cost-preflight.json` records public Cloudflare **reference** limits (Workers Free 100,000 requests/day and 10ms CPU per request; D1 Free 5m rows read/day, 100,000 written/day, 5GB total and 500MB per DB), not account-specific allocation or any approval to spend. `scripts/check-auth-preflight.mjs` always returns an explicit **BLOCKED** status until genuine external proof is independently reviewed, and is not a tool for enabling services. It rejects altered public quota values, any nonzero cost ceiling, fabricated readiness, incomplete official references, and unapproved provider/privacy/limiter settings. Its output explicitly states account billing, OAuth origin, privacy, runtime authorization and strict limiter **NOT VERIFIED**.
+
+```sh
+npm run auth:preflight -- --expect-blocked --output=security-reports/auth-preflight-blocked.json
+```
+
+This command exits successfully **only when** the preflight remains **BLOCKED and its published-reference inputs are structurally valid**. Running it without `--expect-blocked` fails deliberately. CI success is never proof of eligible free billing or authenticated sessions. See `tests/unit/auth-zero-cost-preflight.test.mjs` and [same-WO implementation plan](../../docs/plans/EXN-M01-WO-010-high-assurance-implementation-plan.md). No accounts, secrets, sessions, API handlers, database, deploy, paid features, or public SEO were introduced.
