@@ -145,4 +145,5 @@ test("200 percent text resize retains core navigation and no horizontal overflow
   await expect(page.getByRole("link",{name:"Open site search"})).toBeVisible();
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth);
   expect(overflow).toBeLessThanOrEqual(1441);
+  await page.screenshot({path:test.info().outputPath("text-200-percent-desktop.png"),fullPage:true,animations:"disabled"});
 });
