@@ -57,7 +57,7 @@ No merge, deploy, source/rights promotion, spending, secrets, accounts or advanc
 
 ## Adendo de avaliação arquitetural — 2026-11-09 (PROPOSED)
 
-O [ADR PROPOSED de identidade e runtime](adr/EXN-M01-WO-010-identity-runtime-PROPOSED.md) compara Cloudflare Pages Functions/Workers + D1 + Google OIDC, Supabase Auth Free, autenticação própria de senhas e o estado anônimo. Recomenda condicionalmente o primeiro, mas **não escolhe nem provisiona** backend, D1 ou provedor, e não promove nenhuma decisão aceita.
+O owner aprovou a direção arquitetural condicional em 2026-11-09 (proposta EXN-DEC-0011, ainda não integrada na main), sem liberar G01–G04 nem a implementação. O [ADR PROPOSED de identidade e runtime](adr/EXN-M01-WO-010-identity-runtime-PROPOSED.md) compara Cloudflare Pages Functions/Workers + D1 + Google OIDC, Supabase Auth Free, autenticação própria de senhas e o estado anônimo. Recomenda condicionalmente o primeiro, mas **não escolhe nem provisiona** backend, D1 ou provedor, e não promove nenhuma decisão aceita.
 
 O [plano HIGH_ASSURANCE de implementação](plans/EXN-M01-WO-010-high-assurance-implementation-plan.md) define as etapas dependentes S01–S06 **dentro da mesma EXN-M01-WO-010**. As fases não são novas Work Orders nem autorização para executá-las. Antes do primeiro incremento funcional são obrigatórios aceite explícito do ADR, elegibilidade US$0 lida na conta, decisão de privacidade/LGPD, segurança da sessão, teste de limite global atômico, revisão independente e ambiente de prova autorizado.
 
