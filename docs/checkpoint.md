@@ -1,9 +1,9 @@
 # Checkpoint
 
 - **Owner:** NexLabsTech
-- **Status:** ACEITO até EXN-M01-WO-008 (#18), English-first localizado; SEO permanece PREVIEW_ONLY; próxima EXN-M01-WO-009 (#19) ainda não implementada
+- **Status:** ACEITO até EXN-M01-WO-009 (#19), somente gate automatizado de acessibilidade; checklist manual NOT_RUN; SEO PREVIEW_ONLY; próxima EXN-M01-WO-010 (#20) não implementada
 - **Revisão:** 2026-11-08
-- **Work Order:** reconciliação do aceite EXN-M01-WO-008 · Issue #18; próxima EXN-M01-WO-009 · Issue #19
+- **Work Order:** reconciliação do aceite EXN-M01-WO-009 · Issue #19 (gate automatizado); próxima EXN-M01-WO-010 · Issue #20
 - **Base SHA desta proposta:** `79be738c7af8eda641c4ac4aff52ef7b28931ca0`
 - **HEAD desta proposta:** será registrado pela metadata/timeline da PR após publicação; um commit não pode referenciar seu próprio SHA.
 
@@ -321,3 +321,13 @@ Somente o escopo técnico da PR [#157](https://github.com/NexLabsTech/exile-nexu
 - **Correction Delta concluído antes do aceite:** um E2E usava seletor ambíguo `role=status`, corrigido exclusivamente para `.search-results-count`; reexecução 44/44 PASS, sem enfraquecer CI ou rebaseline.
 - **Riscos/limites:** sete achados npm MODERATE transitivos; nenhum HIGH/CRITICAL observado no gate `npm audit --audit-level=high`. Leitor de tela manual completo, dispositivo real, domínio público, SEO de produção e direitos externos R01–R14 continuam NOT RUN/BLOCKED quando aplicável. A política de SEO permanece `PREVIEW_ONLY`: sem origem pública aprovada, nenhuma URL pública canônica, deploy ou novas permissões.
 - **Próxima NECESSARY:** [EXN-M01-WO-009 issue #19](https://github.com/NexLabsTech/exile-nexus/issues/19), gate de acessibilidade e responsividade, com matriz de axe/teclado, leitura com efeitos desabilitados, verificações automatizadas e checklist manual documentado. Branch e PR Draft próprias, testes, Evidence Bundle e auditoria, sem deploy ou merge automático.
+
+## Reconciliação do aceite em 2026-11-08 — EXN-M01-WO-009 (gate acessibilidade automatizado)
+
+O owner aprovou exclusivamente a PR [#159](https://github.com/NexLabsTech/exile-nexus/pull/159) no HEAD `e71063752fe81dad1f08696b18f8a0ed95ede80e` com as condições de proteção, diff, CI e ausência de defeitos HIGH/CRITICAL. Merge squash normal integrado no SHA `b0092631f495650d4ec4950f26c6a6e9810078fd` e confirmado como HEAD da `main`. A [issue #19](https://github.com/NexLabsTech/exile-nexus/issues/19) foi CLOSED. Os registros anteriores permanecem históricos e verdadeiros para seus próprios períodos.
+
+- **Escopo aceite e testado:** matriz automática para as 11 rotas HTML, quatro viewports (1440/768/390/320), WCAG 2.2 A/AA no axe, estados de erro/vazio/carregando/disabled, teclado, skip-link/Escape, forced colors e reduced motion. Corrigido o overflow real do header em zoom de texto **200%** (inicialmente 1759 px de scrollWidth numa janela de 1440 CSS px) mediante flex-wrap/min-width, sem desabilitar o teste nem alterar os seis baselines visuais SHA-256.
+- **Evidência HEAD autorizado:** [Docs #42548155639](https://github.com/NexLabsTech/exile-nexus/actions/runs/42548155639), [Quality #42548155702](https://github.com/NexLabsTech/exile-nexus/actions/runs/42548155702), [English #42548155646](https://github.com/NexLabsTech/exile-nexus/actions/runs/42548155646), [SEO #42548155659](https://github.com/NexLabsTech/exile-nexus/actions/runs/42548155659), [Browser #42548155649](https://github.com/NexLabsTech/exile-nexus/actions/runs/42548155649), [Accessibility #42548155635](https://github.com/NexLabsTech/exile-nexus/actions/runs/42548155635), [Lighthouse #42548155666](https://github.com/NexLabsTech/exile-nexus/actions/runs/42548155666): **7/7 PASS**. 28 testes Python, 48 unitários Node, 89 Playwright (45 dedicados). [Evidence Bundle](evidence/EXN-M01-WO-009-accessibility-release-gate-2026-11-08.md).
+- **Limite de aceite:** `docs/a11y-manual-checklist.md` permanece **NOT_RUN** para NVDA, VoiceOver, TalkBack, touch real, browser zoom físico e revisão humana. Testes automatizados NÃO constituem certificação WCAG 2.2 AA completa; não afirmar que o lançamento foi aprovado. Não foi realizado deploy, liberação de IP/rights R01–R14 nem indexação: publicação `PREVIEW_ONLY`/noindex preservada.
+- **Riscos:** sete achados npm MODERATE transitivos persistem; `npm audit --audit-level=high` concluiu PASS e não reportou HIGH/CRITICAL. Medições Lighthouse locais não são métricas de produção.
+- **Próxima NECESSARY:** [EXN-M01-WO-010 issue #20](https://github.com/NexLabsTech/exile-nexus/issues/20), identidade, sessões e papéis. **Classificar como HIGH_ASSURANCE** conforme a política de engenharia do owner, pois envolve autenticação privilegiada, apesar da etiqueta STANDARD na issue proposta. Sem definição aprovada de provedor/armazenamento/session secrets, decisões de arquitetura e migração, qualquer autenticação real ou credencial de produção deve permanecer BLOCKED. Começar em branch/PR Draft própria com contratos/threat model, testes fortes, Evidence Bundle e auditoria; sem deploy ou merge automático.
