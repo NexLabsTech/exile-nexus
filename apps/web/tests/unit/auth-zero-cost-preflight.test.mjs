@@ -1,82 +1,138 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { URL } from "node:url";
+import { spawnSync } from "node:child_process";
 import test from "node:test";
 import { assessAuthZeroCost, readAuthPreflight } from "../../scripts/check-auth-preflight.mjs";
 
 const reference = JSON.parse(readFileSync(new URL("../../src/data/auth-zero-cost-preflight.json", import.meta.url), "utf8"));
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
-test("owner-approved conditional direction is NOT an authorization to run S01", () => {
-  const verdict=readAuthPreflight();
-  assert.equal(verdict.status,"BLOCKED");
-  assert.equal(verdict.documentationStructurallyValid,true);
-  assert.equal(verdict.accountBillingVerified,false);
-  assert.equal(verdict.productionAuthAuthorized,false);
-  assert.ok(verdict.reasons.some((x)=>x.includes("G01")));
-  assert.ok(verdict.reasons.some((x)=>x.includes("G04")));
-});
-
-test("hard US$0 cost ceiling and Free account reference limits cannot drift", () => {
-  for(const [key,value] of Object.entries({
-    workerRequestsPerDay:100000,workerCpuMsPerInvocation:10,
-    d1RowsReadPerDay:5000000,d1RowsWrittenPerDay:100000,
-    d1TotalStorageGB:5,d1MaxDatabaseMB:500,
-  })) {
-    const changed=clone(reference);changed.limits[key]=value+1;
-    const result=assessAuthZeroCost(changed);
-    assert.equal(result.documentationStructurallyValid,false,key);
-    assert.equal(result.productionAuthAuthorized,false,key);
+test("ratified Netlify/Supabase direction is not authorization to run S01", () => {
+  const verdict = readAuthPreflight();
+  assert.equal(verdict.status, "BLOCKED");
+  assert.equal(verdict.ownerDirection, "RATIFIED_NETLIFY_SUPABASE");
+  assert.equal(verdict.documentationStructurallyValid, true);
+  for (const field of ["accountBillingVerified","netlifyAccountVerified","supabaseAccountVerified","productionAuthAuthorized"]) {
+    assert.equal(verdict[field], false, field);
   }
-  const paid=clone(reference);paid.monthlySpendCeilingUSD=1;
-  assert.equal(assessAuthZeroCost(paid).documentationStructurallyValid,false);
+  assert.ok(verdict.reasons.some((x) => x.includes("G01")));
+  assert.ok(verdict.reasons.some((x) => x.includes("G04")));
 });
 
-test("account eligibility, a selected runtime or auth enabled without proof is rejected", () => {
-  for(const patch of [
-    {accountFreeEligibility:"VERIFIED"},
-    {hostingChoice:"PAGES_FUNCTIONS"},
+test("hard US$0 and published Free limits cannot drift", () => {
+  const changedValues = {
+    netlifyCreditsPerMonth: 301,
+    netlifyHardCreditLimit: false,
+    supabaseFreeProjects: 3,
+    supabaseDatabaseMBPerProject: 501,
+    supabaseMonthlyActiveUsers: 50001,
+    supabaseEgressGB: 6,
+    supabaseFileStorageGB: 2
+  };
+  for (const [key,value] of Object.entries(changedValues)) {
+    const changed = clone(reference);
+    changed.limits[key] = value;
+    assert.equal(assessAuthZeroCost(changed).documentationStructurallyValid, false, key);
+  }
+  for (const patch of [
+    {monthlySpendCeilingUSD: 1},
+    {schemaVersion: 1},
+    {ownerDirection: "CONDITIONALLY_APPROVED_2026_11_09"},
+    {classification: "ACCOUNT_VERIFIED"}
+  ]) {
+    assert.equal(assessAuthZeroCost({...reference,...patch}).documentationStructurallyValid,false);
+  }
+});
+
+test("provider switching or paid upgrade always fails closed", () => {
+  for (const patch of [
+    {hosting:"CLOUDFLARE_FREE"},
+    {hosting:"NETLIFY_PERSONAL"},
+    {identityDatabase:"SUPABASE_PRO"},
+    {identityDatabase:"D1_FREE"},
+    {paidUpgrade:"AUTOMATIC"}
+  ]) {
+    const changed = clone(reference);
+    Object.assign(changed.providers,patch);
+    assert.equal(assessAuthZeroCost(changed).documentationStructurallyValid,false,JSON.stringify(patch));
+  }
+});
+
+test("account claims, runtime and permission promotion cannot authorize auth", () => {
+  for (const patch of [
+    {netlifyAccountEligibility:"VERIFIED"},
+    {supabaseAccountBilling:"VERIFIED"},
+    {supabaseProjectForExileNexus:"READY"},
+    {hostingChoice:"NETLIFY_FUNCTIONS"},
     {domainAndGoogleOidc:"VERIFIED"},
     {lgpdPrivacy:"APPROVED"},
+    {sessionDesign:"APPROVED"},
     {limiterStrictness:"VERIFIED"},
+    {isolatedEnvironment:"AUTHORIZED"},
     {independentProof:"PASS"},
-    {productionAuth:"ENABLED"},
-  ]){
-    const result=assessAuthZeroCost({...reference,...patch});
-    assert.equal(result.documentationStructurallyValid,false,JSON.stringify(patch));
-    assert.equal(result.status,"BLOCKED");
+    {productionAuth:"ENABLED"}
+  ]) {
+    const verdict = assessAuthZeroCost({...reference,...patch});
+    assert.equal(verdict.status,"BLOCKED");
+    assert.equal(verdict.documentationStructurallyValid,false,JSON.stringify(patch));
+    assert.equal(verdict.productionAuthAuthorized,false);
   }
 });
 
-test("claims of paid-proof or signed-attestation cannot self-authorize auth", () => {
-  for(const claim of [
-    {plan:"Workers Free",monthlySpendUSD:0,verified:true},
-    {accountFreeEligibility:"VERIFIED",approvedBy:"owner",signed:"yes"},
-    {allGatesPassed:true,admin:true,forceReady:true},
-    {accountProof:"https://example.test/attestation",privacyApproved:true,strictLimiter:true},
-  ]){
-    const decision=assessAuthZeroCost(reference,claim);
-    assert.equal(decision.accountBillingVerified,false);
-    assert.equal(decision.productionAuthAuthorized,false);
-    assert.equal(decision.status,"BLOCKED");
-    assert.equal(decision.possibleAccountClaimsSupplied,true);
+test("untrusted signed/billing account claims do not bypass preflight", () => {
+  for (const claim of [
+    {provider:"Netlify",plan:"Free",billingVerified:true},
+    {provider:"Supabase",project:"poe2-nexus",admin:true},
+    {ownerApproval:true,approvedBy:"owner",signed:"yes"},
+    {status:"READY",proofUrl:"https://example.test/attestation",allGatesPassed:true}
+  ]) {
+    const verdict = assessAuthZeroCost(reference,claim);
+    assert.equal(verdict.status,"BLOCKED");
+    assert.equal(verdict.documentationStructurallyValid,true);
+    assert.equal(verdict.accountBillingVerified,false);
+    assert.equal(verdict.productionAuthAuthorized,false);
+    assert.equal(verdict.possibleAccountClaimsSupplied,true);
   }
 });
 
-test("documentation source omission or non-official URL fails closed", () => {
-  for(const field of Object.keys(reference.documentation)){
-    const missing=clone(reference);delete missing.documentation[field];
-    assert.equal(assessAuthZeroCost(missing).documentationStructurallyValid,false);
-    const wrong=clone(reference);wrong.documentation[field]="https://malicious.example/cost";
-    assert.equal(assessAuthZeroCost(wrong).documentationStructurallyValid,false);
+test("only exact official documentation URLs are accepted", () => {
+  for (const key of Object.keys(reference.documentation)) {
+    const missing = clone(reference);
+    delete missing.documentation[key];
+    assert.equal(assessAuthZeroCost(missing).documentationStructurallyValid,false,key);
+    const changed = clone(reference);
+    changed.documentation[key] = "https://netlify.example.invalid/limits";
+    assert.equal(assessAuthZeroCost(changed).documentationStructurallyValid,false,key);
   }
 });
 
-test("malformed or empty policy is never interpreted as approved", () => {
-  for(const value of [null,undefined,{},[],{schemaVersion:2},0,"Free"]){
-    const result=assessAuthZeroCost(value);
-    assert.equal(result.status,"BLOCKED");
-    assert.equal(result.documentationStructurallyValid,false);
-    assert.equal(result.productionAuthAuthorized,false);
+test("missing, extra, unexpected or prototype fields fail closed", () => {
+  const unexpected=clone(reference);unexpected.productionAuthAuthorized=true;
+  assert.equal(assessAuthZeroCost(unexpected).documentationStructurallyValid,false);
+  const unexpectedNested=clone(reference);unexpectedNested.providers.superAdmin=true;
+  assert.equal(assessAuthZeroCost(unexpectedNested).documentationStructurallyValid,false);
+  const missing=clone(reference);delete missing.providers;
+  assert.equal(assessAuthZeroCost(missing).documentationStructurallyValid,false);
+  const malicious=JSON.parse('{"schemaVersion":2,"__proto__":{"admin":true}}');
+  assert.equal(assessAuthZeroCost(malicious).documentationStructurallyValid,false);
+});
+
+test("malformed policy or fake attestation cannot become ready", () => {
+  for (const input of [null,undefined,{},[],{schemaVersion:3},0,"Free",Object.create(null)]) {
+    const verdict=assessAuthZeroCost(input);
+    assert.equal(verdict.status,"BLOCKED");
+    assert.equal(verdict.documentationStructurallyValid,false);
   }
+  const verdict=assessAuthZeroCost(reference,"APPROVED");
+  assert.equal(verdict.documentationStructurallyValid,false);
+  assert.equal(verdict.productionAuthAuthorized,false);
+});
+
+test("CLI passes only with explicit --expect-blocked, refuses use as authorization", () => {
+  const script = new URL("../../scripts/check-auth-preflight.mjs",import.meta.url);
+  const allowed=spawnSync(process.execPath,[script.pathname,"--expect-blocked"],{encoding:"utf8"});
+  assert.equal(allowed.status,0,allowed.stderr);
+  assert.equal(JSON.parse(allowed.stdout).productionAuthAuthorized,false);
+  const refused=spawnSync(process.execPath,[script.pathname],{encoding:"utf8"});
+  assert.equal(refused.status,1);
 });

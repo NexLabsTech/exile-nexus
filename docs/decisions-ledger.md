@@ -201,8 +201,8 @@ A paleta proposta nas pranchas **não substitui** a decisão EXN-DEC-0009 nem `d
 
 ## EXN-DEC-0012 — Solicitação de substituição de Cloudflare e candidatura Netlify + Supabase (2026-11-22)
 
-- **Estado:** PROPOSTA / NÃO ACEITA como decisão operacional; registro preparado em PR #161 Draft, não canônico na main.
-- **Fonte:** o owner pediu explicitamente em 2026-11-22 alternativa à Cloudflare que comece gratuita e permita upgrade futuro. Isso substitui o requisito de continuar na Cloudflare, sem ratificar automaticamente fornecedores específicos.
+- **Estado da direção:** RATIFICADA PELO OWNER em 2026-11-22 (Netlify Free + Supabase Free); **operação, deploy, dados pessoais e release NÃO APROVADOS**. Registro em PR #161 Draft, ainda não integrado na main.
+- **Fonte:** instrução explícita do owner em 2026-11-22: "Ratifico Netlify Free + Supabase Free como a nova direção arquitetural preferida do Exile Nexus, substituindo Cloudflare". O upgrade futuro exige aprovação explícita; esta direção não autoriza provisionar fornecedores, mudar a main nem passar por cima de G01–G04.
 - **Candidatura técnica:** Netlify Free para Astro estático e BFF Functions + Supabase Free para Auth com Google OIDC e PostgreSQL; upgrades Netlify Personal/Pro e Supabase Pro só com aprovação explícita, orçamento e read-back.
 - **Histórico:** EXN-DEC-0011 é direção condicional de 2026-11-09, não aceita na main e não deve mais ser implementada automaticamente. O ADR antigo permanece documentado; não alterar o passado nem promover esta proposta prematuramente.
 - **Gates pendentes:** G00 ratificação concreta, G01 Netlify/Supabase account/billing/quota, G02 LGPD, G03 ambiente aprovado, G04 AUTH-01..14; `ANONYMOUS_ONLY`, `PREVIEW_ONLY`, US$0 obrigatório e R01–R14 preservados.

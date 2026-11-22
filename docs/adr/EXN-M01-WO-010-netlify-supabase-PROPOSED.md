@@ -3,13 +3,13 @@
 - **Data da proposta:** 2026-11-22
 - **Repositório:** NexLabsTech/exile-nexus
 - **Work Order:** EXN-M01-WO-010 / issue #20 / PR #161 DRAFT
-- **Estado:** PROPOSED, NOT ACCEPTED, NOT DEPLOYED
+- **Estado da DIREÇÃO:** RATIFICADA pelo owner em 2026-11-22; operação, contas, OAuth real, runtime de sessões e deploy **BLOCKED / NOT ACCEPTED**; PR #161 DRAFT
 - **Risco:** HIGH_ASSURANCE para identidade, sessões e autorização privilegiada
 - **Context Lock inicial:** main `9d575553c36658f80245c30f494d4a090983bc57`; PR anterior `c7f3844b91a65f2e06180ab959d97ffe7712860b`
 - **Motivação do owner:** substituir Cloudflare por uma solução sem cobrança inicial e com upgrade futuro **somente sob aprovação explícita**.
 - **Governança:** esta proposta não substitui checkpoint ou decisão canônica da main e não libera S01, novas contas, GitHub merge, secrets, build/deploy, OAuth real, dados pessoais ou cobrança.
 
-## Decisão recomendada, ainda dependente de aceite específico
+## Direção ratificada; implementação e operação exigem gates específicos
 
 **Frontend:** preservar Astro 7.4.7 + React 19.3.1 islands e frontend pre-renderizado já aceito em EXN-DEC-0008, sem replatform antecipado.
 
@@ -61,7 +61,7 @@ Não combinar abordagens por acidente. Design final precisa de ADR e testes adve
 
 ## Gates de execução
 
-- **G00 CONDITIONAL:** usuário solicitou remover Cloudflare, mas os fornecedores concretos Netlify/Supabase e a estratégia de sessão ainda requerem aceite operacional específico na mesma WO; registrar nova direção como PROPOSED, não como ADR canônico.
+- **G00 RATIFIED_DIRECTION / PARTIAL:** Netlify Free + Supabase Free ratificados pelo owner; implementação concreta do runtime, estratégia de sessão, domínio e custos ainda dependem dos demais gates e provas.
 - **G01 BLOCKED:** contas Netlify e Supabase não consultadas; read-back do Free, limites, upgrade/overage, titularidade, funções, política do Google, domínio e OAuth pendentes. Não inventar assinatura ou faturamento.
 - **G02 BLOCKED:** política LGPD, finalidades, consentimentos/base legal, retenção, exclusão, operadores e fluxos internacionais sem aprovação.
 - **G03 BLOCKED:** ambiente isolado de integração e credenciais de desenvolvimento ainda sem autorização/prova; fixtures sintéticas locais permitidas apenas no escopo existente.
@@ -72,3 +72,7 @@ Não combinar abordagens por acidente. Design final precisa de ADR e testes adve
 ## Condição de saída
 
 PR #161 permanece Draft, ANONYMOUS_ONLY, sem backend habilitado, sem deploy, sem PR nova, sem merge, sem gasto e sem novos dados/ativos de jogo. Após decisões e provas aprovadas, atualizar o pré-voo `apps/web/src/data/auth-zero-cost-preflight.json` e seus testes, que **ainda descrevem Cloudflare**: são registro histórico STALE_PROVIDER e NÃO podem ser tratados como validação do novo stack. Não os mudar silenciosamente nem enfraquecer o bloqueio.
+
+## Preflight v2 de referência (2026-11-22)
+
+A atualização autorizada nesta mesma WO transforma o antigo manifesto Cloudflare em um contrato **Netlify + Supabase Free** de referência, com esquema v2 e validação de campos exatos. A função `assessAuthZeroCost` **nunca** converte documento, texto de conta ou claim do usuário em permissão de deploy/autenticação. O comando `auth:preflight -- --expect-blocked` passa somente quando o estado `BLOCKED` permanece íntegro; sem a flag, retorna erro. Os números públicos de 300 créditos Netlify, dois projetos Free/500 MB/50k MAU/5 GB egress/1 GB de storage no Supabase não provam a cota, elegibilidade nem billing de uma conta concreta. Uma conexão Supabase listou projetos existentes, incluindo um `poe2-nexus` inativo, **sem prova de vínculo com Exile Nexus e sem consulta de faturamento**; não reativar, associar, criar ou modificar projetos. A conta Netlify e o billing exato não foram lidos. O preflight permanece estrutural e incondicionalmente bloqueado para S01.

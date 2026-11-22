@@ -3,77 +3,116 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = new URL("../src/data/auth-zero-cost-preflight.json", import.meta.url);
-const LIMITS = Object.freeze({
-  workerRequestsPerDay:100000,
-  workerCpuMsPerInvocation:10,
-  d1RowsReadPerDay:5000000,
-  d1RowsWrittenPerDay:100000,
-  d1TotalStorageGB:5,
-  d1MaxDatabaseMB:500
+
+// Published reference values only. No account-specific cost or eligibility assertion.
+const EXPECTED = Object.freeze({
+  "schemaVersion": 2,
+  "classification": "PUBLIC_REFERENCE_ONLY",
+  "ownerDirection": "RATIFIED_NETLIFY_SUPABASE_2026_11_22",
+  "monthlySpendCeilingUSD": 0,
+  "providers": {
+    "hosting": "NETLIFY_FREE",
+    "identityDatabase": "SUPABASE_FREE",
+    "paidUpgrade": "MANUAL_OWNER_APPROVAL_ONLY"
+  },
+  "limits": {
+    "netlifyCreditsPerMonth": 300,
+    "netlifyHardCreditLimit": true,
+    "supabaseFreeProjects": 2,
+    "supabaseDatabaseMBPerProject": 500,
+    "supabaseMonthlyActiveUsers": 50000,
+    "supabaseEgressGB": 5,
+    "supabaseFileStorageGB": 1
+  },
+  "netlifyAccountEligibility": "NOT_VERIFIED",
+  "supabaseAccountBilling": "NOT_VERIFIED",
+  "supabaseProjectForExileNexus": "NOT_VERIFIED",
+  "hostingChoice": "PENDING_RUNTIME_BENCHMARK",
+  "domainAndGoogleOidc": "NOT_VERIFIED",
+  "lgpdPrivacy": "NOT_APPROVED",
+  "sessionDesign": "NOT_APPROVED",
+  "limiterStrictness": "NOT_VERIFIED",
+  "isolatedEnvironment": "NOT_AUTHORIZED",
+  "independentProof": "NOT_RUN",
+  "productionAuth": "BLOCKED",
+  "documentation": {
+    "netlifyPricing": "https://www.netlify.com/pricing/",
+    "netlifyCredits": "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/credit-based-pricing-plans/",
+    "netlifyAstro": "https://docs.netlify.com/build/frameworks/framework-setup-guides/astro/",
+    "supabasePricing": "https://supabase.com/pricing",
+    "supabasePausing": "https://supabase.com/docs/guides/platform/free-project-pausing",
+    "supabaseAuth": "https://supabase.com/docs/guides/auth/sessions"
+  }
 });
 const PENDING = Object.freeze([
-  "G01: real Cloudflare account plan, billing and quotas NOT_VERIFIED",
-  "G01: Pages Functions versus Workers Static Assets NOT_SELECTED",
-  "G01: Google OAuth production origin/brand eligibility NOT_VERIFIED",
-  "G02: lawful basis, privacy notice, retention and user-deletion approval NOT_RECEIVED",
-  "G03: isolated runtime and secret-handling test environment NOT_AUTHORIZED",
-  "G04: HIGH_ASSURANCE independent proof verification and risk acceptance NOT_RUN",
-  "S01: no server endpoint or authenticated capability may be enabled"
+  "G00: architecture direction RATIFIED; session design and runtime benchmark PENDING",
+  "G01: Netlify account Free plan, usage, billing and upgrade safeguards NOT_VERIFIED",
+  "G01: Supabase organization Free plan, project ownership, billing and quotas NOT_VERIFIED",
+  "G01: Google OAuth redirect origin, domain, branding and eligibility NOT_VERIFIED",
+  "G02: LGPD purpose, controller/processors, retention and deletion NOT_APPROVED",
+  "G03: isolated authorized test environment and privileged secrets handling NOT_AUTHORIZED",
+  "G04: AUTH-01..14 backend security, RLS, atomic rate limits and recovery NOT_RUN",
+  "S01: production identity, credentials and deployment remain BLOCKED"
 ]);
 
-/** Reference-check only. Does not authenticate to Cloudflare, Google or billing APIs.
- * Any plausible account attestation remains UNVERIFIED until independently read back.
+function isPlainObject(value) {
+  return value !== null && typeof value === "object" &&
+    !Array.isArray(value) &&
+    (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+}
+
+function verifyExact(reference, expected, path, failures) {
+  if (!isPlainObject(reference)) {
+    failures.push("Missing or invalid reference object: " + path);
+    return;
+  }
+  const actualKeys = Object.keys(reference);
+  const expectedKeys = Object.keys(expected);
+  for (const key of actualKeys) {
+    if (!Object.hasOwn(expected, key)) failures.push("Unexpected reference field: " + path + "." + key);
+  }
+  for (const key of expectedKeys) {
+    if (!Object.hasOwn(reference, key)) {
+      failures.push("Missing reference field: " + path + "." + key);
+    } else if (isPlainObject(expected[key])) {
+      verifyExact(reference[key], expected[key], path + "." + key, failures);
+    } else if (!Object.is(reference[key], expected[key])) {
+      failures.push("Unexpected reference value: " + path + "." + key);
+    }
+  }
+}
+
+/**
+ * Reference-only structural validation. Cannot approve paid plans, accounts,
+ * privacy, credentials or production auth. Caller-supplied evidence is untrusted.
  */
 export function assessAuthZeroCost(reference, accountEvidence = null) {
   const failures = [];
-  if (!reference || reference.schemaVersion !== 1 ||
-      reference.classification !== "PUBLIC_REFERENCE_ONLY" ||
-      reference.ownerDirection !== "CONDITIONALLY_APPROVED_2026_11_09" ||
-      reference.monthlySpendCeilingUSD !== 0 || reference.plan !== "Workers Free + D1 Free") {
-    failures.push("Invalid zero-cost policy identity or hard US$0 ceiling");
+  verifyExact(reference, EXPECTED, "reference", failures);
+  const claimSupplied = accountEvidence !== null;
+  if (claimSupplied && !isPlainObject(accountEvidence)) {
+    failures.push("Malformed/untrusted account claim");
   }
-  for (const [key, expected] of Object.entries(LIMITS)) {
-    if (!reference?.limits || reference.limits[key] !== expected) {
-      failures.push(`Missing/changed published reference limit: ${key}`);
-    }
-  }
-  for (const [key, expected] of [
-    ["hostingChoice","PENDING_ACCOUNT_AND_RUNTIME_BENCHMARK"],
-    ["accountFreeEligibility","NOT_VERIFIED"],
-    ["domainAndGoogleOidc","NOT_VERIFIED"],
-    ["lgpdPrivacy","NOT_APPROVED"],
-    ["limiterStrictness","NOT_VERIFIED"],
-    ["independentProof","NOT_RUN"],
-    ["productionAuth","BLOCKED"],
-  ]) {
-    if (reference?.[key] !== expected) failures.push(`Premature or missing authorization in ${key}`);
-  }
-  const documentation = reference?.documentation;
-  for (const key of ["workerLimits","d1Pricing","d1Limits","rateLimit","pagesPricing","workerAssets"]) {
-    const uri = documentation?.[key];
-    if (typeof uri !== "string" || !uri.startsWith("https://developers.cloudflare.com/")) {
-      failures.push(`Missing primary-source documentation URL: ${key}`);
-    }
-  }
-  if (accountEvidence !== null) {
-    // User-asserted or test-fixture text does not prove live account status or ownership.
-    // It must never grant the ability to enable auth, regardless of any claimed value.
-    if (typeof accountEvidence !== "object" || Array.isArray(accountEvidence) ||
-        accountEvidence === null) failures.push("Invalid claimed account evidence");
-  }
-  const reasons = [...failures, ...PENDING];
+  const reasons = [
+    ...failures,
+    ...(claimSupplied ? ["Caller-supplied account claims are not authoritative read-back"] : []),
+    ...PENDING
+  ];
   return {
-    status:"BLOCKED",
-    gate:"G01_G04",
-    ownerDirection:"CONDITIONALLY_APPROVED",
-    documentationStructurallyValid:failures.length===0,
-    accountBillingVerified:false,
-    oauthOriginVerified:false,
-    privacyApproved:false,
-    isolatedRuntimeAuthorized:false,
-    globallyStrictRateLimitProven:false,
-    productionAuthAuthorized:false,
-    possibleAccountClaimsSupplied:accountEvidence!==null,
+    status: "BLOCKED",
+    gate: "G01_G04",
+    ownerDirection: "RATIFIED_NETLIFY_SUPABASE",
+    documentationStructurallyValid: failures.length === 0,
+    netlifyAccountVerified: false,
+    supabaseAccountVerified: false,
+    accountBillingVerified: false,
+    supabaseProjectBindingVerified: false,
+    oauthOriginVerified: false,
+    privacyApproved: false,
+    isolatedRuntimeAuthorized: false,
+    globallyStrictRateLimitProven: false,
+    productionAuthAuthorized: false,
+    possibleAccountClaimsSupplied: claimSupplied,
     reasons
   };
 }
@@ -84,21 +123,22 @@ export function readAuthPreflight() {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    const result=readAuthPreflight();
-    const output=process.argv.find((arg)=>arg.startsWith("--output="))?.slice("--output=".length);
-    if(output) {
-      const file=resolve(output);
-      mkdirSync(dirname(file),{recursive:true});
-      writeFileSync(file,JSON.stringify(result,null,2)+"\n");
+    const result = readAuthPreflight();
+    const output = process.argv.find((arg) => arg.startsWith("--output="))?.slice("--output=".length);
+    if (output) {
+      const file = resolve(output);
+      mkdirSync(dirname(file), { recursive: true });
+      writeFileSync(file, JSON.stringify(result, null, 2) + "\n");
     }
-    console.log(JSON.stringify(result,null,2));
-    const expectingBlock=process.argv.includes("--expect-blocked");
-    // The check is green only if the declared BLOCKED preflight is structurally valid.
-    // Without --expect-blocked, S01 must be stopped; never confuse CI PASS with ready.
-    if(!expectingBlock || result.status!=="BLOCKED" ||
-       !result.documentationStructurallyValid || result.productionAuthAuthorized) process.exitCode=1;
-  } catch(error) {
-    console.error("AUTH_FREE_PREFLIGHT_FAIL_CLOSED",error instanceof Error?error.message:String(error));
-    process.exitCode=1;
+    console.log(JSON.stringify(result, null, 2));
+    // A green check means only that the BLOCKED state is structurally enforced.
+    const expectingBlocked = process.argv.includes("--expect-blocked");
+    if (!expectingBlocked || result.status !== "BLOCKED" ||
+        !result.documentationStructurallyValid || result.productionAuthAuthorized) {
+      process.exitCode = 1;
+    }
+  } catch (error) {
+    console.error("AUTH_FREE_PREFLIGHT_FAIL_CLOSED", error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
   }
 }

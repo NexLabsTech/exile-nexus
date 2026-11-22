@@ -83,3 +83,5 @@ separa `PASS`, `FAIL`, `NOT APPLICABLE`, `NOT RUN` e `BLOCKED`. Um comentário
 separadamente.
 
 - EXN-M01-WO-010, revisão de provedor 2026-11-22: [Netlify + Supabase ADR PROPOSED](adr/EXN-M01-WO-010-netlify-supabase-PROPOSED.md) e [plano de transição / gates](plans/EXN-M01-WO-010-provider-transition-PROPOSED.md) na **PR #161 DRAFT**; Cloudflare histórico, `ANONYMOUS_ONLY` e `auth:preflight` ainda bloqueados. Nenhuma autenticação, deploy, custo ou decisão operacional aceita.
+
+- [WO-010 Netlify/Supabase preflight v2 Evidence Bundle](evidence/EXN-M01-WO-010-netlify-supabase-preflight-2026-11-22.md): direção ratificada, código somente fail-closed, direitos e autenticação ainda bloqueados; merge e checkpoint não autorizados.

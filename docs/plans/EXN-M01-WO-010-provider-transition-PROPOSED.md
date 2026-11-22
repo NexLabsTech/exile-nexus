@@ -14,7 +14,7 @@ Baseline main verificado 2026-11-22: `9d575553c36658f80245c30f494d4a090983bc57`;
 
 | Gate | Prova NECESSARY | Estado |
 | --- | --- | --- |
-| G00 | Owner ratificar Netlify Functions + Supabase Auth/Postgres e estratégia de sessões; comparar compatibilidade Astro | PROPOSED |
+| G00 | Owner ratificou a direção Netlify Free + Supabase Free em 2026-11-22; modo de sessão, compatibilidade executável e runtime ainda exigem provas antes da implementação | RATIFIED_DIRECTION / PARTIAL |
 | G01 | Contas efetivas Netlify/Supabase Free, billing e upgrade, limites de 300 créditos/mês e 2 projetos/500MB/50k MAU; domínio/redirect Google OAuth, política de uso comercial, zero custo real | BLOCKED |
 | G02 | LGPD: privacy notice, controller/processors, localização, finalidade, retenção, exclusão, export, incident response; autorização de coleta | BLOCKED |
 | G03 | Ambiente isolado aprovado para integração local/hosted, benchmark de cold start, timeout, token validation e controle de gasto; nenhum segredo em CI não confiável | BLOCKED |
@@ -24,10 +24,10 @@ Baseline main verificado 2026-11-22: `9d575553c36658f80245c30f494d4a090983bc57`;
 ## Sequência de adaptação no Codex (quando permitida)
 
 1. Inspecionar main e PR #161, ADRs, DoD, workflow, scripts e testes; renovar Context Lock. NÃO executar port Cloudflare por consequência histórica.
-2. Preparar/ratificar ADR de Netlify/Supabase em PR #161; manter status PROPOSED até aceite específico.
+2. Direção Netlify/Supabase RATIFICADA pelo owner em 2026-11-22; manter implementação e operação BLOCKED até G01–G04 e aprovação de provas.
 3. Provar plan/billing/accounts por read-back legítimo e redigido. Sem acesso, registrar NOT_VERIFIED. Não criar conta, projeto, secrets, DNS ou OAuth sem aprovação.
 4. Aprovar privacidade, esquema de sessão e prova de RLS; para desenho local usar apenas fixtures sintéticas.
-5. Após gate, atualizar/reprovar manifesto de quota e `auth:preflight` e testes para Netlify+Supabase com bloqueio por ausência de evidência. Verificar que flags `ANONYMOUS_ONLY` e `PREVIEW_ONLY` não mudam por acidente.
+5. Nesta mesma WO, o manifesto e `auth:preflight` foram atualizados para Netlify+Supabase **PUBLIC_REFERENCE_ONLY / BLOCKED**, com testes negativos. Em futura implementação, revalidar os limites de conta por read-back e preservar `ANONYMOUS_ONLY` e `PREVIEW_ONLY` até autorização.
 6. Só então executar S01 → testes/evidências/auditoria → aceite owner. Demais subincrementos ficam BLOCKED até o anterior ser aprovado.
 7. Ainda não avançar M02/M05/M06 Divine Intelligence; R03/R05 e a issue #20 continuam gates próprios.
 
@@ -38,3 +38,10 @@ Baseline main verificado 2026-11-22: `9d575553c36658f80245c30f494d4a090983bc57`;
 - Supabase quota DB/MAU/egress e risco de pausa por inatividade: alertar; Pro sujeito a cobrança mínima, compute por projeto e overages, com spend cap onde disponível.
 - Teste de migração em ambiente isolado, backup/restore, variações de origem OAuth, rollback, zero segredos publicados. Nunca ligar auto recharge nem fazer upgrade silencioso.
 - Não inventar domínio, volume, custo da conta ou conclusão de prova de segurança.
+
+## Preflight de referência ajustado sem habilitar S01
+
+- `apps/web/src/data/auth-zero-cost-preflight.json` versão 2 declara somente limites oficiais de Free, `monthlySpendCeilingUSD:0`, upgrade manual, projeto de Supabase `NOT_VERIFIED` e produção `BLOCKED`.
+- O CLI e testes negativos rejeitam alteração de provider, promoção de conta/upgrade, payload malformado, claims falsificadas e documentação fora das URLs oficiais; sem `--expect-blocked` o comando falha propositalmente.
+- Conexão Supabase consultada em modo leitura: organização existente com projeto `poe2-nexus` inativo; **não** evidencia uso ou elegibilidade pelo Exile Nexus, nem plano ou faturamento. Sem permissão para alteração, reativação ou criação.
+- Netlify account read-back, Google OAuth, LGPD, limite transacional e ambiente autenticado não verificados. NÃO chamar essa etapa de S01.

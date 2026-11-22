@@ -1,30 +1,39 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "classification": "PUBLIC_REFERENCE_ONLY",
-  "ownerDirection": "CONDITIONALLY_APPROVED_2026_11_09",
+  "ownerDirection": "RATIFIED_NETLIFY_SUPABASE_2026_11_22",
   "monthlySpendCeilingUSD": 0,
-  "plan": "Workers Free + D1 Free",
-  "limits": {
-    "workerRequestsPerDay": 100000,
-    "workerCpuMsPerInvocation": 10,
-    "d1RowsReadPerDay": 5000000,
-    "d1RowsWrittenPerDay": 100000,
-    "d1TotalStorageGB": 5,
-    "d1MaxDatabaseMB": 500
+  "providers": {
+    "hosting": "NETLIFY_FREE",
+    "identityDatabase": "SUPABASE_FREE",
+    "paidUpgrade": "MANUAL_OWNER_APPROVAL_ONLY"
   },
-  "hostingChoice": "PENDING_ACCOUNT_AND_RUNTIME_BENCHMARK",
-  "accountFreeEligibility": "NOT_VERIFIED",
+  "limits": {
+    "netlifyCreditsPerMonth": 300,
+    "netlifyHardCreditLimit": true,
+    "supabaseFreeProjects": 2,
+    "supabaseDatabaseMBPerProject": 500,
+    "supabaseMonthlyActiveUsers": 50000,
+    "supabaseEgressGB": 5,
+    "supabaseFileStorageGB": 1
+  },
+  "netlifyAccountEligibility": "NOT_VERIFIED",
+  "supabaseAccountBilling": "NOT_VERIFIED",
+  "supabaseProjectForExileNexus": "NOT_VERIFIED",
+  "hostingChoice": "PENDING_RUNTIME_BENCHMARK",
   "domainAndGoogleOidc": "NOT_VERIFIED",
   "lgpdPrivacy": "NOT_APPROVED",
+  "sessionDesign": "NOT_APPROVED",
   "limiterStrictness": "NOT_VERIFIED",
+  "isolatedEnvironment": "NOT_AUTHORIZED",
   "independentProof": "NOT_RUN",
   "productionAuth": "BLOCKED",
   "documentation": {
-    "workerLimits": "https://developers.cloudflare.com/workers/platform/limits/",
-    "d1Pricing": "https://developers.cloudflare.com/d1/platform/pricing/",
-    "d1Limits": "https://developers.cloudflare.com/d1/platform/limits/",
-    "rateLimit": "https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/",
-    "pagesPricing": "https://developers.cloudflare.com/pages/functions/pricing/",
-    "workerAssets": "https://developers.cloudflare.com/workers/static-assets/"
+    "netlifyPricing": "https://www.netlify.com/pricing/",
+    "netlifyCredits": "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/credit-based-pricing-plans/",
+    "netlifyAstro": "https://docs.netlify.com/build/frameworks/framework-setup-guides/astro/",
+    "supabasePricing": "https://supabase.com/pricing",
+    "supabasePausing": "https://supabase.com/docs/guides/platform/free-project-pausing",
+    "supabaseAuth": "https://supabase.com/docs/guides/auth/sessions"
   }
 }
