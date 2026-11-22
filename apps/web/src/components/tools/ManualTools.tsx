@@ -1,4 +1,5 @@
 
+import { useRef } from "react";
 import { copy, formatMessage } from "../../i18n";
 import {
   MAX_UPGRADES,
@@ -112,6 +113,8 @@ const rankOptions: Record<BuildScenario["rank"], string> = {
 };
 
 function BuildTool() {
+  const pendingUpgradeFocus = useRef<number | null>(null);
+
   return (
     <ScenarioForm
       kind="builds"
@@ -131,7 +134,12 @@ function BuildTool() {
           {data.upgrades.map((upgrade, index) => {
             const heading = formatMessage(copy.manual.upgrade, { number: String(index + 1) });
             return (
-              <fieldset key={index} className="manual-group">
+              <fieldset key={index} className="manual-group" ref={(row) => {
+                if (row && pendingUpgradeFocus.current === index) {
+                  pendingUpgradeFocus.current = null;
+                  row.querySelector("input")?.focus();
+                }
+              }}>
                 <legend>{heading}</legend>
                 <div className="manual-fields">
                   {upgradeFields.map((definition) => (
@@ -145,15 +153,20 @@ function BuildTool() {
                   ))}
                 </div>
                 {data.upgrades.length > 1 && (
-                  <ActionButton variant="quiet" onClick={() => change({
-                    ...data, upgrades: data.upgrades.filter((_, row) => row !== index),
-                  })}>{copy.manual.removeUpgrade}</ActionButton>
+                  <ActionButton variant="quiet" onClick={() => {
+                    const upgrades = data.upgrades.filter((_, row) => row !== index);
+                    pendingUpgradeFocus.current = Math.min(index, upgrades.length - 1);
+                    change({ ...data, upgrades });
+                  }}>{copy.manual.removeUpgrade}</ActionButton>
                 )}
               </fieldset>
             );
           })}
           <ActionButton variant="secondary" disabled={data.upgrades.length >= MAX_UPGRADES}
-            onClick={() => change({ ...data, upgrades: [...data.upgrades, emptyUpgrade] })}>
+            onClick={() => {
+              pendingUpgradeFocus.current = data.upgrades.length;
+              change({ ...data, upgrades: [...data.upgrades, emptyUpgrade] });
+            }}>
             {copy.manual.addUpgrade}
           </ActionButton>
           <label className="manual-rank">

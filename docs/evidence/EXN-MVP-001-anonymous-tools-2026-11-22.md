@@ -9,7 +9,7 @@
 - **Implementation HEAD:** `237c82f937824305371ddb58ef7f4b822bdafead`
 - **Implementation tree:** `9b5ca5ccda34377e33fd369a09460fa28691479f`
 
-The evidence-only commit follows the implementation commit. The final Draft PR head and the exact-head remote CI links are recorded in PR metadata and its verification section. The [implementation plan](../plans/EXN-MVP-001-anonymous-tools.md) records the accepted source fingerprints and the standalone owner admission. [Identity #161](https://github.com/NexLabsTech/exile-nexus/pull/161) is a read-only reference at `7db14342511d726d728257af477108d305314c82`.
+The initial evidence-only commit follows the implementation commit. The Correction Delta below records the subsequent keyboard fix. The final Draft PR head and the exact-head remote CI links are recorded in PR metadata and its verification section. The [implementation plan](../plans/EXN-MVP-001-anonymous-tools.md) records the accepted source fingerprints and the standalone owner admission. [Identity #161](https://github.com/NexLabsTech/exile-nexus/pull/161) is a read-only reference at `7db14342511d726d728257af477108d305314c82`.
 
 ## Scope and usage
 
@@ -58,6 +58,14 @@ Threat checks follow TM-05 and TM-12. Imports are capped at 16,384 UTF-8 bytes a
 | Release and account eligibility | **BLOCKED / NOT_VERIFIED**. No release target was provisioned or exercised. |
 
 Correction Delta resolved the old English fixture expecting placeholder copy on the three newly functional routes. The other routes still assert their existing placeholder. The first Lighthouse run measured CLS 0.26047 on Builds when replacing the short loading shell. Server-rendering the same form before hydration eliminated that shift, with the controls inactive until React is ready. The same thresholds and test coverage were retained. Browser screenshots and traces are stored by the existing Playwright CI artifact step. Local output is in the ignored `test-results`, `perf-reports` and `lhci-reports` directories.
+
+## Correction Delta CD-01 · Build comparison keyboard focus
+
+- **Predecessor:** `f9f5bead30116c51fd55a27a9bf6b1b4d1d325cf`. The project and accepted base locks remain valid.
+- **Reproduction:** on the predecessor, keyboard activation of Add upgrade rendered the new row but left focus on the action. The next Tab skipped the new row's input fields.
+- **Correction:** after adding an upgrade, focus its name input when the row commits. After removal, focus the name in the next available row or the previous row when the last one is removed.
+- **Evidence:** the new Playwright regression failed on the predecessor build and passed after correction. All 10 manual-tool scenarios, the static build, English catalog, SEO preview checks, accessibility matrix and static asset budgets passed locally. The final Draft head and canonical Ubuntu runs are recorded in PR metadata.
+- **Scope:** Build Hub keyboard interaction, its regression and this evidence. The existing calculations and contracts, dependency lock and anonymous and publishing policies apply.
 
 ## Auditoria e Checkpoint Delta proposto
 

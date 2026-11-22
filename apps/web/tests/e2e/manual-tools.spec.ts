@@ -78,6 +78,24 @@ test("Build comparison ranks alternatives and marks the budget trade-off", async
   await expect(results.first()).toContainText("Balanced");
 });
 
+test("Build upgrade editing keeps keyboard focus in the active row", async ({ page }) => {
+  await page.goto("/builds/");
+  const form = page.getByRole("form", { name: "Build upgrade comparison" });
+  const add = form.getByRole("button", { name: "Add upgrade" });
+  await expect(add).toBeEnabled();
+  await add.press("Enter");
+
+  const second = form.getByRole("group", { name: "Upgrade 2" });
+  await expect(second.getByRole("textbox", { name: "Upgrade name" })).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(second.getByRole("textbox", { name: "Upgrade cost" })).toBeFocused();
+
+  await second.getByRole("button", { name: "Remove upgrade" }).press("Enter");
+  await expect(second).toHaveCount(0);
+  const first = form.getByRole("group", { name: "Upgrade 1" });
+  await expect(first.getByRole("textbox", { name: "Upgrade name" })).toBeFocused();
+});
+
 test("Economy tools use the manually entered rate, prices, and estimates", async ({ page }) => {
   await page.goto("/economy/");
   const form = page.getByRole("form", { name: "Manual economy tools" });
