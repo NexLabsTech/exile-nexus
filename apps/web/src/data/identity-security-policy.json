@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "mode": "ANONYMOUS_ONLY",
+  "approvedIdentityProvider": null,
+  "approvedSessionStore": null,
+  "approvedServerRuntime": null,
+  "approvalEvidence": null,
+  "allowIdentityCollection": false,
+  "allowCookieSessions": false,
+  "allowPrivilegedOperations": false,
+  "publicPaths": [
+    "/",
+    "/builds/",
+    "/items/",
+    "/economy/",
+    "/farm/",
+    "/patches/",
+    "/advisor/",
+    "/guides/",
+    "/search/",
+    "/ui-kit/",
+    "/404.html"
+  ],
+  "publicOperations": [
+    "read_public"
+  ],
+  "protectedOperations": [
+    "save_private",
+    "edit_private",
+    "manage_users",
+    "publish_content",
+    "change_roles",
+    "manage_sessions"
+  ],
+  "reservedAuthPaths": [
+    "/login/",
+    "/logout/",
+    "/signup/",
+    "/register/",
+    "/account/",
+    "/profile/",
+    "/admin/",
+    "/settings/",
+    "/auth/",
+    "/api/auth/"
+  ],
+  "notes": "Default-deny public preview only. No provider, sessions, cookies, CSRF endpoint or privileged runtime is installed. Live identity requires separate owner-approved HIGH_ASSURANCE architecture and tests."
+}

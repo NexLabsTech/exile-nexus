@@ -12,6 +12,9 @@ promove automaticamente uma proposta a decisão aceita.
 ## Documentos presentes
 
 - [Visão do projeto](project-overview.md)
+
+- [ADR de autenticação e runtime (EXN-M01-WO-010, PROPOSED, NÃO ACEITO)](adr/EXN-M01-WO-010-identity-runtime-PROPOSED.md) — avaliação Cloudflare/D1/Google OIDC e alternativas, sem implementação de backend ou mudança no Decisions Ledger.
+- [Plano HIGH_ASSURANCE da EXN-M01-WO-010 (PROPOSED)](plans/EXN-M01-WO-010-high-assurance-implementation-plan.md) — subetapas futuras sob aprovação expressa, sem nova WO, deploy ou merge.
 - [Product Scope](scope.md) — WO-004, aceita para planejamento.
 - [Requirements Baseline](requirements.md) — WO-004, aceita para planejamento.
 - [Definition of Done](definition-of-done.md) — WO-004, aceita para planejamento.
@@ -78,3 +81,9 @@ gates. A proteção da `main` foi relida pelo endpoint REST do ruleset; somente
 separa `PASS`, `FAIL`, `NOT APPLICABLE`, `NOT RUN` e `BLOCKED`. Um comentário
 `COMMENTED` não é review formal `APPROVED`; reporte aceite administrativo
 separadamente.
+
+- EXN-M01-WO-010, revisão de provedor 2026-11-22: [Netlify + Supabase ADR PROPOSED](adr/EXN-M01-WO-010-netlify-supabase-PROPOSED.md) e [plano de transição / gates](plans/EXN-M01-WO-010-provider-transition-PROPOSED.md) na **PR #161 DRAFT**; Cloudflare histórico, `ANONYMOUS_ONLY` e `auth:preflight` ainda bloqueados. Nenhuma autenticação, deploy, custo ou decisão operacional aceita.
+
+- [WO-010 Netlify/Supabase preflight v2 Evidence Bundle](evidence/EXN-M01-WO-010-netlify-supabase-preflight-2026-11-22.md): direção ratificada, código somente fail-closed, direitos e autenticação ainda bloqueados; merge e checkpoint não autorizados.
+
+- [EXN-M01-WO-010 · G01 read-back de Netlify/Supabase e requisitos Google OAuth](evidence/EXN-M01-WO-010-G01-provider-account-readback-2026-11-22.md): evidências parciais verificadas, contas/quotas pendentes e auditoria pt-BR; G01 permanece BLOCKED.
