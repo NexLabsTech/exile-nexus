@@ -62,7 +62,7 @@ Não combinar abordagens por acidente. Design final precisa de ADR e testes adve
 ## Gates de execução
 
 - **G00 RATIFIED_DIRECTION / PARTIAL:** Netlify Free + Supabase Free ratificados pelo owner; implementação concreta do runtime, estratégia de sessão, domínio e custos ainda dependem dos demais gates e provas.
-- **G01 BLOCKED:** contas Netlify e Supabase não consultadas; read-back do Free, limites, upgrade/overage, titularidade, funções, política do Google, domínio e OAuth pendentes. Não inventar assinatura ou faturamento.
+- **G01 PARTIAL_EVIDENCE / BLOCKED (2026-11-22):** read-back autenticado da organização Supabase conectada comprovou `plan=free` e `tier=tier_free`, com 1 projeto ativo e 12 inativos; **não** comprova conta Netlify, faturas/consumo/limites/overage reais, titularidade do Exile Nexus, domínio, OAuth Google nem elegibilidade específica de novo projeto. Nenhuma cobrança ou serviço foi alterado. Ver [Evidence Bundle G01](../evidence/EXN-M01-WO-010-G01-provider-account-readback-2026-11-22.md).
 - **G02 BLOCKED:** política LGPD, finalidades, consentimentos/base legal, retenção, exclusão, operadores e fluxos internacionais sem aprovação.
 - **G03 BLOCKED:** ambiente isolado de integração e credenciais de desenvolvimento ainda sem autorização/prova; fixtures sintéticas locais permitidas apenas no escopo existente.
 - **G04 NOT_RUN:** provas AUTH-01..14 no runtime escolhido e auditoria HIGH_ASSURANCE sem defeitos HIGH/CRITICAL.
@@ -71,7 +71,7 @@ Não combinar abordagens por acidente. Design final precisa de ADR e testes adve
 
 ## Condição de saída
 
-PR #161 permanece Draft, ANONYMOUS_ONLY, sem backend habilitado, sem deploy, sem PR nova, sem merge, sem gasto e sem novos dados/ativos de jogo. Após decisões e provas aprovadas, atualizar o pré-voo `apps/web/src/data/auth-zero-cost-preflight.json` e seus testes, que **ainda descrevem Cloudflare**: são registro histórico STALE_PROVIDER e NÃO podem ser tratados como validação do novo stack. Não os mudar silenciosamente nem enfraquecer o bloqueio.
+PR #161 permanece Draft, ANONYMOUS_ONLY, sem backend habilitado, sem deploy, sem PR nova, sem merge, sem gasto e sem novos dados/ativos de jogo. O preflight `apps/web/src/data/auth-zero-cost-preflight.json` **já está na versão v2 Netlify/Supabase** e permanece `PUBLIC_REFERENCE_ONLY` / `BLOCKED`, com testes negativos; ele **não** valida contas concretas, faturamento ou autorização operacional. Não enfraquecer o bloqueio nem vincular projetos automaticamente.
 
 ## Preflight v2 de referência (2026-11-22)
 

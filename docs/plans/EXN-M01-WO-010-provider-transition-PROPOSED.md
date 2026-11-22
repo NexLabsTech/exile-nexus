@@ -15,7 +15,7 @@ Baseline main verificado 2026-11-22: `9d575553c36658f80245c30f494d4a090983bc57`;
 | Gate | Prova NECESSARY | Estado |
 | --- | --- | --- |
 | G00 | Owner ratificou a direção Netlify Free + Supabase Free em 2026-11-22; modo de sessão, compatibilidade executável e runtime ainda exigem provas antes da implementação | RATIFIED_DIRECTION / PARTIAL |
-| G01 | Contas efetivas Netlify/Supabase Free, billing e upgrade, limites de 300 créditos/mês e 2 projetos/500MB/50k MAU; domínio/redirect Google OAuth, política de uso comercial, zero custo real | BLOCKED |
+| G01 | Conta Netlify Free e créditos/billing/upgrade; organização Supabase Free, consumo/invoices/capacidade/limites; propriedade do projeto, domínio, callback Google OAuth e custo US$0 verificáveis | **PARTIAL_EVIDENCE / BLOCKED**: `plan=free` / `tier=tier_free` Supabase confirmado; Netlify, billing, domínio/OAuth e quotas reais NOT_VERIFIED |
 | G02 | LGPD: privacy notice, controller/processors, localização, finalidade, retenção, exclusão, export, incident response; autorização de coleta | BLOCKED |
 | G03 | Ambiente isolado aprovado para integração local/hosted, benchmark de cold start, timeout, token validation e controle de gasto; nenhum segredo em CI não confiável | BLOCKED |
 | G04 | Provas AUTH-01..14 no backend, RLS e concorrência, revogação, CSRF, limiter transacional, restore, 0 HIGH/CRITICAL e auditoria em pt-BR | NOT_RUN |
@@ -43,5 +43,5 @@ Baseline main verificado 2026-11-22: `9d575553c36658f80245c30f494d4a090983bc57`;
 
 - `apps/web/src/data/auth-zero-cost-preflight.json` versão 2 declara somente limites oficiais de Free, `monthlySpendCeilingUSD:0`, upgrade manual, projeto de Supabase `NOT_VERIFIED` e produção `BLOCKED`.
 - O CLI e testes negativos rejeitam alteração de provider, promoção de conta/upgrade, payload malformado, claims falsificadas e documentação fora das URLs oficiais; sem `--expect-blocked` o comando falha propositalmente.
-- Conexão Supabase consultada em modo leitura: organização existente com projeto `poe2-nexus` inativo; **não** evidencia uso ou elegibilidade pelo Exile Nexus, nem plano ou faturamento. Sem permissão para alteração, reativação ou criação.
+- Conexão Supabase consultada em modo leitura em 2026-11-22: organização da conexão com `plan=free` / `tier=tier_free`, 1 projeto ativo e 12 inativos (entre os inativos há um projeto historicamente chamado `poe2-nexus`); **não** evidencia vinculação desse projeto ao Exile Nexus, faturas, uso de quotas ou elegibilidade para criação. Nenhuma alteração/requisição de custo/provisionamento foi feita. Detalhes: [Evidence Bundle G01](../evidence/EXN-M01-WO-010-G01-provider-account-readback-2026-11-22.md).
 - Netlify account read-back, Google OAuth, LGPD, limite transacional e ambiente autenticado não verificados. NÃO chamar essa etapa de S01.
