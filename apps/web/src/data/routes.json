@@ -7,7 +7,7 @@
     "category": "PLANNING",
     "eyebrow": "PLAN YOUR EXILE",
     "title": "Shape your next build",
-    "description": "Explore the structure for build planning, routes and character progression. The live planner arrives in a future, separately validated module.",
+    "description": "Compare manually estimated upgrades by damage, survivability and cost. The full planner remains a future module.",
     "mark": "✦"
   },
   {
@@ -29,7 +29,7 @@
     "category": "INSIGHTS",
     "eyebrow": "THE VALUE OF KNOWLEDGE",
     "title": "See the economy clearly",
-    "description": "Market observations will appear here only with permitted sources, provenance and timestamps.",
+    "description": "Convert and compare values with your own rates and estimates. Market observations require separately authorized sources.",
     "mark": "◈"
   },
   {
@@ -40,7 +40,7 @@
     "category": "ANALYSIS",
     "eyebrow": "MEASURE YOUR JOURNEY",
     "title": "Turn sessions into insight",
-    "description": "An upcoming deterministic workspace for your own farming sessions and transparent calculations.",
+    "description": "Estimate the profitability of a farming scenario from your own rewards, costs and time.",
     "mark": "⌁"
   },
   {

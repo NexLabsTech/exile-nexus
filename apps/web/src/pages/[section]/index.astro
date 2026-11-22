@@ -1,4 +1,5 @@
 ---
+import ManualTools from "../../components/tools/ManualTools";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { routes, type RouteEntry } from "../../lib/navigation";
 import { copy } from "../../i18n";
@@ -8,6 +9,12 @@ export function getStaticPaths() {
 }
 
 const { route } = Astro.props as { route: RouteEntry };
+const tool = route.slug === "farm" || route.slug === "builds" || route.slug === "economy" ? route.slug : undefined;
+const toolTitle = {
+  farm: copy.manual.farmTitle,
+  builds: copy.manual.buildTitle,
+  economy: copy.manual.economyTitle,
+};
 ---
 <BaseLayout title={route.label} description={route.description} currentPath={route.href}>
   <section class="inner-hero" aria-labelledby="section-heading">
@@ -21,19 +28,28 @@ const { route } = Astro.props as { route: RouteEntry };
       <p class="eyebrow">{route.eyebrow}</p>
       <h1 id="section-heading">{route.title}</h1>
       <p>{route.description}</p>
-      <span class="ribbon-status"><span aria-hidden="true">✦</span> {copy.common.previewNotLive}</span>
+      <span class="ribbon-status"><span aria-hidden="true">✦</span> {tool ? copy.manual.localStatus : copy.common.previewNotLive}</span>
     </div>
   </section>
 
-  <div class="interior-grid">
+  <div class:list={["interior-grid", tool && "manual-panel-grid"]}>
     <section class="panel panel-primary" aria-labelledby="panel-heading">
-      <div class="panel-heading"><span class="panel-diamond" aria-hidden="true">◇</span><h2 id="panel-heading">{route.label}{copy.section.previewSuffix}</h2><span class="panel-tag">{copy.common.development}</span></div>
-      <div class="empty-state" role="status">
-        <span class="empty-sigil" aria-hidden="true">{route.mark}</span>
-        <h3>{copy.section.emptyTitle}</h3>
-        <p>{copy.section.emptyBody}</p>
-        <a class="button button-ghost exn-focusable" href="/">{copy.common.returnToNexus} <span aria-hidden="true">↗</span></a>
+      <div class="panel-heading">
+        <span class="panel-diamond" aria-hidden="true">◇</span>
+        <h2 id="panel-heading">{tool ? toolTitle[tool] : route.label + copy.section.previewSuffix}</h2>
+        {!tool && <span class="panel-tag">{copy.common.development}</span>}
       </div>
+      {tool ? (
+        <ManualTools kind={tool} client:load />
+      ) : (
+        <div class="empty-state" role="status">
+          <span class="empty-sigil" aria-hidden="true">{route.mark}</span>
+          <h3>{copy.section.emptyTitle}</h3>
+          <p>{copy.section.emptyBody}</p>
+          <a class="button button-ghost exn-focusable" href="/">{copy.common.returnToNexus} <span aria-hidden="true">↗</span></a>
+        </div>
+      )}
+      {tool && <noscript><p>{copy.manual.noScript}</p></noscript>}
     </section>
     <aside class="panel panel-side" aria-labelledby="next-paths-heading">
       <div class="panel-heading"><span class="panel-diamond" aria-hidden="true">✧</span><h2 id="next-paths-heading">{copy.common.otherPaths}</h2></div>

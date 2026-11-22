@@ -22,7 +22,7 @@ for (const viewport of screenSizes) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto("/builds/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Shape your next build");
-    await expect(page.getByRole("status")).toContainText("No verified content is available");
+    await expect(page.getByRole("form", { name: "Build upgrade comparison" })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(viewport.width + 1);
     await page.screenshot({ path: testInfo.outputPath(`builds-${viewport.name}.png`), fullPage: true });
   });
@@ -34,6 +34,7 @@ test("desktop navigation uses stable deep links", async ({ page }) => {
   await page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Items" }).click();
   await expect(page).toHaveURL(/\/items\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("A catalogue worth exploring");
+  await expect(page.getByRole("status")).toContainText("No verified content is available");
   await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Items" })).toHaveAttribute("aria-current", "page");
 });
 

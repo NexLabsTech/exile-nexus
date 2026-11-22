@@ -5,6 +5,12 @@ import { URL } from "node:url";
 const messages = JSON.parse(readFileSync(new URL("../../src/i18n/en.json", import.meta.url), "utf8"));
 const routes = JSON.parse(readFileSync(new URL("../../src/data/routes.json", import.meta.url), "utf8"));
 
+const manualTitles: Record<string, string> = {
+  builds: messages.manual.buildTitle,
+  economy: messages.manual.economyTitle,
+  farm: messages.manual.farmTitle,
+};
+
 test("English headings and metadata remain stable across 11 static pages", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -15,7 +21,13 @@ test("English headings and metadata remain stable across 11 static pages", async
   for (const route of routes) {
     await page.goto(route.href);
     await expect(page.getByRole("heading", { level:1 })).toHaveText(route.title);
-    await expect(page.getByText(messages.section.emptyBody)).toBeVisible();
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", route.description);
+    const title = manualTitles[route.slug];
+    if (title) {
+      await expect(page.getByRole("form", { name: title })).toBeVisible();
+    } else {
+      await expect(page.getByText(messages.section.emptyBody)).toBeVisible();
+    }
     await expect(page.locator("html")).toHaveAttribute("lang","en");
   }
 });

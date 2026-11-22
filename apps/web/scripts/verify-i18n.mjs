@@ -19,6 +19,8 @@ export const PUBLIC_FILES = [
   "src/components/ui/ActionButton.tsx",
   "src/components/ui/FeedbackPanel.tsx",
   "src/components/ui/TextField.tsx",
+  "src/components/tools/ManualTools.tsx",
+  "src/components/tools/ScenarioForm.tsx",
 ];
 
 /** Explicit one-off literals remain proper names in the graphical SVG wordmark. */
