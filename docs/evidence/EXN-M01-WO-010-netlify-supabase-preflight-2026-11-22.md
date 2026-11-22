@@ -57,3 +57,12 @@ A PR continua a mesma WO/branch. Context Lock deve ser renovado se main ou os do
 - **STOP:** não executar S01, não criar service/secret/projeto/conta, não fazer upgrade, merge, deploy ou avançar M05/M06.
 
 A auditoria final depende de CI no HEAD exato; logs e conclusão devem ser informados no comentário de read-back da PR sem falsificar o estado inicial deste documento.
+
+## Correction Delta CI-01 (mesma PR/WO, 2026-11-22)
+
+- **HEAD com falha:** `9730c660f1af948fd42c40b0ec3c21a1de31efc7`.
+- **Runs falharam em lint:** Identity #45052110669, Quality #45052110681, SEO #45052110723, A11y #45052110677, English #45052110682, Browser #45052110687 e Lighthouse #45052110715. O runner registrou quatro erros ESLint `no-undef` no teste `auth-zero-cost-preflight.test.mjs`: `URL` (linhas 7 e 132) e `process` (linhas 133 e 136).
+- **Causa raiz:** variáveis globais Node usadas no teste novo sem imports explícitos; configurações ESLint do projeto não declaravam esses globals. A falha ocorreu antes do typecheck/build e não fornece prova de auth.
+- **Correção mínima:** adicionar imports `URL` de `node:url` e `process` de `node:process` no **mesmo arquivo de teste**. Não alterar regra ESLint, implementação, pacote, workflow ou contrato de segurança.
+- **Reteste local:** `node --test .../auth-zero-cost-preflight.test.mjs` **9/9 PASS** em reprodução isolada; prova completa dos checks de GitHub exige novos runs no HEAD de correção.
+- **Status de auditoria antes dos novos runs:** `CORRECTION REQUIRED` resolvida no diff proposto, evidências completas **NOT_RUN** até read-back; issue #20 continua **BLOCKED**.

@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { URL } from "node:url";
+import process from "node:process";
 import test from "node:test";
 import { assessAuthZeroCost, readAuthPreflight } from "../../scripts/check-auth-preflight.mjs";
 
