@@ -1,5 +1,7 @@
 # EXN-M01-WO-010 · HIGH_ASSURANCE Implementation Plan (PROPOSED)
 
+> **PROVIDER SWITCH 2026-11-22 | STALE / BLOCKED:** o owner pediu alternativa gratuita com upgrade futuro no lugar de Cloudflare. A arquitetura proposta agora é [Netlify + Supabase](../adr/EXN-M01-WO-010-netlify-supabase-PROPOSED.md), com [gates atualizados](EXN-M01-WO-010-provider-transition-PROPOSED.md). G00 permanece pendente para a escolha concreta; G01-G04 e S01 continuam bloqueados. Instruções Cloudflare de G01 e S01-S06 abaixo são histórico e NÃO estão autorizadas para execução no novo provedor. Aprovado só o planejamento; nenhum preflight antigo prova o novo runtime.
+
 - **Status:** owner approved preferred architectural DIRECTION on 2026-11-09, but G00 is only PARTIALLY SATISFIED, G01/G02/G03/G04 remain BLOCKED/NOT_RUN; S01 NOT AUTHORIZED. Issue #20 stays OPEN/BLOCKED, PR #161 Draft.
 - **Scope:** exclusively stable Work Order `EXN-M01-WO-010`; no #21, no new issue, no independent PR/branch unless an owner-approved correction requires it
 - **Baseline:** accepted `main` `9d575553c36658f80245c30f494d4a090983bc57`; existing PR #161 branch `exn-m01-wo-010-identity-security-contracts`

@@ -197,3 +197,13 @@ A paleta proposta nas pranchas **não substitui** a decisão EXN-DEC-0009 nem `d
 - **Gates:** G00 (direção owner) atendido parcialmente; G01 (plano e faturamento lidos na conta real), G02 (privacidade/retenção), G03 (ambiente testado/autorizado) e G04 (verificação independente de provas/risco HIGH_ASSURANCE, conforme as decisões vigentes) pendentes. S01 não executável enquanto pré-requisitos falharem.
 - **Compatibilidade:** EXN-DEC-0008 aprovou apenas o frontend naquela etapa; esta decisão posterior acrescenta uma direção futura **sem** alterar frontend aprovado nem permitir ativação de backend. EXN-DEC-0007 dispensa revisores externos obrigatórios para o mantenedor solo; testes independentes e revisão objetiva com ausência de independência declarada continuam exigíveis, com riscos HIGH_ASSURANCE explicitados. Nenhuma mudança ou bypass de decisão anterior.
 - **Fonte:** autorização do owner nesta conversa, vinculada à [PR #161](https://github.com/NexLabsTech/exile-nexus/pull/161); só será parte da verdade canônica da `main` após auditoria/aceite de integração em etapa explicitamente autorizada.
+
+
+## EXN-DEC-0012 — Solicitação de substituição de Cloudflare e candidatura Netlify + Supabase (2026-11-22)
+
+- **Estado:** PROPOSTA / NÃO ACEITA como decisão operacional; registro preparado em PR #161 Draft, não canônico na main.
+- **Fonte:** o owner pediu explicitamente em 2026-11-22 alternativa à Cloudflare que comece gratuita e permita upgrade futuro. Isso substitui o requisito de continuar na Cloudflare, sem ratificar automaticamente fornecedores específicos.
+- **Candidatura técnica:** Netlify Free para Astro estático e BFF Functions + Supabase Free para Auth com Google OIDC e PostgreSQL; upgrades Netlify Personal/Pro e Supabase Pro só com aprovação explícita, orçamento e read-back.
+- **Histórico:** EXN-DEC-0011 é direção condicional de 2026-11-09, não aceita na main e não deve mais ser implementada automaticamente. O ADR antigo permanece documentado; não alterar o passado nem promover esta proposta prematuramente.
+- **Gates pendentes:** G00 ratificação concreta, G01 Netlify/Supabase account/billing/quota, G02 LGPD, G03 ambiente aprovado, G04 AUTH-01..14; `ANONYMOUS_ONLY`, `PREVIEW_ONLY`, US$0 obrigatório e R01–R14 preservados.
+- **Regras:** não criar conta, projeto, segredo, domínio, provider, login, deploy, upgrade, merge, PR/branch nova nem avançar WO #21. Ver [ADR PROPOSED](adr/EXN-M01-WO-010-netlify-supabase-PROPOSED.md) e [plano de transição](plans/EXN-M01-WO-010-provider-transition-PROPOSED.md).

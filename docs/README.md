@@ -81,3 +81,5 @@ gates. A proteção da `main` foi relida pelo endpoint REST do ruleset; somente
 separa `PASS`, `FAIL`, `NOT APPLICABLE`, `NOT RUN` e `BLOCKED`. Um comentário
 `COMMENTED` não é review formal `APPROVED`; reporte aceite administrativo
 separadamente.
+
+- EXN-M01-WO-010, revisão de provedor 2026-11-22: [Netlify + Supabase ADR PROPOSED](adr/EXN-M01-WO-010-netlify-supabase-PROPOSED.md) e [plano de transição / gates](plans/EXN-M01-WO-010-provider-transition-PROPOSED.md) na **PR #161 DRAFT**; Cloudflare histórico, `ANONYMOUS_ONLY` e `auth:preflight` ainda bloqueados. Nenhuma autenticação, deploy, custo ou decisão operacional aceita.

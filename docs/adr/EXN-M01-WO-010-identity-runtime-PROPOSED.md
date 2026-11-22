@@ -1,5 +1,7 @@
 # EXN-M01-WO-010 · ADR PROPOSED — Identity runtime, provider, sessions and zero-cost guard
 
+> **Revisão de arquitetura em 2026-11-22 | PROPOSED / BLOCKED:** o owner solicitou substituir Cloudflare por alternativa inicialmente gratuita e expansível mediante upgrade manual. A preferência técnica atual, ainda não aceita operacionalmente, está em [Netlify + Supabase](EXN-M01-WO-010-netlify-supabase-PROPOSED.md) e seu [plano de transição](../plans/EXN-M01-WO-010-provider-transition-PROPOSED.md). O conteúdo Cloudflare abaixo é **histórico e não pode ser executado** sem nova decisão. `auth:preflight` permanece fail-closed com dados de provedor antigo; não comprova conta ou custo da nova solução.
+
 - **Status:** OWNER-APPROVED ARCHITECTURAL DIRECTION (2026-11-09); **PROPOSED / NOT ACCEPTED** for actual hosting/provider registration, backend implementation, secrets and deployment. Decision pending canonical PR merge.
 - **Date of research:** 2026-11-09
 - **Owner:** NexLabsTech · **Issue:** #20 · **PR:** #161 Draft
